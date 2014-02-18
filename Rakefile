@@ -1,5 +1,9 @@
+require "rspec/core/rake_task"
 require "bundler/gem_tasks"
 require "ruby_danfe"
+
+task :default => :spec
+RSpec::Core::RakeTask.new
 
 desc "Open an irb session preloaded ruby_danfe classes"
 task :console do
