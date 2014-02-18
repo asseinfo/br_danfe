@@ -1,5 +1,7 @@
 # Ruby DANFE
 
+[![Code Climate](https://codeclimate.com/github/asseinfo/ruby_danfe.png)](https://codeclimate.com/github/asseinfo/ruby_danfe)
+
 It generates PDF files for Brazilian DANFE (_Documento Auxiliar da Nota Fiscal Eletrônica_) from a valid NF-e XML.
 
 It also generates Brazilian DACTE (_Documento Auxiliar do Conhecimento de Transporte Eletrônico_).
