@@ -16,7 +16,7 @@ module RubyDanfe
       end
 
       def config_yaml_load
-        @file_read = YAML.load(file)
+        @file_read = YAML.load( file )
         @file_read ? (@file_read["ruby_danfe"]||{})["options"] : {}
       end
   end
