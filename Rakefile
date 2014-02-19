@@ -18,11 +18,6 @@ namespace :spec do
         puts "Recreating #{f}.fixture.pdf"
         RubyDanfe.generate("#{f}.fixture.pdf", "#{f}")
       end
-
-      Dir["spec/fixtures/cte*.xml"].each do |f|
-        puts "Recreating #{f}.fixture.pdf"
-        RubyDanfe.generate("#{f}.fixture.pdf", "#{f}", :dacte)
-      end
     end
   end
 end
