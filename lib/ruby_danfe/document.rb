@@ -32,10 +32,6 @@ module RubyDanfe
       Barby::Code128C.new(info).annotate_pdf(self, x: x.cm, y: Helper.invert(y.cm), width: w.cm, height: h.cm) if info != ""
     end
 
-    def irectangle(h, w, x, y)
-      self.stroke_rectangle [x.cm, Helper.invert(y.cm)], w.cm, h.cm
-    end
-
     def ibox(h, w, x, y, title = "", info = "", options = {})
       box [x.cm, Helper.invert(y.cm)], w.cm, h.cm, title, info, options
     end
@@ -58,19 +54,6 @@ module RubyDanfe
       ibox h, w, x, y, label, data, options
     end
 
-    def box(at, w, h, title = "", info = "", options = {})
-      options = {
-        align: :left,
-        size: 10,
-        style: nil,
-        valign: :top,
-        border: 1
-      }.merge(options)
-      self.stroke_rectangle at, w, h if options[:border] == 1
-      self.text_box title, size: 6, style: :italic, at: [at[0] + 2, at[1] - 2], width: w - 4, height: 8 if title != ""
-      self.text_box info, size: options[:size], at: [at[0] + 2, at[1] - (title != "" ? 14 : 4) ], width: w - 4, height: h - (title != "" ? 14 : 4), align: options[:align], style: options[:style], valign: options[:valign]
-    end
-
     def lnumeric(h, w, x, y, xml, xpath, options = {})
       i18n = xpath.sub("/", ".");
       data = xml[xpath]
@@ -85,18 +68,32 @@ module RubyDanfe
       numeric [x.cm, Helper.invert(y.cm)], w.cm, h.cm, label, data, options
     end
 
-    def numeric(at, w, h, title = "", info = "", options = {})
-      options = {decimals: 2}.merge(options)
-      info = Helper.numerify(info, options[:decimals]) if info != ""
-      box at, w, h, title, info, options.merge({align: :right})
-    end
-
     def itable(h, w, x, y, data, options = {}, &block)
       self.bounding_box [x.cm, Helper.invert(y.cm)], width: w.cm, height: h.cm do
         self.table data, options do |table|
           yield(table)
         end
       end
+    end
+
+    private
+    def numeric(at, w, h, title = "", info = "", options = {})
+      options = {decimals: 2}.merge(options)
+      info = Helper.numerify(info, options[:decimals]) if info != ""
+      box at, w, h, title, info, options.merge({align: :right})
+    end
+
+    def box(at, w, h, title = "", info = "", options = {})
+      options = {
+        align: :left,
+        size: 10,
+        style: nil,
+        valign: :top,
+        border: 1
+      }.merge(options)
+      self.stroke_rectangle at, w, h if options[:border] == 1
+      self.text_box title, size: 6, style: :italic, at: [at[0] + 2, at[1] - 2], width: w - 4, height: 8 if title != ""
+      self.text_box info, size: options[:size], at: [at[0] + 2, at[1] - (title != "" ? 14 : 4) ], width: w - 4, height: h - (title != "" ? 14 : 4), align: options[:align], style: options[:style], valign: options[:valign]
     end
   end
 end

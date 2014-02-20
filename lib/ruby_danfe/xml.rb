@@ -13,14 +13,6 @@ module RubyDanfe
       return node ? node.text : ""
     end
 
-    def render
-      if @xml.at_css('infNFe/ide')
-        RubyDanfe.render @xml.to_s, :danfe
-      else
-        RubyDanfe.render @xml.to_s, :dacte
-      end
-    end
-
     def collect(ns, tag, &block)
       result = []
       # Tenta primeiro com uso de namespace
@@ -35,14 +27,6 @@ module RubyDanfe
         end
       end
       result
-    end
-
-    def attrib(node, attrib)
-      begin
-        return @xml.css(node).attr(attrib).text
-      rescue
-        ""
-      end
     end
   end
 end
