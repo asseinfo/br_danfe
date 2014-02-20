@@ -14,7 +14,7 @@ module RubyDanfe
 
     private
     def self.origin(xml)
-      xml.css('ICMS/*/orig').text
+      xml.css("ICMS/*/orig").text
     end
 
     def self.cst?(xml)

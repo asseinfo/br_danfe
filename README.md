@@ -6,6 +6,8 @@ It generates PDF files for Brazilian DANFE (_Documento Auxiliar da Nota Fiscal E
 
 This project doesn't support DACTE (_Documento Auxiliar do Conhecimento de Transporte Eletrônico_) or NFC-e (_Nota Fiscal do Consumidor Eletrônica_).
 
+This gem requires `ruby >= 1.9.x`.
+
 ## Installing
 
         gem install ruby_danfe
@@ -22,6 +24,12 @@ If you have the xml in a variable:
         xml = RubyDanfe::XML.new(my_xml_string)
         pdf = RubyDanfe.generatePDF(xml)
         pdf.render_file "output.pdf"
+
+## I18n
+
+By default, your rails application must be config configured for `pt-Br'.
+
+If you need to custom some message or field label, you can override the content of pt-Br.yml file.
 
 ## Development
 

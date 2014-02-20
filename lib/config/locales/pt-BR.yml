@@ -1,0 +1,125 @@
+pt-BR:
+  danfe:
+    chNFe: "CHAVE DE ACESSO"
+    infProt: "PROTOCOLO DE AUTORIZAÇÃO DE USO"
+    others:
+      without_fiscal_value: "SEM VALOR FISCAL"
+      page: "FOLHA %{current} de %{total}"
+      danfe: "DOCUMENTO AUXILIAR DA NOTA FISCAL ELETRÔNICA"
+      sefaz: "Consulta de autenticidade no portal nacional da NF-e www.nfe.fazenda.gov.br/portal ou no site da Sefaz Autorizadora"
+    ide:
+      dEmi: "DATA DA EMISSÃO"
+      dSaiEnt: "DATA DA SAÍDA/ENTRADA"
+      hSaiEnt: "HORA DE SAÍDA"
+      tpNF:
+        entry: "ENTRADA"
+        departure: "SAÍDA"
+      document: "N°. %{nNF}\nSÉRIE %{serie}"
+      natOp: "NATUREZA DA OPERAÇÃO"
+    dest:
+      title: "DESTINATÁRIO / REMETENTE"
+      xNome: "NOME/RAZÃO SOCIAL"
+      CNPJ: "CNPJ/CPF"
+      CPF: "CNPJ/CPF"
+      IE: "INSCRIÇÃO ESTADUAL"
+    enderDest:
+      UF: "UF"
+      xLgr: "ENDEREÇO"
+      xBairro: "BAIRRO"
+      CEP: "CEP"
+      xMun: "MUNICÍPIO"
+      fone: "FONE/FAX"
+    emit:
+      IM: "INSCRIÇÃO MUNICIPAL"
+      IE: "INSCRIÇÃO ESTADUAL"
+      IE_ST: "INSC.ESTADUAL DO SUBST. TRIBUTÁRIO"
+      CNPJ: "CNPJ"
+    dup:
+      title: "FATURA / DUPLICATAS"
+      nDup: "Núm.:"
+      vDup: "Valor: R$"
+      dVenc: "Venc.:"
+    ICMSTot:
+      title: "CÁLCULO DO IMPOSTO"
+      vBC: "BASE DE CÁLCULO DO ICMS"
+      vICMS: "VALOR DO ICMS"
+      vBCST: "BASE DE CÁLCULO DO ICMS ST"
+      vST: "VALOR DO ICMS ST"
+      vProd: "VALOR TOTAL DOS PRODUTOS"
+      vFrete: "VALOR DO FRETE"
+      vSeg: "VALOR DO SEGURO"
+      vDesc: "DESCONTO"
+      vOutro: "OUTRAS DESPESAS ACESSORIAS"
+      vIPI: "VALOR DO IPI"
+      vNF: "VALOR TOTAL DA NOTA"
+    transporta:
+      title: "TRANSPORTADOR / VOLUMES TRANSPORTADOS"
+      xNome: "RAZÃO SOCIAL"
+      CNPJ: "CNPJ/CPF"
+      xEnder: "ENDEREÇO"
+      xMun: "MUNICÍPIO"
+      UF: "UF"
+      IE: "INSCRIÇÂO ESTADUAL"
+    transp:
+      modFrete:
+        title: "FRETE POR CONTA"
+        emitter: "0 - EMITENTE"
+        recipient: "1 - DEST."
+        third_party: "2 - TERCEIROS"
+        no_freight: "9 - SEM FRETE"
+    veicTransp:
+      RNTC: "CODIGO ANTT"
+      placa: "PLACA DO VEÍCULO"
+      UF: "UF"
+    vol:
+      qVol: "QUANTIDADE"
+      esp: "ESPÉCIE"
+      marca: "MARCA"
+      nVol: "NUMERAÇÃO"
+      pesoB: "PESO BRUTO"
+      pesoL: "PESO LÍQUIDO"
+    det:
+      title: "DADOS DO PRODUTO / SERVIÇO"
+      prod:
+        cProd: "CÓDIGO"
+        xProd: "DESCRIÇÃO"
+        NCM: "NCM"
+        CFOP: "CFOP"
+        uCom: "UNID"
+        qCom: "QUANT"
+        vUnCom: "VALOR UNIT"
+        vProd: "VALOR TOT"
+        xProdST: "ST: MVA: %{pMVAST}% * Alíq: %{pICMSST}% * BC: %{vBCST} * Vlr: %{vICMSST}"
+        xProdFCI: "FCI: %{nFCI}"
+      ICMS:
+        CST: "CST"
+        vBC: "BASE CÁLC"
+        vICMS: "VL ICMS"
+        pICMS: "% ICMS"
+      IPI:
+        vIPI: "VL IPI"
+        pIPI: "% IPI"
+    issqn:
+      title: "CÁLCULO DO ISSQN"
+    total:
+      vServ: "VALOR TOTAL DOS SERVIÇOS"
+      vBCISS: "BASE DE CÁLCULO DO ISSQN"
+      ISSTot: "VALOR DO ISSQN"
+    infAdic:
+      title: "DADOS ADICIONAIS"
+      infCpl: "INFORMAÇÕES COMPLEMENTARES"
+      reserved: "RESERVADO AO FISCO"
+      others: "OUTRAS INFORMAÇÕES"
+      vol:
+        title: "CONTINUAÇÃO TRANSPORTADOR/VOLUMES TRANSPORTADOS"
+        qVol: "QUANT.:"
+        esp: "ESP.:"
+        marca: "MARCA:"
+        nVol: "NUM.:"
+        pesoB: "PESO B.:"
+        pesoL: "PESO LÍQ.:"
+    ticket:
+        xNome: "RECEBEMOS DE %{xNome} OS PRODUTOS CONSTANTES DA NOTA FISCAL INDICADA ABAIXO"
+        received_at: "DATA DE RECEBIMENTO"
+        receiver: "IDENTIFICAÇÃO E ASSINATURA DO RECEBEDOR"
+        document: "NF-e\nN°. %{nNF}\nSÉRIE %{serie}"

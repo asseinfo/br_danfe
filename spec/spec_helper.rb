@@ -6,6 +6,7 @@ require "ruby_danfe"
 
 Bundler.require(:default, :development)
 Dir[File.dirname(__FILE__) + "/support/*.rb"].each { |f| require f }
+I18n.locale = "pt-BR";
 
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
