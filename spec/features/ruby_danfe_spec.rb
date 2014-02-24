@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "RubyDanfe generated pdf files" do
+describe "BrDanfe generated pdf files" do
   let(:base_dir) { "./spec/fixtures/"}
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
@@ -9,7 +9,7 @@ describe "RubyDanfe generated pdf files" do
   it "renders a basic NF-e with namespace" do
     expect(File.exist?(output_pdf)).to be_false
 
-    RubyDanfe.generate(output_pdf, "#{base_dir}nfe_with_ns.xml")
+    BrDanfe.generate(output_pdf, "#{base_dir}nfe_with_ns.xml")
 
     expect("#{base_dir}nfe_with_ns.xml.fixture.pdf").to be_same_file_as(output_pdf)
   end
@@ -17,7 +17,7 @@ describe "RubyDanfe generated pdf files" do
   it "renders another basic NF-e without namespace" do
     expect(File.exist?(output_pdf)).to be_false
 
-    RubyDanfe.generate(output_pdf, "#{base_dir}nfe_without_ns.xml")
+    BrDanfe.generate(output_pdf, "#{base_dir}nfe_without_ns.xml")
 
     expect("#{base_dir}nfe_without_ns.xml.fixture.pdf").to be_same_file_as(output_pdf)
   end
@@ -25,16 +25,24 @@ describe "RubyDanfe generated pdf files" do
   it "renders a NF-e having FCI in its items" do
     expect(File.exist?(output_pdf)).to be_false
 
-    RubyDanfe.generate(output_pdf, "#{base_dir}nfe_with_fci.xml")
+    BrDanfe.generate(output_pdf, "#{base_dir}nfe_with_fci.xml")
 
     expect("#{base_dir}nfe_with_fci.xml.fixture.pdf").to be_same_file_as(output_pdf)
   end
 
-  it "renders a NF-e of Simples Nacional using CSOSN" do
+  it "renders a Simples Nacional NF-e using CSOSN" do
     expect(File.exist?(output_pdf)).to be_false
 
-    RubyDanfe.generate(output_pdf, "#{base_dir}nfe_simples_nacional.xml")
+    BrDanfe.generate(output_pdf, "#{base_dir}nfe_simples_nacional.xml")
 
     expect("#{base_dir}nfe_simples_nacional.xml.fixture.pdf").to be_same_file_as(output_pdf)
+  end
+
+  it "renders a NF-e with extra volumes" do
+    expect(File.exist?(output_pdf)).to be_false
+
+    BrDanfe.generate(output_pdf, "#{base_dir}nfe_with_extra_volumes.xml")
+
+    expect("#{base_dir}nfe_with_extra_volumes.xml.fixture.pdf").to be_same_file_as(output_pdf)
   end
 end

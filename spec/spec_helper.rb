@@ -2,7 +2,7 @@ require "simplecov"
 SimpleCov.start
 
 require "bundler/setup"
-require "ruby_danfe"
+require "br_danfe"
 
 Bundler.require(:default, :development)
 Dir[File.dirname(__FILE__) + "/support/*.rb"].each { |f| require f }

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe RubyDanfe::Cst do
+describe BrDanfe::Cst do
   let(:xml_cst) do
     xml = <<-eos
       <imposto>
@@ -38,13 +38,13 @@ describe RubyDanfe::Cst do
   describe ".to_danfe" do
     context "when CST" do
       it "returns origin + CST" do
-        expect(RubyDanfe::Cst.to_danfe(xml_cst)).to eq "500"
+        expect(BrDanfe::Cst.to_danfe(xml_cst)).to eq "500"
       end
     end
 
     context "when CSOSN" do
       it "returns origin + CSOSN" do
-        expect(RubyDanfe::Cst.to_danfe(xml_csosn)).to eq "4102"
+        expect(BrDanfe::Cst.to_danfe(xml_csosn)).to eq "4102"
       end
     end
   end

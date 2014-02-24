@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe RubyDanfe do
+describe BrDanfe do
   let(:base_dir) { "./spec/fixtures/"}
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
@@ -10,7 +10,7 @@ describe RubyDanfe do
     it "saves the PDF document to file based on a xml file" do
       expect(File.exist?(output_pdf)).to be_false
 
-      RubyDanfe.generate(output_pdf, "#{base_dir}nfe_with_ns.xml")
+      BrDanfe.generate(output_pdf, "#{base_dir}nfe_with_ns.xml")
 
       expect("#{base_dir}nfe_with_ns.xml.fixture.pdf").to be_same_file_as(output_pdf)
     end
@@ -20,7 +20,7 @@ describe RubyDanfe do
     it "renders the PDF document to string based on a xml string" do
       xml_string = File.new("#{base_dir}nfe_with_ns.xml")
 
-      pdf_string = RubyDanfe.render(xml_string)
+      pdf_string = BrDanfe.render(xml_string)
 
       expect(pdf_string).to include "%PDF-1.3\n%"
     end
@@ -32,7 +32,7 @@ describe RubyDanfe do
 
       xml_string = File.new("#{base_dir}nfe_with_ns.xml")
 
-      RubyDanfe.render_file(output_pdf, xml_string)
+      BrDanfe.render_file(output_pdf, xml_string)
 
       expect("#{base_dir}nfe_with_ns.xml.fixture.pdf").to be_same_file_as(output_pdf)
     end

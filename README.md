@@ -1,12 +1,14 @@
-# Ruby DANFE
+# BrDanfe
 
-[![Code Climate](https://codeclimate.com/github/asseinfo/ruby_danfe.png)](https://codeclimate.com/github/asseinfo/ruby_danfe) [![Build Status](https://travis-ci.org/asseinfo/ruby_danfe.png?branch=master)](https://travis-ci.org/asseinfo/ruby_danfe)
+[![Code Climate](https://codeclimate.com/github/asseinfo/br_danfe.png)](https://codeclimate.com/github/asseinfo/br_danfe) [![Build Status](https://travis-ci.org/asseinfo/br_danfe.png?branch=master)](https://travis-ci.org/asseinfo/br_danfe)
 
-It generates PDF files for Brazilian DANFE (_Documento Auxiliar da Nota Fiscal Eletrônica_) from a valid NF-e XML.
-
-This project doesn't support DACTE (_Documento Auxiliar do Conhecimento de Transporte Eletrônico_) or NFC-e (_Nota Fiscal do Consumidor Eletrônica_).
+This gem generates PDF files for Brazilian DANFE (_Documento Auxiliar da Nota Fiscal Eletrônica_) from a valid NF-e XML.
 
 This gem requires `ruby >= 1.9.x`.
+
+It's a fork of [Ruby DANFE](http://github.com/taxweb/ruby_danfe) project.
+
+The difference is that this project doesn't support DACTE (_Documento Auxiliar do Conhecimento de Transporte Eletrônico_) or NFC-e (_Nota Fiscal do Consumidor Eletrônica_). It's only focused on DANFE.
 
 ## Installing
 
@@ -16,20 +18,20 @@ This gem requires `ruby >= 1.9.x`.
 
 If you have the xml saved in a file:
 
-        require "ruby_danfe"
-        RubyDanfe.generate("sample.pdf", "sample.xml")
+        require "br_danfe"
+        BrDanfe.generate("sample.pdf", "sample.xml")
 
 If you have the xml in a variable:
 
-        xml = RubyDanfe::XML.new(my_xml_string)
-        pdf = RubyDanfe.generatePDF(xml)
+        xml = BrDanfe::XML.new(my_xml_string)
+        pdf = BrDanfe.generatePDF(xml)
         pdf.render_file "output.pdf"
 
 ## I18n
 
-By default, your rails application must be config configured for `pt-Br'.
+By default, your rails application must be configured to `pt-Br`.
 
-If you need to custom some message or field label, you can override the content of pt-Br.yml file.
+If you need to customize some message or field label, you can override the content of pt-Br.yml file.
 
 ## Development
 
@@ -43,21 +45,22 @@ You can install all necessaries dependencies using bunder like above:
 
 #### Manual tests
 
-At `test` folder you will find the `generate.rb` file. It shows how to generate a pdf file from a valid xml.
-
 You can use it following the steps above:
 
-        $ cd test
-        $ ruby generate.rb nfe_with_ns.xml
+        $ rake pdf_from["spec/fixtures/nfe_with_ns.xml","./output.pdf"]
 
 You can also use an special version of irb with all classes pre-loaded. Just use:
 
         $ rake console
-        RubyDanfe.generate("output.pdf", "test/nfe_with_ns.xml")
+        I18n.locale = "pt-BR"
+        BrDanfe.generate("output.pdf", "test/nfe_with_ns.xml")
 
 or
 
         $ rake console
+
+        I18n.locale = "pt-BR"
+
         my_xml_string = ""
         file = File.new("test/nfe_with_ns.xml", "r")
         while (line = file.gets)
@@ -65,8 +68,8 @@ or
         end
         file.close
 
-        xml = RubyDanfe::XML.new(my_xml_string)
-        pdf = RubyDanfe.generatePDF(xml)
+        xml = BrDanfe::XML.new(my_xml_string)
+        pdf = BrDanfe.generatePDF(xml)
 
         pdf.render_file "output.pdf"
 
@@ -94,13 +97,13 @@ Code coverage is available through of SimpleCov. Just run `rspec` and open the c
 
 You can build using one of the above tasks
 
-        $ rake build    # Build ruby_danfe-X.X.X.gem into the pkg directory
-        $ rake install  # Build and install ruby_danfe-X.X.X.gem into system gems
-        $ rake release  # Create tag vX.X.X and build and push ruby_danfe-X.X.X.gem to Rubygems
+        $ rake build    # Build br_danfe-X.X.X.gem into the pkg directory
+        $ rake install  # Build and install br_danfe-X.X.X.gem into system gems
+        $ rake release  # Create tag vX.X.X and build and push br_danfe-X.X.X.gem to Rubygems
 
 ## Contributing
 
-We encourage you to contribute to Ruby DANFE!
+We encourage you to contribute to BrDanfe!
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
@@ -110,4 +113,4 @@ We encourage you to contribute to Ruby DANFE!
 
 ## License
 
-Ruby DANFE is released under the [MIT License](http://www.opensource.org/licenses/MIT).
+BrDanfe is released under the [MIT License](http://www.opensource.org/licenses/MIT).
