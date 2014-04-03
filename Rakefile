@@ -32,6 +32,13 @@ namespace :spec do
     task :recreate_pdfs do
       Dir["spec/fixtures/nfe*.xml"].each do |f|
         puts "Recreating #{f}.fixture.pdf"
+
+        if File.exist?("#{f}.logo.png")
+          BrDanfe.options.logo_path = "#{f}.logo.png"
+        else
+          BrDanfe.options.logo_path = ""
+        end
+
         BrDanfe.generate("#{f}.fixture.pdf", "#{f}")
       end
     end

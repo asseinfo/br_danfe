@@ -1,14 +1,20 @@
 module BrDanfe
   class Emit
     def self.render(pdf, xml)
+      pdf.ibox 3.92, 8.46, 0.25, 2.54
+
+      pdf.ibox 3.92, 8.46, 0.25, 2.80, "", xml["emit/xNome"],
+        { size: 12, align: :center, border: 0, style: :bold }
+
       if BrDanfe.options.logo_path.empty?
-        pdf.ibox 3.92, 8.46, 0.25, 2.80, "", xml["emit/xNome"], {size: 12, align: :center, border: 0, style: :bold}
-        self.render_address(pdf, xml, 2.54)
+        pdf.ibox 3.92, 8.46, 0.75, 4, "",
+          address(xml), { align: :left, border: 0 }
       else
-        pdf.ibox 3.92, 8.46, 0.25, 2.54
-        pdf.ibox 3.92, 8.46, 0.25, 2.80, "", xml["emit/xNome"], {size: 12, align: :center, border: 0, style: :bold}
-        self.render_address(pdf, xml, 4)
-        pdf.image BrDanfe.options.logo_path, at: [0.5.cm, Helper.invert(4.cm)], width: 2.cm
+        pdf.ibox 3.92, 8.46, 2.75, 4, "",
+          address(xml), { size: 8, align: :left, border: 0 }
+
+        pdf.image BrDanfe.options.logo_path, at: [0.5.cm, Helper.invert(4.cm)],
+          width: 2.cm
       end
 
       pdf.ibox 3.92, 2.08, 8.71, 2.54
@@ -33,13 +39,11 @@ module BrDanfe
     end
 
     private
-      def self.render_address(pdf, xml, y)
-        pdf.ibox 3.92, 8.46, 0.25, y, "",
-          "\n" + xml["enderEmit/xLgr"] + ", " + xml["enderEmit/nro"] + "\n" +
+      def self.address(xml)
+        xml["enderEmit/xLgr"] + ", " + xml["enderEmit/nro"] + "\n" +
           xml["enderEmit/xBairro"] + " - " + Cep.format(xml["enderEmit/CEP"]) + "\n" +
           xml["enderEmit/xMun"] + "/" + xml["enderEmit/UF"] + "\n" +
-          Phone.format(xml["enderEmit/fone"]) + " " + xml["enderEmit/email"],
-          { align: :center, valign: :center }
+          Phone.format(xml["enderEmit/fone"]) + " " + xml["enderEmit/email"]
       end
   end
 end

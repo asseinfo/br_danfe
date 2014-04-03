@@ -45,4 +45,14 @@ describe "BrDanfe generated pdf files" do
 
     expect("#{base_dir}nfe_with_extra_volumes.xml.fixture.pdf").to be_same_file_as(output_pdf)
   end
+
+  it "renders a NF-e with logo" do
+    expect(File.exist?(output_pdf)).to be_false
+
+    BrDanfe.options.logo_path = "./spec/fixtures/nfe_with_logo.xml.logo.png"
+    BrDanfe.generate(output_pdf, "#{base_dir}nfe_with_logo.xml")
+    BrDanfe.options.logo_path = ""
+
+    expect("#{base_dir}nfe_with_logo.xml.fixture.pdf").to be_same_file_as(output_pdf)
+  end
 end
