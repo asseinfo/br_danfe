@@ -17,10 +17,6 @@ module BrDanfe
       @document.send(method_name, *args, &block)
     end
 
-    def respond_to_missing?(method_name, include_private = false)
-      @document.respond_to?(method_name, include_private) || super
-    end
-
     def ititle(h, w, x, y, i18n)
       title = ""
       title = I18n.t("danfe.#{i18n}") if i18n != ""

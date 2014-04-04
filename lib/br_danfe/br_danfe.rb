@@ -24,10 +24,6 @@ module BrDanfe
     @options ||= BrDanfe::Options.new
   end
 
-  def self.options=(new_options = {})
-    @options = BrDanfe::Options.new(new_options)
-  end
-
   private
   def self.generatePDF(xml_string, new_options = {})
     self.options = new_options if !new_options.empty?
