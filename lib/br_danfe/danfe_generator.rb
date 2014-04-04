@@ -10,20 +10,23 @@ module BrDanfe
     def generatePDF
       @pdf.stamp("without_fiscal_value") if Helper.without_fiscal_value?(@xml)
 
+      det = Det.new(@pdf, @xml)
+      emit = Emit.new(@pdf, @xml)
+
       @pdf.repeat :all do
         Ticket.render(@pdf, @xml)
-        Emit.new(@pdf, @xml).render
+        emit.render
         Dest.render(@pdf, @xml)
         Dup.render(@pdf, @xml)
         Icmstot.render(@pdf, @xml)
         Transp.render(@pdf, @xml)
         nVol = Vol.render(@pdf, @xml)
-        Det.render_header(@pdf, @xml)
+        det.render_header
         Issqn.render(@pdf, @xml)
         Infadic.render(@pdf, @xml, nVol)
       end
 
-      Det.render_body(@pdf, @xml)
+      det.render_body
 
       @pdf.page_count.times do |i|
         @pdf.go_to_page(i + 1)
