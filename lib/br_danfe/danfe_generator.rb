@@ -12,7 +12,7 @@ module BrDanfe
 
       @pdf.repeat :all do
         Ticket.render(@pdf, @xml)
-        Emit.render(@pdf, @xml)
+        Emit.new(@pdf, @xml).render
         Dest.render(@pdf, @xml)
         Dup.render(@pdf, @xml)
         Icmstot.render(@pdf, @xml)
