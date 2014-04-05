@@ -12,11 +12,12 @@ module BrDanfe
 
       det = Det.new(@pdf, @xml)
       emit = Emit.new(@pdf, @xml)
+      dest = Dest.new(@pdf, @xml)
 
       @pdf.repeat :all do
         Ticket.render(@pdf, @xml)
         emit.render
-        Dest.render(@pdf, @xml)
+        dest.render
         Dup.render(@pdf, @xml)
         Icmstot.render(@pdf, @xml)
         Transp.render(@pdf, @xml)
