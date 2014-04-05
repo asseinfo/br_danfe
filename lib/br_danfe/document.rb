@@ -92,8 +92,18 @@ module BrDanfe
       }.merge(options)
 
       self.stroke_rectangle at, w, h if options[:border] == 1
-      self.text_box title, size: 6, style: :italic, at: [at[0] + 2, at[1] - 2], width: w - 4, height: 8 if title != ""
-      self.text_box info, size: options[:size], at: [at[0] + 2, at[1] - (title != "" ? 14 : 4) ], width: w - 4, height: h - (title != "" ? 14 : 4), align: options[:align], style: options[:style], valign: options[:valign]
+
+      at[0] += 2
+
+      if title != ""
+        title_coord = Array.new(at)
+        title_coord[1] -= 2
+        self.text_box title, size: 6, style: :italic, at: title_coord, width: w - 4, height: 8
+      end
+
+      title_adjustment = title == "" ? 4 : 14
+      at[1] -= title_adjustment
+      self.text_box info, size: options[:size], at: at, width: w - 4, height: h - title_adjustment, align: options[:align], style: options[:style], valign: options[:valign]
     end
   end
 end
