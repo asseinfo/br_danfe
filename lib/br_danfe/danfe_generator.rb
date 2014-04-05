@@ -15,12 +15,13 @@ module BrDanfe
       dest = Dest.new(@pdf, @xml)
       vol = Vol.new(@pdf, @xml)
       infadic = Infadic.new(@pdf, @xml)
+      dup = Dup.new(@pdf, @xml)
 
       @pdf.repeat :all do
         Ticket.render(@pdf, @xml)
         emit.render
         dest.render
-        Dup.render(@pdf, @xml)
+        dup.render
         Icmstot.render(@pdf, @xml)
         Transp.render(@pdf, @xml)
         nVol = vol.render
