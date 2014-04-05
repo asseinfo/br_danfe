@@ -14,6 +14,7 @@ module BrDanfe
       emit = Emit.new(@pdf, @xml)
       dest = Dest.new(@pdf, @xml)
       vol = Vol.new(@pdf, @xml)
+      infadic = Infadic.new(@pdf, @xml)
 
       @pdf.repeat :all do
         Ticket.render(@pdf, @xml)
@@ -25,7 +26,7 @@ module BrDanfe
         nVol = vol.render
         det.render_header
         Issqn.render(@pdf, @xml)
-        Infadic.render(@pdf, @xml, nVol)
+        infadic.render(nVol)
       end
 
       det.render_body
