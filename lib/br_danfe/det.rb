@@ -51,7 +51,7 @@ module BrDanfe
     def product(det)
       [
         det.css("prod/cProd").text,
-        Xprod.generate(det),
+        Xprod.new(det).render,
         det.css("prod/NCM").text,
         Cst.to_danfe(det),
         det.css("prod/CFOP").text,

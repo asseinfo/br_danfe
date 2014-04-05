@@ -1,41 +1,46 @@
 module BrDanfe
   class Xprod
-    def self.generate(det)
-      xprod = "#{det.css('prod/xProd').text}"
+    def initialize(det)
+      @det = det
+    end
 
-      if has_infAdProd?(det)
-        xprod += "\n"
-        xprod += det.css("infAdProd").text
-      end
+    def render
+      xprod = "#{@det.css('prod/xProd').text}"
 
-      if has_fci?(det)
-        xprod += "\n"
-        xprod += I18n.t("danfe.det.prod.xProdFCI", nFCI: det.css('prod/nFCI').text)
-      end
-
-      if has_st?(det)
-        xprod += "\n"
-        xprod += I18n.t("danfe.det.prod.xProdST",
-          pMVAST: det.css('ICMS/*/pMVAST').text,
-          pICMSST: det.css('ICMS/*/pICMSST').text,
-          vBCST: det.css('ICMS/*/vBCST').text,
-          vICMSST: det.css('ICMS/*/vICMSST').text)
-      end
+      xprod += infAdProd if has_infAdProd?
+      xprod += fci if has_fci?
+      xprod += st if has_st?
 
       xprod
     end
 
     private
-    def self.has_infAdProd?(det)
-      !det.css("infAdProd").text.empty?
+    def has_infAdProd?
+      !@det.css("infAdProd").text.empty?
     end
 
-    def self.has_fci?(det)
-      !det.css("prod/nFCI").text.empty?
+    def has_fci?
+      !@det.css("prod/nFCI").text.empty?
     end
 
-    def self.has_st?(det)
-      det.css("ICMS/*/vBCST").text.to_i > 0
+    def has_st?
+      @det.css("ICMS/*/vBCST").text.to_i > 0
+    end
+
+    def infAdProd
+      "\n" + @det.css("infAdProd").text
+    end
+
+    def fci
+      "\n" + I18n.t("danfe.det.prod.xProdFCI", nFCI: @det.css('prod/nFCI').text)
+    end
+
+    def st
+      "\n" + I18n.t("danfe.det.prod.xProdST",
+        pMVAST: @det.css('ICMS/*/pMVAST').text,
+        pICMSST: @det.css('ICMS/*/pICMSST').text,
+        vBCST: @det.css('ICMS/*/vBCST').text,
+        vICMSST: @det.css('ICMS/*/vICMSST').text)
     end
   end
 end
