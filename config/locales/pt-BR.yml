@@ -3,7 +3,7 @@ pt-BR:
     chNFe: "CHAVE DE ACESSO"
     infProt: "PROTOCOLO DE AUTORIZAÇÃO DE USO"
     others:
-      without_fiscal_value: "SEM VALOR FISCAL"
+      has_no_fiscal_value: "SEM VALOR FISCAL"
       page: "FOLHA %{current} de %{total}"
       danfe: "DOCUMENTO AUXILIAR DA NOTA FISCAL ELETRÔNICA"
       sefaz: "Consulta de autenticidade no portal nacional da NF-e www.nfe.fazenda.gov.br/portal ou no site da Sefaz Autorizadora"

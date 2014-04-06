@@ -17,9 +17,9 @@ module BrDanfe
 
     private
     def create_watermark
-      @pdf.create_stamp("without_fiscal_value") do
+      @pdf.create_stamp("has_no_fiscal_value") do
         @pdf.fill_color "7d7d7d"
-        @pdf.text_box I18n.t("danfe.others.without_fiscal_value"),
+        @pdf.text_box I18n.t("danfe.others.has_no_fiscal_value"),
           size: 2.2.cm,
           width: @pdf.bounds.width,
           height: @pdf.bounds.height,
@@ -32,29 +32,11 @@ module BrDanfe
     end
 
     def generate
-      @pdf.stamp("without_fiscal_value") if Helper.without_fiscal_value?(@xml)
+      @pdf.stamp("has_no_fiscal_value") if Helper.has_no_fiscal_value?(@xml)
 
-      det = Det.new(@pdf, @xml)
-      emit = Emit.new(@pdf, @xml, @options.logo_path)
-      dest = Dest.new(@pdf, @xml)
-      vol = Vol.new(@pdf, @xml)
-      infadic = Infadic.new(@pdf, @xml)
-      dup = Dup.new(@pdf, @xml)
+      @pdf.repeat(:all) { repeat_on_each_page }
 
-      @pdf.repeat :all do
-        Ticket.render(@pdf, @xml)
-        emit.render
-        dest.render
-        dup.render
-        Icmstot.render(@pdf, @xml)
-        Transp.render(@pdf, @xml)
-        nVol = vol.render
-        det.render_header
-        Issqn.render(@pdf, @xml)
-        infadic.render(nVol)
-      end
-
-      det.render_body
+      DetBody.new(@pdf, @xml).render
 
       @pdf.page_count.times do |i|
         @pdf.go_to_page(i + 1)
@@ -64,6 +46,19 @@ module BrDanfe
       end
 
       @pdf
+    end
+
+    def repeat_on_each_page
+      Ticket.render(@pdf, @xml)
+      Emit.new(@pdf, @xml, @options.logo_path).render
+      Dest.new(@pdf, @xml).render
+      Dup.new(@pdf, @xml).render
+      Icmstot.render(@pdf, @xml)
+      Transp.render(@pdf, @xml)
+      nVol = Vol.new(@pdf, @xml).render
+      DetHeader.new(@pdf, @xml).render
+      Issqn.render(@pdf, @xml)
+      Infadic.new(@pdf, @xml).render(nVol)
     end
   end
 end

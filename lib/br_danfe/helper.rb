@@ -22,7 +22,7 @@ module BrDanfe
       formated_date
     end
 
-    def self.without_fiscal_value?(xml)
+    def self.has_no_fiscal_value?(xml)
       homologation?(xml) || unauthorized?(xml)
     end
 

@@ -8,7 +8,7 @@ describe BrDanfe::Helper do
     end
   end
 
-  describe ".without_fiscal_value?" do
+  describe ".no_fiscal_value?" do
     let(:xml_homologation) do
       xml = <<-eos
         <nfeProc>
@@ -65,19 +65,19 @@ describe BrDanfe::Helper do
 
     context "when XML is unauthorized" do
       it "returns true" do
-        expect(BrDanfe::Helper.without_fiscal_value?(xml_unauthorized)).to eq true
+        expect(BrDanfe::Helper.has_no_fiscal_value?(xml_unauthorized)).to eq true
       end
     end
 
     context "when XML is in homologation environment" do
       it "returns true" do
-        expect(BrDanfe::Helper.without_fiscal_value?(xml_homologation)).to eq true
+        expect(BrDanfe::Helper.has_no_fiscal_value?(xml_homologation)).to eq true
       end
     end
 
     context "when XML is authorized" do
       it "returns false" do
-        expect(BrDanfe::Helper.without_fiscal_value?(xml_authorized)).to eq false
+        expect(BrDanfe::Helper.has_no_fiscal_value?(xml_authorized)).to eq false
       end
     end
   end
