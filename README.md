@@ -6,26 +6,17 @@ This gem generates PDF files for Brazilian DANFE (_Documento Auxiliar da Nota Fi
 
 This gem requires `ruby >= 1.9.x`.
 
-It's a fork of [Ruby DANFE](http://github.com/taxweb/ruby_danfe) project.
-
-The difference is that this project doesn't support DACTE (_Documento Auxiliar do Conhecimento de Transporte Eletrônico_) or NFC-e (_Nota Fiscal do Consumidor Eletrônica_). It's only focused on DANFE.
-
 ## Installing
 
         gem install ruby_danfe
 
 ## Usage
 
-If you have the xml saved in a file:
+        xml = File.read("nfe.xml")
 
-        require "br_danfe"
-        BrDanfe.generate("sample.pdf", "sample.xml")
-
-If you have the xml in a variable:
-
-        xml = BrDanfe::XML.new(my_xml_string)
-        pdf = BrDanfe.generatePDF(xml)
-        pdf.render_file "output.pdf"
+        danfe = BrDanfe::Danfe.new(xml)
+        danfe.options.logo_path = "logo.png"
+        danfe.save_pdf("nfe.pdf")
 
 ## I18n
 
@@ -52,26 +43,13 @@ You can use it following the steps above:
 You can also use an special version of irb with all classes pre-loaded. Just use:
 
         $ rake console
-        I18n.locale = "pt-BR"
-        BrDanfe.generate("output.pdf", "test/nfe_with_ns.xml")
-
-or
-
-        $ rake console
 
         I18n.locale = "pt-BR"
 
-        my_xml_string = ""
-        file = File.new("test/nfe_with_ns.xml", "r")
-        while (line = file.gets)
-            my_xml_string = my_xml_string + line
-        end
-        file.close
+        xml = File.read "test/nfe_with_ns.xml"
 
-        xml = BrDanfe::XML.new(my_xml_string)
-        pdf = BrDanfe.generatePDF(xml)
-
-        pdf.render_file "output.pdf"
+        danfe = BrDanfe::Danfe.new(xml)
+        danfe.save_pdf "output.pdf"
 
 #### Automated tests with RSpec
 
@@ -110,6 +88,10 @@ We encourage you to contribute to BrDanfe!
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Ruby DANFE gem
+
+This project is based on [Ruby DANFE gem](http://github.com/taxweb/ruby_danfe).
 
 ## License
 

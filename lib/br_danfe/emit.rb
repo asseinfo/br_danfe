@@ -1,8 +1,9 @@
 module BrDanfe
   class Emit
-    def initialize(pdf, xml)
+    def initialize(pdf, xml, logo_path)
       @pdf = pdf
       @xml = xml
+      @logo_path = logo_path
     end
 
     def render
@@ -24,13 +25,13 @@ module BrDanfe
       @pdf.ibox 3.92, 8.46, 0.25, 2.80, "", @xml["emit/xNome"],
         { size: 12, align: :center, border: 0, style: :bold }
 
-      if BrDanfe.options.logo_path.empty?
+      if @logo_path.empty?
         @pdf.ibox 3.92, 8.46, 0.75, 4, "", address, { align: :left, border: 0 }
       else
         @pdf.ibox 3.92, 8.46, 2.75, 4, "", address,
           { size: 8, align: :left, border: 0 }
 
-        @pdf.image BrDanfe.options.logo_path, at: [0.5.cm, Helper.invert(4.cm)],
+        @pdf.image @logo_path, at: [0.5.cm, Helper.invert(4.cm)],
           width: 2.cm
       end
     end
