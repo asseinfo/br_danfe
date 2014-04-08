@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "prawn"
   spec.add_dependency "barby"
   spec.add_dependency "i18n"
+  spec.add_dependency "br_documents", "0.0.4"
 
   spec.add_development_dependency "pry"
   spec.add_development_dependency "rspec"

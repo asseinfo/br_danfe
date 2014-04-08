@@ -99,11 +99,13 @@ module BrDanfe
     end
 
     def ie(x, field)
-      @pdf.ibox 0.85, 6.86, x, 7.31, I18n.t("danfe.emit.#{field}"), Ie.format(@xml["emit/#{field}"], @xml["enderEmit/UF"])
+      ie = BrDocuments::IE::Factory.create(@xml["enderEmit/UF"], @xml["emit/#{field}"])
+      @pdf.ibox 0.85, 6.86, x, 7.31, I18n.t("danfe.emit.#{field}"), ie.formatted
     end
 
     def cnpj_box
-      @pdf.ibox 0.85, 6.84, 13.97, 7.31, I18n.t("danfe.emit.CNPJ"), Cnpj.format(@xml["emit/CNPJ"])
+      cnpj = BrDocuments::CnpjCpf::Cnpj.new(@xml["emit/CNPJ"])
+      @pdf.ibox 0.85, 6.84, 13.97, 7.31, I18n.t("danfe.emit.CNPJ"), cnpj.formatted
     end
   end
 end

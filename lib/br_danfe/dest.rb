@@ -29,11 +29,13 @@ module BrDanfe
     end
 
     def cnpj
-      Cnpj.format(@xml["dest/CNPJ"])
+      cnpj = BrDocuments::CnpjCpf::Cnpj.new(@xml["dest/CNPJ"])
+      cnpj.formatted
     end
 
     def cpf
-      Cpf.format(@xml["dest/CPF"])
+      cpf = BrDocuments::CnpjCpf::Cpf.new(@xml["dest/CPF"])
+      cpf.formatted
     end
 
     def render_line2
@@ -64,7 +66,8 @@ module BrDanfe
     end
 
     def ie
-      Ie.format(@xml["dest/IE"], @xml["enderDest/UF"])
+      ie = BrDocuments::IE::Factory.create(@xml["enderDest/UF"], @xml["dest/IE"])
+      ie.formatted
     end
   end
 end
