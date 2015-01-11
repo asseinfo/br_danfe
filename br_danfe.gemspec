@@ -20,9 +20,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency "prawn", "1.0.0"
   spec.add_dependency "barby", "0.5.1"
   spec.add_dependency "i18n"
-  spec.add_dependency "br_documents", "0.0.4"
+  spec.add_dependency "br_documents", ">= 0.0.8"
 
-  spec.add_development_dependency "rspec", "3.0.0"
-  spec.add_development_dependency "simplecov", "0.9.0"
+  spec.add_development_dependency "rspec", ">= 3.0.0"
+  spec.add_development_dependency "simplecov", ">= 0.9.0"
   spec.add_development_dependency "codeclimate-test-reporter"
 end
