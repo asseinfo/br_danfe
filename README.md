@@ -12,11 +12,26 @@ This gem requires `ruby >= 1.9.x`.
 
 ## Usage
 
+### Usage in Ruby
+
         xml = File.read("nfe.xml")
 
         danfe = BrDanfe::Danfe.new(xml)
         danfe.options.logo_path = "logo.png"
         danfe.save_pdf("nfe.pdf")
+
+### Usage in Rails Controller
+
+        class DanfeController < ApplicationController
+          def new
+            invoice = Invoice.find(params[:id])
+            xml_as_string = invoice.generate_xml # your method that generates the NF-e's xml
+
+            danfe = BrDanfe::Danfe.new(xml_as_string)
+
+            send_data danfe.render_pdf, filename: "danfe.pdf", type: "application/pdf"
+          end
+        end
 
 ## I18n
 

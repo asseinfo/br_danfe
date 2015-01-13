@@ -15,6 +15,11 @@ module BrDanfe
       @pdf.render_file filename
     end
 
+    def render_pdf
+      generate
+      @pdf.render
+    end
+
     private
     def create_watermark
       @pdf.create_stamp("has_no_fiscal_value") do
