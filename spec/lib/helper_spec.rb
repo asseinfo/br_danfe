@@ -1,10 +1,55 @@
 require "spec_helper"
 
 describe BrDanfe::Helper do
+  describe ".format_datetime" do
+    it "returns a formated string" do
+      string = "2013-10-18T13:54:04"
+      expect(BrDanfe::Helper.format_datetime(string)).to eq "18/10/2013 13:54:04"
+    end
+
+    describe "when the source is blank" do
+      it "is empty" do
+        expect(BrDanfe::Helper.format_datetime("")).to eq ""
+      end
+    end
+  end
+
   describe ".format_date" do
     it "returns a formated string" do
       string = "2013-10-18T13:54:04"
-      expect(BrDanfe::Helper.format_date(string)).to eq "18/10/2013 13:54:04"
+      expect(BrDanfe::Helper.format_date(string)).to eq "18/10/2013"
+    end
+
+    describe "when the source is blank" do
+      it "is empty" do
+        expect(BrDanfe::Helper.format_date("")).to eq ""
+      end
+    end
+  end
+
+  describe ".format_time" do
+    describe "when param is a complete datetime" do
+      let(:param) { "2013-10-18T16:54:04-03:00" }
+
+      it "is a formated time string in UTC" do
+        expect(BrDanfe::Helper.format_time(param)).to eq "19:54:04"
+      end
+    end
+
+    describe "when param is only a time" do
+      let(:param) { "14:23:02" }
+
+      it "is a formated time string" do
+        expect(BrDanfe::Helper.format_time(param)).to eq "14:23:02"
+      end
+    end
+
+    describe "when param is blank" do
+      let(:param) { "" }
+
+      it "is empty" do
+        expect(BrDanfe::Helper.format_time(param)).to eq ""
+      end
     end
   end
 

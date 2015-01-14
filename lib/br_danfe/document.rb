@@ -41,8 +41,16 @@ module BrDanfe
     end
 
     def idate(h, w, x, y, i18n = "", info = "", options = {})
-      tt = info.split("-")
-      data = "#{tt[2]}/#{tt[1]}/#{tt[0]}"
+      data = BrDanfe::Helper::format_date(info)
+
+      label = ""
+      label = I18n.t("danfe.#{i18n}") if i18n != ""
+
+      ibox h, w, x, y, label, data, options
+    end
+
+    def itime(h, w, x, y, i18n = "", info = "", options = {})
+      data = BrDanfe::Helper::format_time(info)
 
       label = ""
       label = I18n.t("danfe.#{i18n}") if i18n != ""

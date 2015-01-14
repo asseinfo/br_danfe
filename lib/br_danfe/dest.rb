@@ -42,7 +42,11 @@ module BrDanfe
       @pdf.ibox 0.85, 10.16, 0.25, 9.43, I18n.t("danfe.enderDest.xLgr"), street
       @pdf.lbox 0.85, 4.83, 10.41, 9.43, @xml, "enderDest/xBairro"
       @pdf.ibox 0.85, 2.67, 15.24, 9.43, I18n.t("danfe.enderDest.CEP"), cep
-      @pdf.idate 0.85, 2.92, 17.90, 9.43, "ide.dSaiEnt", @xml["ide/dSaiEnt"], { align: :right }
+      if @xml.version_310?
+        @pdf.idate 0.85, 2.92, 17.90, 9.43, "ide.dSaiEnt", @xml["ide/dhSaiEnt"], { align: :right }
+      else
+        @pdf.idate 0.85, 2.92, 17.90, 9.43, "ide.dSaiEnt", @xml["ide/dSaiEnt"], { align: :right }
+      end
     end
 
     def street
@@ -58,7 +62,11 @@ module BrDanfe
       @pdf.ibox 0.85, 4.06, 7.36, 10.28, I18n.t("danfe.enderDest.fone"), phone
       @pdf.lbox 0.85, 1.14, 11.42, 10.28, @xml, "enderDest/UF"
       @pdf.ibox 0.85, 5.33, 12.56, 10.28, I18n.t("danfe.dest.IE"), ie
-      @pdf.idate 0.85, 2.92, 17.90, 10.28, "ide.hSaiEnt", @xml["ide/dSaiEnt"], { align: :right }
+      if @xml.version_310?
+        @pdf.itime 0.85, 2.92, 17.90, 10.28, "ide.hSaiEnt", @xml["ide/dhSaiEnt"], { align: :right }
+      else
+        @pdf.itime 0.85, 2.92, 17.90, 10.28, "ide.hSaiEnt", @xml["ide/hSaiEnt"], { align: :right }
+      end
     end
 
     def phone

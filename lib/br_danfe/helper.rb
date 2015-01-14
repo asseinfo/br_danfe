@@ -11,15 +11,39 @@ module BrDanfe
       28.7.cm - y
     end
 
-    def self.format_date(string)
-      formated_date = ""
+    def self.format_datetime(xml_datetime)
+      formated = ""
 
-      if not string.empty?
-        date = DateTime.strptime(string, "%Y-%m-%dT%H:%M:%S")
-        formated_date = date.strftime("%d/%m/%Y %H:%M:%S")
+      if !xml_datetime.empty?
+        date = DateTime.strptime(xml_datetime, "%Y-%m-%dT%H:%M:%S")
+        formated = date.strftime("%d/%m/%Y %H:%M:%S")
       end
 
-      formated_date
+      formated
+    end
+
+    def self.format_date(xml_datetime)
+      formated = ""
+
+      if !xml_datetime.empty?
+        date = DateTime.strptime(xml_datetime, "%Y-%m-%d")
+        formated = date.strftime("%d/%m/%Y")
+      end
+
+      formated
+    end
+
+    def self.format_time(xml_datetime)
+      formated = ""
+
+      if xml_datetime.length == 8
+        formated = xml_datetime
+      elsif xml_datetime.length > 8
+        date = DateTime.strptime(xml_datetime, "%Y-%m-%dT%H:%M:%S %Z").to_time
+        formated = date.getutc.strftime("%H:%M:%S")
+      end
+
+      formated
     end
 
     def self.has_no_fiscal_value?(xml)

@@ -1,133 +1,163 @@
 require "spec_helper"
 
-describe "BrDanfe generated pdf files" do
-  let(:base_dir) { "./spec/fixtures/"}
+describe BrDanfe::Danfe do
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
-  describe "#render_pdf" do
-    it "renders a basic NF-e with namespace" do
-      danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_ns.xml"))
+  context "when xml's version is v2.00" do
+    let(:base_dir) { "./spec/fixtures/v2.00/"}
 
-      expected = IO.binread("#{base_dir}nfe_with_ns.xml.fixture.pdf")
+    describe "#render_pdf" do
+      it "renders a basic NF-e with namespace" do
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_ns.xml"))
 
-      expect(danfe.render_pdf).to eq expected
+        expected = IO.binread("#{base_dir}nfe_with_ns.xml.fixture.pdf")
+
+        expect(danfe.render_pdf).to eq expected
+      end
+
+      it "renders another basic NF-e without namespace" do
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_without_ns.xml"))
+
+        expected = IO.binread("#{base_dir}nfe_without_ns.xml.fixture.pdf")
+
+        expect(danfe.render_pdf).to eq expected
+      end
+
+      it "renders a NF-e having FCI in its items" do
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_fci.xml"))
+
+        expected = IO.binread("#{base_dir}nfe_with_fci.xml.fixture.pdf")
+
+        expect(danfe.render_pdf).to eq expected
+      end
+
+      it "renders a Simples Nacional NF-e using CSOSN" do
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
+
+        expected = IO.binread("#{base_dir}nfe_simples_nacional.xml.fixture.pdf")
+
+        expect(danfe.render_pdf).to eq expected
+      end
+
+      it "renders a NF-e with extra volumes" do
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_extra_volumes.xml"))
+
+        expected = IO.binread("#{base_dir}nfe_with_extra_volumes.xml.fixture.pdf")
+
+        expect(danfe.render_pdf).to eq expected
+      end
+
+      it "renders a NF-e with logo" do
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_logo.xml"))
+        danfe.options.logo_path = "#{base_dir}nfe_with_logo.xml.logo.png"
+
+        expected = IO.binread("#{base_dir}nfe_with_logo.xml.fixture.pdf")
+
+        expect(danfe.render_pdf).to eq expected
+      end
+
+      it "renders a NF-e with CPF" do
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_cpf.xml"))
+
+        expected = IO.binread("#{base_dir}nfe_with_cpf.xml.fixture.pdf")
+
+        expect(danfe.render_pdf).to eq expected
+      end
     end
 
-    it "renders another basic NF-e without namespace" do
-      danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_without_ns.xml"))
+    describe "#save_pdf" do
+      before { File.delete(output_pdf) if File.exist?(output_pdf) }
 
-      expected = IO.binread("#{base_dir}nfe_without_ns.xml.fixture.pdf")
+      it "renders a basic NF-e with namespace" do
+        expect(File.exist?(output_pdf)).to be_falsey
 
-      expect(danfe.render_pdf).to eq expected
-    end
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_ns.xml"))
+        danfe.save_pdf output_pdf
 
-    it "renders a NF-e having FCI in its items" do
-      danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_fci.xml"))
+        expect("#{base_dir}nfe_with_ns.xml.fixture.pdf").to be_same_file_as(output_pdf)
+      end
 
-      expected = IO.binread("#{base_dir}nfe_with_fci.xml.fixture.pdf")
+      it "renders another basic NF-e without namespace" do
+        expect(File.exist?(output_pdf)).to be_falsey
 
-      expect(danfe.render_pdf).to eq expected
-    end
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_without_ns.xml"))
+        danfe.save_pdf output_pdf
 
-    it "renders a Simples Nacional NF-e using CSOSN" do
-      danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
+        expect("#{base_dir}nfe_without_ns.xml.fixture.pdf").to be_same_file_as(output_pdf)
+      end
 
-      expected = IO.binread("#{base_dir}nfe_simples_nacional.xml.fixture.pdf")
+      it "renders a NF-e having FCI in its items" do
+        expect(File.exist?(output_pdf)).to be_falsey
 
-      expect(danfe.render_pdf).to eq expected
-    end
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_fci.xml"))
+        danfe.save_pdf output_pdf
 
-    it "renders a NF-e with extra volumes" do
-      danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_extra_volumes.xml"))
+        expect("#{base_dir}nfe_with_fci.xml.fixture.pdf").to be_same_file_as(output_pdf)
+      end
 
-      expected = IO.binread("#{base_dir}nfe_with_extra_volumes.xml.fixture.pdf")
+      it "renders a Simples Nacional NF-e using CSOSN" do
+        expect(File.exist?(output_pdf)).to be_falsey
 
-      expect(danfe.render_pdf).to eq expected
-    end
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
+        danfe.save_pdf output_pdf
 
-    it "renders a NF-e with logo" do
-      danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_logo.xml"))
-      danfe.options.logo_path = "./spec/fixtures/nfe_with_logo.xml.logo.png"
+        expect("#{base_dir}nfe_simples_nacional.xml.fixture.pdf").to be_same_file_as(output_pdf)
+      end
 
-      expected = IO.binread("#{base_dir}nfe_with_logo.xml.fixture.pdf")
+      it "renders a NF-e with extra volumes" do
+        expect(File.exist?(output_pdf)).to be_falsey
 
-      expect(danfe.render_pdf).to eq expected
-    end
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_extra_volumes.xml"))
+        danfe.save_pdf output_pdf
 
-    it "renders a NF-e with CPF" do
-      danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_cpf.xml"))
+        expect("#{base_dir}nfe_with_extra_volumes.xml.fixture.pdf").to be_same_file_as(output_pdf)
+      end
 
-      expected = IO.binread("#{base_dir}nfe_with_cpf.xml.fixture.pdf")
+      it "renders a NF-e with logo" do
+        expect(File.exist?(output_pdf)).to be_falsey
 
-      expect(danfe.render_pdf).to eq expected
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_logo.xml"))
+        danfe.options.logo_path = "#{base_dir}nfe_with_logo.xml.logo.png"
+        danfe.save_pdf output_pdf
+
+        expect("#{base_dir}nfe_with_logo.xml.fixture.pdf").to be_same_file_as(output_pdf)
+      end
+
+      it "renders a NF-e with CPF" do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_cpf.xml"))
+        danfe.save_pdf output_pdf
+
+        expect("#{base_dir}nfe_with_cpf.xml.fixture.pdf").to be_same_file_as(output_pdf)
+      end
     end
   end
 
-  describe "#save_pdf" do
-    before { File.delete(output_pdf) if File.exist?(output_pdf) }
+  context "when xml's version is v3.10" do
+    let(:base_dir) { "./spec/fixtures/v3.10/"}
 
-    it "renders a basic NF-e with namespace" do
-      expect(File.exist?(output_pdf)).to be_falsey
+    describe "#render_pdf" do
+      it "renders a Simples Nacional NF-e using CSOSN" do
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
 
-      danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_ns.xml"))
-      danfe.save_pdf output_pdf
+        expected = IO.binread("#{base_dir}nfe_simples_nacional.xml.fixture.pdf")
 
-      expect("#{base_dir}nfe_with_ns.xml.fixture.pdf").to be_same_file_as(output_pdf)
+        expect(danfe.render_pdf).to eq expected
+      end
     end
 
-    it "renders another basic NF-e without namespace" do
-      expect(File.exist?(output_pdf)).to be_falsey
+    describe "#save_pdf" do
+      before { File.delete(output_pdf) if File.exist?(output_pdf) }
 
-      danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_without_ns.xml"))
-      danfe.save_pdf output_pdf
+      it "renders a Simples Nacional NF-e using CSOSN" do
+        expect(File.exist?(output_pdf)).to be_falsey
 
-      expect("#{base_dir}nfe_without_ns.xml.fixture.pdf").to be_same_file_as(output_pdf)
-    end
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
+        danfe.save_pdf output_pdf
 
-    it "renders a NF-e having FCI in its items" do
-      expect(File.exist?(output_pdf)).to be_falsey
-
-      danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_fci.xml"))
-      danfe.save_pdf output_pdf
-
-      expect("#{base_dir}nfe_with_fci.xml.fixture.pdf").to be_same_file_as(output_pdf)
-    end
-
-    it "renders a Simples Nacional NF-e using CSOSN" do
-      expect(File.exist?(output_pdf)).to be_falsey
-
-      danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
-      danfe.save_pdf output_pdf
-
-      expect("#{base_dir}nfe_simples_nacional.xml.fixture.pdf").to be_same_file_as(output_pdf)
-    end
-
-    it "renders a NF-e with extra volumes" do
-      expect(File.exist?(output_pdf)).to be_falsey
-
-      danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_extra_volumes.xml"))
-      danfe.save_pdf output_pdf
-
-      expect("#{base_dir}nfe_with_extra_volumes.xml.fixture.pdf").to be_same_file_as(output_pdf)
-    end
-
-    it "renders a NF-e with logo" do
-      expect(File.exist?(output_pdf)).to be_falsey
-
-      danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_logo.xml"))
-      danfe.options.logo_path = "./spec/fixtures/nfe_with_logo.xml.logo.png"
-      danfe.save_pdf output_pdf
-
-      expect("#{base_dir}nfe_with_logo.xml.fixture.pdf").to be_same_file_as(output_pdf)
-    end
-
-    it "renders a NF-e with CPF" do
-      expect(File.exist?(output_pdf)).to be_falsey
-
-      danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_cpf.xml"))
-      danfe.save_pdf output_pdf
-
-      expect("#{base_dir}nfe_with_cpf.xml.fixture.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}nfe_simples_nacional.xml.fixture.pdf").to be_same_file_as(output_pdf)
+      end
     end
   end
 end

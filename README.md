@@ -6,6 +6,14 @@ This gem generates PDF files for Brazilian DANFE (_Documento Auxiliar da Nota Fi
 
 This gem requires `ruby >= 1.9.x`.
 
+## Supported NF-e versions
+
+XML version | Supported?
+----------- | ----------
+1.00        | no
+2.00        | yes
+3.10        | yes
+
 ## Installing
 
         gem install ruby_danfe
@@ -85,6 +93,68 @@ You can do this automagically running the following taks:
 #### Code coverage
 
 Code coverage is available through of SimpleCov. Just run `rspec` and open the coverage report in your browser.
+
+#### Generating new fixtures
+
+If you need to generate new danfes for using as fixtures, please don't use real data.
+
+These data bellow are suggested:
+
+**Sender:**
+
+Field        | Content
+------------ | ----------------------
+Name         | Nome do Remetente Ltda
+Trade        | Nome Fantasia do Remetente Ltda
+Address      | Rua do Remetente
+Number       | 123
+Complement   | Casa
+Neighborhood | Bairro do Remetente
+CEP          | 12.345-678
+City         | São Paulo - SP
+Phone        | (11) 1234-5678
+CNPJ         | 62.013.294/0001-43
+IE           | 526.926.313.553
+
+**Recipient:**
+
+Field        | Content
+------------ | -------------------------
+Name         | Nome do Destinatário PJ Ltda
+Address      | Rua do Destinatário PJ
+Number       | 345
+Complement   | SL 1 e 2
+Neighborhood | Bairro do Destinatário PJ
+CEP          | 23.456-789
+City         | Sumaré - SP
+Phone        | (19) 2345-6789
+CNPJ         | 71.058.884/0001-83
+IE           | 671.008.375.110
+
+Field        | Content
+------------ | -------------------------
+Name         | Nome do Destinatário PF
+Address      | Rua do Destinatário PF
+Number       | 345
+Complement   | 1o Andar
+Neighborhood | Bairro do Destinatário PF
+CEP          | 98.765-432
+City         | Vinhedo - SP
+Phone        | (16) 4567-8901
+CPF          | 485.325.574-57
+RG           | 11.420.947-9
+
+**Transporter:**
+
+Field        | Content
+------------ | --------------------------
+Name         | Nome do Transportador Ltda
+Address      | Rua do Transportador, 456
+City         | Votorantim - SP
+CNPJ         | 71.434.064/0001-49
+IE           | 964.508.990.089
+
+You can generate new data using [4devs generators](http://www.4devs.com.br).
 
 ### Building and publishing
 

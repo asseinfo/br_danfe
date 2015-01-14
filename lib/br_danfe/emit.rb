@@ -87,7 +87,7 @@ module BrDanfe
     end
 
     def protocol_box
-      @pdf.ibox 0.85, 10.02, 10.79, 6.46, I18n.t("danfe.infProt"), @xml["infProt/nProt"] + " " + Helper.format_date(@xml["infProt/dhRecbto"]), { align: :center }
+      @pdf.ibox 0.85, 10.02, 10.79, 6.46, I18n.t("danfe.infProt"), @xml["infProt/nProt"] + " " + Helper.format_datetime(@xml["infProt/dhRecbto"]), { align: :center }
     end
 
     def ie_box

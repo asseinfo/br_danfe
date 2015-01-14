@@ -28,5 +28,9 @@ module BrDanfe
       end
       result
     end
+
+    def version_310?
+      @xml.css("infNFe").attr("versao").to_s == "3.10"
+    end
   end
 end
