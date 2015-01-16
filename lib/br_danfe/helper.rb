@@ -40,7 +40,7 @@ module BrDanfe
         formated = xml_datetime
       elsif xml_datetime.length > 8
         date = DateTime.strptime(xml_datetime, "%Y-%m-%dT%H:%M:%S %Z").to_time
-        formated = date.getutc.strftime("%H:%M:%S")
+        formated = date.strftime("%H:%M:%S")
       end
 
       formated

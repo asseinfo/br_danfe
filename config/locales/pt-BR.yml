@@ -9,8 +9,8 @@ pt-BR:
       sefaz: "Consulta de autenticidade no portal nacional da NF-e www.nfe.fazenda.gov.br/portal ou no site da Sefaz Autorizadora"
     ide:
       dEmi: "DATA DA EMISSÃO"
-      dSaiEnt: "DATA DA SAÍDA/ENTRADA"
-      hSaiEnt: "HORA DE SAÍDA"
+      dSaiEnt: "DATA DA ENTRADA/SAÍDA"
+      hSaiEnt: "HORA DE ENTRADA/SAÍDA"
       tpNF:
         entry: "ENTRADA"
         departure: "SAÍDA"

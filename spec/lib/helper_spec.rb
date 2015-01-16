@@ -31,8 +31,8 @@ describe BrDanfe::Helper do
     describe "when param is a complete datetime" do
       let(:param) { "2013-10-18T16:54:04-03:00" }
 
-      it "is a formated time string in UTC" do
-        expect(BrDanfe::Helper.format_time(param)).to eq "19:54:04"
+      it "is a formated time string in localtime" do
+        expect(BrDanfe::Helper.format_time(param)).to eq "16:54:04"
       end
     end
 

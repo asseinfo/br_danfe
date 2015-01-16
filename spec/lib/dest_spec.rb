@@ -52,7 +52,7 @@ describe BrDanfe::Dest do
 
         pdf.render_file output_pdf
 
-        expect("#{base_dir}dest.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}dest#render-v2.00.pdf").to be_same_file_as(output_pdf)
       end
     end
 
@@ -92,7 +92,7 @@ describe BrDanfe::Dest do
 
         pdf.render_file output_pdf
 
-        expect("#{base_dir}dest.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}dest#render-v3.10.pdf").to be_same_file_as(output_pdf)
       end
     end
   end
