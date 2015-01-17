@@ -1,29 +1,34 @@
 module BrDanfe
   class Infadic
+    Y = 25.92 + SPACE_BETWEEN_GROUPS
+
     def initialize(pdf, xml)
       @pdf = pdf
       @xml = xml
+
+      @ltitle = Y - 0.41
+      @l1 = Y
     end
 
     def render(nVol)
-      @pdf.ititle 0.42, 10.00, 0.25, 25.91, "infAdic.title"
+      @pdf.ititle 0.42, 10.00, 0.25, @ltitle, "infAdic.title"
 
       if nVol > 1
         render_extra_volumes
       else
-        @pdf.ibox 3.07, 12.93, 0.25, 26.33, I18n.t("danfe.infAdic.infCpl"), @xml["infAdic/infCpl"], { size: 6, valign: :top }
+        @pdf.ibox 3.07, 12.93, 0.25, @l1, I18n.t("danfe.infAdic.infCpl"), @xml["infAdic/infCpl"], { size: 6, valign: :top }
       end
 
-      @pdf.ibox 3.07, 7.62, 13.17, 26.33, I18n.t("danfe.infAdic.reserved")
+      @pdf.ibox 3.07, 7.62, 13.19, @l1, I18n.t("danfe.infAdic.reserved")
     end
 
     private
     def render_extra_volumes
-      @pdf.ibox 3.07, 12.93, 0.25, 26.33, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
-      @pdf.ibox 3.07, 12.93, 0.25, 26.60, "", I18n.t("danfe.infAdic.vol.title"), { size: 5, valign: :top, border: 0 }
+      @pdf.ibox 3.07, 12.93, 0.25, @l1, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
+      @pdf.ibox 3.07, 12.93, 0.25, Y + 0.27, "", I18n.t("danfe.infAdic.vol.title"), { size: 5, valign: :top, border: 0 }
 
       volumes = 0
-      y = 26.67
+      y = Y + 0.34
       @xml.collect("xmlns", "vol") do |det|
         volumes += 1
         if volumes > 1

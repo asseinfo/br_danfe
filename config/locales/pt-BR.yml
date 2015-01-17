@@ -119,7 +119,7 @@ pt-BR:
         pesoB: "PESO B.:"
         pesoL: "PESO LÍQ.:"
     ticket:
-        xNome: "RECEBEMOS DE %{xNome} OS PRODUTOS CONSTANTES DA NOTA FISCAL INDICADA ABAIXO"
+        xNome: "RECEBEMOS DE %{xNome} OS PRODUTOS/SERVIÇOS CONSTANTES DA NOTA FISCAL INDICADA AO LADO"
         received_at: "DATA DE RECEBIMENTO"
         receiver: "IDENTIFICAÇÃO E ASSINATURA DO RECEBEDOR"
         document: "NF-e\nN°. %{nNF}\nSÉRIE %{serie}"

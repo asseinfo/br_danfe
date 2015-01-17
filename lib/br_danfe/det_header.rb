@@ -1,12 +1,17 @@
 module BrDanfe
+  Y = 17.39 + SPACE_BETWEEN_GROUPS
+
   class DetHeader
     def initialize(pdf, xml)
       @pdf = pdf
       @xml = xml
+
+      @ltitle = Y - 0.42
+      @l1 = Y
     end
 
     def render
-      @pdf.ititle 0.42, 10.00, 0.25, 17.45, "det.title"
+      @pdf.ititle 0.42, 10.00, 0.25, @ltitle, "det.title"
 
       column(2.00, 0.25, "prod.cProd")
       column(4.90, 2.25, "prod.xProd")
@@ -23,12 +28,12 @@ module BrDanfe
       column(0.90, 19.05, "ICMS.pICMS")
       column(0.86, 19.95, "IPI.pIPI")
 
-      @pdf.horizontal_line 0.25.cm, 20.83.cm, at: Helper.invert(18.17.cm)
+      @pdf.horizontal_line 0.25.cm, 20.81.cm, at: Helper.invert(18.17.cm)
     end
 
     private
     def column(w, x, title)
-      @pdf.ibox 6.70, w, x, 17.87, I18n.t("danfe.det.#{title}")
+      @pdf.ibox 6.70, w, x, @l1, I18n.t("danfe.det.#{title}")
     end
   end
 end

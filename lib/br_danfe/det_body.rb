@@ -6,15 +6,20 @@ module BrDanfe
     end
 
     def render
+      options = {
+        column_widths: column_widths,
+        cell_style: { padding: 2, border_width: 0 }
+      }
+
       @pdf.font_size(6) do
-        @pdf.itable 6.37, 21.50, 0.25, 18.17,
-          products,
-          column_widths: column_widths,
-          cell_style: {padding: 2, border_width: 0} do |table|
+        @pdf.bounding_box [0.25.cm, Helper.invert(18.17.cm)], width: 21.50.cm, height: 6.37.cm do
+          @pdf.table products, options do |table|
             table.column(6..13).style(align: :right)
-            table.column(0..13).border_width = 1
+            table.column(0..13).border_width = 0.3
+            table.column(0..13).border_lines = [:dotted]
             table.column(0..13).borders = [:bottom]
           end
+        end
       end
     end
 

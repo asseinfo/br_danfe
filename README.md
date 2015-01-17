@@ -4,6 +4,8 @@
 
 This gem generates PDF files for Brazilian DANFE (_Documento Auxiliar da Nota Fiscal Eletrônica_) from a valid NF-e XML.
 
+[See an example here.](https://github.com/asseinfo/br_danfe/blob/master/spec/fixtures/v2.00/nfe_with_logo.xml.fixture.pdf?raw=true)
+
 This gem requires `ruby >= 1.9.x`.
 
 ## Supported NF-e versions

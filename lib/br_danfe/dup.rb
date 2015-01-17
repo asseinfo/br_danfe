@@ -1,16 +1,20 @@
 module BrDanfe
   class Dup
+    Y = 11.50
+
     def initialize(pdf, xml)
       @pdf = pdf
       @xml = xml
+
+      @ltitle = Y - 0.42
     end
 
     def render
-      @pdf.ititle 0.42, 10.00, 0.25, 11.12, "dup.title"
-      @pdf.ibox 0.85, 20.57, 0.25, 11.51
+      @pdf.ititle 0.42, 10.00, 0.25, @ltitle, "dup.title"
+      @pdf.ibox 0.85, 20.57, 0.25, Y
 
       x = 0.25
-      y = 11.51
+      y = Y
       @xml.collect("xmlns", "dup") do |det|
         render_dup(det, x, y)
         x += 2.30

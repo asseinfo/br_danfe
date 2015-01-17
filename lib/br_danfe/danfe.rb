@@ -1,4 +1,7 @@
 module BrDanfe
+  LINE_HEIGHT = 0.80
+  SPACE_BETWEEN_GROUPS = 0.52
+
   class Danfe
     attr_reader :options
 
@@ -55,14 +58,15 @@ module BrDanfe
 
     def repeat_on_each_page
       Ticket.render(@pdf, @xml)
-      Emit.new(@pdf, @xml, @options.logo_path).render
+      EmitHeader.new(@pdf, @xml, @options.logo_path).render
+      Emit.new(@pdf, @xml).render
       Dest.new(@pdf, @xml).render
       Dup.new(@pdf, @xml).render
-      Icmstot.render(@pdf, @xml)
-      Transp.render(@pdf, @xml)
+      Icmstot.new(@pdf, @xml).render
+      Transp.new(@pdf, @xml).render
       nVol = Vol.new(@pdf, @xml).render
       DetHeader.new(@pdf, @xml).render
-      Issqn.render(@pdf, @xml)
+      Issqn.new(@pdf, @xml).render
       Infadic.new(@pdf, @xml).render(nVol)
     end
   end
