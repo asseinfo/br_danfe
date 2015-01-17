@@ -57,7 +57,7 @@ module BrDanfe
     end
 
     def repeat_on_each_page
-      Ticket.render(@pdf, @xml)
+      Ticket.new(@pdf, @xml).render
       EmitHeader.new(@pdf, @xml, @options.logo_path).render
       Emit.new(@pdf, @xml).render
       Dest.new(@pdf, @xml).render
@@ -65,7 +65,7 @@ module BrDanfe
       Icmstot.new(@pdf, @xml).render
       Transp.new(@pdf, @xml).render
       nVol = Vol.new(@pdf, @xml).render
-      DetHeader.new(@pdf, @xml).render
+      DetHeader.new(@pdf).render
       Issqn.new(@pdf, @xml).render
       Infadic.new(@pdf, @xml).render(nVol)
     end

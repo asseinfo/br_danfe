@@ -57,7 +57,7 @@ describe BrDanfe::Xprod do
       it "returns product + ST" do
         expected = "MONITOR DE ARCO ELETRICO"
         expected += "\n"
-        expected += "ST: MVA: 56.00% * Alíq: 17.00% * BC: 479.82 * Vlr: 29.28"
+        expected += "ST: MVA: 56,00% * Alíq: 17,00% * BC: 479,82 * Vlr: 29,28"
 
         expect(subject.render).to eq expected
       end
@@ -123,7 +123,7 @@ describe BrDanfe::Xprod do
         expected += "\n"
         expected +="FCI: 12232531-74B2-4FDD-87A6-CF0AD3E55386"
         expected += "\n"
-        expected += "ST: MVA: 56.00% * Alíq: 17.00% * BC: 479.82 * Vlr: 29.28"
+        expected += "ST: MVA: 56,00% * Alíq: 17,00% * BC: 479,82 * Vlr: 29,28"
 
         expect(subject.render).to eq expected
       end

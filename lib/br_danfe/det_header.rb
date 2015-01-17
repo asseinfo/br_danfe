@@ -2,9 +2,8 @@ module BrDanfe
   Y = 17.39 + SPACE_BETWEEN_GROUPS
 
   class DetHeader
-    def initialize(pdf, xml)
+    def initialize(pdf)
       @pdf = pdf
-      @xml = xml
 
       @ltitle = Y - 0.42
       @l1 = Y

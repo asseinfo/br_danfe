@@ -49,7 +49,7 @@ describe BrDanfe::Danfe do
 
       it "renders a NF-e with logo" do
         danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_logo.xml"))
-        danfe.options.logo_path = "#{base_dir}nfe_with_logo.xml.logo.png"
+        danfe.options.logo_path = "spec/fixtures/logo.png"
 
         expected = IO.binread("#{base_dir}nfe_with_logo.xml.fixture.pdf")
 
@@ -117,7 +117,7 @@ describe BrDanfe::Danfe do
         expect(File.exist?(output_pdf)).to be_falsey
 
         danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_logo.xml"))
-        danfe.options.logo_path = "#{base_dir}nfe_with_logo.xml.logo.png"
+        danfe.options.logo_path = "spec/fixtures/logo.png"
         danfe.save_pdf output_pdf
 
         expect("#{base_dir}nfe_with_logo.xml.fixture.pdf").to be_same_file_as(output_pdf)

@@ -33,7 +33,7 @@ module BrDanfe
     end
 
     def lbox(h, w, x, y, xml, xpath, options = {})
-      i18n = xpath.sub("/", ".");
+      i18n = xpath.gsub("/", ".");
       label = I18n.t("danfe.#{i18n}")
       data = xml[xpath]
 
@@ -51,7 +51,7 @@ module BrDanfe
     end
 
     def lnumeric(h, w, x, y, xml, xpath, options = {})
-      i18n = xpath.sub("/", ".");
+      i18n = xpath.gsub("/", ".");
       data = xml[xpath]
 
       inumeric(h, w, x, y, i18n, data, options)

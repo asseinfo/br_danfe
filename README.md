@@ -6,7 +6,7 @@ This gem generates PDF files for Brazilian DANFE (_Documento Auxiliar da Nota Fi
 
 [See an example here.](https://github.com/asseinfo/br_danfe/blob/master/spec/fixtures/v2.00/nfe_with_logo.xml.fixture.pdf?raw=true)
 
-This gem requires `ruby >= 1.9.x`.
+This gem requires `ruby >= 1.9.3`.
 
 ## Supported NF-e versions
 

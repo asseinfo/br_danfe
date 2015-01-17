@@ -102,9 +102,10 @@ pt-BR:
     issqn:
       title: "CÁLCULO DO ISSQN"
     total:
-      vServ: "VALOR TOTAL DOS SERVIÇOS"
-      vBCISS: "BASE DE CÁLCULO DO ISSQN"
-      ISSTot: "VALOR DO ISSQN"
+      ISSQNtot:
+        vServ: "VALOR TOTAL DOS SERVIÇOS"
+        vBC: "BASE DE CÁLCULO DO ISSQN"
+        vISS: "VALOR DO ISSQN"
     infAdic:
       title: "DADOS ADICIONAIS"
       infCpl: "INFORMAÇÕES COMPLEMENTARES"
