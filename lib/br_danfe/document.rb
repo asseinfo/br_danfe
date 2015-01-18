@@ -50,6 +50,31 @@ module BrDanfe
       i18n_lbox(h, w, x, y, i18n, data, options)
     end
 
+    def lcnpj(h, w, x, y, xml, xpath, options = {})
+      i18n = xpath.gsub("/", ".");
+
+      cnpj = BrDocuments::CnpjCpf::Cnpj.new(xml[xpath])
+      if cnpj.valid?
+        data = cnpj.formatted
+      else
+        data = ""
+      end
+
+      i18n_lbox(h, w, x, y, i18n, data, options)
+    end
+
+    def lie(h, w, x, y, xml, xpath_uf, xpath_ie, options = {})
+      i18n = xpath_ie.gsub("/", ".");
+
+      data = ""
+      if xml[xpath_uf].present? #BrDocument bug - review this in the future
+        ie = BrDocuments::IE::Factory.create(xml[xpath_uf], xml[xpath_ie])
+        data = ie.formatted if ie.valid?
+      end
+
+      i18n_lbox(h, w, x, y, i18n, data, options)
+    end
+
     def lnumeric(h, w, x, y, xml, xpath, options = {})
       i18n = xpath.gsub("/", ".");
       data = xml[xpath]
@@ -64,6 +89,13 @@ module BrDanfe
       numeric [x.cm, Helper.invert(y.cm)], w.cm, h.cm, label, data, options
     end
 
+    def i18n_lbox(h, w, x, y, i18n = "", info = "", options = {})
+      label = ""
+      label = I18n.t("danfe.#{i18n}") if i18n != ""
+
+      ibox h, w, x, y, label, info, options
+    end
+
     private
     def numeric(at, w, h, title = "", info = "", options = {})
       options = {
@@ -72,13 +104,6 @@ module BrDanfe
 
       info = Helper.numerify(info, options[:decimals]) if info != ""
       box at, w, h, title, info, options.merge({align: :right})
-    end
-
-    def i18n_lbox(h, w, x, y, i18n = "", info = "", options = {})
-      label = ""
-      label = I18n.t("danfe.#{i18n}") if i18n != ""
-
-      ibox h, w, x, y, label, info, options
     end
 
     def box(at, w, h, title = "", info = "", options = {})

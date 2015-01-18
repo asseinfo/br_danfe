@@ -95,5 +95,74 @@ describe BrDanfe::Dest do
         expect("#{base_dir}dest#render-v3.10.pdf").to be_same_file_as(output_pdf)
       end
     end
+
+    context "when recipient has CNPJ" do
+      let(:xml_as_string) do
+        <<-eos
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="3.10">
+            <dest>
+              <CNPJ>71058884000183</CNPJ>
+            </dest>
+          </infNFe>
+        </NFe>
+        eos
+      end
+
+      it "renders xml to the pdf" do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}dest#render-with_cnpj.pdf").to be_same_file_as(output_pdf)
+      end
+    end
+
+    context "when recipient has CPF" do
+      let(:xml_as_string) do
+        <<-eos
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="3.10">
+            <dest>
+              <CPF>48532557457</CPF>
+            </dest>
+          </infNFe>
+        </NFe>
+        eos
+      end
+
+      it "renders xml to the pdf" do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}dest#render-with_cpf.pdf").to be_same_file_as(output_pdf)
+      end
+    end
+
+    context "when recipient has IE" do
+      let(:xml_as_string) do
+        <<-eos
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="3.10">
+            <dest>
+              <enderDest>
+                <UF>SP</UF>
+              </enderDest>
+              <IE>671008375110</IE>
+            </dest>
+          </infNFe>
+        </NFe>
+        eos
+      end
+
+      it "renders xml to the pdf" do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}dest#render-with_ie.pdf").to be_same_file_as(output_pdf)
+      end
+    end
   end
 end

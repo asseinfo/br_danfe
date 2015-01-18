@@ -19,12 +19,12 @@ describe BrDanfe::Emit do
               <natOp>Vendas de producao do estabelecimento</natOp>
             </ide>
             <emit>
-              <CNPJ>12345678901234</CNPJ>
+              <CNPJ>62013294000143</CNPJ>
               <enderEmit>
-                <UF>PB</UF>
+                <UF>SP</UF>
               </enderEmit>
-              <IE>160158257</IE>
-              <IE_ST>671008375110</IE_ST>
+              <IE>526926313553</IE>
+              <IE_ST>611724092039</IE_ST>
             </emit>
           </infNFe>
         </NFe>
