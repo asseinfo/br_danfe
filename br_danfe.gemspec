@@ -18,7 +18,8 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = ">= 2.0"
 
   spec.add_dependency "nokogiri"
-  spec.add_dependency "prawn", "1.0.0"
+  spec.add_dependency "prawn", "1.3.0"
+  spec.add_dependency "prawn-table", "0.2.1"
   spec.add_dependency "barby", "0.5.1"
   spec.add_dependency "i18n"
   spec.add_dependency "br_documents", ">= 0.0.8"
