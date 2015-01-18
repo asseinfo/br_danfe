@@ -32,11 +32,18 @@ module BrDanfe
     end
 
     def mod_frete
-      if @xml["transp/modFrete"] == "0"
-        I18n.t("danfe.transp.modFrete.emitter")
-      else
-        I18n.t("danfe.transp.modFrete.recipient")
+      case @xml["transp/modFrete"]
+      when "0"
+        modality = "emitter"
+      when "1"
+        modality = "recipient"
+      when "2"
+        modality = "third_party"
+      when "9"
+        modality = "no_freight"
       end
+
+      I18n.t("danfe.transp.modFrete.#{modality}")
     end
   end
 end

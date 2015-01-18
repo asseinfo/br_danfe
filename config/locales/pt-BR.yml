@@ -63,10 +63,10 @@ pt-BR:
     transp:
       modFrete:
         title: "FRETE POR CONTA"
-        emitter: "0 - EMITENTE"
-        recipient: "1 - DEST."
-        third_party: "2 - TERCEIROS"
-        no_freight: "9 - SEM FRETE"
+        emitter: "0-Emitente"
+        recipient: "1-Destinatário"
+        third_party: "2-Terceiros"
+        no_freight: "9-Sem Frete"
     veicTransp:
       RNTC: "CODIGO ANTT"
       placa: "PLACA DO VEÍCULO"

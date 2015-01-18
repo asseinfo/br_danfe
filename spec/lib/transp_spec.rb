@@ -47,5 +47,93 @@ describe BrDanfe::Transp do
 
       expect("#{base_dir}transp#render.pdf").to be_same_file_as(output_pdf)
     end
+
+    context "when modFrete is 0" do
+      let(:xml_as_string) do
+        <<-eos
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+            <transp>
+              <modFrete>0</modFrete>
+            </transp>
+          </infNFe>
+        </NFe>
+        eos
+      end
+
+      it "renders '0-Emitente' to the pdf" do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}transp#render-modfrete_0.pdf").to be_same_file_as(output_pdf)
+      end
+    end
+
+    context "when modFrete is 1" do
+      let(:xml_as_string) do
+        <<-eos
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+            <transp>
+              <modFrete>1</modFrete>
+            </transp>
+          </infNFe>
+        </NFe>
+        eos
+      end
+
+      it "renders '1-Destinatário' to the pdf" do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}transp#render-modfrete_1.pdf").to be_same_file_as(output_pdf)
+      end
+    end
+
+    context "when modFrete is 2" do
+      let(:xml_as_string) do
+        <<-eos
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+            <transp>
+              <modFrete>2</modFrete>
+            </transp>
+          </infNFe>
+        </NFe>
+        eos
+      end
+
+      it "renders '2-Terceiros' to the pdf" do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}transp#render-modfrete_2.pdf").to be_same_file_as(output_pdf)
+      end
+    end
+
+    context "when modFrete is 3" do
+      let(:xml_as_string) do
+        <<-eos
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+            <transp>
+              <modFrete>9</modFrete>
+            </transp>
+          </infNFe>
+        </NFe>
+        eos
+      end
+
+      it "renders '9-Sem Frete' to the pdf" do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}transp#render-modfrete_9.pdf").to be_same_file_as(output_pdf)
+      end
+    end
   end
 end
