@@ -1,7 +1,11 @@
 require "simplecov"
 require "codeclimate-test-reporter"
+
 CodeClimate::TestReporter.start
-SimpleCov.start
+
+SimpleCov.start do
+  add_filter "/spec/support"
+end
 
 require "bundler/setup"
 require "br_danfe"

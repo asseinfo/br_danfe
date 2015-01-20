@@ -3,52 +3,22 @@ require "spec_helper"
 describe BrDanfe::Danfe do
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
-  context "when xml's version is v2.00" do
-    let(:base_dir) { "./spec/fixtures/v2.00/"}
+  describe "#render_pdf" do
+    let(:base_dir) { "./spec/fixtures/v3.10/"}
 
-    describe "#render_pdf" do
-      it "renders a basic NF-e with namespace" do
-        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_ns.xml"))
+    it "renders a Simples Nacional NF-e using CSOSN" do
+      danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
 
-        expected = IO.binread("#{base_dir}nfe_with_ns.xml.fixture.pdf")
+      expected = IO.binread("#{base_dir}nfe_simples_nacional.xml.fixture.pdf")
 
-        expect(danfe.render_pdf).to eq expected
-      end
-
-      it "renders another basic NF-e without namespace" do
-        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_without_ns.xml"))
-
-        expected = IO.binread("#{base_dir}nfe_without_ns.xml.fixture.pdf")
-
-        expect(danfe.render_pdf).to eq expected
-      end
-
-      it "renders a NF-e having FCI in its items" do
-        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_fci.xml"))
-
-        expected = IO.binread("#{base_dir}nfe_with_fci.xml.fixture.pdf")
-
-        expect(danfe.render_pdf).to eq expected
-      end
-
-      it "renders a Simples Nacional NF-e using CSOSN" do
-        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
-
-        expected = IO.binread("#{base_dir}nfe_simples_nacional.xml.fixture.pdf")
-
-        expect(danfe.render_pdf).to eq expected
-      end
-
-      it "renders a NF-e with extra volumes" do
-        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_extra_volumes.xml"))
-
-        expected = IO.binread("#{base_dir}nfe_with_extra_volumes.xml.fixture.pdf")
-
-        expect(danfe.render_pdf).to eq expected
-      end
+      expect(danfe.render_pdf).to eq expected
     end
+  end
 
-    describe "#save_pdf" do
+  describe "#save_pdf" do
+    context "when xml's version is v2.00" do
+      let(:base_dir) { "./spec/fixtures/v2.00/"}
+
       before { File.delete(output_pdf) if File.exist?(output_pdf) }
 
       it "renders a basic NF-e with namespace" do
@@ -96,22 +66,10 @@ describe BrDanfe::Danfe do
         expect("#{base_dir}nfe_with_extra_volumes.xml.fixture.pdf").to have_same_content_of file: output_pdf
       end
     end
-  end
 
-  context "when xml's version is v3.10" do
-    let(:base_dir) { "./spec/fixtures/v3.10/"}
+    context "when xml's version is v3.10" do
+      let(:base_dir) { "./spec/fixtures/v3.10/"}
 
-    describe "#render_pdf" do
-      it "renders a Simples Nacional NF-e using CSOSN" do
-        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
-
-        expected = IO.binread("#{base_dir}nfe_simples_nacional.xml.fixture.pdf")
-
-        expect(danfe.render_pdf).to eq expected
-      end
-    end
-
-    describe "#save_pdf" do
       before { File.delete(output_pdf) if File.exist?(output_pdf) }
 
       it "renders a Simples Nacional NF-e using CSOSN" do

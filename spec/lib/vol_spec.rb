@@ -61,5 +61,26 @@ describe BrDanfe::Vol do
     it "returns the quantity of volumes" do
       expect(subject.render).to eq 3
     end
+
+    context "when any <vol> tag is found" do
+      let(:xml_as_string) do
+        <<-eos
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+            <transp>
+            </transp>
+          </infNFe>
+        </NFe>
+        eos
+      end
+
+      it "renders blank boxes" do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}vol#render-blank-boxes.pdf").to have_same_content_of file: output_pdf
+      end
+    end
   end
 end
