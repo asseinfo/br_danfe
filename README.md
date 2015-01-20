@@ -59,44 +59,21 @@ You can install all necessaries dependencies using bunder like above:
 
 ### Tests
 
-#### Manual tests
-
-You can use it following the steps above:
-
-        $ rake pdf_from["spec/fixtures/nfe_with_ns.xml","./output.pdf"]
-
-You can also use an special version of irb with all classes pre-loaded. Just use:
-
-        $ rake console
-
-        I18n.locale = "pt-BR"
-
-        xml = File.read "test/nfe_with_ns.xml"
-
-        danfe = BrDanfe::Danfe.new(xml)
-        danfe.save_pdf "output.pdf"
-
 #### Automated tests with RSpec
 
 You can run all specs using:
 
         $ rspec
 
-In the `spec/fixtures` folder, you are going to find some xml files. Each one represent a different NF-e context.
+If you modify something that caused general visual changes at output pdfs, so you have to rebuild the fixtures pdf files.
 
-Each xml file must have its respective pdf file.
-
-If you did some change that caused general visual changes at output pdfs, so you have to rebuild all fixtures pdf files.
-
-You can do this automagically running the following taks:
-
-        $ rake spec:fixtures:recreate_pdfs
+You can do this simply deleting the fixture pdf file. The `have_same_content_of` matcher will recreate the fixture in the next time you run the `rspec` command.
 
 #### Code coverage
 
 Code coverage is available through of SimpleCov. Just run `rspec` and open the coverage report in your browser.
 
-#### Generating new fixtures
+#### Fake data for generating new fixtures
 
 If you need to generate new danfes for using as fixtures, please don't use real data.
 

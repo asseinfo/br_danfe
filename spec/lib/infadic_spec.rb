@@ -59,7 +59,7 @@ describe BrDanfe::Infadic do
 
         pdf.render_file output_pdf
 
-        expect("#{base_dir}infadic#render.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}infadic#render.pdf").to have_same_content_of file: output_pdf
       end
     end
 
@@ -74,7 +74,7 @@ describe BrDanfe::Infadic do
 
         pdf.render_file output_pdf
 
-        expect("#{base_dir}infadic#render-extra_volume.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}infadic#render-extra_volume.pdf").to have_same_content_of file: output_pdf
       end
     end
   end

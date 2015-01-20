@@ -45,7 +45,7 @@ describe BrDanfe::Transp do
 
       pdf.render_file output_pdf
 
-      expect("#{base_dir}transp#render.pdf").to be_same_file_as(output_pdf)
+      expect("#{base_dir}transp#render.pdf").to have_same_content_of file: output_pdf
     end
 
     context "when modFrete is 0" do
@@ -66,7 +66,7 @@ describe BrDanfe::Transp do
 
         pdf.render_file output_pdf
 
-        expect("#{base_dir}transp#render-modfrete_0.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}transp#render-modfrete_0.pdf").to have_same_content_of file: output_pdf
       end
     end
 
@@ -88,7 +88,7 @@ describe BrDanfe::Transp do
 
         pdf.render_file output_pdf
 
-        expect("#{base_dir}transp#render-modfrete_1.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}transp#render-modfrete_1.pdf").to have_same_content_of file: output_pdf
       end
     end
 
@@ -110,7 +110,7 @@ describe BrDanfe::Transp do
 
         pdf.render_file output_pdf
 
-        expect("#{base_dir}transp#render-modfrete_2.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}transp#render-modfrete_2.pdf").to have_same_content_of file: output_pdf
       end
     end
 
@@ -132,7 +132,7 @@ describe BrDanfe::Transp do
 
         pdf.render_file output_pdf
 
-        expect("#{base_dir}transp#render-modfrete_9.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}transp#render-modfrete_9.pdf").to have_same_content_of file: output_pdf
       end
     end
   end

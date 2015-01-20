@@ -117,7 +117,7 @@ describe BrDanfe::DetBody do
 
         pdf.render_file output_pdf
 
-        expect("#{base_dir}det_body#render-csosn.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}det_body#render-csosn.pdf").to have_same_content_of file: output_pdf
       end
     end
 
@@ -208,7 +208,7 @@ describe BrDanfe::DetBody do
 
         pdf.render_file output_pdf
 
-        expect("#{base_dir}det_body#render-cst.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}det_body#render-cst.pdf").to have_same_content_of file: output_pdf
       end
     end
 
@@ -249,7 +249,7 @@ describe BrDanfe::DetBody do
 
         pdf.render_file output_pdf
 
-        expect("#{base_dir}det_body#render-fci.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}det_body#render-fci.pdf").to have_same_content_of file: output_pdf
       end
     end
 
@@ -292,7 +292,7 @@ describe BrDanfe::DetBody do
 
         pdf.render_file output_pdf
 
-        expect("#{base_dir}det_body#render-icms_st.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}det_body#render-icms_st.pdf").to have_same_content_of file: output_pdf
       end
     end
   end

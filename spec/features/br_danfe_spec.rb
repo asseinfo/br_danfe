@@ -57,7 +57,7 @@ describe BrDanfe::Danfe do
         danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_ns.xml"))
         danfe.save_pdf output_pdf
 
-        expect("#{base_dir}nfe_with_ns.xml.fixture.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}nfe_with_ns.xml.fixture.pdf").to have_same_content_of file: output_pdf
       end
 
       it "renders another basic NF-e without namespace" do
@@ -66,7 +66,7 @@ describe BrDanfe::Danfe do
         danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_without_ns.xml"))
         danfe.save_pdf output_pdf
 
-        expect("#{base_dir}nfe_without_ns.xml.fixture.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}nfe_without_ns.xml.fixture.pdf").to have_same_content_of file: output_pdf
       end
 
       it "renders a NF-e having FCI in its items" do
@@ -75,7 +75,7 @@ describe BrDanfe::Danfe do
         danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_fci.xml"))
         danfe.save_pdf output_pdf
 
-        expect("#{base_dir}nfe_with_fci.xml.fixture.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}nfe_with_fci.xml.fixture.pdf").to have_same_content_of file: output_pdf
       end
 
       it "renders a Simples Nacional NF-e using CSOSN" do
@@ -84,7 +84,7 @@ describe BrDanfe::Danfe do
         danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
         danfe.save_pdf output_pdf
 
-        expect("#{base_dir}nfe_simples_nacional.xml.fixture.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}nfe_simples_nacional.xml.fixture.pdf").to have_same_content_of file: output_pdf
       end
 
       it "renders a NF-e with extra volumes" do
@@ -93,7 +93,7 @@ describe BrDanfe::Danfe do
         danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_extra_volumes.xml"))
         danfe.save_pdf output_pdf
 
-        expect("#{base_dir}nfe_with_extra_volumes.xml.fixture.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}nfe_with_extra_volumes.xml.fixture.pdf").to have_same_content_of file: output_pdf
       end
     end
   end
@@ -120,7 +120,7 @@ describe BrDanfe::Danfe do
         danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
         danfe.save_pdf output_pdf
 
-        expect("#{base_dir}nfe_simples_nacional.xml.fixture.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}nfe_simples_nacional.xml.fixture.pdf").to have_same_content_of file: output_pdf
       end
     end
   end

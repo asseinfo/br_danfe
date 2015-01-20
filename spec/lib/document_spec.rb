@@ -34,7 +34,7 @@ describe BrDanfe::Document do
         subject.lie 0.80, 3.94, 1, 1, xml, "transporta/UF", "transporta/IE"
         subject.render_file output_pdf
 
-        expect("#{base_dir}document#lie-valid.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}document#lie-valid.pdf").to have_same_content_of file: output_pdf
       end
     end
 
@@ -60,7 +60,7 @@ describe BrDanfe::Document do
         subject.lie 0.80, 3.94, 1, 1, xml, "transporta/UF", "transporta/IE"
         subject.render_file output_pdf
 
-        expect("#{base_dir}document#lie-invalid.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}document#lie-invalid.pdf").to have_same_content_of file: output_pdf
       end
     end
 
@@ -84,7 +84,7 @@ describe BrDanfe::Document do
         subject.lie 0.80, 3.94, 1, 1, xml, "transporta/UF", "transporta/IE"
         subject.render_file output_pdf
 
-        expect("#{base_dir}document#lie-blank.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}document#lie-blank.pdf").to have_same_content_of file: output_pdf
       end
     end
   end
@@ -116,7 +116,7 @@ describe BrDanfe::Document do
         subject.lcnpj 0.80, 3.94, 1, 1, xml, "transporta/CNPJ"
         subject.render_file output_pdf
 
-        expect("#{base_dir}document#lcnpj-valid.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}document#lcnpj-valid.pdf").to have_same_content_of file: output_pdf
       end
     end
 
@@ -141,7 +141,7 @@ describe BrDanfe::Document do
         subject.lcnpj 0.80, 3.94, 1, 1, xml, "transporta/CNPJ"
         subject.render_file output_pdf
 
-        expect("#{base_dir}document#lcnpj-invalid.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}document#lcnpj-invalid.pdf").to have_same_content_of file: output_pdf
       end
     end
 
@@ -165,7 +165,7 @@ describe BrDanfe::Document do
         subject.lcnpj 0.80, 3.94, 1, 1, xml, "transporta/CNPJ"
         subject.render_file output_pdf
 
-        expect("#{base_dir}document#lcnpj-blank.pdf").to be_same_file_as(output_pdf)
+        expect("#{base_dir}document#lcnpj-blank.pdf").to have_same_content_of file: output_pdf
       end
     end
   end
