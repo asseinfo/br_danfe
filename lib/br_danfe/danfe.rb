@@ -3,9 +3,9 @@ module BrDanfe
     attr_reader :options
 
     def initialize(xml)
-      @xml = XML.new(xml)
-      @pdf = Document.new
-      @options = Options.new
+      @xml = DanfeLib::XML.new(xml)
+      @pdf = DanfeLib::Document.new
+      @options = DanfeLib::Options.new
 
       create_watermark
     end
@@ -37,11 +37,11 @@ module BrDanfe
     end
 
     def generate
-      @pdf.stamp("has_no_fiscal_value") if Helper.has_no_fiscal_value?(@xml)
+      @pdf.stamp("has_no_fiscal_value") if DanfeLib::Helper.has_no_fiscal_value?(@xml)
 
       @pdf.repeat(:all) { repeat_on_each_page }
 
-      DetBody.new(@pdf, @xml).render
+      DanfeLib::DetBody.new(@pdf, @xml).render
 
       @pdf.page_count.times do |i|
         @pdf.go_to_page(i + 1)
@@ -54,17 +54,17 @@ module BrDanfe
     end
 
     def repeat_on_each_page
-      Ticket.new(@pdf, @xml).render
-      EmitHeader.new(@pdf, @xml, @options.logo_path).render
-      Emit.new(@pdf, @xml).render
-      Dest.new(@pdf, @xml).render
-      Dup.new(@pdf, @xml).render
-      Icmstot.new(@pdf, @xml).render
-      Transp.new(@pdf, @xml).render
-      nVol = Vol.new(@pdf, @xml).render
-      DetHeader.new(@pdf).render
-      Issqn.new(@pdf, @xml).render
-      Infadic.new(@pdf, @xml).render(nVol)
+      DanfeLib::Ticket.new(@pdf, @xml).render
+      DanfeLib::EmitHeader.new(@pdf, @xml, @options.logo_path).render
+      DanfeLib::Emit.new(@pdf, @xml).render
+      DanfeLib::Dest.new(@pdf, @xml).render
+      DanfeLib::Dup.new(@pdf, @xml).render
+      DanfeLib::Icmstot.new(@pdf, @xml).render
+      DanfeLib::Transp.new(@pdf, @xml).render
+      nVol = DanfeLib::Vol.new(@pdf, @xml).render
+      DanfeLib::DetHeader.new(@pdf).render
+      DanfeLib::Issqn.new(@pdf, @xml).render
+      DanfeLib::Infadic.new(@pdf, @xml).render(nVol)
     end
   end
 end

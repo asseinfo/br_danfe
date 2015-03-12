@@ -4,7 +4,7 @@ describe BrDanfe::Danfe do
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
   describe "#render_pdf" do
-    let(:base_dir) { "./spec/fixtures/v3.10/"}
+    let(:base_dir) { "./spec/fixtures/nfe/v3.10/"}
 
     it "renders a Simples Nacional NF-e using CSOSN" do
       danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
@@ -17,7 +17,7 @@ describe BrDanfe::Danfe do
 
   describe "#save_pdf" do
     context "when xml's version is v2.00" do
-      let(:base_dir) { "./spec/fixtures/v2.00/"}
+      let(:base_dir) { "./spec/fixtures/nfe/v2.00/"}
 
       before { File.delete(output_pdf) if File.exist?(output_pdf) }
 
@@ -68,7 +68,7 @@ describe BrDanfe::Danfe do
     end
 
     context "when xml's version is v3.10" do
-      let(:base_dir) { "./spec/fixtures/v3.10/"}
+      let(:base_dir) { "./spec/fixtures/nfe/v3.10/"}
 
       before { File.delete(output_pdf) if File.exist?(output_pdf) }
 

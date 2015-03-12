@@ -2,7 +2,7 @@
 
 [![Code Climate](https://codeclimate.com/github/asseinfo/br_danfe.png)](https://codeclimate.com/github/asseinfo/br_danfe) [![Build Status](https://travis-ci.org/asseinfo/br_danfe.png?branch=master)](https://travis-ci.org/asseinfo/br_danfe)
 
-This gem generates PDF files for Brazilian DANFE (_Documento Auxiliar da Nota Fiscal Eletrônica_) from a valid NF-e XML.
+This gem generates PDF files for Brazilian DANFE (_Documento Auxiliar da Nota Fiscal Eletrônica_) from a valid NF-e XML. It also can generates PDF file for CC-e (_Carta de Correção Eletrônica_).
 
 [See an example here.](https://github.com/asseinfo/br_danfe/blob/master/spec/fixtures/v2.00/nfe_with_logo.xml.fixture.pdf?raw=true)
 
@@ -22,7 +22,8 @@ XML version | Supported?
 
 ## Usage
 
-### Usage in Ruby
+### DANFE - _Documento Auxiliar da Nota Fiscal Eletrônica_
+#### Usage in Ruby
 
         xml = File.read("nfe.xml")
 
@@ -30,7 +31,7 @@ XML version | Supported?
         danfe.options.logo_path = "logo.png"
         danfe.save_pdf("nfe.pdf")
 
-### Usage in Rails Controller
+#### Usage in Rails Controller
 
         class DanfeController < ApplicationController
           def new
@@ -40,6 +41,28 @@ XML version | Supported?
             danfe = BrDanfe::Danfe.new(xml_as_string)
 
             send_data danfe.render_pdf, filename: "danfe.pdf", type: "application/pdf"
+          end
+        end
+
+### CC-e - _Carta de Correção Eletrônica_
+
+#### Usage in Ruby
+
+        xml = File.read("cce.xml")
+
+        cce = BrDanfe::Cce.new(xml)
+        cce.save_pdf("nfe.pdf")
+
+#### Usage in Rails Controller
+
+        class CCeController < ApplicationController
+          def new
+            invoice = Invoice.find(params[:id])
+            xml_as_string = invoice.generate_xml # your method that generates the CC-e's xml
+
+            cce = BrDanfe::Cce.new(xml_as_string)
+
+            send_data cce.render_pdf, filename: "cce.pdf", type: "application/pdf"
           end
         end
 

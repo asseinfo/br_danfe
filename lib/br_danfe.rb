@@ -9,7 +9,7 @@ require "yaml"
 require "ostruct"
 require "i18n"
 require "br_documents"
-require "br_danfe/consts"
+require "br_danfe/danfe_lib/consts"
 
 Dir[File.dirname(__FILE__) + "/**/*.rb"].each { |f| require f }
 I18n.load_path << File.expand_path("../../config/locales/pt-BR.yml", __FILE__)

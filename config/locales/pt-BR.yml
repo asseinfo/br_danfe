@@ -1,4 +1,18 @@
 pt-BR:
+  cce:
+    title: "Carta de Correção Eletrônica - CCe"
+    protocol: "PROTOCOLO DE AUTORIZAÇÃO"
+    key: "CHAVE DE ACESSO"
+    legal_note: "A Carta de Correção é disciplinada pelo § 1o-A do art. 7o
+                do Convênio S/N, de 15 de dezembro de 1970 e pode ser
+                utilizada para regularização de erro ocorrido na emissão de
+                documento fiscal, desde que o erro não esteja relacionado com:\n
+                I. as variáveis que determinam o valor do imposto tais como:
+                base de cálculo, alíquota, diferença de preço, quantidade,
+                valor da operação ou da prestação;\n
+                II. a correção de dados cadastrais que implique mudança do
+                remetente ou do destinatário;\n
+                III. a data de emissão ou de saída."
   danfe:
     chNFe: "CHAVE DE ACESSO"
     infProt: "PROTOCOLO DE AUTORIZAÇÃO DE USO"
