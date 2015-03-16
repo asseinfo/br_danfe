@@ -62,7 +62,7 @@ describe BrDanfe::DanfeLib::Dest do
         <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
           <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="3.10">
             <ide>
-              <dEmi>2011-10-29</dEmi>
+              <dhEmi>2011-10-29T13:02:59+00:00</dhEmi>
               <dhSaiEnt>2011-10-30T12:32:45-03:00</dhSaiEnt>
             </ide>
             <dest>

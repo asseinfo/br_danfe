@@ -64,16 +64,18 @@ module BrDanfe
       end
 
       def render_dates_block
-        @pdf.ldate LINE_HEIGHT, 2.92, 17.90, @l1, "ide.dEmi", @xml["ide/dEmi"], { align: :right }
 
         if @xml.version_310?
+          dEmi    = "ide/dhEmi"
           dSaiEnt = "ide/dhSaiEnt"
           hSaiEnt = "ide/dhSaiEnt"
         else
+          dEmi    = "ide/dEmi"
           dSaiEnt = "ide/dSaiEnt"
           hSaiEnt = "ide/hSaiEnt"
         end
 
+        @pdf.ldate LINE_HEIGHT, 2.92, 17.90, @l1, "ide.dEmi", @xml[dEmi], { align: :right }
         @pdf.ldate LINE_HEIGHT, 2.92, 17.90, @l2, "ide.dSaiEnt", @xml[dSaiEnt], { align: :right }
         @pdf.ltime LINE_HEIGHT, 2.92, 17.90, @l3, "ide.hSaiEnt", @xml[hSaiEnt], { align: :right }
       end
