@@ -1,7 +1,7 @@
 module BrDanfe
   module DanfeLib
     class Infadic
-      Y = 25.92 + SPACE_BETWEEN_GROUPS
+      Y = 27.04 + SPACE_BETWEEN_GROUPS
 
       def initialize(pdf, xml)
         @pdf = pdf
@@ -12,21 +12,21 @@ module BrDanfe
       end
 
       def render(nVol)
-        @pdf.ititle 0.42, 10.00, 0.25, @ltitle, "infAdic.title"
+        @pdf.ititle 0.42, 10.00, 0.75, @ltitle, "infAdic.title"
 
         if nVol > 1
           render_extra_volumes
         else
-          @pdf.ibox 3.07, 12.93, 0.25, @l1, I18n.t("danfe.infAdic.infCpl"), @xml["infAdic/infCpl"], { size: 6, valign: :top }
+          @pdf.ibox 2.65, 12.45, 0.75, @l1, I18n.t("danfe.infAdic.infCpl"), @xml["infAdic/infCpl"], { size: 6, valign: :top }
         end
 
-        @pdf.ibox 3.07, 7.62, 13.19, @l1, I18n.t("danfe.infAdic.reserved")
+        @pdf.ibox 2.65, 7.15, 13.20, @l1, I18n.t("danfe.infAdic.reserved")
       end
 
       private
       def render_extra_volumes
-        @pdf.ibox 3.07, 12.93, 0.25, @l1, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
-        @pdf.ibox 3.07, 12.93, 0.25, Y + 0.27, "", I18n.t("danfe.infAdic.vol.title"), { size: 5, valign: :top, border: 0 }
+        @pdf.ibox 2.65, 12.45, 0.75, @l1, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
+        @pdf.ibox 2.65, 12.45, 0.75, Y + 0.27, "", I18n.t("danfe.infAdic.vol.title"), { size: 5, valign: :top, border: 0 }
 
         volumes = 0
         y = Y + 0.34
@@ -38,12 +38,12 @@ module BrDanfe
           end
         end
 
-        @pdf.ibox 2.07, 12.93, 0.25, y + 0.30, "", I18n.t("danfe.infAdic.others"), { size: 6, valign: :top, border: 0 }
-        @pdf.ibox 2.07, 12.93, 0.25, y + 0.50, "", @xml["infAdic/infCpl"], { size: 5, valign: :top, border: 0 }
+        @pdf.ibox 1.65, 12.45, 0.75, y + 0.30, "", I18n.t("danfe.infAdic.others"), { size: 6, valign: :top, border: 0 }
+        @pdf.ibox 1.65, 12.45, 0.75, y + 0.50, "", @xml["infAdic/infCpl"], { size: 5, valign: :top, border: 0 }
       end
 
       def render_extra_volume(det, y)
-        render_field "qVol", det, 0.70, 0.25, 0.70, 0.90, y, :text
+        render_field "qVol", det, 0.70, 0.75, 0.70, 1.04, y, :text
         render_field "esp", det, 0.50, 1.35, 3.00, 1.75, y, :text
         render_field "marca", det, 0.70, 4.15, 2.00, 4.75, y, :text
         render_field "nVol", det, 1.00, 6.10, 1.00, 6.70, y, :text

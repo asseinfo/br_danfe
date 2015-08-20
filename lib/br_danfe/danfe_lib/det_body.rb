@@ -13,7 +13,7 @@ module BrDanfe
         }
 
         @pdf.font_size(6) do
-          @pdf.bounding_box [0.25.cm, Helper.invert(18.17.cm)], width: 21.50.cm, height: 6.37.cm do
+          @pdf.bounding_box [0.75.cm, Helper.invert(19.59.cm)], width: 19.57.cm, height: 6.07.cm do
             @pdf.table products, options do |table|
               table.column(6..13).style(align: :right)
               table.column(0..13).border_width = 0.3
@@ -54,8 +54,8 @@ module BrDanfe
 
       def column_widths
         {
-          0 => 2.00.cm,
-          1 => 4.90.cm,
+          0 => 1.50.cm,
+          1 => 4.40.cm,
           2 => 1.30.cm,
           3 => 0.80.cm,
           4 => 1.00.cm,

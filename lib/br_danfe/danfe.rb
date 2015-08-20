@@ -45,7 +45,7 @@ module BrDanfe
 
       @pdf.page_count.times do |i|
         @pdf.go_to_page(i + 1)
-        @pdf.ibox 1.00, 2.08, 8.71, 5.54, "",
+        @pdf.ibox 1.00, 2.08, 8.21, 6.96, "",
           I18n.t("danfe.others.page", current: i+1, total: @pdf.page_count),
           { size: 8, align: :center, valign: :center, border: 0, style: :bold }
       end
