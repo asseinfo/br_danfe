@@ -114,7 +114,7 @@ describe BrDanfe::DanfeLib::Transp do
       end
     end
 
-    context "when modFrete is 3" do
+    context "when modFrete is 9" do
       let(:xml_as_string) do
         <<-eos
         <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
