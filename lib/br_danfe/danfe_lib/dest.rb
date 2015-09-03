@@ -31,9 +31,9 @@ module BrDanfe
 
       def render_cnpj_cpf
         if @xml["dest/CNPJ"] == ""
-          @pdf.i18n_lbox LINE_HEIGHT, 4.87, 12.57, @l1, "dest.CPF", cpf
+          @pdf.i18n_lbox LINE_HEIGHT, 4.37, 12.57, @l1, "dest.CPF", cpf
         else
-          @pdf.lcnpj LINE_HEIGHT, 4.87, 12.57, @l1, @xml, "dest/CNPJ"
+          @pdf.lcnpj LINE_HEIGHT, 4.37, 12.57, @l1, @xml, "dest/CNPJ"
         end
       end
 
@@ -44,8 +44,8 @@ module BrDanfe
 
       def render_line2
         @pdf.i18n_lbox LINE_HEIGHT, 9.66, 0.75, @l2, "enderDest.xLgr", street
-        @pdf.lbox LINE_HEIGHT, 4.83, 10.41, @l2, @xml, "enderDest/xBairro"
-        @pdf.i18n_lbox LINE_HEIGHT, 2.20, 15.24, @l2, "enderDest.CEP", cep
+        @pdf.lbox LINE_HEIGHT, 4.33, 10.41, @l2, @xml, "enderDest/xBairro"
+        @pdf.i18n_lbox LINE_HEIGHT, 2.20, 14.74, @l2, "enderDest.CEP", cep
       end
 
       def street
@@ -60,7 +60,7 @@ module BrDanfe
         @pdf.lbox LINE_HEIGHT, 6.61, 0.75, @l3, @xml, "enderDest/xMun"
         @pdf.i18n_lbox LINE_HEIGHT, 4.06, 7.36, @l3, "enderDest.fone", phone
         @pdf.lbox LINE_HEIGHT, 1.14, 11.42, @l3, @xml, "enderDest/UF"
-        @pdf.lie LINE_HEIGHT, 4.88, 12.56, @l3, @xml, "enderDest/UF", "dest/IE"
+        @pdf.lie LINE_HEIGHT, 4.38, 12.56, @l3, @xml, "enderDest/UF", "dest/IE"
       end
 
       def render_dates_block
@@ -75,9 +75,9 @@ module BrDanfe
           hSaiEnt = "ide/hSaiEnt"
         end
 
-        @pdf.ldate LINE_HEIGHT, 2.42, 17.90, @l1, "ide.dEmi", @xml[dEmi], { align: :right }
-        @pdf.ldate LINE_HEIGHT, 2.42, 17.90, @l2, "ide.dSaiEnt", @xml[dSaiEnt], { align: :right }
-        @pdf.ltime LINE_HEIGHT, 2.42, 17.90, @l3, "ide.hSaiEnt", @xml[hSaiEnt], { align: :right }
+        @pdf.ldate LINE_HEIGHT, 2.92, 17.40, @l1, "ide.dEmi", @xml[dEmi], { align: :right }
+        @pdf.ldate LINE_HEIGHT, 2.92, 17.40, @l2, "ide.dSaiEnt", @xml[dSaiEnt], { align: :right }
+        @pdf.ltime LINE_HEIGHT, 2.92, 17.40, @l3, "ide.hSaiEnt", @xml[hSaiEnt], { align: :right }
       end
 
       def phone
