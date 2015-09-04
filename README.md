@@ -44,6 +44,18 @@ XML version | Supported?
           end
         end
 
+### Options
+
+* `logo_path`: Path of sender's logo image.
+* `products_quantity_precision`: Product quantity decimal precision. Default is 2.
+* `products_unit_price_precision`: Product unit price decimal precision. Default is 2.
+
+XML version | Supported?
+----------- | ----------
+1.00        | no
+2.00        | yes
+3.10        | yes
+
 ### CC-e - _Carta de Correção Eletrônica_
 
 #### Usage in Ruby

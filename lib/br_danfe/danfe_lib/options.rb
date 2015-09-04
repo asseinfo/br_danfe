@@ -2,7 +2,9 @@ module BrDanfe
   module DanfeLib
     class Options < OpenStruct
       DEFAULTOPTIONS = {
-        logo_path: ""
+        logo_path: "",
+        products_quantity_precision: 2,
+        products_unit_price_precision: 2
       }
 
       def initialize(new_options={})
