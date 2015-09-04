@@ -1,9 +1,10 @@
 module BrDanfe
   module DanfeLib
     class DetBody
-      def initialize(pdf, xml)
+      def initialize(pdf, xml, options)
         @pdf = pdf
         @xml = xml
+        @options = options
       end
 
       def render
@@ -37,8 +38,8 @@ module BrDanfe
           Cst.to_danfe(det),
           det.css("prod/CFOP").text,
           det.css("prod/uCom").text,
-          numerify(det, "prod/qCom"),
-          numerify(det, "prod/vUnCom"),
+          numerify(det, "prod/qCom", @options[:quantity_precision]),
+          numerify(det, "prod/vUnCom", @options[:unit_price_precision]),
           numerify(det, "prod/vProd"),
           numerify(det, "ICMS/*/vBC"),
           numerify(det, "ICMS/*/vICMS"),
@@ -48,8 +49,8 @@ module BrDanfe
         ]
       end
 
-      def numerify(det, xpath)
-        Helper.numerify(det.css("#{xpath}").text)
+      def numerify(det, xpath, precision = 2)
+        Helper.numerify(det.css("#{xpath}").text, precision)
       end
 
       def column_widths

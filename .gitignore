@@ -3,5 +3,5 @@
 *sublime-*
 Gemfile.lock
 pkg
-*.pdf
+output.pdf
 coverage

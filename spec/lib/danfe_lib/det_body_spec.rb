@@ -1,13 +1,25 @@
 require "spec_helper"
 
 describe BrDanfe::DanfeLib::DetBody do
-  let(:base_dir) { "./spec/fixtures/nfe/lib/"}
+  let(:base_dir) { "./spec/fixtures/nfe/lib/" }
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
   let(:xml) { BrDanfe::DanfeLib::XML.new(xml_as_string) }
 
-  subject { described_class.new(pdf, xml) }
+  let(:options) do
+    { unit_price_precision: 2, quantity_precision: 2 }
+  end
+
+  let(:options_custom_unit_price_precision) do
+    { unit_price_precision: 4, quantity_precision: 2 }
+  end
+
+  let(:options_custom_quantity_precision) do
+    { unit_price_precision: 2, quantity_precision: 4 }
+  end
+
+  subject { described_class.new(pdf, xml, options) }
 
   describe "#render" do
     before do
@@ -293,6 +305,72 @@ describe BrDanfe::DanfeLib::DetBody do
         pdf.render_file output_pdf
 
         expect("#{base_dir}det_body#render-icms_st.pdf").to have_same_content_of file: output_pdf
+      end
+    end
+
+    context "when the unit price of the product has a custom precision" do
+      subject { described_class.new(pdf, xml, options_custom_unit_price_precision) }
+
+      let(:xml_as_string) do
+        <<-eos
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+            <det nItem="1">
+              <prod>
+                <cProd>3</cProd>
+                <xProd>Produto Com Csosn 201 - ICMS ST</xProd>
+                <NCM>45678901</NCM>
+                <CFOP>5401</CFOP>
+                <uCom>UN</uCom>
+                <qCom>6.0000</qCom>
+                <vUnCom>1.1312000000</vUnCom>
+                <vProd>6.79</vProd>
+              </prod>
+            </det>
+          </infNFe>
+        </NFe>
+        eos
+      end
+
+      it "renders xml to the pdf" do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}det_body#render-unit_price_with_custom_precision.pdf").to have_same_content_of file: output_pdf
+      end
+    end
+
+    context "when the quantity of the product has a custom precision" do
+      subject { described_class.new(pdf, xml, options_custom_quantity_precision) }
+
+      let(:xml_as_string) do
+        <<-eos
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+            <det nItem="1">
+              <prod>
+                <cProd>3</cProd>
+                <xProd>Produto Com Csosn 201 - ICMS ST</xProd>
+                <NCM>45678901</NCM>
+                <CFOP>5401</CFOP>
+                <uCom>UN</uCom>
+                <qCom>6.4545</qCom>
+                <vUnCom>1.0300000000</vUnCom>
+                <vProd>6.65</vProd>
+              </prod>
+            </det>
+          </infNFe>
+        </NFe>
+        eos
+      end
+
+      it "renders xml to the pdf" do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}det_body#render-quantity_with_custom_precision.pdf").to have_same_content_of file: output_pdf
       end
     end
   end

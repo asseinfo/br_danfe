@@ -41,7 +41,10 @@ module BrDanfe
 
       @pdf.repeat(:all) { repeat_on_each_page }
 
-      DanfeLib::DetBody.new(@pdf, @xml).render
+      det_body_options = { unit_price_precision: @options.products_unit_price_precision,
+        quantity_precision: @options.products_quantity_precision }
+
+      DanfeLib::DetBody.new(@pdf, @xml, det_body_options).render
 
       @pdf.page_count.times do |i|
         @pdf.go_to_page(i + 1)
