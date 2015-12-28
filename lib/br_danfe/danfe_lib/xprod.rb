@@ -11,6 +11,7 @@ module BrDanfe
         xprod += infAdProd if has_infAdProd?
         xprod += fci if has_fci?
         xprod += st if has_st?
+        xprod += difal if has_difal?
 
         xprod
       end
@@ -28,6 +29,10 @@ module BrDanfe
         @det.css("ICMS/*/vBCST").text.to_i > 0
       end
 
+      def has_difal?
+        @det.css("ICMSUFDest").present?
+      end
+
       def infAdProd
         "\n" + @det.css("infAdProd").text
       end
@@ -42,6 +47,18 @@ module BrDanfe
           pICMSST: Helper.numerify(@det.css('ICMS/*/pICMSST').text, 2),
           vBCST: Helper.numerify(@det.css('ICMS/*/vBCST').text, 2),
           vICMSST: Helper.numerify(@det.css('ICMS/*/vICMSST').text, 2))
+      end
+
+      def difal
+        "\n" + I18n.t("danfe.det.prod.xProdDIFAL",
+          vBCUFDest: Helper.numerify(@det.css('ICMSUFDest/vBCUFDest').text, 2),
+          pFCPUFDest: Helper.numerify(@det.css('ICMSUFDest/pFCPUFDest').text, 2),
+          pICMSUFDest: Helper.numerify(@det.css('ICMSUFDest/pICMSUFDest').text, 2),
+          pICMSInter: Helper.numerify(@det.css('ICMSUFDest/pICMSInter').text, 2),
+          pICMSInterPart: @det.css('ICMSUFDest/pICMSInterPart').text,
+          vFCPUFDest: Helper.numerify(@det.css('ICMSUFDest/vFCPUFDest').text, 2),
+          vICMSUFDest: Helper.numerify(@det.css('ICMSUFDest/vICMSUFDest').text, 2),
+          vICMSUFRemet: Helper.numerify(@det.css('ICMSUFDest/vICMSUFRemet').text, 2))
       end
     end
   end

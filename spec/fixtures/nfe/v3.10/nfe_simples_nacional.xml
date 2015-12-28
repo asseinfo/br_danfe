@@ -1,1 +1,523 @@
-<NFe xmlns="http://www.portalfiscal.inf.br/nfe"><infNFe versao="3.10" Id="NFe35150162013294000143550010000000011000000017"><ide><cUF>35</cUF><cNF>00000001</cNF><natOp>5101-Venda de producao do estabelecimento</natOp><indPag>1</indPag><mod>55</mod><serie>1</serie><nNF>1</nNF><dhEmi>2015-01-14T00:00:00-02:00</dhEmi><dhSaiEnt>2011-10-30T15:32:45-02:00</dhSaiEnt><tpNF>1</tpNF><idDest>1</idDest><cMunFG>3550308</cMunFG><tpImp>1</tpImp><tpEmis>1</tpEmis><cDV>7</cDV><tpAmb>1</tpAmb><finNFe>1</finNFe><indFinal>0</indFinal><indPres>0</indPres><procEmi>0</procEmi><verProc>1</verProc></ide><emit><CNPJ>62013294000143</CNPJ><xNome>Nome do Remetente Ltda</xNome><xFant>Nome Fantasia do Remetente Ltda</xFant><enderEmit><xLgr>Rua do Remetente, Casa</xLgr><nro>123</nro><xBairro>Bairro do Remetente</xBairro><cMun>3550308</cMun><xMun>SAO PAULO</xMun><UF>SP</UF><CEP>12345678</CEP><cPais>1058</cPais><xPais>BRASIL</xPais><fone>1112345678</fone></enderEmit><IE>526926313553</IE><CRT>1</CRT></emit><dest><CNPJ>71058884000183</CNPJ><xNome>Nome do Destinatario Pj Ltda</xNome><enderDest><xLgr>Rua do Destinatario Pj, Sl 1 e 2</xLgr><nro>345</nro><xBairro>Bairro do Destinatario Pj</xBairro><cMun>3552403</cMun><xMun>SUMARE</xMun><UF>SP</UF><CEP>23456789</CEP><cPais>1058</cPais><xPais>BRASIL</xPais><fone>1923456789</fone></enderDest><indIEDest>1</indIEDest><IE>671008375110</IE></dest><det nItem="1"><prod><cProd>1</cProd><cEAN/><xProd>Produto Com Csosn 101</xProd><NCM/><CFOP>5101</CFOP><uCom>UN</uCom><qCom>2.0000</qCom><vUnCom>1.0100000000</vUnCom><vProd>2.02</vProd><cEANTrib/><uTrib>UN</uTrib><qTrib>2.0000</qTrib><vUnTrib>1.0100000000</vUnTrib><indTot>1</indTot></prod><imposto><ICMS><ICMSSN101><orig>0</orig><CSOSN>101</CSOSN><pCredSN>0.0000</pCredSN><vCredICMSSN>0.00</vCredICMSSN></ICMSSN101></ICMS><PIS><PISOutr><CST>99</CST><vBC>0.00</vBC><pPIS>0.0000</pPIS><vPIS>0.00</vPIS></PISOutr></PIS><COFINS><COFINSOutr><CST>99</CST><vBC>0.00</vBC><pCOFINS>0.0000</pCOFINS><vCOFINS>0.00</vCOFINS></COFINSOutr></COFINS></imposto></det><det nItem="2"><prod><cProd>2</cProd><cEAN/><xProd>Produto Com Csosn102</xProd><NCM/><CFOP>5101</CFOP><uCom>UN</uCom><qCom>4.0000</qCom><vUnCom>1.0200000000</vUnCom><vProd>4.08</vProd><cEANTrib/><uTrib>UN</uTrib><qTrib>4.0000</qTrib><vUnTrib>1.0200000000</vUnTrib><indTot>1</indTot></prod><imposto><ICMS><ICMSSN102><orig>0</orig><CSOSN>102</CSOSN></ICMSSN102></ICMS><PIS><PISOutr><CST>99</CST><vBC>0.00</vBC><pPIS>0.0000</pPIS><vPIS>0.00</vPIS></PISOutr></PIS><COFINS><COFINSOutr><CST>99</CST><vBC>0.00</vBC><pCOFINS>0.0000</pCOFINS><vCOFINS>0.00</vCOFINS></COFINSOutr></COFINS></imposto></det><det nItem="3"><prod><cProd>3</cProd><cEAN/><xProd>Produto Com Csosn 201</xProd><NCM/><CFOP>5401</CFOP><uCom>UN</uCom><qCom>6.0000</qCom><vUnCom>1.0300000000</vUnCom><vProd>6.18</vProd><cEANTrib/><uTrib>UN</uTrib><qTrib>6.0000</qTrib><vUnTrib>1.0300000000</vUnTrib><indTot>1</indTot></prod><imposto><ICMS><ICMSSN201><orig>0</orig><CSOSN>201</CSOSN><modBCST>4</modBCST><pMVAST>24.0000</pMVAST><pRedBCST>100.0000</pRedBCST><vBCST>7.66</vBCST><pICMSST>17.0000</pICMSST><vICMSST>0.25</vICMSST><pCredSN>0.0000</pCredSN><vCredICMSSN>0.00</vCredICMSSN></ICMSSN201></ICMS><PIS><PISOutr><CST>99</CST><vBC>0.00</vBC><pPIS>0.0000</pPIS><vPIS>0.00</vPIS></PISOutr></PIS><COFINS><COFINSOutr><CST>99</CST><vBC>0.00</vBC><pCOFINS>0.0000</pCOFINS><vCOFINS>0.00</vCOFINS></COFINSOutr></COFINS></imposto></det><det nItem="4"><prod><cProd>4</cProd><cEAN/><xProd>Produto Com Csosn 202</xProd><NCM/><CFOP>5401</CFOP><uCom>UN</uCom><qCom>8.0000</qCom><vUnCom>1.0400000000</vUnCom><vProd>8.32</vProd><cEANTrib/><uTrib>UN</uTrib><qTrib>8.0000</qTrib><vUnTrib>1.0400000000</vUnTrib><indTot>1</indTot></prod><imposto><ICMS><ICMSSN202><orig>0</orig><CSOSN>202</CSOSN><modBCST>4</modBCST><pMVAST>24.0000</pMVAST><pRedBCST>100.0000</pRedBCST><vBCST>10.32</vBCST><pICMSST>17.0000</pICMSST><vICMSST>0.34</vICMSST></ICMSSN202></ICMS><PIS><PISOutr><CST>99</CST><vBC>0.00</vBC><pPIS>0.0000</pPIS><vPIS>0.00</vPIS></PISOutr></PIS><COFINS><COFINSOutr><CST>99</CST><vBC>0.00</vBC><pCOFINS>0.0000</pCOFINS><vCOFINS>0.00</vCOFINS></COFINSOutr></COFINS></imposto></det><det nItem="5"><prod><cProd>5</cProd><cEAN/><xProd>Produto Com Csosn 300</xProd><NCM/><CFOP>5101</CFOP><uCom>UN</uCom><qCom>10.0000</qCom><vUnCom>1.0500000000</vUnCom><vProd>10.50</vProd><cEANTrib/><uTrib>UN</uTrib><qTrib>10.0000</qTrib><vUnTrib>1.0500000000</vUnTrib><indTot>1</indTot></prod><imposto><ICMS><ICMSSN102><orig>0</orig><CSOSN>300</CSOSN></ICMSSN102></ICMS><PIS><PISOutr><CST>99</CST><vBC>0.00</vBC><pPIS>0.0000</pPIS><vPIS>0.00</vPIS></PISOutr></PIS><COFINS><COFINSOutr><CST>99</CST><vBC>0.00</vBC><pCOFINS>0.0000</pCOFINS><vCOFINS>0.00</vCOFINS></COFINSOutr></COFINS></imposto></det><det nItem="6"><prod><cProd>6</cProd><cEAN/><xProd>Produto Com Csosn 400</xProd><NCM/><CFOP>5101</CFOP><uCom>UN</uCom><qCom>12.0000</qCom><vUnCom>1.0600000000</vUnCom><vProd>12.72</vProd><cEANTrib/><uTrib>UN</uTrib><qTrib>12.0000</qTrib><vUnTrib>1.0600000000</vUnTrib><indTot>1</indTot></prod><imposto><ICMS><ICMSSN102><orig>0</orig><CSOSN>400</CSOSN></ICMSSN102></ICMS><PIS><PISOutr><CST>99</CST><vBC>0.00</vBC><pPIS>0.0000</pPIS><vPIS>0.00</vPIS></PISOutr></PIS><COFINS><COFINSOutr><CST>99</CST><vBC>0.00</vBC><pCOFINS>0.0000</pCOFINS><vCOFINS>0.00</vCOFINS></COFINSOutr></COFINS></imposto></det><det nItem="7"><prod><cProd>7</cProd><cEAN/><xProd>Produto Com Csosn 500</xProd><NCM/><CFOP>5405</CFOP><uCom>UN</uCom><qCom>14.0000</qCom><vUnCom>1.0700000000</vUnCom><vProd>14.98</vProd><cEANTrib/><uTrib>UN</uTrib><qTrib>14.0000</qTrib><vUnTrib>1.0700000000</vUnTrib><indTot>1</indTot></prod><imposto><ICMS><ICMSSN500><orig>0</orig><CSOSN>500</CSOSN></ICMSSN500></ICMS><PIS><PISOutr><CST>99</CST><vBC>0.00</vBC><pPIS>0.0000</pPIS><vPIS>0.00</vPIS></PISOutr></PIS><COFINS><COFINSOutr><CST>99</CST><vBC>0.00</vBC><pCOFINS>0.0000</pCOFINS><vCOFINS>0.00</vCOFINS></COFINSOutr></COFINS></imposto></det><det nItem="8"><prod><cProd>8</cProd><cEAN/><xProd>Produto Com Csosn 900</xProd><NCM/><CFOP>5201</CFOP><uCom>UN</uCom><qCom>16.0000</qCom><vUnCom>1.0800000000</vUnCom><vProd>17.28</vProd><cEANTrib/><uTrib>UN</uTrib><qTrib>16.0000</qTrib><vUnTrib>1.0800000000</vUnTrib><indTot>1</indTot></prod><imposto><ICMS><ICMSSN900><orig>0</orig><CSOSN>900</CSOSN><modBC>3</modBC><vBC>17.28</vBC><pRedBC>100.0000</pRedBC><pICMS>0.0000</pICMS><vICMS>0.00</vICMS></ICMSSN900></ICMS><PIS><PISOutr><CST>99</CST><vBC>0.00</vBC><pPIS>0.0000</pPIS><vPIS>0.00</vPIS></PISOutr></PIS><COFINS><COFINSOutr><CST>99</CST><vBC>0.00</vBC><pCOFINS>0.0000</pCOFINS><vCOFINS>0.00</vCOFINS></COFINSOutr></COFINS></imposto></det><total><ICMSTot><vBC>17.28</vBC><vICMS>0.00</vICMS><vICMSDeson>0.00</vICMSDeson><vBCST>17.98</vBCST><vST>0.59</vST><vProd>76.08</vProd><vFrete>0.00</vFrete><vSeg>0.00</vSeg><vDesc>0.00</vDesc><vII>0.00</vII><vIPI>0.00</vIPI><vPIS>0.00</vPIS><vCOFINS>0.00</vCOFINS><vOutro>0.00</vOutro><vNF>76.67</vNF></ICMSTot></total><transp><modFrete>0</modFrete></transp><cobr><fat><nFat>1</nFat></fat><dup><nDup>1</nDup><dVenc>2015-02-13</dVenc><vDup>25.56</vDup></dup><dup><nDup>2</nDup><dVenc>2015-03-15</dVenc><vDup>25.56</vDup></dup><dup><nDup>3</nDup><dVenc>2015-04-14</dVenc><vDup>25.55</vDup></dup></cobr><infAdic><infCpl>Teste Com Observacao * PERMITE O APROVEITAMENTO DO CREDITO DE ICMS NO VALOR DE R$ 0,00; CORRESPONDENTE A ALIQUOTA DE 0,00%; NOS TERMOS DO ARTIGO 23 DA LC 123/2006 * OPERACAO SUJEITA A SUBSTITUICAO TRIBUTARIA CONFORME ANEXO 3 DO RICMS/SC * DOCUMENTO EMITIDO POR ME OU EPP OPTANTE PELO SIMPLES NACIONAL * NAO GERA DIREITO A CREDITO FISCAL DE IPI</infCpl></infAdic></infNFe></NFe>
+<NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+  <infNFe versao="3.10" Id="NFe35150162013294000143550010000000011000000017">
+    <ide>
+      <cUF>35</cUF>
+      <cNF>00000001</cNF>
+      <natOp>5101-Venda de producao do estabelecimento</natOp>
+      <indPag>1</indPag>
+      <mod>55</mod>
+      <serie>1</serie>
+      <nNF>1</nNF>
+      <dhEmi>2015-01-14T00:00:00-02:00</dhEmi>
+      <dhSaiEnt>2011-10-30T15:32:45-02:00</dhSaiEnt>
+      <tpNF>1</tpNF>
+      <idDest>1</idDest>
+      <cMunFG>3550308</cMunFG>
+      <tpImp>1</tpImp>
+      <tpEmis>1</tpEmis>
+      <cDV>7</cDV>
+      <tpAmb>1</tpAmb>
+      <finNFe>1</finNFe>
+      <indFinal>0</indFinal>
+      <indPres>0</indPres>
+      <procEmi>0</procEmi>
+      <verProc>1</verProc>
+    </ide>
+    <emit>
+      <CNPJ>62013294000143</CNPJ>
+      <xNome>Nome do Remetente Ltda</xNome>
+      <xFant>Nome Fantasia do Remetente Ltda</xFant>
+      <enderEmit>
+        <xLgr>Rua do Remetente, Casa</xLgr>
+        <nro>123</nro>
+        <xBairro>Bairro do Remetente</xBairro>
+        <cMun>3550308</cMun>
+        <xMun>SAO PAULO</xMun>
+        <UF>SP</UF>
+        <CEP>12345678</CEP>
+        <cPais>1058</cPais>
+        <xPais>BRASIL</xPais>
+        <fone>1112345678</fone>
+      </enderEmit>
+      <IE>526926313553</IE>
+      <CRT>1</CRT>
+    </emit>
+    <dest>
+      <CNPJ>71058884000183</CNPJ>
+      <xNome>Nome do Destinatario Pj Ltda</xNome>
+      <enderDest>
+        <xLgr>Rua do Destinatario Pj, Sl 1 e 2</xLgr>
+        <nro>345</nro>
+        <xBairro>Bairro do Destinatario Pj</xBairro>
+        <cMun>3552403</cMun>
+        <xMun>SUMARE</xMun>
+        <UF>SP</UF>
+        <CEP>23456789</CEP>
+        <cPais>1058</cPais>
+        <xPais>BRASIL</xPais>
+        <fone>1923456789</fone>
+      </enderDest>
+      <indIEDest>1</indIEDest>
+      <IE>671008375110</IE>
+    </dest>
+    <det nItem="1">
+      <prod>
+        <cProd>1</cProd>
+        <cEAN />
+        <xProd>Produto Com Csosn 101</xProd>
+        <NCM />
+        <CFOP>5101</CFOP>
+        <uCom>UN</uCom>
+        <qCom>2.0000</qCom>
+        <vUnCom>1.0100000000</vUnCom>
+        <vProd>2.02</vProd>
+        <cEANTrib />
+        <uTrib>UN</uTrib>
+        <qTrib>2.0000</qTrib>
+        <vUnTrib>1.0100000000</vUnTrib>
+        <indTot>1</indTot>
+      </prod>
+      <imposto>
+        <ICMS>
+          <ICMSSN101>
+            <orig>0</orig>
+            <CSOSN>101</CSOSN>
+            <pCredSN>0.0000</pCredSN>
+            <vCredICMSSN>0.00</vCredICMSSN>
+          </ICMSSN101>
+        </ICMS>
+        <PIS>
+          <PISOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pPIS>0.0000</pPIS>
+            <vPIS>0.00</vPIS>
+          </PISOutr>
+        </PIS>
+        <COFINS>
+          <COFINSOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pCOFINS>0.0000</pCOFINS>
+            <vCOFINS>0.00</vCOFINS>
+          </COFINSOutr>
+        </COFINS>
+      </imposto>
+    </det>
+    <det nItem="2">
+      <prod>
+        <cProd>2</cProd>
+        <cEAN />
+        <xProd>Produto Com Csosn102</xProd>
+        <NCM />
+        <CFOP>5101</CFOP>
+        <uCom>UN</uCom>
+        <qCom>4.0000</qCom>
+        <vUnCom>1.0200000000</vUnCom>
+        <vProd>4.08</vProd>
+        <cEANTrib />
+        <uTrib>UN</uTrib>
+        <qTrib>4.0000</qTrib>
+        <vUnTrib>1.0200000000</vUnTrib>
+        <indTot>1</indTot>
+      </prod>
+      <imposto>
+        <ICMS>
+          <ICMSSN102>
+            <orig>0</orig>
+            <CSOSN>102</CSOSN>
+          </ICMSSN102>
+        </ICMS>
+        <PIS>
+          <PISOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pPIS>0.0000</pPIS>
+            <vPIS>0.00</vPIS>
+          </PISOutr>
+        </PIS>
+        <COFINS>
+          <COFINSOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pCOFINS>0.0000</pCOFINS>
+            <vCOFINS>0.00</vCOFINS>
+          </COFINSOutr>
+        </COFINS>
+      </imposto>
+    </det>
+    <det nItem="3">
+      <prod>
+        <cProd>3</cProd>
+        <cEAN />
+        <xProd>Produto Com Csosn 201</xProd>
+        <NCM />
+        <CFOP>5401</CFOP>
+        <uCom>UN</uCom>
+        <qCom>6.0000</qCom>
+        <vUnCom>1.0300000000</vUnCom>
+        <vProd>6.18</vProd>
+        <cEANTrib />
+        <uTrib>UN</uTrib>
+        <qTrib>6.0000</qTrib>
+        <vUnTrib>1.0300000000</vUnTrib>
+        <indTot>1</indTot>
+      </prod>
+      <imposto>
+        <ICMS>
+          <ICMSSN201>
+            <orig>0</orig>
+            <CSOSN>201</CSOSN>
+            <modBCST>4</modBCST>
+            <pMVAST>24.0000</pMVAST>
+            <pRedBCST>100.0000</pRedBCST>
+            <vBCST>7.66</vBCST>
+            <pICMSST>17.0000</pICMSST>
+            <vICMSST>0.25</vICMSST>
+            <pCredSN>0.0000</pCredSN>
+            <vCredICMSSN>0.00</vCredICMSSN>
+          </ICMSSN201>
+        </ICMS>
+        <PIS>
+          <PISOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pPIS>0.0000</pPIS>
+            <vPIS>0.00</vPIS>
+          </PISOutr>
+        </PIS>
+        <COFINS>
+          <COFINSOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pCOFINS>0.0000</pCOFINS>
+            <vCOFINS>0.00</vCOFINS>
+          </COFINSOutr>
+        </COFINS>
+      </imposto>
+    </det>
+    <det nItem="4">
+      <prod>
+        <cProd>4</cProd>
+        <cEAN />
+        <xProd>Produto Com Csosn 202</xProd>
+        <NCM />
+        <CFOP>5401</CFOP>
+        <uCom>UN</uCom>
+        <qCom>8.0000</qCom>
+        <vUnCom>1.0400000000</vUnCom>
+        <vProd>8.32</vProd>
+        <cEANTrib />
+        <uTrib>UN</uTrib>
+        <qTrib>8.0000</qTrib>
+        <vUnTrib>1.0400000000</vUnTrib>
+        <indTot>1</indTot>
+      </prod>
+      <imposto>
+        <ICMS>
+          <ICMSSN202>
+            <orig>0</orig>
+            <CSOSN>202</CSOSN>
+            <modBCST>4</modBCST>
+            <pMVAST>24.0000</pMVAST>
+            <pRedBCST>100.0000</pRedBCST>
+            <vBCST>10.32</vBCST>
+            <pICMSST>17.0000</pICMSST>
+            <vICMSST>0.34</vICMSST>
+          </ICMSSN202>
+        </ICMS>
+        <PIS>
+          <PISOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pPIS>0.0000</pPIS>
+            <vPIS>0.00</vPIS>
+          </PISOutr>
+        </PIS>
+        <COFINS>
+          <COFINSOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pCOFINS>0.0000</pCOFINS>
+            <vCOFINS>0.00</vCOFINS>
+          </COFINSOutr>
+        </COFINS>
+      </imposto>
+    </det>
+    <det nItem="5">
+      <prod>
+        <cProd>5</cProd>
+        <cEAN />
+        <xProd>Produto Com Csosn 300</xProd>
+        <NCM />
+        <CFOP>5101</CFOP>
+        <uCom>UN</uCom>
+        <qCom>10.0000</qCom>
+        <vUnCom>1.0500000000</vUnCom>
+        <vProd>10.50</vProd>
+        <cEANTrib />
+        <uTrib>UN</uTrib>
+        <qTrib>10.0000</qTrib>
+        <vUnTrib>1.0500000000</vUnTrib>
+        <indTot>1</indTot>
+      </prod>
+      <imposto>
+        <ICMS>
+          <ICMSSN102>
+            <orig>0</orig>
+            <CSOSN>300</CSOSN>
+          </ICMSSN102>
+        </ICMS>
+        <PIS>
+          <PISOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pPIS>0.0000</pPIS>
+            <vPIS>0.00</vPIS>
+          </PISOutr>
+        </PIS>
+        <COFINS>
+          <COFINSOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pCOFINS>0.0000</pCOFINS>
+            <vCOFINS>0.00</vCOFINS>
+          </COFINSOutr>
+        </COFINS>
+      </imposto>
+    </det>
+    <det nItem="6">
+      <prod>
+        <cProd>6</cProd>
+        <cEAN />
+        <xProd>Produto Com Csosn 400</xProd>
+        <NCM />
+        <CFOP>5101</CFOP>
+        <uCom>UN</uCom>
+        <qCom>12.0000</qCom>
+        <vUnCom>1.0600000000</vUnCom>
+        <vProd>12.72</vProd>
+        <cEANTrib />
+        <uTrib>UN</uTrib>
+        <qTrib>12.0000</qTrib>
+        <vUnTrib>1.0600000000</vUnTrib>
+        <indTot>1</indTot>
+      </prod>
+      <imposto>
+        <ICMS>
+          <ICMSSN102>
+            <orig>0</orig>
+            <CSOSN>400</CSOSN>
+          </ICMSSN102>
+        </ICMS>
+        <PIS>
+          <PISOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pPIS>0.0000</pPIS>
+            <vPIS>0.00</vPIS>
+          </PISOutr>
+        </PIS>
+        <COFINS>
+          <COFINSOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pCOFINS>0.0000</pCOFINS>
+            <vCOFINS>0.00</vCOFINS>
+          </COFINSOutr>
+        </COFINS>
+      </imposto>
+    </det>
+    <det nItem="7">
+      <prod>
+        <cProd>7</cProd>
+        <cEAN />
+        <xProd>Produto Com Csosn 500</xProd>
+        <NCM />
+        <CFOP>5405</CFOP>
+        <uCom>UN</uCom>
+        <qCom>14.0000</qCom>
+        <vUnCom>1.0700000000</vUnCom>
+        <vProd>14.98</vProd>
+        <cEANTrib />
+        <uTrib>UN</uTrib>
+        <qTrib>14.0000</qTrib>
+        <vUnTrib>1.0700000000</vUnTrib>
+        <indTot>1</indTot>
+      </prod>
+      <imposto>
+        <ICMS>
+          <ICMSSN500>
+            <orig>0</orig>
+            <CSOSN>500</CSOSN>
+          </ICMSSN500>
+        </ICMS>
+        <PIS>
+          <PISOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pPIS>0.0000</pPIS>
+            <vPIS>0.00</vPIS>
+          </PISOutr>
+        </PIS>
+        <COFINS>
+          <COFINSOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pCOFINS>0.0000</pCOFINS>
+            <vCOFINS>0.00</vCOFINS>
+          </COFINSOutr>
+        </COFINS>
+      </imposto>
+    </det>
+    <det nItem="8">
+      <prod>
+        <cProd>8</cProd>
+        <cEAN />
+        <xProd>Produto Com Csosn 900</xProd>
+        <NCM />
+        <CFOP>5201</CFOP>
+        <uCom>UN</uCom>
+        <qCom>16.0000</qCom>
+        <vUnCom>1.0800000000</vUnCom>
+        <vProd>17.28</vProd>
+        <cEANTrib />
+        <uTrib>UN</uTrib>
+        <qTrib>16.0000</qTrib>
+        <vUnTrib>1.0800000000</vUnTrib>
+        <indTot>1</indTot>
+      </prod>
+      <imposto>
+        <ICMS>
+          <ICMSSN900>
+            <orig>0</orig>
+            <CSOSN>900</CSOSN>
+            <modBC>3</modBC>
+            <vBC>17.28</vBC>
+            <pRedBC>100.0000</pRedBC>
+            <pICMS>0.0000</pICMS>
+            <vICMS>0.00</vICMS>
+          </ICMSSN900>
+        </ICMS>
+        <PIS>
+          <PISOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pPIS>0.0000</pPIS>
+            <vPIS>0.00</vPIS>
+          </PISOutr>
+        </PIS>
+        <COFINS>
+          <COFINSOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pCOFINS>0.0000</pCOFINS>
+            <vCOFINS>0.00</vCOFINS>
+          </COFINSOutr>
+        </COFINS>
+      </imposto>
+    </det>
+    <det nItem="9">
+      <prod>
+        <cProd>9</cProd>
+        <cEAN />
+        <xProd>Produto Com DIFAL</xProd>
+        <NCM />
+        <CFOP>5201</CFOP>
+        <uCom>UN</uCom>
+        <qCom>16.0000</qCom>
+        <vUnCom>1.0800000000</vUnCom>
+        <vProd>17.28</vProd>
+        <cEANTrib />
+        <uTrib>UN</uTrib>
+        <qTrib>16.0000</qTrib>
+        <vUnTrib>1.0800000000</vUnTrib>
+        <indTot>1</indTot>
+      </prod>
+      <imposto>
+        <ICMS>
+          <ICMSSN900>
+            <orig>0</orig>
+            <CSOSN>900</CSOSN>
+            <modBC>3</modBC>
+            <vBC>17.28</vBC>
+            <pRedBC>100.0000</pRedBC>
+            <pICMS>0.0000</pICMS>
+            <vICMS>0.00</vICMS>
+          </ICMSSN900>
+        </ICMS>
+        <ICMSUFDest>
+          <vBCUFDest>12000.53</vBCUFDest>
+          <pFCPUFDest>17.90</pFCPUFDest>
+          <pICMSUFDest>21.51</pICMSUFDest>
+          <pICMSInter>12.45</pICMSInter>
+          <pICMSInterPart>40</pICMSInterPart>
+          <vFCPUFDest>11002.35</vFCPUFDest>
+          <vICMSUFDest>19282.47</vICMSUFDest>
+          <vICMSUFRemet>12344.56</vICMSUFRemet>
+        </ICMSUFDest>
+        <PIS>
+          <PISOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pPIS>0.0000</pPIS>
+            <vPIS>0.00</vPIS>
+          </PISOutr>
+        </PIS>
+        <COFINS>
+          <COFINSOutr>
+            <CST>99</CST>
+            <vBC>0.00</vBC>
+            <pCOFINS>0.0000</pCOFINS>
+            <vCOFINS>0.00</vCOFINS>
+          </COFINSOutr>
+        </COFINS>
+      </imposto>
+    </det>
+    <total>
+      <ICMSTot>
+        <vBC>17.28</vBC>
+        <vICMS>0.00</vICMS>
+        <vICMSDeson>0.00</vICMSDeson>
+        <vBCST>17.98</vBCST>
+        <vST>0.59</vST>
+        <vProd>76.08</vProd>
+        <vFrete>0.00</vFrete>
+        <vSeg>0.00</vSeg>
+        <vDesc>0.00</vDesc>
+        <vII>0.00</vII>
+        <vIPI>0.00</vIPI>
+        <vPIS>0.00</vPIS>
+        <vCOFINS>0.00</vCOFINS>
+        <vOutro>0.00</vOutro>
+        <vNF>76.67</vNF>
+      </ICMSTot>
+    </total>
+    <transp>
+      <modFrete>0</modFrete>
+    </transp>
+    <cobr>
+      <fat>
+        <nFat>1</nFat>
+      </fat>
+      <dup>
+        <nDup>1</nDup>
+        <dVenc>2015-02-13</dVenc>
+        <vDup>25.56</vDup>
+      </dup>
+      <dup>
+        <nDup>2</nDup>
+        <dVenc>2015-03-15</dVenc>
+        <vDup>25.56</vDup>
+      </dup>
+      <dup>
+        <nDup>3</nDup>
+        <dVenc>2015-04-14</dVenc>
+        <vDup>25.55</vDup>
+      </dup>
+    </cobr>
+    <infAdic>
+      <infCpl>Teste Com Observacao * PERMITE O APROVEITAMENTO DO CREDITO DE ICMS NO VALOR DE R$ 0,00; CORRESPONDENTE A ALIQUOTA DE 0,00%; NOS TERMOS DO ARTIGO 23 DA LC 123/2006 * OPERACAO SUJEITA A SUBSTITUICAO TRIBUTARIA CONFORME ANEXO 3 DO RICMS/SC * DOCUMENTO EMITIDO POR ME OU EPP OPTANTE PELO SIMPLES NACIONAL * NAO GERA DIREITO A CREDITO FISCAL DE IPI</infCpl>
+    </infAdic>
+  </infNFe>
+</NFe>
