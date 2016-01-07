@@ -1,5 +1,5 @@
 machine:
-  ruby:
-    version: 2.1.2
   timezone:
     America/Sao_Paulo
+  environment:
+    CODECLIMATE_REPO_TOKEN: d7196b5d208c110965cd943545838235668fde9bd23a755f850d3b012e93f9d1
