@@ -24,7 +24,7 @@ describe BrDanfe::DanfeLib::Emit do
                 <UF>SP</UF>
               </enderEmit>
               <IE>526926313553</IE>
-              <IE_ST>611724092039</IE_ST>
+              <IEST>611724092039</IEST>
             </emit>
           </infNFe>
         </NFe>
