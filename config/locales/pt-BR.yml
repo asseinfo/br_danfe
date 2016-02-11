@@ -46,7 +46,7 @@ pt-BR:
     emit:
       IM: "INSCRIÇÃO MUNICIPAL"
       IE: "INSCRIÇÃO ESTADUAL"
-      IE_ST: "INSC.ESTADUAL DO SUBST. TRIBUTÁRIO"
+      IEST: "INSC.ESTADUAL DO SUBST. TRIBUTÁRIO"
       CNPJ: "CNPJ"
     dup:
       title: "FATURA / DUPLICATAS"
