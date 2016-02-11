@@ -26,6 +26,12 @@ describe BrDanfe::DanfeLib::Emit do
               <IE>526926313553</IE>
               <IEST>611724092039</IEST>
             </emit>
+            <dest>
+              <CNPJ>08143375000112</CNPJ>
+              <enderDest>
+                <UF>SP</UF>
+              </enderDest>
+            </dest>
           </infNFe>
         </NFe>
         <protNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="2.00">
