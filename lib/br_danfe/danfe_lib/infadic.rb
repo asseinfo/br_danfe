@@ -32,9 +32,6 @@ module BrDanfe
       def render_difal
         @pdf.ibox 2.65, 12.45, 0.75, @l1, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
 
-        difal_content = I18n.t("danfe.infAdic.difal", vICMSUFDest: @xml["ICMSTot/vICMSUFDest"],
-          vFCPUFDest: @xml["ICMSTot/vFCPUFDest"], vICMSUFRemet: @xml["ICMSTot/vICMSUFRemet"])
-
         y = Y + 0.20
         @pdf.ibox 1.65, 12.45, 0.75, y, "", difal_content, { size: 5, valign: :top, border: 0 }
 
@@ -43,19 +40,31 @@ module BrDanfe
         @pdf.ibox 1.65, 12.45, 0.75, y + 0.50, "", @xml["infAdic/infCpl"], { size: 5, valign: :top, border: 0 }
       end
 
+      def difal_content
+        icms_dest = @xml["ICMSTot/vICMSUFDest"]
+        fcp_dest = @xml["ICMSTot/vFCPUFDest"]
+        icms_remet = @xml["ICMSTot/vICMSUFRemet"]
+
+        icms_dest = Helper.numerify(icms_dest, 2) if icms_dest != ""
+        fcp_dest = Helper.numerify(fcp_dest, 2) if fcp_dest != ""
+        icms_remet = Helper.numerify(icms_remet, 2) if icms_remet != ""
+
+        I18n.t("danfe.infAdic.difal",
+          vICMSUFDest: icms_dest,
+          vFCPUFDest: fcp_dest,
+          vICMSUFRemet: icms_remet)
+      end
+
       def render_extra_volumes
         @pdf.ibox 2.65, 12.45, 0.75, @l1, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
 
+        y = Y + 0.20
+
         if difal?
-          y = Y + 0.20
-
-          difal_content = I18n.t("danfe.infAdic.difal", vICMSUFDest: @xml["ICMSTot/vICMSUFDest"],
-            vFCPUFDest: @xml["ICMSTot/vFCPUFDest"], vICMSUFRemet: @xml["ICMSTot/vICMSUFRemet"])
           @pdf.ibox 1.65, 12.45, 0.75, y, "", difal_content, { size: 5, valign: :top, border: 0 }
-
           y += 0.27
         else
-          y = Y + 0.27
+          y += 0.07
         end
 
         @pdf.ibox 2.65, 12.45, 0.75, y, "", I18n.t("danfe.infAdic.vol.title"), { size: 5, valign: :top, border: 0 }
@@ -110,7 +119,7 @@ module BrDanfe
       end
 
       def difal?
-        @xml["ICMSTot/vICMSUFDest"].present?
+        !@xml["ICMSTot/vICMSUFDest"].to_f.zero?
       end
     end
   end

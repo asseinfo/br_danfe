@@ -43,6 +43,13 @@ describe BrDanfe::DanfeLib::Infadic do
           <infAdic>
             <infCpl>Uma observação</infCpl>
           </infAdic>
+          <total>
+            <ICMSTot>
+              <vFCPUFDest>0.00</vFCPUFDest>
+              <vICMSUFDest>0.00</vICMSUFDest>
+              <vICMSUFRemet>0.00</vICMSUFRemet>
+            </ICMSTot>
+          </total>
         </infNFe>
       </NFe>
       eos
@@ -65,44 +72,46 @@ describe BrDanfe::DanfeLib::Infadic do
       context "with difal" do
         let(:xml_as_string) do
           <<-eos
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <transp>
-              <vol>
-                <qVol>1</qVol>
-                <esp>VOLUMES 1</esp>
-                <marca>DIVERSOS 1</marca>
-                <nVol>1</nVol>
-                <pesoL>1000.000</pesoL>
-                <pesoB>1100.000</pesoB>
-              </vol>
-              <vol>
-                <qVol>2</qVol>
-                <esp>VOLUMES 2</esp>
-                <marca>DIVERSOS 2</marca>
-                <nVol>2</nVol>
-                <pesoL>2000.000</pesoL>
-                <pesoB>2200.000</pesoB>
-              </vol>
-              <vol>
-                <qVol>3</qVol>
-                <esp>VOLUMES 3</esp>
-                <marca>DIVERSOS 3</marca>
-                <nVol>3</nVol>
-                <pesoL>3000.000</pesoL>
-                <pesoB>3300.000</pesoB>
-              </vol>
-            </transp>
-            <infAdic>
-              <infCpl>Uma observação</infCpl>
-            </infAdic>
-            <ICMSTot>
-              <vFCPUFDest>4892.78</vFCPUFDest>
-              <vICMSUFDest>2915.78</vICMSUFDest>
-              <vICMSUFRemet>75394.78</vICMSUFRemet>
-            </ICMSTot>
-          </infNFe>
-        </NFe>
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <transp>
+                <vol>
+                  <qVol>1</qVol>
+                  <esp>VOLUMES 1</esp>
+                  <marca>DIVERSOS 1</marca>
+                  <nVol>1</nVol>
+                  <pesoL>1000.000</pesoL>
+                  <pesoB>1100.000</pesoB>
+                </vol>
+                <vol>
+                  <qVol>2</qVol>
+                  <esp>VOLUMES 2</esp>
+                  <marca>DIVERSOS 2</marca>
+                  <nVol>2</nVol>
+                  <pesoL>2000.000</pesoL>
+                  <pesoB>2200.000</pesoB>
+                </vol>
+                <vol>
+                  <qVol>3</qVol>
+                  <esp>VOLUMES 3</esp>
+                  <marca>DIVERSOS 3</marca>
+                  <nVol>3</nVol>
+                  <pesoL>3000.000</pesoL>
+                  <pesoB>3300.000</pesoB>
+                </vol>
+              </transp>
+              <infAdic>
+                <infCpl>Uma observação</infCpl>
+              </infAdic>
+              <total>
+                <ICMSTot>
+                  <vFCPUFDest>4892.78</vFCPUFDest>
+                  <vICMSUFDest>2915.78</vICMSUFDest>
+                  <vICMSUFRemet>75394.78</vICMSUFRemet>
+                </ICMSTot>
+              </total>
+            </infNFe>
+          </NFe>
           eos
         end
 
