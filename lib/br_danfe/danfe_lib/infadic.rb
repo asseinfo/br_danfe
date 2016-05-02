@@ -16,44 +16,16 @@ module BrDanfe
 
         if nVol > 1
           render_extra_volumes
+        elsif difal?
+          render_difal
         else
-          if difal?
-            render_difal
-          else
-            @pdf.ibox 2.65, 12.45, 0.75, @l1, I18n.t("danfe.infAdic.infCpl"), @xml["infAdic/infCpl"], { size: 6, valign: :top }
-          end
+          @pdf.ibox 2.65, 12.45, 0.75, @l1, I18n.t("danfe.infAdic.infCpl"), @xml["infAdic/infCpl"], { size: 6, valign: :top }
         end
 
         @pdf.ibox 2.65, 7.15, 13.20, @l1, I18n.t("danfe.infAdic.reserved")
       end
 
       private
-
-      def render_difal
-        @pdf.ibox 2.65, 12.45, 0.75, @l1, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
-
-        y = Y + 0.20
-        @pdf.ibox 1.65, 12.45, 0.75, y, "", difal_content, { size: 5, valign: :top, border: 0 }
-
-        y += 0.10
-        @pdf.ibox 1.65, 12.45, 0.75, y + 0.30, "", I18n.t("danfe.infAdic.others"), { size: 6, valign: :top, border: 0 }
-        @pdf.ibox 1.65, 12.45, 0.75, y + 0.50, "", @xml["infAdic/infCpl"], { size: 5, valign: :top, border: 0 }
-      end
-
-      def difal_content
-        icms_dest = @xml["ICMSTot/vICMSUFDest"]
-        fcp_dest = @xml["ICMSTot/vFCPUFDest"]
-        icms_remet = @xml["ICMSTot/vICMSUFRemet"]
-
-        icms_dest = Helper.numerify(icms_dest, 2) if icms_dest != ""
-        fcp_dest = Helper.numerify(fcp_dest, 2) if fcp_dest != ""
-        icms_remet = Helper.numerify(icms_remet, 2) if icms_remet != ""
-
-        I18n.t("danfe.infAdic.difal",
-          vICMSUFDest: icms_dest,
-          vFCPUFDest: fcp_dest,
-          vICMSUFRemet: icms_remet)
-      end
 
       def render_extra_volumes
         @pdf.ibox 2.65, 12.45, 0.75, @l1, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
@@ -80,8 +52,22 @@ module BrDanfe
           end
         end
 
-        @pdf.ibox 1.65, 12.45, 0.75, y + 0.30, "", I18n.t("danfe.infAdic.others"), { size: 6, valign: :top, border: 0 }
-        @pdf.ibox 1.65, 12.45, 0.75, y + 0.50, "", @xml["infAdic/infCpl"], { size: 5, valign: :top, border: 0 }
+        render_info_cpl_with_others y
+      end
+
+      def difal?
+        !@xml["ICMSTot/vICMSUFDest"].to_f.zero?
+      end
+
+      def difal_content
+        I18n.t("danfe.infAdic.difal",
+          vICMSUFDest: numerify(@xml["ICMSTot/vICMSUFDest"]),
+          vFCPUFDest: numerify(@xml["ICMSTot/vFCPUFDest"]),
+          vICMSUFRemet: numerify(@xml["ICMSTot/vICMSUFRemet"]))
+      end
+
+      def numerify(value)
+        Helper.numerify(value, 2) if value != ""
       end
 
       def render_extra_volume(det, y)
@@ -118,8 +104,20 @@ module BrDanfe
         style_italic.merge({ decimals: 3 })
       end
 
-      def difal?
-        !@xml["ICMSTot/vICMSUFDest"].to_f.zero?
+      def render_info_cpl_with_others(y)
+        @pdf.ibox 1.65, 12.45, 0.75, y + 0.30, "", I18n.t("danfe.infAdic.others"), { size: 6, valign: :top, border: 0 }
+        @pdf.ibox 1.65, 12.45, 0.75, y + 0.50, "", @xml["infAdic/infCpl"], { size: 5, valign: :top, border: 0 }
+      end
+
+      def render_difal
+        @pdf.ibox 2.65, 12.45, 0.75, @l1, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
+
+        y = Y + 0.20
+        @pdf.ibox 1.65, 12.45, 0.75, y, "", difal_content, { size: 5, valign: :top, border: 0 }
+
+        y += 0.10
+
+        render_info_cpl_with_others y
       end
     end
   end
