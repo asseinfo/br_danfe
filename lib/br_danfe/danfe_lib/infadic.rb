@@ -16,6 +16,8 @@ module BrDanfe
 
         if nVol > 1
           render_extra_volumes
+        elsif difal?
+          render_difal
         else
           @pdf.ibox 2.65, 12.45, 0.75, @l1, I18n.t("danfe.infAdic.infCpl"), @xml["infAdic/infCpl"], { size: 6, valign: :top }
         end
@@ -24,12 +26,24 @@ module BrDanfe
       end
 
       private
+
       def render_extra_volumes
         @pdf.ibox 2.65, 12.45, 0.75, @l1, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
-        @pdf.ibox 2.65, 12.45, 0.75, Y + 0.27, "", I18n.t("danfe.infAdic.vol.title"), { size: 5, valign: :top, border: 0 }
+
+        y = Y + 0.20
+
+        if difal?
+          @pdf.ibox 1.65, 12.45, 0.75, y, "", difal_content, { size: 5, valign: :top, border: 0 }
+          y += 0.27
+        else
+          y += 0.07
+        end
+
+        @pdf.ibox 2.65, 12.45, 0.75, y, "", I18n.t("danfe.infAdic.vol.title"), { size: 5, valign: :top, border: 0 }
 
         volumes = 0
-        y = Y + 0.34
+        y += 0.07
+
         @xml.collect("xmlns", "vol") do |det|
           volumes += 1
           if volumes > 1
@@ -38,8 +52,22 @@ module BrDanfe
           end
         end
 
-        @pdf.ibox 1.65, 12.45, 0.75, y + 0.30, "", I18n.t("danfe.infAdic.others"), { size: 6, valign: :top, border: 0 }
-        @pdf.ibox 1.65, 12.45, 0.75, y + 0.50, "", @xml["infAdic/infCpl"], { size: 5, valign: :top, border: 0 }
+        render_info_cpl_with_others y
+      end
+
+      def difal?
+        !@xml["ICMSTot/vICMSUFDest"].to_f.zero?
+      end
+
+      def difal_content
+        I18n.t("danfe.infAdic.difal",
+          vICMSUFDest: numerify(@xml["ICMSTot/vICMSUFDest"]),
+          vFCPUFDest: numerify(@xml["ICMSTot/vFCPUFDest"]),
+          vICMSUFRemet: numerify(@xml["ICMSTot/vICMSUFRemet"]))
+      end
+
+      def numerify(value)
+        Helper.numerify(value, 2) if value != ""
       end
 
       def render_extra_volume(det, y)
@@ -74,6 +102,22 @@ module BrDanfe
 
       def style_decimal
         style_italic.merge({ decimals: 3 })
+      end
+
+      def render_info_cpl_with_others(y)
+        @pdf.ibox 1.65, 12.45, 0.75, y + 0.30, "", I18n.t("danfe.infAdic.others"), { size: 6, valign: :top, border: 0 }
+        @pdf.ibox 1.65, 12.45, 0.75, y + 0.50, "", @xml["infAdic/infCpl"], { size: 5, valign: :top, border: 0 }
+      end
+
+      def render_difal
+        @pdf.ibox 2.65, 12.45, 0.75, @l1, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
+
+        y = Y + 0.20
+        @pdf.ibox 1.65, 12.45, 0.75, y, "", difal_content, { size: 5, valign: :top, border: 0 }
+
+        y += 0.10
+
+        render_info_cpl_with_others y
       end
     end
   end

@@ -308,49 +308,6 @@ describe BrDanfe::DanfeLib::DetBody do
       end
     end
 
-    context "with DIFAL" do
-      let(:xml_as_string) do
-        <<-eos
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <det nItem="1">
-              <prod>
-                <cProd>3</cProd>
-                <xProd>Produto Com DIFAL</xProd>
-                <NCM>45678901</NCM>
-                <CFOP>5401</CFOP>
-                <uCom>UN</uCom>
-                <qCom>6.0000</qCom>
-                <vUnCom>1.1312000000</vUnCom>
-                <vProd>6.79</vProd>
-              </prod>
-              <imposto>
-                <ICMSUFDest>
-                  <vBCUFDest>12000.53</vBCUFDest>
-                  <pFCPUFDest>17.90</pFCPUFDest>
-                  <pICMSUFDest>21.51</pICMSUFDest>
-                  <pICMSInter>12.45</pICMSInter>
-                  <pICMSInterPart>40</pICMSInterPart>
-                  <vFCPUFDest>11002.35</vFCPUFDest>
-                  <vICMSUFDest>19282.47</vICMSUFDest>
-                  <vICMSUFRemet>12344.56</vICMSUFRemet>
-                </ICMSUFDest>
-              </imposto>
-            </det>
-          </infNFe>
-        </NFe>
-        eos
-      end
-
-      it "renders xml to the pdf" do
-        expect(File.exist?(output_pdf)).to be_falsey
-
-        pdf.render_file output_pdf
-
-        expect("#{base_dir}det_body#render-difal.pdf").to have_same_content_of file: output_pdf
-      end
-    end
-
     context "when the unit price of the product has a custom precision" do
       subject { described_class.new(pdf, xml, options_custom_unit_price_precision) }
 

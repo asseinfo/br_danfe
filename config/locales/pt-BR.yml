@@ -105,7 +105,6 @@ pt-BR:
         vProd: "VALOR TOT"
         xProdST: "ST: MVA: %{pMVAST}% * Alíq: %{pICMSST}% * BC: %{vBCST} * Vlr: %{vICMSST}"
         xProdFCI: "FCI: %{nFCI}"
-        xProdDIFAL: "DIFAL: Vlr BC: %{vBCUFDest} * Vlr ICMS Remet: %{vICMSUFRemet} * Vlr ICMS Dest: %{vICMSUFDest} * Vlr FCP: %{vFCPUFDest} * FCP: %{pFCPUFDest}% * ICMS: %{pICMSUFDest}% * ICMS Inter: %{pICMSInter}% * ICMS Inter Part: %{pICMSInterPart}%"
       ICMS:
         CST: "CST"
         vBC: "BASE CÁLC"
@@ -126,6 +125,7 @@ pt-BR:
       infCpl: "INFORMAÇÕES COMPLEMENTARES"
       reserved: "RESERVADO AO FISCO"
       others: "OUTRAS INFORMAÇÕES"
+      difal: "Valores totais do ICMS Interestadual: DIFAL da UF destino R$%{vICMSUFDest} + FCP R$%{vFCPUFDest}; DIFAL da UF Origem R$%{vICMSUFRemet}."
       vol:
         title: "CONTINUAÇÃO TRANSPORTADOR/VOLUMES TRANSPORTADOS"
         qVol: "QUANT.:"
