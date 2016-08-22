@@ -60,9 +60,9 @@ describe BrDanfe::DanfeLib::EmitHeader do
     end
 
     context "with logo" do
-      let(:logo_path) { "spec/fixtures/logo.png" }
+      let(:logo) { "spec/fixtures/logo.png" }
 
-      subject { described_class.new(pdf, xml, logo_path) }
+      subject { described_class.new(pdf, xml, logo) }
 
       it "renders xml to the pdf" do
         expect(File.exist?(output_pdf)).to be_falsey
