@@ -58,7 +58,7 @@ module BrDanfe
 
     def repeat_on_each_page
       DanfeLib::Ticket.new(@pdf, @xml).render
-      DanfeLib::EmitHeader.new(@pdf, @xml, @options.logo_path).render
+      DanfeLib::EmitHeader.new(@pdf, @xml, @options.logo).render
       DanfeLib::Emit.new(@pdf, @xml).render
       DanfeLib::Dest.new(@pdf, @xml).render
       DanfeLib::Dup.new(@pdf, @xml).render

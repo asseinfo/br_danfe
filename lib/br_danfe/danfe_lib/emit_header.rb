@@ -1,10 +1,10 @@
 module BrDanfe
   module DanfeLib
     class EmitHeader
-      def initialize(pdf, xml, logo_path)
+      def initialize(pdf, xml, logo)
         @pdf = pdf
         @xml = xml
-        @logo_path = logo_path
+        @logo = logo
       end
 
       def render
@@ -21,13 +21,13 @@ module BrDanfe
         @pdf.ibox 3.92, 7.46, 0.75, 4.22, "", @xml["emit/xNome"],
           { size: 12, align: :center, border: 0, style: :bold }
 
-        if @logo_path.blank?
+        if @logo.blank?
           @pdf.ibox 3.92, 7.46, 1.25, 5.42, "", address, { align: :left, border: 0 }
         else
           @pdf.ibox 3.92, 7.46, 3.25, 5.42, "", address,
             { size: 8, align: :left, border: 0 }
 
-          @pdf.image @logo_path, at: [1.0.cm, Helper.invert(5.42.cm)],
+          @pdf.image @logo, at: [1.0.cm, Helper.invert(5.42.cm)],
             width: 2.cm
         end
       end

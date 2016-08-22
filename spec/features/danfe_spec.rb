@@ -26,7 +26,7 @@ describe BrDanfe::Danfe do
         expect(File.exist?(output_pdf)).to be_falsey
 
         danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
-        danfe.options.logo_path = "spec/fixtures/logo.png"
+        danfe.options.logo = "spec/fixtures/logo.png"
         danfe.options.products_unit_price_precision = 4
         danfe.options.products_quantity_precision = 4
 
