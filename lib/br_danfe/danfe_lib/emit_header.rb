@@ -21,7 +21,7 @@ module BrDanfe
         @pdf.ibox 3.92, 7.46, 0.75, 4.22, "", @xml["emit/xNome"],
           { size: 12, align: :center, border: 0, style: :bold }
 
-        if @logo_path.empty?
+        if @logo_path.blank?
           @pdf.ibox 3.92, 7.46, 1.25, 5.42, "", address, { align: :left, border: 0 }
         else
           @pdf.ibox 3.92, 7.46, 3.25, 5.42, "", address,
