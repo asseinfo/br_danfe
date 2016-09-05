@@ -48,7 +48,7 @@ describe BrDanfe::DanfeLib::EmitHeader do
     end
 
     context "without logo" do
-      subject { described_class.new(pdf, xml, "") }
+      subject { described_class.new(pdf, xml, "", { width: 80 }, 80) }
 
       it "renders xml to the pdf" do
         expect(File.exist?(output_pdf)).to be_falsey
@@ -62,7 +62,7 @@ describe BrDanfe::DanfeLib::EmitHeader do
     context "with logo" do
       let(:logo) { "spec/fixtures/logo.png" }
 
-      subject { described_class.new(pdf, xml, logo) }
+      subject { described_class.new(pdf, xml, logo, { width: 80 }, 80) }
 
       it "renders xml to the pdf" do
         expect(File.exist?(output_pdf)).to be_falsey

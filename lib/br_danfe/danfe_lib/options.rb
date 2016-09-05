@@ -3,6 +3,8 @@ module BrDanfe
     class Options < OpenStruct
       DEFAULTOPTIONS = {
         logo: "",
+        logo_options: {},
+        bounding_box_size: 80,
         products_quantity_precision: 2,
         products_unit_price_precision: 2
       }
