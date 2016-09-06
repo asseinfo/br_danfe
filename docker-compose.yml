@@ -1,0 +1,8 @@
+version: "2"
+services:
+  br_danfe:
+    build: .
+    volumes:
+      - .:/src
+    environment:
+      - TZ=America/Sao_Paulo
