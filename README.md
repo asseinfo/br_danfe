@@ -84,31 +84,40 @@ By default, your rails application must be configured to `pt-Br`.
 
 If you need to customize some message or field label, you can override the content of pt-Br.yml file.
 
-## Development
+## Development - With Docker
 
-### Installing dependencies
+You needs to build docker container like above:
 
-You can install all necessaries dependencies using bunder like above:
+        $ docker-compose build
+
+You can run all RSpec specs using:
+
+        $ docker-compose run br_danfe rspec
+
+
+## Development - Without Docker
+
+You needs to install all necessaries dependencies using bunder like above:
 
         $ bundle install
 
-### Tests
 
-#### Automated tests with RSpec
-
-You can run all specs using:
+You can run all RSpec specs using:
 
         $ rspec
 
-If you modify something that caused general visual changes at output pdfs, so you have to rebuild the fixtures pdf files.
 
-You can do this simply deleting the fixture pdf file. The `have_same_content_of` matcher will recreate the fixture in the next time you run the `rspec` command.
+## About tests
 
-#### Code coverage
+> If you modify something that caused general visual changes at output pdfs, so you have to rebuild the fixtures pdf files.
+>
+> You can do this simply deleting the fixture pdf file. The `have_same_content_of` matcher will recreate the fixture in the next time you run the `rspec` command.
+
+### Code coverage
 
 Code coverage is available through of SimpleCov. Just run `rspec` and open the coverage report in your browser.
 
-#### Fake data for generating new fixtures
+### Fake data for generating new fixtures
 
 If you need to generate new danfes for using as fixtures, please don't use real data.
 
@@ -171,7 +180,7 @@ IE           | 964.508.990.089
 
 You can generate new data using [4devs generators](http://www.4devs.com.br).
 
-### Building and publishing
+## Building and publishing
 
 You can build using one of the above tasks
 
