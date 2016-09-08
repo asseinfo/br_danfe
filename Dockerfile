@@ -12,7 +12,6 @@ WORKDIR /src
 ADD ./lib/br_danfe/version.rb ./lib/br_danfe/version.rb
 ADD ./br_danfe.gemspec ./br_danfe.gemspec
 ADD ./Gemfile ./Gemfile
-ADD ./Gemfile.lock ./Gemfile.lock
 
 RUN bundle
 
