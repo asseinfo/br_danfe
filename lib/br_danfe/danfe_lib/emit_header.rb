@@ -1,12 +1,11 @@
 module BrDanfe
   module DanfeLib
     class EmitHeader
-      def initialize(pdf, xml, logo, logo_options, bounding_box_size)
+      def initialize(pdf, xml, logo, logo_dimensions)
         @pdf = pdf
         @xml = xml
         @logo = logo
-        @logo_options = logo_options
-        @bounding_box_size = bounding_box_size
+        @logo_dimensions = logo_dimensions
       end
 
       def render
@@ -54,9 +53,12 @@ module BrDanfe
       end
 
       def logo
+        bounding_box_size = 80
+        logo_options = BrDanfe::DanfeLib::LogoOptions.new(bounding_box_size, @logo_dimensions).options
+
         @pdf.move_down 105
-        @pdf.bounding_box([0.83.cm, @pdf.cursor], width: @bounding_box_size, height: @bounding_box_size) do
-          @pdf.image @logo, @logo_options
+        @pdf.bounding_box([0.83.cm, @pdf.cursor], width: bounding_box_size, height: bounding_box_size) do
+          @pdf.image @logo, logo_options
         end
       end
 
