@@ -1,34 +1,37 @@
 module BrDanfe
   module DanfeLib
     class EmitHeader
-      def initialize(pdf, xml, logo)
+      def initialize(pdf, xml, logo, logo_dimensions)
         @pdf = pdf
         @xml = xml
         @logo = logo
+        @logo_dimensions = logo_dimensions
       end
 
       def render
-        address_box
+        company_box
         danfe_box
         access_key_box
         sefaz_box
       end
 
       private
-      def address_box
+
+      def company_box
         @pdf.ibox 3.92, 7.46, 0.75, 3.96
 
-        @pdf.ibox 3.92, 7.46, 0.75, 4.22, "", @xml["emit/xNome"],
+        @pdf.ibox 3.92, 7.46, 0.75, 3.96, "", @xml["emit/xNome"],
           { size: 12, align: :center, border: 0, style: :bold }
 
+        address_company
+      end
+
+      def address_company
         if @logo.blank?
           @pdf.ibox 3.92, 7.46, 1.25, 5.42, "", address, { align: :left, border: 0 }
         else
-          @pdf.ibox 3.92, 7.46, 3.25, 5.42, "", address,
-            { size: 8, align: :left, border: 0 }
-
-          @pdf.image @logo, at: [1.0.cm, Helper.invert(5.42.cm)],
-            width: 2.cm
+          @pdf.ibox 3.92, 7.46, 3.60, 5.42, "", address, { size: 8, align: :left, border: 0 }
+          logo
         end
       end
 
@@ -47,6 +50,16 @@ module BrDanfe
 
       def cep
         Cep.format(@xml["enderEmit/CEP"])
+      end
+
+      def logo
+        bounding_box_size = 80
+        logo_options = BrDanfe::DanfeLib::LogoOptions.new(bounding_box_size, @logo_dimensions).options
+
+        @pdf.move_down 105
+        @pdf.bounding_box([0.83.cm, @pdf.cursor], width: bounding_box_size, height: bounding_box_size) do
+          @pdf.image @logo, logo_options
+        end
       end
 
       def danfe_box

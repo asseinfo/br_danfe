@@ -29,6 +29,7 @@ describe BrDanfe::Danfe do
         danfe.options.logo = "spec/fixtures/logo.png"
         danfe.options.products_unit_price_precision = 4
         danfe.options.products_quantity_precision = 4
+        danfe.options.logo_dimensions = { width: 100, height: 100 }
 
         danfe.save_pdf output_pdf
 
