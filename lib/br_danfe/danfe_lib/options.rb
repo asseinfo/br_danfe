@@ -1,12 +1,7 @@
 module BrDanfe
   module DanfeLib
     class Options < OpenStruct
-      DEFAULTOPTIONS = {
-        logo: "",
-        logo_dimensions: {},
-        products_quantity_precision: 2,
-        products_unit_price_precision: 2
-      }
+      DEFAULTOPTIONS = { logo: "", logo_dimensions: {} }
 
       def initialize(new_options={})
         options = DEFAULTOPTIONS.merge(config_yaml_load)

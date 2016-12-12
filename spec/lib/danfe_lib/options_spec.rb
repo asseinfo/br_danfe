@@ -5,21 +5,13 @@ describe BrDanfe::DanfeLib::Options do
     options = BrDanfe::DanfeLib::Options.new
     expect(options.logo).to eq("")
     expect(options.logo_dimensions).to eq({})
-
-    expect(options.products_unit_price_precision).to eq(2)
-    expect(options.products_quantity_precision).to eq(2)
   end
 
   it "returns the config set in params" do
-    custom_options = { logo: "/fake/path/file.png",
-      products_unit_price_precision: 3, products_quantity_precision: 4,
-      logo_dimensions: { width: 50, height: 50}
-    }
+    custom_options = { logo: "/fake/path/file.png", logo_dimensions: { width: 50, height: 50} }
 
     options = BrDanfe::DanfeLib::Options.new(custom_options)
     expect(options.logo).to eq("/fake/path/file.png")
-    expect(options.products_unit_price_precision).to eq(3)
-    expect(options.products_quantity_precision).to eq(4)
     expect(options.logo_dimensions).to eq({ width: 50, height: 50})
   end
 end

@@ -1,11 +1,15 @@
 module BrDanfe
   module DanfeLib
     class Helper
-      def self.numerify(number, decimals = 2)
+      def self.numerify(number)
         return "" if !number || number == ""
-        int, frac = ("%.#{decimals}f" % number).split(".")
-        int.gsub!(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1\.")
-        int + "," + frac
+
+        separated_number = number.to_s.split(".")
+        integer_part = separated_number[0].reverse.gsub( /\d{3}(?=\d)/, '\&.' ).reverse
+        decimal_part = separated_number[1] || "00"
+        decimal_part = decimal_part + "0" if decimal_part.size < 2
+
+        integer_part + "," + decimal_part
       end
 
       def self.invert(y)

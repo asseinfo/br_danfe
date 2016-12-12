@@ -38,10 +38,10 @@ module BrDanfe
 
       def st
         "\n" + I18n.t("danfe.det.prod.xProdST",
-          pMVAST: Helper.numerify(@det.css('ICMS/*/pMVAST').text, 2),
-          pICMSST: Helper.numerify(@det.css('ICMS/*/pICMSST').text, 2),
-          vBCST: Helper.numerify(@det.css('ICMS/*/vBCST').text, 2),
-          vICMSST: Helper.numerify(@det.css('ICMS/*/vICMSST').text, 2))
+          pMVAST: Helper.numerify(@det.css('ICMS/*/pMVAST').text),
+          pICMSST: Helper.numerify(@det.css('ICMS/*/pICMSST').text),
+          vBCST: Helper.numerify(@det.css('ICMS/*/vBCST').text),
+          vICMSST: Helper.numerify(@det.css('ICMS/*/vICMSST').text))
       end
     end
   end

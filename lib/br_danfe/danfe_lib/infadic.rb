@@ -67,7 +67,7 @@ module BrDanfe
       end
 
       def numerify(value)
-        Helper.numerify(value, 2) if value != ""
+        Helper.numerify(value) if value != ""
       end
 
       def render_extra_volume(det, y)
