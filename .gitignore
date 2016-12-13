@@ -1,7 +1,6 @@
 .idea
 .DS_store
 *sublime-*
-Gemfile.lock
 pkg
 output.pdf
 coverage
