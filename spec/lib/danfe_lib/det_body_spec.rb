@@ -7,19 +7,7 @@ describe BrDanfe::DanfeLib::DetBody do
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
   let(:xml) { BrDanfe::DanfeLib::XML.new(xml_as_string) }
 
-  let(:options) do
-    { unit_price_precision: 2, quantity_precision: 2 }
-  end
-
-  let(:options_custom_unit_price_precision) do
-    { unit_price_precision: 4, quantity_precision: 2 }
-  end
-
-  let(:options_custom_quantity_precision) do
-    { unit_price_precision: 2, quantity_precision: 4 }
-  end
-
-  subject { described_class.new(pdf, xml, options) }
+  subject { described_class.new(pdf, xml) }
 
   describe "#render" do
     before do
@@ -39,8 +27,8 @@ describe BrDanfe::DanfeLib::DetBody do
                 <NCM>12345678</NCM>
                 <CFOP>5101</CFOP>
                 <uCom>UN</uCom>
-                <qCom>2.0000</qCom>
-                <vUnCom>1.0100000000</vUnCom>
+                <qCom>2.00</qCom>
+                <vUnCom>1.01</vUnCom>
                 <vProd>2.02</vProd>
               </prod>
               <imposto>
@@ -59,8 +47,8 @@ describe BrDanfe::DanfeLib::DetBody do
                 <NCM>23456789</NCM>
                 <CFOP>5101</CFOP>
                 <uCom>UN</uCom>
-                <qCom>4.0000</qCom>
-                <vUnCom>1.0200000000</vUnCom>
+                <qCom>4.00</qCom>
+                <vUnCom>1.02</vUnCom>
                 <vProd>4.08</vProd>
               </prod>
               <imposto>
@@ -79,8 +67,8 @@ describe BrDanfe::DanfeLib::DetBody do
                 <NCM>45678901</NCM>
                 <CFOP>5401</CFOP>
                 <uCom>UN</uCom>
-                <qCom>6.0000</qCom>
-                <vUnCom>1.0300000000</vUnCom>
+                <qCom>6.00</qCom>
+                <vUnCom>1.03</vUnCom>
                 <vProd>6.18</vProd>
               </prod>
               <imposto>
@@ -88,9 +76,9 @@ describe BrDanfe::DanfeLib::DetBody do
                 <ICMSSN201>
                   <orig>0</orig>
                   <CSOSN>201</CSOSN>
-                  <pMVAST>24.0000</pMVAST>
+                  <pMVAST>24.00</pMVAST>
                   <vBCST>7.66</vBCST>
-                  <pICMSST>17.0000</pICMSST>
+                  <pICMSST>17.00</pICMSST>
                   <vICMSST>0.25</vICMSST>
                 </ICMSSN201>
               </ICMS>
@@ -103,8 +91,8 @@ describe BrDanfe::DanfeLib::DetBody do
                 <NCM>34567890</NCM>
                 <CFOP>5201</CFOP>
                 <uCom>UN</uCom>
-                <qCom>16.0000</qCom>
-                <vUnCom>1.0800000000</vUnCom>
+                <qCom>16.00</qCom>
+                <vUnCom>1.08</vUnCom>
                 <vProd>17.28</vProd>
               </prod>
               <imposto>
@@ -277,8 +265,8 @@ describe BrDanfe::DanfeLib::DetBody do
                 <NCM>45678901</NCM>
                 <CFOP>5401</CFOP>
                 <uCom>UN</uCom>
-                <qCom>6.0000</qCom>
-                <vUnCom>1.0300000000</vUnCom>
+                <qCom>6.00</qCom>
+                <vUnCom>1.03</vUnCom>
                 <vProd>6.18</vProd>
               </prod>
               <imposto>
@@ -286,9 +274,9 @@ describe BrDanfe::DanfeLib::DetBody do
                 <ICMSSN201>
                   <orig>0</orig>
                   <CSOSN>201</CSOSN>
-                  <pMVAST>24.0000</pMVAST>
+                  <pMVAST>24.00</pMVAST>
                   <vBCST>7.66</vBCST>
-                  <pICMSST>17.0000</pICMSST>
+                  <pICMSST>17.00</pICMSST>
                   <vICMSST>0.25</vICMSST>
                 </ICMSSN201>
               </ICMS>
@@ -309,7 +297,7 @@ describe BrDanfe::DanfeLib::DetBody do
     end
 
     context "when the unit price of the product has a custom precision" do
-      subject { described_class.new(pdf, xml, options_custom_unit_price_precision) }
+      subject { described_class.new(pdf, xml) }
 
       let(:xml_as_string) do
         <<-eos
@@ -322,8 +310,8 @@ describe BrDanfe::DanfeLib::DetBody do
                 <NCM>45678901</NCM>
                 <CFOP>5401</CFOP>
                 <uCom>UN</uCom>
-                <qCom>6.0000</qCom>
-                <vUnCom>1.1312000000</vUnCom>
+                <qCom>6.00</qCom>
+                <vUnCom>1.1312</vUnCom>
                 <vProd>6.79</vProd>
               </prod>
             </det>
@@ -342,7 +330,7 @@ describe BrDanfe::DanfeLib::DetBody do
     end
 
     context "when the quantity of the product has a custom precision" do
-      subject { described_class.new(pdf, xml, options_custom_quantity_precision) }
+      subject { described_class.new(pdf, xml) }
 
       let(:xml_as_string) do
         <<-eos
@@ -356,7 +344,7 @@ describe BrDanfe::DanfeLib::DetBody do
                 <CFOP>5401</CFOP>
                 <uCom>UN</uCom>
                 <qCom>6.4545</qCom>
-                <vUnCom>1.0300000000</vUnCom>
+                <vUnCom>1.03</vUnCom>
                 <vProd>6.65</vProd>
               </prod>
             </det>

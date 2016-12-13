@@ -68,13 +68,13 @@
         <NCM />
         <CFOP>5101</CFOP>
         <uCom>UN</uCom>
-        <qCom>2.0000</qCom>
-        <vUnCom>1.0100000000</vUnCom>
+        <qCom>2.00</qCom>
+        <vUnCom>1.01</vUnCom>
         <vProd>2.02</vProd>
         <cEANTrib />
         <uTrib>UN</uTrib>
-        <qTrib>2.0000</qTrib>
-        <vUnTrib>1.0100000000</vUnTrib>
+        <qTrib>2.00</qTrib>
+        <vUnTrib>1.01</vUnTrib>
         <indTot>1</indTot>
       </prod>
       <imposto>
@@ -82,7 +82,7 @@
           <ICMSSN101>
             <orig>0</orig>
             <CSOSN>101</CSOSN>
-            <pCredSN>0.0000</pCredSN>
+            <pCredSN>0.00</pCredSN>
             <vCredICMSSN>0.00</vCredICMSSN>
           </ICMSSN101>
         </ICMS>
@@ -90,7 +90,7 @@
           <PISOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pPIS>0.0000</pPIS>
+            <pPIS>0.00</pPIS>
             <vPIS>0.00</vPIS>
           </PISOutr>
         </PIS>
@@ -98,7 +98,7 @@
           <COFINSOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pCOFINS>0.0000</pCOFINS>
+            <pCOFINS>0.00</pCOFINS>
             <vCOFINS>0.00</vCOFINS>
           </COFINSOutr>
         </COFINS>
@@ -112,13 +112,13 @@
         <NCM />
         <CFOP>5101</CFOP>
         <uCom>UN</uCom>
-        <qCom>4.0000</qCom>
-        <vUnCom>1.0200000000</vUnCom>
+        <qCom>4.00</qCom>
+        <vUnCom>1.02</vUnCom>
         <vProd>4.08</vProd>
         <cEANTrib />
         <uTrib>UN</uTrib>
-        <qTrib>4.0000</qTrib>
-        <vUnTrib>1.0200000000</vUnTrib>
+        <qTrib>4.00</qTrib>
+        <vUnTrib>1.02</vUnTrib>
         <indTot>1</indTot>
       </prod>
       <imposto>
@@ -132,7 +132,7 @@
           <PISOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pPIS>0.0000</pPIS>
+            <pPIS>0.00</pPIS>
             <vPIS>0.00</vPIS>
           </PISOutr>
         </PIS>
@@ -140,7 +140,7 @@
           <COFINSOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pCOFINS>0.0000</pCOFINS>
+            <pCOFINS>0.00</pCOFINS>
             <vCOFINS>0.00</vCOFINS>
           </COFINSOutr>
         </COFINS>
@@ -154,13 +154,13 @@
         <NCM />
         <CFOP>5401</CFOP>
         <uCom>UN</uCom>
-        <qCom>6.0000</qCom>
-        <vUnCom>1.0300000000</vUnCom>
+        <qCom>6.00</qCom>
+        <vUnCom>1.03</vUnCom>
         <vProd>6.18</vProd>
         <cEANTrib />
         <uTrib>UN</uTrib>
-        <qTrib>6.0000</qTrib>
-        <vUnTrib>1.0300000000</vUnTrib>
+        <qTrib>6.00</qTrib>
+        <vUnTrib>1.03</vUnTrib>
         <indTot>1</indTot>
       </prod>
       <imposto>
@@ -169,12 +169,12 @@
             <orig>0</orig>
             <CSOSN>201</CSOSN>
             <modBCST>4</modBCST>
-            <pMVAST>24.0000</pMVAST>
-            <pRedBCST>100.0000</pRedBCST>
+            <pMVAST>24.00</pMVAST>
+            <pRedBCST>100.00</pRedBCST>
             <vBCST>7.66</vBCST>
-            <pICMSST>17.0000</pICMSST>
+            <pICMSST>17.00</pICMSST>
             <vICMSST>0.25</vICMSST>
-            <pCredSN>0.0000</pCredSN>
+            <pCredSN>0.00</pCredSN>
             <vCredICMSSN>0.00</vCredICMSSN>
           </ICMSSN201>
         </ICMS>
@@ -182,7 +182,7 @@
           <PISOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pPIS>0.0000</pPIS>
+            <pPIS>0.00</pPIS>
             <vPIS>0.00</vPIS>
           </PISOutr>
         </PIS>
@@ -190,7 +190,7 @@
           <COFINSOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pCOFINS>0.0000</pCOFINS>
+            <pCOFINS>0.00</pCOFINS>
             <vCOFINS>0.00</vCOFINS>
           </COFINSOutr>
         </COFINS>
@@ -204,13 +204,13 @@
         <NCM />
         <CFOP>5401</CFOP>
         <uCom>UN</uCom>
-        <qCom>8.0000</qCom>
-        <vUnCom>1.0400000000</vUnCom>
+        <qCom>8.00</qCom>
+        <vUnCom>1.04</vUnCom>
         <vProd>8.32</vProd>
         <cEANTrib />
         <uTrib>UN</uTrib>
-        <qTrib>8.0000</qTrib>
-        <vUnTrib>1.0400000000</vUnTrib>
+        <qTrib>8.00</qTrib>
+        <vUnTrib>1.04</vUnTrib>
         <indTot>1</indTot>
       </prod>
       <imposto>
@@ -219,10 +219,10 @@
             <orig>0</orig>
             <CSOSN>202</CSOSN>
             <modBCST>4</modBCST>
-            <pMVAST>24.0000</pMVAST>
-            <pRedBCST>100.0000</pRedBCST>
+            <pMVAST>24.00</pMVAST>
+            <pRedBCST>100.00</pRedBCST>
             <vBCST>10.32</vBCST>
-            <pICMSST>17.0000</pICMSST>
+            <pICMSST>17.00</pICMSST>
             <vICMSST>0.34</vICMSST>
           </ICMSSN202>
         </ICMS>
@@ -230,7 +230,7 @@
           <PISOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pPIS>0.0000</pPIS>
+            <pPIS>0.00</pPIS>
             <vPIS>0.00</vPIS>
           </PISOutr>
         </PIS>
@@ -238,7 +238,7 @@
           <COFINSOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pCOFINS>0.0000</pCOFINS>
+            <pCOFINS>0.00</pCOFINS>
             <vCOFINS>0.00</vCOFINS>
           </COFINSOutr>
         </COFINS>
@@ -252,13 +252,13 @@
         <NCM />
         <CFOP>5101</CFOP>
         <uCom>UN</uCom>
-        <qCom>10.0000</qCom>
-        <vUnCom>1.0500000000</vUnCom>
+        <qCom>10.00</qCom>
+        <vUnCom>1.05</vUnCom>
         <vProd>10.50</vProd>
         <cEANTrib />
         <uTrib>UN</uTrib>
-        <qTrib>10.0000</qTrib>
-        <vUnTrib>1.0500000000</vUnTrib>
+        <qTrib>10.00</qTrib>
+        <vUnTrib>1.05</vUnTrib>
         <indTot>1</indTot>
       </prod>
       <imposto>
@@ -272,7 +272,7 @@
           <PISOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pPIS>0.0000</pPIS>
+            <pPIS>0.00</pPIS>
             <vPIS>0.00</vPIS>
           </PISOutr>
         </PIS>
@@ -280,7 +280,7 @@
           <COFINSOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pCOFINS>0.0000</pCOFINS>
+            <pCOFINS>0.00</pCOFINS>
             <vCOFINS>0.00</vCOFINS>
           </COFINSOutr>
         </COFINS>
@@ -294,13 +294,13 @@
         <NCM />
         <CFOP>5101</CFOP>
         <uCom>UN</uCom>
-        <qCom>12.0000</qCom>
-        <vUnCom>1.0600000000</vUnCom>
+        <qCom>12.00</qCom>
+        <vUnCom>1.06</vUnCom>
         <vProd>12.72</vProd>
         <cEANTrib />
         <uTrib>UN</uTrib>
-        <qTrib>12.0000</qTrib>
-        <vUnTrib>1.0600000000</vUnTrib>
+        <qTrib>12.00</qTrib>
+        <vUnTrib>1.06</vUnTrib>
         <indTot>1</indTot>
       </prod>
       <imposto>
@@ -314,7 +314,7 @@
           <PISOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pPIS>0.0000</pPIS>
+            <pPIS>0.00</pPIS>
             <vPIS>0.00</vPIS>
           </PISOutr>
         </PIS>
@@ -322,7 +322,7 @@
           <COFINSOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pCOFINS>0.0000</pCOFINS>
+            <pCOFINS>0.00</pCOFINS>
             <vCOFINS>0.00</vCOFINS>
           </COFINSOutr>
         </COFINS>
@@ -336,13 +336,13 @@
         <NCM />
         <CFOP>5405</CFOP>
         <uCom>UN</uCom>
-        <qCom>14.0000</qCom>
-        <vUnCom>1.0700000000</vUnCom>
+        <qCom>14.00</qCom>
+        <vUnCom>1.07</vUnCom>
         <vProd>14.98</vProd>
         <cEANTrib />
         <uTrib>UN</uTrib>
-        <qTrib>14.0000</qTrib>
-        <vUnTrib>1.0700000000</vUnTrib>
+        <qTrib>14.00</qTrib>
+        <vUnTrib>1.07</vUnTrib>
         <indTot>1</indTot>
       </prod>
       <imposto>
@@ -356,7 +356,7 @@
           <PISOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pPIS>0.0000</pPIS>
+            <pPIS>0.00</pPIS>
             <vPIS>0.00</vPIS>
           </PISOutr>
         </PIS>
@@ -364,7 +364,7 @@
           <COFINSOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pCOFINS>0.0000</pCOFINS>
+            <pCOFINS>0.00</pCOFINS>
             <vCOFINS>0.00</vCOFINS>
           </COFINSOutr>
         </COFINS>
@@ -378,13 +378,13 @@
         <NCM />
         <CFOP>5201</CFOP>
         <uCom>UN</uCom>
-        <qCom>16.0000</qCom>
-        <vUnCom>1.0800000000</vUnCom>
+        <qCom>16.00</qCom>
+        <vUnCom>1.08</vUnCom>
         <vProd>17.28</vProd>
         <cEANTrib />
         <uTrib>UN</uTrib>
-        <qTrib>16.0000</qTrib>
-        <vUnTrib>1.0800000000</vUnTrib>
+        <qTrib>16.00</qTrib>
+        <vUnTrib>1.08</vUnTrib>
         <indTot>1</indTot>
       </prod>
       <imposto>
@@ -394,8 +394,8 @@
             <CSOSN>900</CSOSN>
             <modBC>3</modBC>
             <vBC>17.28</vBC>
-            <pRedBC>100.0000</pRedBC>
-            <pICMS>0.0000</pICMS>
+            <pRedBC>100.00</pRedBC>
+            <pICMS>0.00</pICMS>
             <vICMS>0.00</vICMS>
           </ICMSSN900>
         </ICMS>
@@ -403,7 +403,7 @@
           <PISOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pPIS>0.0000</pPIS>
+            <pPIS>0.00</pPIS>
             <vPIS>0.00</vPIS>
           </PISOutr>
         </PIS>
@@ -411,7 +411,7 @@
           <COFINSOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pCOFINS>0.0000</pCOFINS>
+            <pCOFINS>0.00</pCOFINS>
             <vCOFINS>0.00</vCOFINS>
           </COFINSOutr>
         </COFINS>
@@ -425,13 +425,13 @@
         <NCM />
         <CFOP>5201</CFOP>
         <uCom>UN</uCom>
-        <qCom>16.0000</qCom>
-        <vUnCom>1.0800000000</vUnCom>
+        <qCom>16.00</qCom>
+        <vUnCom>1.08</vUnCom>
         <vProd>17.28</vProd>
         <cEANTrib />
         <uTrib>UN</uTrib>
-        <qTrib>16.0000</qTrib>
-        <vUnTrib>1.0800000000</vUnTrib>
+        <qTrib>16.00</qTrib>
+        <vUnTrib>1.08</vUnTrib>
         <indTot>1</indTot>
       </prod>
       <imposto>
@@ -441,8 +441,8 @@
             <CSOSN>900</CSOSN>
             <modBC>3</modBC>
             <vBC>17.28</vBC>
-            <pRedBC>100.0000</pRedBC>
-            <pICMS>0.0000</pICMS>
+            <pRedBC>100.00</pRedBC>
+            <pICMS>0.00</pICMS>
             <vICMS>0.00</vICMS>
           </ICMSSN900>
         </ICMS>
@@ -460,7 +460,7 @@
           <PISOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pPIS>0.0000</pPIS>
+            <pPIS>0.00</pPIS>
             <vPIS>0.00</vPIS>
           </PISOutr>
         </PIS>
@@ -468,7 +468,7 @@
           <COFINSOutr>
             <CST>99</CST>
             <vBC>0.00</vBC>
-            <pCOFINS>0.0000</pCOFINS>
+            <pCOFINS>0.00</pCOFINS>
             <vCOFINS>0.00</vCOFINS>
           </COFINSOutr>
         </COFINS>

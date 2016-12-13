@@ -99,11 +99,7 @@ module BrDanfe
 
       private
       def numeric(at, w, h, title = "", info = "", options = {})
-        options = {
-          decimals: 2
-        }.merge(options)
-
-        info = Helper.numerify(info, options[:decimals]) if info != ""
+        info = Helper.numerify(info) if info != ""
         box at, w, h, title, info, options.merge({align: :right})
       end
 

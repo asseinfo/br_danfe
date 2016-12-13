@@ -47,8 +47,7 @@ XML version | Supported?
 ### Options
 
 * `logo_path`: Path of sender's logo image.
-* `products_quantity_precision`: Product quantity decimal precision. Default is 2.
-* `products_unit_price_precision`: Product unit price decimal precision. Default is 2.
+* `logo_dimensions`: Dimensions of the logo. Ex: logo_dimensions = { width: 100, height: 90 }
 
 XML version | Supported?
 ----------- | ----------

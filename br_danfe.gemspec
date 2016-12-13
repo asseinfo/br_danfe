@@ -26,6 +26,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "byebug", "3.5.1"
   spec.add_development_dependency "rspec", ">= 3.0.0"
-  spec.add_development_dependency "simplecov", ">= 0.9.0"
+  spec.add_development_dependency "simplecov", "0.11.1"
   spec.add_development_dependency "codeclimate-test-reporter"
 end

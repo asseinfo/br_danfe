@@ -16,7 +16,6 @@ describe BrDanfe::Danfe do
   end
 
   describe "#save_pdf" do
-
     context "when danfe has custom options" do
       let(:base_dir) { "./spec/fixtures/nfe/v2.00/"}
 
@@ -25,10 +24,8 @@ describe BrDanfe::Danfe do
       it "render a NF-e with customized options" do
         expect(File.exist?(output_pdf)).to be_falsey
 
-        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
+        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}custom_options.fixture.xml"))
         danfe.options.logo = "spec/fixtures/logo.png"
-        danfe.options.products_unit_price_precision = 4
-        danfe.options.products_quantity_precision = 4
         danfe.options.logo_dimensions = { width: 100, height: 100 }
 
         danfe.save_pdf output_pdf
