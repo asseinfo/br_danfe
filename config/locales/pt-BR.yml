@@ -101,8 +101,8 @@ pt-BR:
         CFOP: "CFOP"
         uCom: "UNID"
         qCom: "QUANT"
-        vUnCom: "VALOR UNIT"
-        vProd: "VALOR TOT"
+        vUnCom: "VLR UNIT"
+        vProd: "VLR TOT"
         xProdST: "ST: MVA: %{pMVAST}% * Alíq: %{pICMSST}% * BC: %{vBCST} * Vlr: %{vICMSST}"
         xProdFCI: "FCI: %{nFCI}"
       ICMS:
