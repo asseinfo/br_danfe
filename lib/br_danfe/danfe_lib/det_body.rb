@@ -17,7 +17,7 @@ module BrDanfe
             @pdf.table products, options do |table|
               table.column(6..13).style(align: :right)
               table.column(0..13).border_width = 0.3
-              table.column(0..13).border_lines = [:dotted]
+              table.column(0..13).border_lines = [:solid]
               table.column(0..13).borders = [:bottom]
             end
           end
@@ -25,6 +25,7 @@ module BrDanfe
       end
 
       private
+
       def products
         @xml.collect("xmlns", "det") { |det| product(det) }
       end
@@ -58,8 +59,8 @@ module BrDanfe
           1 => 6.10.cm,
           2 => 1.05.cm,
           3 => 0.60.cm,
-          4 => 0.65.cm,
-          5 => 1.10.cm,
+          4 => 0.70.cm,
+          5 => 1.05.cm,
           6 => 1.20.cm,
           7 => 1.20.cm,
           8 => 1.20.cm,
