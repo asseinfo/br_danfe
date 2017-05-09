@@ -11,10 +11,10 @@ module BrDanfe
         @l1 = Y
       end
 
-      def render(nVol)
+      def render(n_vol, footer_info)
         @pdf.ititle 0.42, 10.00, 0.75, @ltitle, "infAdic.title"
 
-        if nVol > 1
+        if n_vol > 1
           render_extra_volumes
         elsif difal?
           render_difal
@@ -23,6 +23,8 @@ module BrDanfe
         end
 
         @pdf.ibox 2.65, 7.15, 13.20, @l1, I18n.t("danfe.infAdic.reserved")
+
+        render_footer_information footer_info
       end
 
       private
@@ -118,6 +120,12 @@ module BrDanfe
         y += 0.10
 
         render_info_cpl_with_others y
+      end
+
+      def render_footer_information(footer_info)
+        if footer_info.present?
+          @pdf.ibox 0.35, 12.45, 0.75, @l1 + 2.65, "", footer_info, { size: 5, border: 0 }
+        end
       end
     end
   end

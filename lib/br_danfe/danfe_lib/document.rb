@@ -77,23 +77,19 @@ module BrDanfe
       end
 
       def lnumeric(h, w, x, y, xml, xpath, options = {})
-        i18n = xpath.gsub("/", ".");
+        i18n = xpath.gsub("/", ".")
         data = xml[xpath]
 
         inumeric(h, w, x, y, i18n, data, options)
       end
 
       def inumeric(h, w, x, y, i18n = "", data = "", options = {})
-        label = ""
-        label = I18n.t("danfe.#{i18n}") if i18n != ""
-
+        label = i18n != "" ? I18n.t("danfe.#{i18n}") : ""
         numeric [x.cm, Helper.invert(y.cm)], w.cm, h.cm, label, data, options
       end
 
       def i18n_lbox(h, w, x, y, i18n = "", info = "", options = {})
-        label = ""
-        label = I18n.t("danfe.#{i18n}") if i18n != ""
-
+        label = i18n != "" ? I18n.t("danfe.#{i18n}") : ""
         ibox h, w, x, y, label, info, options
       end
 

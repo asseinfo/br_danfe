@@ -10,17 +10,18 @@ module BrDanfe
       create_watermark
     end
 
-    def save_pdf(filename)
-      generate
+    def save_pdf(filename, footer_info = "")
+      generate footer_info
       @pdf.render_file filename
     end
 
-    def render_pdf
-      generate
+    def render_pdf(footer_info = "")
+      generate footer_info
       @pdf.render
     end
 
     private
+
     def create_watermark
       @pdf.create_stamp("has_no_fiscal_value") do
         @pdf.fill_color "7d7d7d"
@@ -36,10 +37,10 @@ module BrDanfe
       end
     end
 
-    def generate
+    def generate(footer_info)
       @pdf.stamp("has_no_fiscal_value") if DanfeLib::Helper.has_no_fiscal_value?(@xml)
 
-      @pdf.repeat(:all) { repeat_on_each_page }
+      @pdf.repeat(:all) { repeat_on_each_page footer_info }
 
       DanfeLib::DetBody.new(@pdf, @xml).render
 
@@ -53,7 +54,7 @@ module BrDanfe
       @pdf
     end
 
-    def repeat_on_each_page
+    def repeat_on_each_page(footer_info)
       DanfeLib::Ticket.new(@pdf, @xml).render
       DanfeLib::EmitHeader.new(@pdf, @xml, @options.logo, @options.logo_dimensions).render
       DanfeLib::Emit.new(@pdf, @xml).render
@@ -63,8 +64,10 @@ module BrDanfe
       DanfeLib::Transp.new(@pdf, @xml).render
       nVol = DanfeLib::Vol.new(@pdf, @xml).render
       DanfeLib::DetHeader.new(@pdf).render
+
       DanfeLib::Issqn.new(@pdf, @xml).render
-      DanfeLib::Infadic.new(@pdf, @xml).render(nVol)
+
+      DanfeLib::Infadic.new(@pdf, @xml).render(nVol, footer_info)
     end
   end
 end
