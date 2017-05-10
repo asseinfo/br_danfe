@@ -7,7 +7,7 @@ describe BrDanfe::DanfeLib::EmitHeader do
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
   let(:xml) { BrDanfe::DanfeLib::XML.new(xml_as_string) }
 
-  subject { described_class.new(pdf, xml, logo, { width: 100, height: 100 }, 3.96) }
+  subject { described_class.new(pdf, xml, logo, { width: 100, height: 100 }) }
 
   describe "#render" do
     let(:xml_as_string) do
@@ -45,7 +45,7 @@ describe BrDanfe::DanfeLib::EmitHeader do
     end
 
     before do
-      subject.render
+      subject.render 3.96
       File.delete(output_pdf) if File.exist?(output_pdf)
     end
 

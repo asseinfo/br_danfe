@@ -1,15 +1,16 @@
 module BrDanfe
   module DanfeLib
     class EmitHeader
-      def initialize(pdf, xml, logo, logo_dimensions, y_position)
+      def initialize(pdf, xml, logo, logo_dimensions)
         @pdf = pdf
         @xml = xml
         @logo = logo
         @logo_dimensions = logo_dimensions
-        @y_position = y_position
       end
 
-      def render
+      def render(y_position)
+        @y_position = y_position
+
         company_box
         danfe_box
         access_key_box
@@ -40,7 +41,6 @@ module BrDanfe
         formatted += @xml["enderEmit/xBairro"] + " - " + cep + "\n"
         formatted += @xml["enderEmit/xMun"] + "/" + @xml["enderEmit/UF"] + "\n"
         formatted += phone + " " + @xml["enderEmit/email"]
-
         formatted
       end
 

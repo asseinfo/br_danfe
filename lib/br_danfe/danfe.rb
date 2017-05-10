@@ -42,11 +42,14 @@ module BrDanfe
 
       DanfeLib::DetBody.new(@pdf, @xml).render
 
+      emit_header = DanfeLib::EmitHeader.new(@pdf, @xml, @options.logo, @options.logo_dimensions)
       @pdf.page_count.times do |i|
         page = i + 1
-        @pdf.go_to_page(page)
         y_position = y_position(page)
-        render_emit_header(y_position)
+
+        @pdf.go_to_page(page)
+
+        emit_header.render y_position
         render_info_current_page(page, y_position)
         render_no_fiscal_value
       end
@@ -69,10 +72,6 @@ module BrDanfe
 
     def y_position(page)
       page === 1 ? 3.96 : 1.85
-    end
-
-    def render_emit_header(y_position)
-      DanfeLib::EmitHeader.new(@pdf, @xml, @options.logo, @options.logo_dimensions, y_position).render
     end
 
     def render_info_current_page(page, y_position)
