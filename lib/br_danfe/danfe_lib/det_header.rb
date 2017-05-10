@@ -32,6 +32,7 @@ module BrDanfe
       end
 
       private
+
       def column(w, x, title)
         @pdf.ibox 6.40, w, x, @l1, I18n.t("danfe.det.#{title}")
       end

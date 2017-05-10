@@ -7,6 +7,8 @@ describe BrDanfe::DanfeLib::EmitHeader do
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
   let(:xml) { BrDanfe::DanfeLib::XML.new(xml_as_string) }
 
+  subject { described_class.new(pdf, xml, logo, { width: 100, height: 100 }, 3.96) }
+
   describe "#render" do
     let(:xml_as_string) do
       <<-eos
@@ -48,7 +50,7 @@ describe BrDanfe::DanfeLib::EmitHeader do
     end
 
     context "without logo" do
-      subject { described_class.new(pdf, xml, "", { width: 100, height: 100 }) }
+      let(:logo) { "" }
 
       it "renders xml to the pdf" do
         expect(File.exist?(output_pdf)).to be_falsey
@@ -61,8 +63,6 @@ describe BrDanfe::DanfeLib::EmitHeader do
 
     context "with logo" do
       let(:logo) { "spec/fixtures/logo.png" }
-
-      subject { described_class.new(pdf, xml, logo, { width: 100, height: 100 }) }
 
       it "renders xml to the pdf" do
         expect(File.exist?(output_pdf)).to be_falsey
