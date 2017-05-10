@@ -64,9 +64,7 @@ module BrDanfe
       DanfeLib::Transp.new(@pdf, @xml).render
       nVol = DanfeLib::Vol.new(@pdf, @xml).render
       DanfeLib::DetHeader.new(@pdf).render
-
       DanfeLib::Issqn.new(@pdf, @xml).render
-
       DanfeLib::Infadic.new(@pdf, @xml).render(nVol, footer_info)
     end
   end
