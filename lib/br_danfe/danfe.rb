@@ -49,7 +49,6 @@ module BrDanfe
 
         @pdf.go_to_page(page)
 
-        # DanfeLib::DetHeader.new(@pdf).render
         emit_header.render y_position
         render_info_current_page(page, y_position)
         render_no_fiscal_value
