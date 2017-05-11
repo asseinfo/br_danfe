@@ -49,6 +49,7 @@ module BrDanfe
 
         @pdf.go_to_page(page)
 
+        # DanfeLib::DetHeader.new(@pdf).render
         emit_header.render y_position
         render_info_current_page(page, y_position)
         render_no_fiscal_value
@@ -65,7 +66,6 @@ module BrDanfe
       DanfeLib::Icmstot.new(@pdf, @xml).render
       DanfeLib::Transp.new(@pdf, @xml).render
       n_vol = DanfeLib::Vol.new(@pdf, @xml).render
-      DanfeLib::DetHeader.new(@pdf).render
       DanfeLib::Issqn.new(@pdf, @xml).render
       DanfeLib::Infadic.new(@pdf, @xml).render(n_vol, footer_info)
     end

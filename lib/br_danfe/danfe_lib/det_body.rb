@@ -9,17 +9,13 @@ module BrDanfe
       def render
         options = {
           column_widths: column_widths,
-          cell_style: { padding: 2, border_width: 0 }
+          header: true,
+          cell_style: { padding: 2, border_width: 0.5 }
         }
 
-        @pdf.font_size(6.5) do
+         @pdf.font_size(6.5) do
           @pdf.bounding_box [0.75.cm, Helper.invert(19.59.cm)], width: 19.57.cm, height: 6.07.cm do
-            @pdf.table products, options do |table|
-              table.column(6..13).style(align: :right)
-              table.column(0..13).border_width = 0.3
-              table.column(0..13).border_lines = [:solid]
-              table.column(0..13).borders = [:bottom]
-            end
+            @pdf.table products, options
           end
         end
       end
@@ -27,26 +23,48 @@ module BrDanfe
       private
 
       def products
-        @xml.collect("xmlns", "det") { |det| product(det) }
+        header = [[header_column("prod.cProd"), header_column("prod.xProd"), header_column("prod.NCM"),
+          header_column("ICMS.CST"), header_column("prod.CFOP"), header_column("prod.uCom"),
+          header_column("prod.qCom"), header_column("prod.vUnCom"), header_column("prod.vProd"),
+          header_column("ICMS.vBC"), header_column("ICMS.vICMS"), header_column("IPI.vIPI"),
+          header_column("ICMS.pICMS"), header_column("IPI.pIPI")
+        ]]
+
+        data = @xml.collect("xmlns", "det") { |det| product(det) }
+        header + data
       end
 
       def product(det)
         [
-          det.css("prod/cProd").text,
-          Xprod.new(det).render,
-          det.css("prod/NCM").text,
-          Cst.to_danfe(det),
-          det.css("prod/CFOP").text,
-          det.css("prod/uCom").text,
-          numerify(det, "prod/qCom"),
-          numerify(det, "prod/vUnCom"),
-          numerify(det, "prod/vProd"),
-          numerify(det, "ICMS/*/vBC"),
-          numerify(det, "ICMS/*/vICMS"),
-          numerify(det, "IPI/*/vIPI"),
-          numerify(det, "ICMS/*/pICMS"),
-          numerify(det, "IPI/*/pIPI")
+          cell_text(det.css("prod/cProd").text),
+          cell_text(Xprod.new(det).render),
+          cell_text(det.css("prod/NCM").text),
+          cell_text(Cst.to_danfe(det)),
+          cell_text(det.css("prod/CFOP").text),
+          cell_text(det.css("prod/uCom").text),
+          cell_number(numerify(det, "prod/qCom")),
+          cell_number(numerify(det, "prod/vUnCom")),
+          cell_number(numerify(det, "prod/vProd")),
+          cell_number(numerify(det, "ICMS/*/vBC")),
+          cell_number(numerify(det, "ICMS/*/vICMS")),
+          cell_number(numerify(det, "IPI/*/vIPI")),
+          cell_number(numerify(det, "ICMS/*/pICMS")),
+          cell_number(numerify(det, "IPI/*/pIPI"))
         ]
+      end
+
+      def header_column(title)
+        { content: I18n.t("danfe.det.#{title}"), padding: 2, align: :left, size: 6, valign: :top }
+      end
+
+      def cell_number(text)
+        cell_text(text, { align: :right })
+      end
+
+      def cell_text(text, options = {})
+        cell = { content: text, border_width: 0.3, border_lines: [:solid] } #, borders: [:bottom]
+        cell.merge!(options)
+        cell
       end
 
       def numerify(det, xpath)
