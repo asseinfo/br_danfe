@@ -50,6 +50,7 @@ module BrDanfe
         @pdf.go_to_page(page)
 
         emit_header.render y_position
+        @pdf.ititle 0.42, 10.00, 0.75, 18.91, "det.title"
         render_info_current_page(page, y_position)
         render_no_fiscal_value
       end

@@ -56,9 +56,9 @@ module BrDanfe
         bounding_box_size = 80
         logo_options = BrDanfe::DanfeLib::LogoOptions.new(bounding_box_size, @logo_dimensions).options
 
-        @pdf.move_down 105
-        @pdf.bounding_box([0.83.cm, @pdf.cursor], width: bounding_box_size, height: bounding_box_size) do
+        @pdf.bounding_box([0.83.cm, Helper.invert(@y_position.cm + 1.02.cm)], width: bounding_box_size, height: bounding_box_size) do
           @pdf.image @logo, logo_options
+          @pdf.stroke_bounds
         end
       end
 
