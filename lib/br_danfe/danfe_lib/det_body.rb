@@ -104,7 +104,9 @@ module BrDanfe
 
       def render_tables(first_table, next_table, first_table_height)
         render_table first_table, table_position_on_first_page, first_table_height
-        if next_table.size > 0
+
+        table_with_only_header = 1
+        if next_table.size > table_with_only_header
           @pdf.start_new_page
           render_table next_table, table_position_on_next_pages, table_height_on_next_pages
         end

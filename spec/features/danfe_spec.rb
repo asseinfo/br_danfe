@@ -101,3 +101,19 @@ describe BrDanfe::Danfe do
     end
   end
 end
+
+
+# context "with footer information" do
+#   before do
+#     subject.render(1, "Gerado através do Teste")
+#     File.delete(output_pdf) if File.exist?(output_pdf)
+#   end
+#
+#   it "renders xml to the pdf" do
+#     expect(File.exist?(output_pdf)).to be_falsey
+#
+#     pdf.render_file output_pdf
+#
+#     expect("#{base_dir}infadic#render-footer_information.pdf").to have_same_content_of file: output_pdf
+#   end
+# end

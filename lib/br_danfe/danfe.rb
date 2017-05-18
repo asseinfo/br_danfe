@@ -43,15 +43,15 @@ module BrDanfe
       @pdf
     end
 
-    def render_on_first_page()
+    def render_on_first_page
       DanfeLib::Ticket.new(@pdf, @xml).render
       DanfeLib::Dest.new(@pdf, @xml).render
       DanfeLib::Dup.new(@pdf, @xml).render
       DanfeLib::Icmstot.new(@pdf, @xml).render
       DanfeLib::Transp.new(@pdf, @xml).render
       n_vol = DanfeLib::Vol.new(@pdf, @xml).render
-      DanfeLib::Infadic.new(@pdf, @xml).render(n_vol)
       has_issqn = DanfeLib::Issqn.new(@pdf, @xml).render
+      DanfeLib::Infadic.new(@pdf, @xml).render(n_vol)
       render_products has_issqn
     end
 
