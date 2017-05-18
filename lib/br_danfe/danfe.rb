@@ -52,6 +52,7 @@ module BrDanfe
       n_vol = DanfeLib::Vol.new(@pdf, @xml).render
       has_issqn = DanfeLib::Issqn.new(@pdf, @xml).render
       DanfeLib::Infadic.new(@pdf, @xml).render(n_vol)
+
       render_products has_issqn
     end
 

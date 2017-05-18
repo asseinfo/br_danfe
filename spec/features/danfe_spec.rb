@@ -98,22 +98,51 @@ describe BrDanfe::Danfe do
 
         expect("#{base_dir}nfe_simples_nacional.xml.fixture.pdf").to have_same_content_of file: output_pdf
       end
+
+      context "when there are more than one page" do
+        it "renders xml to the pdf" do
+          expect(File.exist?(output_pdf)).to be_falsey
+
+          danfe = BrDanfe::Danfe.new(File.read("#{base_dir}with_three_pages.xml"))
+          danfe.save_pdf output_pdf
+
+          expect("#{base_dir}with_three_pages.fixture.pdf").to have_same_content_of file: output_pdf
+        end
+      end
+
+      context "when there is ISSQN" do
+        it "renders xml to the pdf" do
+          expect(File.exist?(output_pdf)).to be_falsey
+
+          danfe = BrDanfe::Danfe.new(File.read("#{base_dir}with_issqn.xml"))
+          danfe.save_pdf output_pdf
+
+          expect("#{base_dir}with_issqn.fixture.pdf").to have_same_content_of file: output_pdf
+        end
+      end
+
+      context "when there isn't ISSQN" do
+        it "renders xml to the pdf" do
+          expect(File.exist?(output_pdf)).to be_falsey
+
+          danfe = BrDanfe::Danfe.new(File.read("#{base_dir}withot_issqn.xml"))
+          danfe.save_pdf output_pdf
+
+          expect("#{base_dir}withot_issqn.fixture.pdf").to have_same_content_of file: output_pdf
+        end
+      end
+
+      context "when there is footer information" do
+        it "renders xml to the pdf" do
+          expect(File.exist?(output_pdf)).to be_falsey
+
+          footer = "Gerado através do Teste"
+          danfe = BrDanfe::Danfe.new(File.read("#{base_dir}with_footer.xml"))
+          danfe.save_pdf output_pdf, footer
+
+          expect("#{base_dir}with_footer.fixture.pdf").to have_same_content_of file: output_pdf
+        end
+      end
     end
   end
 end
-
-
-# context "with footer information" do
-#   before do
-#     subject.render(1, "Gerado através do Teste")
-#     File.delete(output_pdf) if File.exist?(output_pdf)
-#   end
-#
-#   it "renders xml to the pdf" do
-#     expect(File.exist?(output_pdf)).to be_falsey
-#
-#     pdf.render_file output_pdf
-#
-#     expect("#{base_dir}infadic#render-footer_information.pdf").to have_same_content_of file: output_pdf
-#   end
-# end
