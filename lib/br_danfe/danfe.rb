@@ -38,46 +38,55 @@ module BrDanfe
     end
 
     def generate(footer_info)
-      render_on_first_page footer_info
-
-      DanfeLib::DetBody.new(@pdf, @xml).render
-
-      emit_header = DanfeLib::EmitHeader.new(@pdf, @xml, @options.logo, @options.logo_dimensions)
-      @pdf.page_count.times do |i|
-        page = i + 1
-        y_position = y_position(page)
-
-        @pdf.go_to_page(page)
-
-        emit_header.render y_position
-        @pdf.ititle 0.42, 10.00, 0.75, 18.91, "det.title"
-        render_info_current_page(page, y_position)
-        render_no_fiscal_value
-      end
-
+      render_on_first_page
+      render_on_each_page footer_info
       @pdf
     end
 
-    def render_on_first_page(footer_info)
+    def render_on_first_page()
       DanfeLib::Ticket.new(@pdf, @xml).render
-      DanfeLib::Emit.new(@pdf, @xml).render
       DanfeLib::Dest.new(@pdf, @xml).render
       DanfeLib::Dup.new(@pdf, @xml).render
       DanfeLib::Icmstot.new(@pdf, @xml).render
       DanfeLib::Transp.new(@pdf, @xml).render
       n_vol = DanfeLib::Vol.new(@pdf, @xml).render
-      DanfeLib::Issqn.new(@pdf, @xml).render
-      DanfeLib::Infadic.new(@pdf, @xml).render(n_vol, footer_info)
+      DanfeLib::Infadic.new(@pdf, @xml).render(n_vol)
+      has_issqn = DanfeLib::Issqn.new(@pdf, @xml).render
+      render_products has_issqn
     end
 
-    def y_position(page)
-      page === 1 ? 3.96 : 1.85
+    def render_products(has_issqn)
+      DanfeLib::DetBody.new(@pdf, @xml).render(has_issqn)
     end
 
-    def render_info_current_page(page, y_position)
-      render_options = { size: 8, align: :center, valign: :center, border: 0, style: :bold }
-      @pdf.ibox 1.00, 2.08, 8.21, y_position + 3.00, "",
-        I18n.t("danfe.others.page", current: page, total: @pdf.page_count), render_options
+    def render_on_each_page(footer_info)
+      emitter = DanfeLib::EmitHeader.new(@pdf, @xml, @options.logo, @options.logo_dimensions)
+
+      @pdf.page_count.times do |i|
+        page = i + 1
+        position = page === 1 ? 3.96 : 1.85
+        repeated_information page, position, emitter, footer_info
+      end
+    end
+
+    def repeated_information(page, y_position, emitter, footer_info)
+      @pdf.go_to_page(page)
+
+      emitter.render page, y_position
+      render_product_table_title page
+      render_footer_information footer_info
+      render_no_fiscal_value
+    end
+
+    def render_product_table_title(page)
+      y_position = page == 1 ? 18.91 : 7.40
+      @pdf.ititle 0.42, 10.00, 0.75, y_position, "det.title"
+    end
+
+    def render_footer_information(footer_info)
+      if footer_info.present?
+        @pdf.ibox 0.35, 12.45, 0.75, 30.21, "", footer_info, { size: 5, border: 0 }
+      end
     end
 
     def render_no_fiscal_value

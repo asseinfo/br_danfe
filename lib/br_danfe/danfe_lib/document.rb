@@ -77,7 +77,7 @@ module BrDanfe
       end
 
       def lnumeric(h, w, x, y, xml, xpath, options = {})
-        i18n = xpath.gsub("/", ".")
+        i18n = xpath.tr("/", ".")
         data = xml[xpath]
 
         inumeric(h, w, x, y, i18n, data, options)
