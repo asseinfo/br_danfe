@@ -10,17 +10,18 @@ module BrDanfe
       create_watermark
     end
 
-    def save_pdf(filename)
-      generate
+    def save_pdf(filename, footer_info = "")
+      generate footer_info
       @pdf.render_file filename
     end
 
-    def render_pdf
-      generate
+    def render_pdf(footer_info = "")
+      generate footer_info
       @pdf.render
     end
 
     private
+
     def create_watermark
       @pdf.create_stamp("has_no_fiscal_value") do
         @pdf.fill_color "7d7d7d"
@@ -36,35 +37,61 @@ module BrDanfe
       end
     end
 
-    def generate
-      @pdf.stamp("has_no_fiscal_value") if DanfeLib::Helper.has_no_fiscal_value?(@xml)
-
-      @pdf.repeat(:all) { repeat_on_each_page }
-
-      DanfeLib::DetBody.new(@pdf, @xml).render
-
-      @pdf.page_count.times do |i|
-        @pdf.go_to_page(i + 1)
-        @pdf.ibox 1.00, 2.08, 8.21, 6.96, "",
-          I18n.t("danfe.others.page", current: i+1, total: @pdf.page_count),
-          { size: 8, align: :center, valign: :center, border: 0, style: :bold }
-      end
-
+    def generate(footer_info)
+      render_on_first_page
+      render_on_each_page footer_info
       @pdf
     end
 
-    def repeat_on_each_page
+    def render_on_first_page
       DanfeLib::Ticket.new(@pdf, @xml).render
-      DanfeLib::EmitHeader.new(@pdf, @xml, @options.logo, @options.logo_dimensions).render
-      DanfeLib::Emit.new(@pdf, @xml).render
       DanfeLib::Dest.new(@pdf, @xml).render
       DanfeLib::Dup.new(@pdf, @xml).render
       DanfeLib::Icmstot.new(@pdf, @xml).render
       DanfeLib::Transp.new(@pdf, @xml).render
-      nVol = DanfeLib::Vol.new(@pdf, @xml).render
-      DanfeLib::DetHeader.new(@pdf).render
-      DanfeLib::Issqn.new(@pdf, @xml).render
-      DanfeLib::Infadic.new(@pdf, @xml).render(nVol)
+      n_vol = DanfeLib::Vol.new(@pdf, @xml).render
+      has_issqn = DanfeLib::Issqn.new(@pdf, @xml).render
+      DanfeLib::Infadic.new(@pdf, @xml).render(n_vol)
+
+      render_products has_issqn
+    end
+
+    def render_products(has_issqn)
+      DanfeLib::DetBody.new(@pdf, @xml).render(has_issqn)
+    end
+
+    def render_on_each_page(footer_info)
+      emitter = DanfeLib::EmitHeader.new(@pdf, @xml, @options.logo, @options.logo_dimensions)
+
+      @pdf.page_count.times do |i|
+        page = i + 1
+        position = page === 1 ? 3.96 : 1.85
+        repeated_information page, position, emitter, footer_info
+      end
+    end
+
+    def repeated_information(page, y_position, emitter, footer_info)
+      @pdf.go_to_page(page)
+
+      emitter.render page, y_position
+      render_product_table_title page
+      render_footer_information footer_info
+      render_no_fiscal_value
+    end
+
+    def render_product_table_title(page)
+      y_position = page == 1 ? 18.91 : 7.40
+      @pdf.ititle 0.42, 10.00, 0.75, y_position, "det.title"
+    end
+
+    def render_footer_information(footer_info)
+      if footer_info.present?
+        @pdf.ibox 0.35, 12.45, 0.75, 30.21, "", footer_info, { size: 5, border: 0 }
+      end
+    end
+
+    def render_no_fiscal_value
+      @pdf.stamp("has_no_fiscal_value") if DanfeLib::Helper.has_no_fiscal_value?(@xml)
     end
   end
 end

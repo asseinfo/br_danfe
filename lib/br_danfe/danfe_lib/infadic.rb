@@ -1,36 +1,36 @@
 module BrDanfe
   module DanfeLib
     class Infadic
-      Y = 27.04 + SPACE_BETWEEN_GROUPS
+      Y_POSITION = 27.04 + SPACE_BETWEEN_GROUPS
 
       def initialize(pdf, xml)
         @pdf = pdf
         @xml = xml
 
-        @ltitle = Y - 0.41
-        @l1 = Y
+        @title = Y_POSITION - 0.41
+        @y_position = Y_POSITION
       end
 
-      def render(nVol)
-        @pdf.ititle 0.42, 10.00, 0.75, @ltitle, "infAdic.title"
+      def render(n_vol)
+        @pdf.ititle 0.42, 10.00, 0.75, @title, "infAdic.title"
 
-        if nVol > 1
+        if n_vol > 1
           render_extra_volumes
         elsif difal?
           render_difal
         else
-          @pdf.ibox 2.65, 12.45, 0.75, @l1, I18n.t("danfe.infAdic.infCpl"), @xml["infAdic/infCpl"], { size: 6, valign: :top }
+          @pdf.ibox 2.65, 12.45, 0.75, @y_position, I18n.t("danfe.infAdic.infCpl"), @xml["infAdic/infCpl"], { size: 6, valign: :top }
         end
 
-        @pdf.ibox 2.65, 7.15, 13.20, @l1, I18n.t("danfe.infAdic.reserved")
+        @pdf.ibox 2.65, 7.15, 13.20, @y_position, I18n.t("danfe.infAdic.reserved")
       end
 
       private
 
       def render_extra_volumes
-        @pdf.ibox 2.65, 12.45, 0.75, @l1, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
+        @pdf.ibox 2.65, 12.45, 0.75, @y_position, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
 
-        y = Y + 0.20
+        y = Y_POSITION + 0.20
 
         if difal?
           @pdf.ibox 1.65, 12.45, 0.75, y, "", difal_content, { size: 5, valign: :top, border: 0 }
@@ -110,9 +110,9 @@ module BrDanfe
       end
 
       def render_difal
-        @pdf.ibox 2.65, 12.45, 0.75, @l1, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
+        @pdf.ibox 2.65, 12.45, 0.75, @y_position, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
 
-        y = Y + 0.20
+        y = Y_POSITION + 0.20
         @pdf.ibox 1.65, 12.45, 0.75, y, "", difal_content, { size: 5, valign: :top, border: 0 }
 
         y += 0.10
