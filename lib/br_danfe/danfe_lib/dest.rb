@@ -49,7 +49,7 @@ module BrDanfe
       end
 
       def street
-        @xml["enderDest/xLgr"] + " " + @xml["enderDest/nro"]
+        @xml["enderDest/xLgr"] + " " + @xml["enderDest/nro"] + @xml["enderDest/xCpl"]
       end
 
       def cep
