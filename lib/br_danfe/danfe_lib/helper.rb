@@ -1,6 +1,8 @@
 module BrDanfe
   module DanfeLib
     class Helper
+      MAXIMUM_TEXT_MEASURE = 319
+
       def self.numerify(number)
         return "" if !number || number == ""
 
@@ -62,6 +64,19 @@ module BrDanfe
 
       def self.unauthorized?(xml)
         xml.css("nfeProc/protNFe/infProt/dhRecbto").empty?
+      end
+
+      def self.mensure_text(pdf, text)
+        pdf.width_of(text)
+      end
+
+      def self.address_is_too_big(pdf, address)
+        Helper.mensure_text(pdf, address) > MAXIMUM_TEXT_MEASURE
+      end
+
+      def self.generate_street(xml)
+        address_complement = " - #{xml["enderDest/xCpl"]}" if xml["enderDest/xCpl"].present?
+        "#{xml["enderDest/xLgr"]} #{xml["enderDest/nro"]}#{address_complement}"
       end
     end
   end

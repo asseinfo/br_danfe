@@ -49,20 +49,15 @@ module BrDanfe
       end
 
       def street
-        street = @xml["enderDest/xLgr"] + " " + @xml["enderDest/nro"] + address_complement
+        street = Helper.generate_street(@xml)
 
-        maximum_text_measure = 319
-        if @pdf.width_of(street) > maximum_text_measure
-          while @pdf.width_of("#{street.strip}...") > maximum_text_measure && street.length > 0 do
+        if Helper.address_is_too_big(@pdf, street)
+          while Helper.mensure_text(@pdf, "#{street.strip}...") > Helper::MAXIMUM_TEXT_MEASURE && street.length > 0 do
             street = street[0..street.length-2]
           end
           street = "#{street.strip}..."
         end
         street
-      end
-
-      def address_complement
-        @xml["enderDest/xCpl"].present? ? " - " + @xml["enderDest/xCpl"] : ""
       end
 
       def cep

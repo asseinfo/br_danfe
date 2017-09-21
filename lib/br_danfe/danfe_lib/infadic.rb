@@ -19,7 +19,14 @@ module BrDanfe
         elsif difal?
           render_difal
         else
-          @pdf.ibox 2.65, 12.45, 0.75, @y_position, I18n.t("danfe.infAdic.infCpl"), @xml["infAdic/infCpl"], { size: 6, valign: :top }
+          street = Helper.generate_street(@xml)
+          if Helper.address_is_too_big(@pdf, street)
+            observation = "#{@xml["infAdic/infCpl"]}\n#{street}"
+          else
+            observation = @xml["infAdic/infCpl"]
+          end
+
+          @pdf.ibox 2.65, 12.45, 0.75, @y_position, I18n.t("danfe.infAdic.infCpl"), observation, { size: 6, valign: :top }
         end
 
         @pdf.ibox 2.65, 7.15, 13.20, @y_position, I18n.t("danfe.infAdic.reserved")
