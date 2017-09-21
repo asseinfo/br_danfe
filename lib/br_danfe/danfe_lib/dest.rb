@@ -50,6 +50,14 @@ module BrDanfe
 
       def street
         street = @xml["enderDest/xLgr"] + " " + @xml["enderDest/nro"] + address_complement
+
+        maximum_text_measure = 319
+        if @pdf.width_of(street) > maximum_text_measure
+          while @pdf.width_of("#{street.strip}...") > maximum_text_measure && street.length > 0 do
+            street = street[0..street.length-2]
+          end
+          street = "#{street.strip}..."
+        end
         street
       end
 
