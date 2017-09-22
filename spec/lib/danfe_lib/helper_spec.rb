@@ -188,7 +188,7 @@ describe BrDanfe::DanfeLib::Helper do
     end
   end
 
-  describe ".generate_street" do
+  describe ".generate_address" do
     let(:xml) do
       <<-eos
         <enderDest>
@@ -204,7 +204,7 @@ describe BrDanfe::DanfeLib::Helper do
     end
 
     it "joins street, number and complement" do
-      expect(BrDanfe::DanfeLib::Helper.generate_street(xml_street))
+      expect(BrDanfe::DanfeLib::Helper.generate_address(xml_street))
         .to eq "Rua do governo do estado 1125 - Em anexo ao super mercado maior do bairro"
     end
 
@@ -220,7 +220,7 @@ describe BrDanfe::DanfeLib::Helper do
       end
 
       it "joins only street and number" do
-        expect(BrDanfe::DanfeLib::Helper.generate_street(xml_street))
+        expect(BrDanfe::DanfeLib::Helper.generate_address(xml_street))
           .to eq "Rua do governo do estado 1125"
       end
     end
@@ -237,7 +237,7 @@ describe BrDanfe::DanfeLib::Helper do
       end
 
       it "joins only street" do
-        expect(BrDanfe::DanfeLib::Helper.generate_street(xml_street))
+        expect(BrDanfe::DanfeLib::Helper.generate_address(xml_street))
           .to eq "Rua do governo do estado"
       end
     end

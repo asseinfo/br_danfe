@@ -19,14 +19,9 @@ module BrDanfe
         elsif difal?
           render_difal
         else
-          street = Helper.generate_street(@xml)
-          if Helper.address_is_too_big(@pdf, street)
-            observation = "#{@xml["infAdic/infCpl"]}\n#{street}"
-          else
-            observation = @xml["infAdic/infCpl"]
-          end
-
-          @pdf.ibox 2.65, 12.45, 0.75, @y_position, I18n.t("danfe.infAdic.infCpl"), observation, { size: 6, valign: :top }
+          title = I18n.t "danfe.infAdic.infCpl"
+          observation = generate_observation @xml["infAdic/infCpl"]
+          @pdf.ibox 2.65, 12.45, 0.75, @y_position, title, observation, { size: 6, valign: :top }
         end
 
         @pdf.ibox 2.65, 7.15, 13.20, @y_position, I18n.t("danfe.infAdic.reserved")
@@ -125,6 +120,17 @@ module BrDanfe
         y += 0.10
 
         render_info_cpl_with_others y
+      end
+
+      def generate_observation(informations)
+        observation = informations
+
+        street = Helper.generate_address @xml
+        if Helper.address_is_too_big @pdf, street
+          observation = "#{observation} * Endereço: #{street}"
+        end
+
+        observation
       end
     end
   end

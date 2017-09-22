@@ -71,7 +71,7 @@ module BrDanfe
         Helper.mensure_text(pdf, address) > Dest::MAXIMUM_SIZE_FOR_STREET
       end
 
-      def self.generate_street(xml)
+      def self.generate_address(xml)
         address_complement = " - #{xml_text(xml, "enderDest/xCpl")}" if xml_text(xml, "enderDest/xCpl").present?
         address_number = " #{xml_text(xml, "enderDest/nro")}" if xml_text(xml, "enderDest/nro").present?
         "#{xml_text(xml, "enderDest/xLgr")}#{address_number}#{address_complement}"

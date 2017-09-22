@@ -50,7 +50,7 @@ module BrDanfe
       end
 
       def street
-        street = Helper.generate_street(@xml)
+        street = Helper.generate_address @xml
 
         if Helper.address_is_too_big(@pdf, street)
           while Helper.mensure_text(@pdf, "#{street.strip}...") > MAXIMUM_SIZE_FOR_STREET && street.length > 0 do
