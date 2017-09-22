@@ -91,7 +91,7 @@ You needs to build docker container like above:
 
 You can run all RSpec specs using:
 
-        $ docker-compose run br_danfe rspec
+        $ docker-compose run --rm br_danfe rspec
 
 
 ## Development - Without Docker
