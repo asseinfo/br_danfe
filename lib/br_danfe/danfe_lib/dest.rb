@@ -2,6 +2,7 @@ module BrDanfe
   module DanfeLib
     class Dest
       Y = 10.00
+      MAXIMUM_SIZE_FOR_STREET = 319
 
       def initialize(pdf, xml)
         @pdf = pdf
@@ -52,7 +53,7 @@ module BrDanfe
         street = Helper.generate_street(@xml)
 
         if Helper.address_is_too_big(@pdf, street)
-          while Helper.mensure_text(@pdf, "#{street.strip}...") > Helper::MAXIMUM_TEXT_MEASURE && street.length > 0 do
+          while Helper.mensure_text(@pdf, "#{street.strip}...") > MAXIMUM_SIZE_FOR_STREET && street.length > 0 do
             street = street[0..street.length-2]
           end
           street = "#{street.strip}..."
@@ -74,11 +75,11 @@ module BrDanfe
       def render_dates_block
 
         if @xml.version_310?
-          dEmi    = "ide/dhEmi"
+          dEmi = "ide/dhEmi"
           dSaiEnt = "ide/dhSaiEnt"
           hSaiEnt = "ide/dhSaiEnt"
         else
-          dEmi    = "ide/dEmi"
+          dEmi = "ide/dEmi"
           dSaiEnt = "ide/dSaiEnt"
           hSaiEnt = "ide/hSaiEnt"
         end

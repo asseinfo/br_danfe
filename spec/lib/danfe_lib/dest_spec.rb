@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe BrDanfe::DanfeLib::Dest do
-  let(:base_dir) { "./spec/fixtures/nfe/lib/"}
+  let(:base_dir) { "./spec/fixtures/nfe/lib/" }
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
