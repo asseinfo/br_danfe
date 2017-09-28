@@ -167,7 +167,7 @@ describe BrDanfe::DanfeLib::Dest do
       end
     end
 
-    context "when recipient doesn't has address complement" do
+    context "when recipient doesn't have address complement" do
       let(:xml_as_string) do
         <<-eos
         <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -207,7 +207,7 @@ describe BrDanfe::DanfeLib::Dest do
       end
     end
 
-    context "when recipient address (xLgr + nro + xCpl) has more 63 characters" do
+    context "when recipient address (xLgr + nro + xCpl) has more than 63 characters" do
       let(:xml_as_string) do
         <<-eos
         <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -239,7 +239,7 @@ describe BrDanfe::DanfeLib::Dest do
         eos
       end
 
-      it "renders xml to the pdf" do
+      it "it renders xml to pdf trimming the address of after 63 characters" do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf

@@ -147,7 +147,7 @@ describe BrDanfe::DanfeLib::Infadic do
         end
       end
 
-      context "with very large address" do
+      context "with too big address" do
         let(:xml_as_string) do
           <<-eos
       <NFe xmlns="http://www.portalfiscal.inf.br/nfe">

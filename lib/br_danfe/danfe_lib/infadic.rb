@@ -125,9 +125,9 @@ module BrDanfe
       def generate_observation(informations)
         observation = informations
 
-        street = Helper.generate_address @xml
+        address = Helper.generate_address @xml
         if Helper.address_is_too_big @pdf, street
-          observation = "#{observation} * Endereço: #{street}"
+          observation = "#{observation} * Endereço: #{address}"
         end
 
         observation

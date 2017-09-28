@@ -44,21 +44,21 @@ module BrDanfe
       end
 
       def render_line2
-        @pdf.i18n_lbox LINE_HEIGHT, 9.66, 0.75, @l2, "enderDest.xLgr", street
+        @pdf.i18n_lbox LINE_HEIGHT, 9.66, 0.75, @l2, "enderDest.xLgr", address
         @pdf.lbox LINE_HEIGHT, 4.33, 10.41, @l2, @xml, "enderDest/xBairro"
         @pdf.i18n_lbox LINE_HEIGHT, 2.20, 14.74, @l2, "enderDest.CEP", cep
       end
 
-      def street
-        street = Helper.generate_address @xml
+      def address
+        address = Helper.generate_address @xml
 
-        if Helper.address_is_too_big(@pdf, street)
-          while Helper.mensure_text(@pdf, "#{street.strip}...") > MAXIMUM_SIZE_FOR_STREET && street.length > 0 do
-            street = street[0..street.length-2]
+        if Helper.address_is_too_big(@pdf, address)
+          while Helper.mensure_text(@pdf, "#{address.strip}...") > MAXIMUM_SIZE_FOR_STREET && address.length > 0 do
+            address = address[0..address.length-2]
           end
-          street = "#{street.strip}..."
+          address = "#{address.strip}..."
         end
-        street
+        address
       end
 
       def cep

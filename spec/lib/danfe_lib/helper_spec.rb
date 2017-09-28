@@ -203,12 +203,12 @@ describe BrDanfe::DanfeLib::Helper do
       Nokogiri::XML(xml)
     end
 
-    it "joins street, number and complement" do
+    it "returns the address with the street, number and complement" do
       expect(BrDanfe::DanfeLib::Helper.generate_address(xml_street))
         .to eq "Rua do governo do estado 1125 - Em anexo ao super mercado maior do bairro"
     end
 
-    context "when receipient address hasn't complement" do
+    context "when recipient address hasn't complement" do
       let(:xml) do
         <<-eos
         <enderDest>
@@ -219,13 +219,13 @@ describe BrDanfe::DanfeLib::Helper do
         eos
       end
 
-      it "joins only street and number" do
+      it "returns the address with the street and number" do
         expect(BrDanfe::DanfeLib::Helper.generate_address(xml_street))
           .to eq "Rua do governo do estado 1125"
       end
     end
 
-    context "when receipient address hasn't complement and number" do
+    context "when recipient address hasn't complement and number" do
       let(:xml) do
         <<-eos
         <enderDest>
@@ -236,9 +236,26 @@ describe BrDanfe::DanfeLib::Helper do
         eos
       end
 
-      it "joins only street" do
+      it "returns the address with the street only" do
         expect(BrDanfe::DanfeLib::Helper.generate_address(xml_street))
           .to eq "Rua do governo do estado"
+      end
+    end
+
+    context "when recipient address hasn't number" do
+      let(:xml) do
+        <<-eos
+        <enderDest>
+          <xLgr>Rua do governo do estado</xLgr>
+          <nro></nro>
+          <xCpl>Em anexo ao super mercado maior do bairro</xCpl>
+        </enderDest>
+        eos
+      end
+
+      it "returns the address with the street and complement" do
+        expect(BrDanfe::DanfeLib::Helper.generate_address(xml_street))
+          .to eq "Rua do governo do estado - Em anexo ao super mercado maior do bairro"
       end
     end
   end
