@@ -14,6 +14,29 @@ describe BrDanfe::DanfeLib::Infadic do
       <<-eos
       <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
         <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+          <ide>
+            <dEmi>2011-10-29</dEmi>
+            <dSaiEnt>2011-10-30</dSaiEnt>
+            <hSaiEnt>15:32:45</hSaiEnt>
+          </ide>
+          <dest>
+            <CNPJ>82743287000880</CNPJ>
+            <xNome>Schneider Electric Brasil Ltda</xNome>
+            <enderDest>
+              <xLgr>Av da Saudade</xLgr>
+              <nro>1125</nro>
+              <xBairro>Frutal</xBairro>
+              <xCpl>Sala 01 e 02</xCpl>
+              <cMun>3552403</cMun>
+              <xMun>SUMARE</xMun>
+              <UF>SP</UF>
+              <CEP>13171320</CEP>
+              <cPais>1058</cPais>
+              <xPais>BRASIL</xPais>
+              <fone>1921046300</fone>
+            </enderDest>
+            <IE>671008375110</IE>
+          </dest>
           <transp>
             <vol>
               <qVol>1</qVol>
@@ -121,6 +144,51 @@ describe BrDanfe::DanfeLib::Infadic do
           pdf.render_file output_pdf
 
           expect("#{base_dir}infadic#render-difal.pdf").to have_same_content_of file: output_pdf
+        end
+      end
+
+      context "with too big address" do
+        let(:xml_as_string) do
+          <<-eos
+      <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+        <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+          <ide>
+            <dEmi>2011-10-29</dEmi>
+            <dSaiEnt>2011-10-30</dSaiEnt>
+            <hSaiEnt>15:32:45</hSaiEnt>
+          </ide>
+          <dest>
+            <CNPJ>82743287000880</CNPJ>
+            <xNome>Schneider Electric Brasil Ltda</xNome>
+            <enderDest>
+              <xLgr>Av da Saudade</xLgr>
+              <nro>1125</nro>
+              <xBairro>Frutal</xBairro>
+              <xCpl>Em anexo ao super mercado maior do bairro</xCpl>
+              <cMun>3552403</cMun>
+              <xMun>SUMARE</xMun>
+              <UF>SP</UF>
+              <CEP>13171320</CEP>
+              <cPais>1058</cPais>
+              <xPais>BRASIL</xPais>
+              <fone>1921046300</fone>
+            </enderDest>
+            <IE>671008375110</IE>
+          </dest>
+          <infAdic>
+            <infCpl>Uma observação</infCpl>
+          </infAdic>
+        </infNFe>
+      </NFe>
+          eos
+        end
+
+        it "renders xml to the pdf with street on observation" do
+          expect(File.exist?(output_pdf)).to be_falsey
+
+          pdf.render_file output_pdf
+
+          expect("#{base_dir}infadic-with-street-data#render.pdf").to have_same_content_of file: output_pdf
         end
       end
     end

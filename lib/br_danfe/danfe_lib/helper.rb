@@ -55,14 +55,33 @@ module BrDanfe
         homologation?(xml) || unauthorized?(xml)
       end
 
-      private
       def self.homologation?(xml)
-        xml.css("nfeProc/NFe/infNFe/ide/tpAmb").text == "2"
+        xml_text(xml, "nfeProc/NFe/infNFe/ide/tpAmb") == "2"
       end
 
       def self.unauthorized?(xml)
         xml.css("nfeProc/protNFe/infProt/dhRecbto").empty?
       end
+
+      def self.mensure_text(pdf, text)
+        pdf.width_of(text)
+      end
+
+      def self.address_is_too_big(pdf, address)
+        Helper.mensure_text(pdf, address) > Dest::MAXIMUM_SIZE_FOR_STREET
+      end
+
+      def self.generate_address(xml)
+        address_complement = " - #{xml_text(xml, "enderDest/xCpl")}" if xml_text(xml, "enderDest/xCpl").present?
+        address_number = " #{xml_text(xml, "enderDest/nro")}" if xml_text(xml, "enderDest/nro").present?
+        "#{xml_text(xml, "enderDest/xLgr")}#{address_number}#{address_complement}"
+      end
+
+      def self.xml_text(xml, property)
+        xml.css(property).text
+      end
+
+      private_class_method :xml_text
     end
   end
 end

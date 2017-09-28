@@ -13,7 +13,7 @@ ADD ./lib/br_danfe/version.rb ./lib/br_danfe/version.rb
 ADD ./br_danfe.gemspec ./br_danfe.gemspec
 ADD ./Gemfile ./Gemfile
 
-RUN bundle
+RUN bundle install
 
 # LINK SOURCE
 ADD ./ ./

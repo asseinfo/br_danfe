@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe BrDanfe::DanfeLib::Dest do
-  let(:base_dir) { "./spec/fixtures/nfe/lib/"}
+  let(:base_dir) { "./spec/fixtures/nfe/lib/" }
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
@@ -32,6 +32,7 @@ describe BrDanfe::DanfeLib::Dest do
                 <xLgr>Av da Saudade</xLgr>
                 <nro>1125</nro>
                 <xBairro>Frutal</xBairro>
+                <xCpl>Sala 01 e 02</xCpl>
                 <cMun>3552403</cMun>
                 <xMun>SUMARE</xMun>
                 <UF>SP</UF>
@@ -72,6 +73,7 @@ describe BrDanfe::DanfeLib::Dest do
                 <xLgr>Av da Saudade</xLgr>
                 <nro>1125</nro>
                 <xBairro>Frutal</xBairro>
+                <xCpl>Sala 01 e 02</xCpl>
                 <cMun>3552403</cMun>
                 <xMun>SUMARE</xMun>
                 <UF>SP</UF>
@@ -162,6 +164,87 @@ describe BrDanfe::DanfeLib::Dest do
         pdf.render_file output_pdf
 
         expect("#{base_dir}dest#render-with_ie.pdf").to have_same_content_of file: output_pdf
+      end
+    end
+
+    context "when recipient doesn't have address complement" do
+      let(:xml_as_string) do
+        <<-eos
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="3.10">
+            <ide>
+              <dhEmi>2011-10-29T13:02:59+00:00</dhEmi>
+              <dhSaiEnt>2011-10-30T12:32:45-03:00</dhSaiEnt>
+            </ide>
+            <dest>
+              <CNPJ>82743287000880</CNPJ>
+              <xNome>Schneider Electric Brasil Ltda</xNome>
+              <enderDest>
+                <xLgr>Av da Saudade</xLgr>
+                <nro>1125</nro>
+                <xBairro>Frutal</xBairro>
+                <cMun>3552403</cMun>
+                <xMun>SUMARE</xMun>
+                <UF>SP</UF>
+                <CEP>13171320</CEP>
+                <cPais>1058</cPais>
+                <xPais>BRASIL</xPais>
+                <fone>1921046300</fone>
+              </enderDest>
+              <IE>671008375110</IE>
+            </dest>
+          </infNFe>
+        </NFe>
+        eos
+      end
+
+      it "renders xml to the pdf" do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}dest#render-without-address-complement.pdf").to have_same_content_of file: output_pdf
+      end
+    end
+
+    context "when recipient address (xLgr + nro + xCpl) has more than 63 characters" do
+      let(:xml_as_string) do
+        <<-eos
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="3.10">
+            <ide>
+              <dhEmi>2011-10-29T13:02:59+00:00</dhEmi>
+              <dhSaiEnt>2011-10-30T12:32:45-03:00</dhSaiEnt>
+            </ide>
+            <dest>
+              <CNPJ>82743287000880</CNPJ>
+              <xNome>Schneider Electric Brasil Ltda</xNome>
+              <enderDest>
+                <xLgr>Rua do governo do estado</xLgr>
+                <nro>1125</nro>
+                <xCpl>Em anexo ao super mercado maior do bairro</xCpl>
+                <xBairro>Frutal</xBairro>
+                <cMun>3552403</cMun>
+                <xMun>SUMARE</xMun>
+                <UF>SP</UF>
+                <CEP>13171320</CEP>
+                <cPais>1058</cPais>
+                <xPais>BRASIL</xPais>
+                <fone>1921046300</fone>
+              </enderDest>
+              <IE>671008375110</IE>
+            </dest>
+          </infNFe>
+        </NFe>
+        eos
+      end
+
+      it "it renders xml to pdf trimming the address of after 63 characters" do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}dest#render-with-address-bigger.pdf").to have_same_content_of file: output_pdf
       end
     end
   end
