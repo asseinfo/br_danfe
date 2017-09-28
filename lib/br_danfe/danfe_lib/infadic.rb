@@ -126,7 +126,7 @@ module BrDanfe
         observation = informations
 
         address = Helper.generate_address @xml
-        if Helper.address_is_too_big @pdf, street
+        if Helper.address_is_too_big @pdf, address
           observation = "#{observation} * Endereço: #{address}"
         end
 
