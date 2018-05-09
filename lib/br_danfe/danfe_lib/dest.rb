@@ -74,7 +74,7 @@ module BrDanfe
 
       def render_dates_block
 
-        if @xml.version_310?
+        if @xml.version_310? || @xml.version_400?
           dEmi = "ide/dhEmi"
           dSaiEnt = "ide/dhSaiEnt"
           hSaiEnt = "ide/dhSaiEnt"
