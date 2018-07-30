@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    br_danfe (0.7.1)
+    br_danfe (0.7.2)
       barby (= 0.5.1)
       br_documents (>= 0.0.8)
       i18n
@@ -87,4 +87,4 @@ RUBY VERSION
    ruby 2.2.5p319
 
 BUNDLED WITH
-   1.15.3
+   1.16.1

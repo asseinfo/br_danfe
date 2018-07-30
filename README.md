@@ -15,6 +15,7 @@ XML version | Supported?
 1.00        | no
 2.00        | yes
 3.10        | yes
+4.00        | yes
 
 ## Installing
 
@@ -49,13 +50,7 @@ XML version | Supported?
 * `logo_path`: Path of sender's logo image.
 * `logo_dimensions`: Dimensions of the logo. Ex: logo_dimensions = { width: 100, height: 90 }
 
-XML version | Supported?
------------ | ----------
-1.00        | no
-2.00        | yes
-3.10        | yes
-
-### CC-e - _Carta de Correção Eletrônica_
+### CC-e - Carta de Correção Eletrônica
 
 #### Usage in Ruby
 
@@ -103,18 +98,18 @@ You needs to install all necessaries dependencies using bunder like above:
 
 You can run all RSpec specs using:
 
-        $ rspec
+        $ bundle exec rspec
 
 
 ## About tests
 
-> If you modify something that caused general visual changes at output pdfs, so you have to rebuild the fixtures pdf files.
+> If you modify something that caused general visual changes at output pdf's, so you have to rebuild the fixtures pdf files.
 >
-> You can do this simply deleting the fixture pdf file. The `have_same_content_of` matcher will recreate the fixture in the next time you run the `rspec` command.
+> You can do this simply deleting the fixture pdf file. The `have_same_content_of` matcher will recreate the fixture in the next time you run the `bundle exec rspec` command.
 
 ### Code coverage
 
-Code coverage is available through of SimpleCov. Just run `rspec` and open the coverage report in your browser.
+Code coverage is available through of SimpleCov. Just run `bundle exec rspec` and open the coverage report in your browser.
 
 ### Fake data for generating new fixtures
 
@@ -183,9 +178,9 @@ You can generate new data using [4devs generators](http://www.4devs.com.br).
 
 You can build using one of the above tasks
 
-        $ rake build    # Build br_danfe-X.X.X.gem into the pkg directory
-        $ rake install  # Build and install br_danfe-X.X.X.gem into system gems
-        $ rake release  # Create tag vX.X.X and build and push br_danfe-X.X.X.gem to Rubygems
+        $ bundle exec rake build    # Build br_danfe-X.X.X.gem into the pkg directory
+        $ bundle exec rake install  # Build and install br_danfe-X.X.X.gem into system gems
+        $ bundle exec rake release  # Create tag vX.X.X, build and push br_danfe-X.X.X.gem to Rubygems
 
 ## Contributing
 

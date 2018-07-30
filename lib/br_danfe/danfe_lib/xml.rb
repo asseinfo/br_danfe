@@ -30,8 +30,8 @@ module BrDanfe
         result
       end
 
-      def version_310?
-        @xml.css("infNFe").attr("versao").to_s == "3.10"
+      def version_is_310_or_newer?
+        @xml.css("infNFe").attr("versao").to_s.to_f >= 3.10
       end
     end
   end
