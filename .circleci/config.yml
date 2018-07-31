@@ -1,0 +1,42 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.3.7
+    steps:
+      - checkout
+      - restore_cache:
+          key: brdanfe-cache-v1-{{ checksum "Gemfile.lock" }}
+      - run: bundle check || bundle install
+      - save_cache:
+          key: brdanfe-cache-v1-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - .
+      - save_cache:
+          key: brdanfe-cache-v1-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ./vendor/bundle
+  rspec:
+    docker:
+      - image: circleci/ruby:2.3.7
+    steps:
+      - restore_cache:
+          key: brdanfe-cache-v1-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: brdanfe-cache-v1-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install Test Coverage for CodeClimate
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run: ./cc-test-reporter before-build
+      - run: bundle exec rspec
+      - run: ./cc-test-reporter after-build --exit-code $?
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build
+      - rspec:
+          requires:
+            - build
