@@ -1,8 +1,7 @@
 require "spec_helper"
 
 describe BrDanfe::DanfeLib::Dest do
-  let(:base_dir) { "./spec/fixtures/nfe/lib/" }
-  let(:output_pdf) { "#{base_dir}output.pdf" }
+  let(:path_of_expected_pdf) { "./spec/fixtures/nfe/lib/output.pdf" }
 
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
   let(:xml) { BrDanfe::DanfeLib::XML.new(xml_as_string) }
@@ -11,8 +10,8 @@ describe BrDanfe::DanfeLib::Dest do
 
   describe "#render" do
     before do
+      File.delete(path_of_expected_pdf) if File.exist?(path_of_expected_pdf)
       subject.render
-      File.delete(output_pdf) if File.exist?(output_pdf)
     end
 
     context "when nf-e's version is 2.00" do
@@ -49,11 +48,11 @@ describe BrDanfe::DanfeLib::Dest do
       end
 
       it "renders xml to the pdf" do
-        expect(File.exist?(output_pdf)).to be_falsey
+        expect(File.exist?(path_of_expected_pdf)).to eql false
 
-        pdf.render_file output_pdf
+        pdf.render_file path_of_expected_pdf
 
-        expect("#{base_dir}dest#render-v2.00.pdf").to have_same_content_of file: output_pdf
+        expect("./spec/fixtures/nfe/lib/dest#render-v2.00.pdf").to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -90,11 +89,52 @@ describe BrDanfe::DanfeLib::Dest do
       end
 
       it "renders xml to the pdf" do
-        expect(File.exist?(output_pdf)).to be_falsey
+        expect(File.exist?(path_of_expected_pdf)).to eql false
 
-        pdf.render_file output_pdf
+        pdf.render_file path_of_expected_pdf
 
-        expect("#{base_dir}dest#render-v3.10.pdf").to have_same_content_of file: output_pdf
+        expect("./spec/fixtures/nfe/lib/dest#render-v3.10.pdf").to have_same_content_of file: path_of_expected_pdf
+      end
+    end
+
+    context "when nf-e's version is 4.00" do
+      let(:xml_as_string) do
+        <<-eos
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="4.00">
+            <ide>
+              <dhEmi>2018-07-30T13:30:59+00:00</dhEmi>
+              <dhSaiEnt>2018-07-30T14:32:45-03:00</dhSaiEnt>
+            </ide>
+            <dest>
+              <CNPJ>82743287000880</CNPJ>
+              <xNome>Schneider Electric Brasil Ltda</xNome>
+              <enderDest>
+                <xLgr>Av da Saudade</xLgr>
+                <nro>1125</nro>
+                <xBairro>Frutal</xBairro>
+                <xCpl>Sala 01 e 02</xCpl>
+                <cMun>3552403</cMun>
+                <xMun>SUMARE</xMun>
+                <UF>SP</UF>
+                <CEP>13171320</CEP>
+                <cPais>1058</cPais>
+                <xPais>BRASIL</xPais>
+                <fone>1921046300</fone>
+              </enderDest>
+              <IE>671008375110</IE>
+            </dest>
+          </infNFe>
+        </NFe>
+        eos
+      end
+
+      it "renders xml to the pdf" do
+        expect(File.exist?(path_of_expected_pdf)).to eql false
+
+        pdf.render_file path_of_expected_pdf
+
+        expect("./spec/fixtures/nfe/lib/dest#render-v4.00.pdf").to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -112,11 +152,11 @@ describe BrDanfe::DanfeLib::Dest do
       end
 
       it "renders xml to the pdf" do
-        expect(File.exist?(output_pdf)).to be_falsey
+        expect(File.exist?(path_of_expected_pdf)).to eql false
 
-        pdf.render_file output_pdf
+        pdf.render_file path_of_expected_pdf
 
-        expect("#{base_dir}dest#render-with_cnpj.pdf").to have_same_content_of file: output_pdf
+        expect("./spec/fixtures/nfe/lib/dest#render-with_cnpj.pdf").to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -134,11 +174,11 @@ describe BrDanfe::DanfeLib::Dest do
       end
 
       it "renders xml to the pdf" do
-        expect(File.exist?(output_pdf)).to be_falsey
+        expect(File.exist?(path_of_expected_pdf)).to eql false
 
-        pdf.render_file output_pdf
+        pdf.render_file path_of_expected_pdf
 
-        expect("#{base_dir}dest#render-with_cpf.pdf").to have_same_content_of file: output_pdf
+        expect("./spec/fixtures/nfe/lib/dest#render-with_cpf.pdf").to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -159,11 +199,11 @@ describe BrDanfe::DanfeLib::Dest do
       end
 
       it "renders xml to the pdf" do
-        expect(File.exist?(output_pdf)).to be_falsey
+        expect(File.exist?(path_of_expected_pdf)).to eql false
 
-        pdf.render_file output_pdf
+        pdf.render_file path_of_expected_pdf
 
-        expect("#{base_dir}dest#render-with_ie.pdf").to have_same_content_of file: output_pdf
+        expect("./spec/fixtures/nfe/lib/dest#render-with_ie.pdf").to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -199,11 +239,12 @@ describe BrDanfe::DanfeLib::Dest do
       end
 
       it "renders xml to the pdf" do
-        expect(File.exist?(output_pdf)).to be_falsey
+        expect(File.exist?(path_of_expected_pdf)).to eql false
 
-        pdf.render_file output_pdf
+        pdf.render_file path_of_expected_pdf
 
-        expect("#{base_dir}dest#render-without-address-complement.pdf").to have_same_content_of file: output_pdf
+        expect("./spec/fixtures/nfe/lib/dest#render-without-address-complement.pdf")
+          .to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -239,12 +280,13 @@ describe BrDanfe::DanfeLib::Dest do
         eos
       end
 
-      it "it renders xml to pdf trimming the address of after 63 characters" do
-        expect(File.exist?(output_pdf)).to be_falsey
+      it "renders xml to pdf discarding the address of after 63 characters" do
+        expect(File.exist?(path_of_expected_pdf)).to eql false
 
-        pdf.render_file output_pdf
+        pdf.render_file path_of_expected_pdf
 
-        expect("#{base_dir}dest#render-with-address-bigger.pdf").to have_same_content_of file: output_pdf
+        expect("./spec/fixtures/nfe/lib/dest#render-with-address-bigger.pdf")
+          .to have_same_content_of file: path_of_expected_pdf
       end
     end
   end

@@ -3,8 +3,8 @@ require "spec_helper"
 describe BrDanfe::DanfeLib::XML do
   subject { BrDanfe::DanfeLib::XML.new(xml_as_string) }
 
-  describe "#version_310?" do
-    describe "when xml's version is 3.10" do
+  describe "#version_is_310_or_newer?" do
+    describe "when xml's version is equal 3.10" do
       let(:xml_as_string) do
         <<-eos
           <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -14,12 +14,27 @@ describe BrDanfe::DanfeLib::XML do
         eos
       end
 
-      it "is true" do
-        expect(subject.version_310?).to be_truthy
+      it "returns true" do
+        expect(subject.version_is_310_or_newer?).to eql true
       end
     end
 
-    describe "when xml's version isn't 3.10" do
+    describe "when xml's version is greather 3.10" do
+      let(:xml_as_string) do
+        <<-eos
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe versao="4.00" Id="NFe35150162013294000143550010000000011000000017">
+            </infNFe>
+          </NFe>
+        eos
+      end
+
+      it "returns true" do
+        expect(subject.version_is_310_or_newer?).to eql true
+      end
+    end
+
+    describe "when xml's version is minor that 3.10" do
       let(:xml_as_string) do
         <<-eos
           <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -29,8 +44,8 @@ describe BrDanfe::DanfeLib::XML do
         eos
       end
 
-      it "is false" do
-        expect(subject.version_310?).to be_falsey
+      it "returns false" do
+        expect(subject.version_is_310_or_newer?).to eql false
       end
     end
   end

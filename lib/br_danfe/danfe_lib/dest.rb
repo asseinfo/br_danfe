@@ -7,6 +7,7 @@ module BrDanfe
       def initialize(pdf, xml)
         @pdf = pdf
         @xml = xml
+        @xml_version_is_310_or_newer = @xml.version_is_310_or_newer?
 
         @ltitle = Y - 0.42
         @l1 = Y
@@ -21,10 +22,11 @@ module BrDanfe
         render_line2
         render_line3
 
-        render_dates_block
+        @xml_version_is_310_or_newer ? render_dates_for_nfe_310_or_newer : render_dates_for_older_nfes
       end
 
       private
+
       def render_line1
         @pdf.lbox LINE_HEIGHT, 11.82, 0.75, @l1, @xml, "dest/xNome"
         render_cnpj_cpf
@@ -72,25 +74,22 @@ module BrDanfe
         @pdf.lie LINE_HEIGHT, 4.38, 12.56, @l3, @xml, "enderDest/UF", "dest/IE"
       end
 
-      def render_dates_block
-
-        if @xml.version_310?
-          dEmi = "ide/dhEmi"
-          dSaiEnt = "ide/dhSaiEnt"
-          hSaiEnt = "ide/dhSaiEnt"
-        else
-          dEmi = "ide/dEmi"
-          dSaiEnt = "ide/dSaiEnt"
-          hSaiEnt = "ide/hSaiEnt"
-        end
-
-        @pdf.ldate LINE_HEIGHT, 2.92, 17.40, @l1, "ide.dEmi", @xml[dEmi], { align: :right }
-        @pdf.ldate LINE_HEIGHT, 2.92, 17.40, @l2, "ide.dSaiEnt", @xml[dSaiEnt], { align: :right }
-        @pdf.ltime LINE_HEIGHT, 2.92, 17.40, @l3, "ide.hSaiEnt", @xml[hSaiEnt], { align: :right }
-      end
-
       def phone
         Phone.format(@xml["enderDest/fone"])
+      end
+
+      def render_dates_for_nfe_310_or_newer
+        render_dates "ide/dhEmi", "ide/dhSaiEnt", "ide/dhSaiEnt"
+      end
+
+      def render_dates(emitted_at_date_and_hour, exited_at_date, exited_at_hour)
+        @pdf.ldate LINE_HEIGHT, 2.92, 17.40, @l1, "ide.dEmi", @xml[emitted_at_date_and_hour], { align: :right }
+        @pdf.ldate LINE_HEIGHT, 2.92, 17.40, @l2, "ide.dSaiEnt", @xml[exited_at_date], { align: :right }
+        @pdf.ltime LINE_HEIGHT, 2.92, 17.40, @l3, "ide.hSaiEnt", @xml[exited_at_hour], { align: :right }
+      end
+
+      def render_dates_for_older_nfes
+        render_dates "ide/dEmi", "ide/dSaiEnt", "ide/hSaiEnt"
       end
     end
   end
