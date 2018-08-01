@@ -107,6 +107,18 @@ You can run all RSpec specs using:
 >
 > You can do this simply deleting the fixture pdf file. The `have_same_content_of` matcher will recreate the fixture in the next time you run the `bundle exec rspec` command.
 
+
+## Environment variables
+
+The following variables are necessary to be set:
+
+Environment var       | Development? | Test? | CI?   | Production? | Data
+----------------------|--------------|-------|-------|-------------|-----
+TZ                    | no           | no    | yes   | no          | America/Sao_Paulo 
+BUNDLE_PATH           | no           | no    | yes   | no          | vendor/bundle 
+CC_TEST_REPORTER_ID   | no           | no    | yes   | no          | get at codeclimate 
+RAILS_ENV             | no           | no    | yes   | no          | test  
+
 ### Code coverage
 
 Code coverage is available through of SimpleCov. Just run `bundle exec rspec` and open the coverage report in your browser.
