@@ -1,5 +1,6 @@
 # coding: utf-8
-$:.push File.expand_path('../lib', __FILE__)
+
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
 require 'br_danfe/version'
 
 Gem::Specification.new do |spec|
@@ -12,10 +13,10 @@ Gem::Specification.new do |spec|
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split('\n')
-  spec.test_files    = `git ls-files -- {test,spec,features}/*`.split('\n')
+  spec.test_files    = `git ls-files -- { test,spec,features }/*`.split('\n')
   spec.executables   = `git ls-files -- bin/*`.split('\n').map{ |f| File.basename(f) }
   spec.require_paths = ['lib']
-  spec.required_ruby_version = '>= 2.0'
+  spec.required_ruby_version = '>= 2.1'
 
   spec.add_dependency 'barby', '0.5.1'
   spec.add_dependency 'br_documents', '0.0.13'
