@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.3.7
+      - image: circleci/ruby:2.5.1
     steps:
       - checkout
       - restore_cache:
@@ -18,7 +18,7 @@ jobs:
             - ./vendor/bundle
   rspec:
     docker:
-      - image: circleci/ruby:2.3.7
+      - image: circleci/ruby:2.5.1
     steps:
       - restore_cache:
           key: brdanfe-cache-v1-{{ .Environment.CIRCLE_SHA1 }}
