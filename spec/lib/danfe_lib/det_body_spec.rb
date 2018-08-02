@@ -17,10 +17,6 @@ describe BrDanfe::DanfeLib::DetBody do
     eos
   end
 
-  let(:products) do
-    "#{product_1}\n#{product_2}"
-  end
-
   let(:product_1) do
     <<-eos
         <det nItem="1">
