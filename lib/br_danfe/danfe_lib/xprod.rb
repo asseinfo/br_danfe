@@ -11,29 +11,27 @@ module BrDanfe
         xprod += infAdProd if has_infAdProd?
         xprod += fci if has_fci?
         xprod += st if has_st?
+        #xprod += fcp if has_fcp?
 
         xprod
       end
 
       private
-      def has_infAdProd?
-        !@det.css("infAdProd").text.empty?
-      end
-
-      def has_fci?
-        !@det.css("prod/nFCI").text.empty?
-      end
-
-      def has_st?
-        @det.css("ICMS/*/vBCST").text.to_i > 0
-      end
 
       def infAdProd
         "\n" + @det.css("infAdProd").text
       end
 
+      def has_infAdProd?
+        !@det.css("infAdProd").text.empty?
+      end
+
       def fci
         "\n" + I18n.t("danfe.det.prod.xProdFCI", nFCI: @det.css('prod/nFCI').text)
+      end
+
+      def has_fci?
+        !@det.css("prod/nFCI").text.empty?
       end
 
       def st
@@ -42,6 +40,20 @@ module BrDanfe
           pICMSST: Helper.numerify(@det.css('ICMS/*/pICMSST').text),
           vBCST: Helper.numerify(@det.css('ICMS/*/vBCST').text),
           vICMSST: Helper.numerify(@det.css('ICMS/*/vICMSST').text))
+      end
+
+      def has_st?
+        @det.css("ICMS/*/vBCST").text.to_i > 0
+      end
+
+      def fcp
+        "\n" + I18n.t("danfe.det.prod.xProdFCP",
+          vFCP: Helper.numerify(@det.css["ICMS00/vFCP"].text),
+          pFCP: Helper.numerify(@det.css["ICMS00/pFCP"]))
+      end
+
+      def has_fcp?
+        @det.css["ICMS00/vFCP"].text.to_i > 0 && @det.css["ICMS00/pFCP"].text.to_i
       end
     end
   end
