@@ -88,6 +88,37 @@ describe BrDanfe::DanfeLib::Xprod do
       end
     end
 
+    context "when have FCP" do
+      let(:xml_st) do
+        xml = <<-eos
+        <det nItem="1">
+          <prod>
+            <xProd>MONITOR DE ARCO ELETRICO</xProd>
+          </prod>
+          <imposto>
+            <vTotTrib>23.56</vTotTrib>
+            <ICMS00>
+              <vFCP>23.56</pMVAST>
+              <pFCP>2.00</pFCP>
+            </ICMS>
+          </imposto>
+        </det>
+        eos
+
+        Nokogiri::XML(xml)
+      end
+
+      subject { BrDanfe::DanfeLib::Xprod.new(xml_st) }
+
+      it "returns product + ST" do
+        expected = "MONITOR DE ARCO ELETRICO"
+        expected += "\n"
+        expected += "FCP: Vlr: 23,56 Perc.: 2,00%"
+
+        expect(subject.render).to eq expected
+      end
+    end
+
     context "when have FCI + ST + infAdProd" do
       let(:xml_IFC_ST_infAdProd) do
         xml = <<-eos
