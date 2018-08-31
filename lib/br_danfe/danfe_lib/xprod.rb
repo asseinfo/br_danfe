@@ -31,7 +31,7 @@ module BrDanfe
       end
 
       def has_fci?
-        @det.css("prod/nFCI").present?
+        !@det.css("prod/nFCI").text.empty?
       end
 
       def st
@@ -53,7 +53,7 @@ module BrDanfe
       end
 
       def has_fcp?
-        @det.css("ICMS00/vFCP").present?
+        @det.css("ICMS00/vFCP").text.to_i > 0
       end
     end
   end

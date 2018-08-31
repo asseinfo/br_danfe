@@ -113,7 +113,7 @@ describe BrDanfe::DanfeLib::Xprod do
       it "returns product + ST" do
         expected = "MONITOR DE ARCO ELETRICO"
         expected += "\n"
-        expected += "FCP: Vlr: 23,56 Perc.: 2,00%"
+        expected += "FCP: Alíq: 2,00% * Vlr: 23,56"
 
         expect(subject.render).to eq expected
       end
@@ -137,6 +137,10 @@ describe BrDanfe::DanfeLib::Xprod do
                 <vICMSST>29.28</vICMSST>
               </ICMSSN202>
             </ICMS>
+            <ICMS00>
+              <vFCP>23.56</pMVAST>
+              <pFCP>2.00</pFCP>
+            </ICMS>
           </imposto>
           <infAdProd>Informações adicionais do produto</infAdProd>
         </det>
@@ -155,6 +159,8 @@ describe BrDanfe::DanfeLib::Xprod do
         expected +="FCI: 12232531-74B2-4FDD-87A6-CF0AD3E55386"
         expected += "\n"
         expected += "ST: MVA: 56,00% * Alíq: 17,00% * BC: 479,82 * Vlr: 29,28"
+        expected += "\n"
+        expected += "FCP: Alíq: 2,00% * Vlr: 23,56"
 
         expect(subject.render).to eq expected
       end
