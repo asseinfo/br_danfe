@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Uf do
+describe BrDanfe::Uf do
   describe '#include?' do
     ufs =
       [
@@ -11,7 +11,7 @@ describe Uf do
     context 'when uf is symbol' do
       ufs.each do |uf|
         it "returns true for uf #{uf}" do
-          expect(Uf.include? uf.to_sym).to be true
+          expect(BrDanfe::Uf.include? uf.to_sym).to be true
         end
       end
     end
@@ -19,26 +19,26 @@ describe Uf do
     context 'when uf is string' do
       ufs.each do |uf|
         it "returns true for uf #{uf}" do
-          expect(Uf.include? uf).to be true
+          expect(BrDanfe::Uf.include? uf).to be true
         end
       end
     end
 
     context 'when uf is not from Brazil' do
       it "returns false" do
-        expect(Uf.include? 'EX').to be false
+        expect(BrDanfe::Uf.include? 'EX').to be false
       end
     end
 
     context 'when uf is blank' do
       it "returns false" do
-        expect(Uf.include? '').to be false
+        expect(BrDanfe::Uf.include? '').to be false
       end
     end
 
     context 'when uf is nil' do
       it "returns false" do
-        expect(Uf.include? nil).to be false
+        expect(BrDanfe::Uf.include? nil).to be false
       end
     end
   end
