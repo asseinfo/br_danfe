@@ -89,7 +89,7 @@ describe BrDanfe::DanfeLib::Xprod do
     end
 
     context "when have FCP" do
-      let(:xml_st) do
+      let(:xml_fcp) do
         xml = <<-eos
         <det nItem="1">
           <prod>
@@ -98,7 +98,7 @@ describe BrDanfe::DanfeLib::Xprod do
           <imposto>
             <vTotTrib>23.56</vTotTrib>
             <ICMS00>
-              <vFCP>23.56</pMVAST>
+              <vFCP>4.71</vFCP>
               <pFCP>2.00</pFCP>
             </ICMS>
           </imposto>
@@ -108,18 +108,18 @@ describe BrDanfe::DanfeLib::Xprod do
         Nokogiri::XML(xml)
       end
 
-      subject { BrDanfe::DanfeLib::Xprod.new(xml_st) }
+      subject { BrDanfe::DanfeLib::Xprod.new(xml_fcp) }
 
-      it "returns product + ST" do
+      it "returns product + FCP" do
         expected = "MONITOR DE ARCO ELETRICO"
         expected += "\n"
-        expected += "FCP: Alíq: 2,00% * Vlr: 23,56"
+        expected += "FCP: Alíq: 2,00% * Vlr: 4,71"
 
         expect(subject.render).to eq expected
       end
     end
 
-    context "when have FCI + ST + infAdProd" do
+    context "when have FCI + ST + infAdProd + FCP" do
       let(:xml_IFC_ST_infAdProd) do
         xml = <<-eos
         <det nItem="1">
@@ -138,7 +138,7 @@ describe BrDanfe::DanfeLib::Xprod do
               </ICMSSN202>
             </ICMS>
             <ICMS00>
-              <vFCP>23.56</pMVAST>
+              <vFCP>4.71</vFCP>
               <pFCP>2.00</pFCP>
             </ICMS>
           </imposto>
@@ -160,7 +160,7 @@ describe BrDanfe::DanfeLib::Xprod do
         expected += "\n"
         expected += "ST: MVA: 56,00% * Alíq: 17,00% * BC: 479,82 * Vlr: 29,28"
         expected += "\n"
-        expected += "FCP: Alíq: 2,00% * Vlr: 23,56"
+        expected += "FCP: Alíq: 2,00% * Vlr: 4,71"
 
         expect(subject.render).to eq expected
       end
