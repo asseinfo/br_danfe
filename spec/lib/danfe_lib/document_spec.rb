@@ -86,6 +86,31 @@ describe BrDanfe::DanfeLib::Document do
 
         expect("#{base_dir}document#lie-blank.pdf").to have_same_content_of file: output_pdf
       end
+
+      context "when UF is invalid" do
+        let(:xml_as_string) do
+          <<-eos
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <transp>
+                <transporta>
+                  <UF>SC</UF>
+                </transporta>
+              </transp>
+            </infNFe>
+          </NFe>
+          eos
+        end
+
+        it "renders a blank box to the pdf" do
+          expect(File.exist?(output_pdf)).to be_falsey
+
+          subject.lie 0.80, 3.94, 0.75, 1.85, xml, "transporta/UF", "transporta/IE"
+          subject.render_file output_pdf
+
+          expect("#{base_dir}document#lie-blank-uf-invalid.pdf").to have_same_content_of file: output_pdf
+        end
+      end
     end
   end
 
