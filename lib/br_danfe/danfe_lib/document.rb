@@ -68,7 +68,7 @@ module BrDanfe
         i18n = xpath_ie.gsub("/", ".");
 
         data = ""
-        if xml[xpath_uf].present? #BrDocument bug - review this in the future
+        if BrDanfe::Uf.include?(xml[xpath_uf])
           ie = BrDocuments::IE::Factory.create(xml[xpath_uf], xml[xpath_ie])
           data = ie.formatted if ie.valid?
         end
