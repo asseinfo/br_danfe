@@ -105,6 +105,7 @@ pt-BR:
         vProd: "VL TOTAL"
         xProdST: "ST: MVA: %{pMVAST}% * Alíq: %{pICMSST}% * BC: %{vBCST} * Vlr: %{vICMSST}"
         xProdFCI: "FCI: %{nFCI}"
+        xProdFCP: "FCP: Alíq: %{pFCP}% * Vlr: %{vFCP}"
       ICMS:
         CST: "CST"
         vBC: "BC ICMS"
