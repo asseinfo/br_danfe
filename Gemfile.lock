@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    br_danfe (0.7.5)
+    br_danfe (0.7.6)
       barby (= 0.5.1)
       br_documents (>= 0.0.15)
       i18n (= 0.8.6)
