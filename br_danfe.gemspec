@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'barby', '0.5.1'
   spec.add_dependency 'br_documents', '>= 0.0.15'
   spec.add_dependency 'i18n', '0.8.6'
-  spec.add_dependency 'nokogiri', '1.8.3'
+  spec.add_dependency 'nokogiri', '~> 1.8'
   spec.add_dependency 'prawn', '2.1.0'
   spec.add_dependency 'prawn-table', '0.2.2'
 
