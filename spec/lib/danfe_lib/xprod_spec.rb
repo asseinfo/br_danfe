@@ -88,7 +88,7 @@ describe BrDanfe::DanfeLib::Xprod do
       end
     end
 
-    context "when have FCP" do
+    context "when have FCP on ICMS00 tag" do
       let(:xml_fcp) do
         xml = <<-eos
         <det nItem="1">
@@ -97,9 +97,11 @@ describe BrDanfe::DanfeLib::Xprod do
           </prod>
           <imposto>
             <vTotTrib>23.56</vTotTrib>
-            <ICMS00>
-              <vFCP>4.71</vFCP>
-              <pFCP>2.00</pFCP>
+            <ICMS>
+              <ICMS00>
+                <vFCP>4.71</vFCP>
+                <pFCP>2.00</pFCP>
+              </ICMS00>
             </ICMS>
           </imposto>
         </det>
@@ -136,10 +138,10 @@ describe BrDanfe::DanfeLib::Xprod do
                 <pICMSST>17.00</pICMSST>
                 <vICMSST>29.28</vICMSST>
               </ICMSSN202>
-            </ICMS>
-            <ICMS00>
-              <vFCP>4.71</vFCP>
-              <pFCP>2.00</pFCP>
+              <ICMS00>
+                <vFCP>4.71</vFCP>
+                <pFCP>2.00</pFCP>
+              </ICMS00>
             </ICMS>
           </imposto>
           <infAdProd>Informações adicionais do produto</infAdProd>
@@ -161,6 +163,74 @@ describe BrDanfe::DanfeLib::Xprod do
         expected += "ST: MVA: 56,00% * Alíq: 17,00% * BC: 479,82 * Vlr: 29,28"
         expected += "\n"
         expected += "FCP: Alíq: 2,00% * Vlr: 4,71"
+
+        expect(subject.render).to eq expected
+      end
+    end
+
+    context "when have FCP not in a ICMS00 tag" do
+      let(:xml_fcp) do
+        xml = <<-eos
+        <det nItem="1">
+          <prod>
+            <xProd>MONITOR DE ARCO ELETRICO</xProd>
+          </prod>
+          <imposto>
+            <vTotTrib>23.56</vTotTrib>
+            <ICMS>
+              <ICMS10>
+                <vBCFCP>235.50</vBCFCP>
+                <vFCP>4.71</vFCP>
+                <pFCP>2.00</pFCP>
+              </ICMS10>
+            </ICMS>
+          </imposto>
+        </det>
+        eos
+
+        Nokogiri::XML(xml)
+      end
+
+      subject { BrDanfe::DanfeLib::Xprod.new(xml_fcp) }
+
+      it "returns product + FCP" do
+        expected = "MONITOR DE ARCO ELETRICO"
+        expected += "\n"
+        expected += "FCP: Base: 235,50 * Alíq: 2,00% * Vlr: 4,71"
+
+        expect(subject.render).to eq expected
+      end
+    end
+
+    context "when have FCP ST" do
+      let(:xml_fcp) do
+        xml = <<-eos
+        <det nItem="1">
+          <prod>
+            <xProd>MONITOR DE ARCO ELETRICO</xProd>
+          </prod>
+          <imposto>
+            <vTotTrib>23.56</vTotTrib>
+            <ICMS>
+              <ICMS30>
+                <vBCFCPST>235.50</vBCFCPST>
+                <vFCPST>4.71</vFCPST>
+                <pFCPST>2.00</pFCPST>
+              </ICMS30>
+            </ICMS>
+          </imposto>
+        </det>
+        eos
+
+        Nokogiri::XML(xml)
+      end
+
+      subject { BrDanfe::DanfeLib::Xprod.new(xml_fcp) }
+
+      it "returns product + FCP" do
+        expected = "MONITOR DE ARCO ELETRICO"
+        expected += "\n"
+        expected += "FCP ST: Base: 235,50 * Alíq: 2,00% * Vlr: 4,71"
 
         expect(subject.render).to eq expected
       end
