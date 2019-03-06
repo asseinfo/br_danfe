@@ -29,7 +29,7 @@ module BrDanfe
 
       def fci
         "\n#{I18n.t('danfe.det.prod.xProdFCI',
-                    nFCI: @det.css('prod/nFCI').text)}"
+          nFCI: @det.css('prod/nFCI').text)}"
       end
 
       def fci?
@@ -38,10 +38,10 @@ module BrDanfe
 
       def icms_st
         "\n#{I18n.t('danfe.det.prod.xProdST',
-                    pMVAST: Helper.numerify(@det.css('ICMS/*/pMVAST').text),
-                    pICMSST: Helper.numerify(@det.css('ICMS/*/pICMSST').text),
-                    vBCST: Helper.numerify(@det.css('ICMS/*/vBCST').text),
-                    vICMSST: Helper.numerify(@det.css('ICMS/*/vICMSST').text))}"
+          pMVAST: Helper.numerify(@det.css('ICMS/*/pMVAST').text),
+          pICMSST: Helper.numerify(@det.css('ICMS/*/pICMSST').text),
+          vBCST: Helper.numerify(@det.css('ICMS/*/vBCST').text),
+          vICMSST: Helper.numerify(@det.css('ICMS/*/vICMSST').text))}"
       end
 
       def icms_st?
@@ -66,15 +66,15 @@ module BrDanfe
 
       def fcp_icms00
         "\n#{I18n.t('danfe.det.prod.xProdFCPICMS00',
-                    vFCP: Helper.numerify(@det.css('ICMS00/vFCP').text),
-                    pFCP: Helper.numerify(@det.css('ICMS00/pFCP').text))}"
+          vFCP: Helper.numerify(@det.css('ICMS00/vFCP').text),
+          pFCP: Helper.numerify(@det.css('ICMS00/pFCP').text))}"
       end
 
       def fcp_other_icms_tags
         "\n#{I18n.t('danfe.det.prod.xProdFCPOtherICMSTags',
-                    vBCFCP: Helper.numerify(@det.css('ICMS/*/vBCFCP').text),
-                    vFCP: Helper.numerify(@det.css('ICMS/*/vFCP').text),
-                    pFCP: Helper.numerify(@det.css('ICMS/*/pFCP').text))}"
+          vBCFCP: Helper.numerify(@det.css('ICMS/*/vBCFCP').text),
+          vFCP: Helper.numerify(@det.css('ICMS/*/vFCP').text),
+          pFCP: Helper.numerify(@det.css('ICMS/*/pFCP').text))}"
       end
 
       def fcp_st?
@@ -83,9 +83,9 @@ module BrDanfe
 
       def fcp_st
         "\n#{I18n.t('danfe.det.prod.xProdFCPST',
-                    vBCFCPST: Helper.numerify(@det.css('ICMS/*/vBCFCPST').text),
-                    pFCPST: Helper.numerify(@det.css('ICMS/*/pFCPST').text),
-                    vFCPST: Helper.numerify(@det.css('ICMS/*/vFCPST').text))}"
+          vBCFCPST: Helper.numerify(@det.css('ICMS/*/vBCFCPST').text),
+          pFCPST: Helper.numerify(@det.css('ICMS/*/pFCPST').text),
+          vFCPST: Helper.numerify(@det.css('ICMS/*/vFCPST').text))}"
       end
     end
   end
