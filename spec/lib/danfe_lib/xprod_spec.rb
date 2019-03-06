@@ -168,7 +168,7 @@ describe BrDanfe::DanfeLib::Xprod do
       end
     end
 
-    context "when have FCP not in a ICMS00 tag" do
+    context "when FCP is not in a ICMS00 tag" do
       let(:xml_fcp) do
         xml = <<-eos
         <det nItem="1">

@@ -24,7 +24,7 @@ module BrDanfe
       end
 
       def has_infAdProd?
-        !@det.css('infAdProd').text.empty?
+        !@det.css("infAdProd").text.empty?
       end
 
       def fci
