@@ -53,25 +53,21 @@ module BrDanfe
       end
 
       def fcp
-        if icms00?
-          fcp_icms00
-        else
-          fcp_other_icms_tags
-        end
+        icms00? ? fcp_for_icms00 : fcp_complete
       end
 
       def icms00?
         @det.at_css('ICMS00')
       end
 
-      def fcp_icms00
+      def fcp_for_icms00
         "\n#{I18n.t('danfe.det.prod.xProdFCPICMS00',
           vFCP: Helper.numerify(@det.css('ICMS00/vFCP').text),
           pFCP: Helper.numerify(@det.css('ICMS00/pFCP').text))}"
       end
 
-      def fcp_other_icms_tags
-        "\n#{I18n.t('danfe.det.prod.xProdFCPOtherICMSTags',
+      def fcp_complete
+        "\n#{I18n.t('danfe.det.prod.xProdFCP',
           vBCFCP: Helper.numerify(@det.css('ICMS/*/vBCFCP').text),
           vFCP: Helper.numerify(@det.css('ICMS/*/vFCP').text),
           pFCP: Helper.numerify(@det.css('ICMS/*/pFCP').text))}"
