@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    br_danfe (0.7.7)
+    br_danfe (0.8.0)
       barby (= 0.5.1)
       br_documents (>= 0.0.15)
       i18n (= 0.8.6)
@@ -84,4 +84,4 @@ DEPENDENCIES
   simplecov-html (= 0.10.1)
 
 BUNDLED WITH
-   1.17.2
+   1.16.3

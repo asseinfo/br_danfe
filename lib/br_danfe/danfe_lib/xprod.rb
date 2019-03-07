@@ -10,8 +10,9 @@ module BrDanfe
 
         xprod += infAdProd if has_infAdProd?
         xprod += fci if fci?
-        xprod += st if st?
+        xprod += icms_st if icms_st?
         xprod += fcp if fcp?
+        xprod += fcp_st if fcp_st?
 
         xprod
       end
@@ -35,7 +36,7 @@ module BrDanfe
         !@det.css('prod/nFCI').text.empty?
       end
 
-      def st
+      def icms_st
         "\n#{I18n.t('danfe.det.prod.xProdST',
           pMVAST: Helper.numerify(@det.css('ICMS/*/pMVAST').text),
           pICMSST: Helper.numerify(@det.css('ICMS/*/pICMSST').text),
@@ -43,18 +44,44 @@ module BrDanfe
           vICMSST: Helper.numerify(@det.css('ICMS/*/vICMSST').text))}"
       end
 
-      def st?
-        @det.css("ICMS/*/vBCST").text.to_i > 0
+      def icms_st?
+        @det.css('ICMS/*/vBCST').text.to_i > 0
+      end
+
+      def fcp?
+        @det.css('ICMS/*/vFCP').text.to_i > 0
       end
 
       def fcp
-        "\n#{I18n.t('danfe.det.prod.xProdFCP',
+        icms00? ? fcp_for_icms00 : fcp_complete
+      end
+
+      def icms00?
+        @det.at_css('ICMS00')
+      end
+
+      def fcp_for_icms00
+        "\n#{I18n.t('danfe.det.prod.xProdFCPICMS00',
           vFCP: Helper.numerify(@det.css('ICMS00/vFCP').text),
           pFCP: Helper.numerify(@det.css('ICMS00/pFCP').text))}"
       end
 
-      def fcp?
-        @det.css("ICMS00/vFCP").text.to_i > 0
+      def fcp_complete
+        "\n#{I18n.t('danfe.det.prod.xProdFCP',
+          vBCFCP: Helper.numerify(@det.css('ICMS/*/vBCFCP').text),
+          vFCP: Helper.numerify(@det.css('ICMS/*/vFCP').text),
+          pFCP: Helper.numerify(@det.css('ICMS/*/pFCP').text))}"
+      end
+
+      def fcp_st?
+        @det.css('ICMS/*/vFCPST').text.to_i > 0
+      end
+
+      def fcp_st
+        "\n#{I18n.t('danfe.det.prod.xProdFCPST',
+          vBCFCPST: Helper.numerify(@det.css('ICMS/*/vBCFCPST').text),
+          pFCPST: Helper.numerify(@det.css('ICMS/*/pFCPST').text),
+          vFCPST: Helper.numerify(@det.css('ICMS/*/vFCPST').text))}"
       end
     end
   end
