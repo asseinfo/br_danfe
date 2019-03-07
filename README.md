@@ -186,14 +186,18 @@ IE           | 964.508.990.089
 
 You can generate new data using [4devs generators](http://www.4devs.com.br).
 
-## Deploy 
+## Deploy to Rubygems
 
-        $ bundle exec rake release  # Create tag vX.X.X, build and push br_danfe-X.X.X.gem to Rubygems
+    $ bundle exec rake release  # Create tag vX.X.X, build and push br_danfe-X.X.X.gem to Rubygems
 
 You can build or install using one of the above tasks
 
-        $ bundle exec rake build    # Build br_danfe-X.X.X.gem into the pkg directory
-        $ bundle exec rake install  # Build and install br_danfe-X.X.X.gem into system gems
+    $ bundle exec rake build    # Build br_danfe-X.X.X.gem into the pkg directory
+    $ bundle exec rake install  # Build and install br_danfe-X.X.X.gem into system gems
+
+#### Login
+    $ gem signin
+    $ gem signout
 
 ## Contributing
 
