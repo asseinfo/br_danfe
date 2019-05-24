@@ -40,6 +40,10 @@ module BrDanfe
           modality = "recipient"
         when "2"
           modality = "third_party"
+        when "3"
+          modality = "own_emitter"
+        when "4"
+          modality = "own_recipient"
         when "9"
           modality = "no_freight"
         end
