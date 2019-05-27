@@ -80,6 +80,8 @@ pt-BR:
         emitter: "0-Emitente"
         recipient: "1-Destinatário"
         third_party: "2-Terceiros"
+        own_emitter: "3-Prop/Rem"
+        own_recipient: "4-Prop/Dest"
         no_freight: "9-Sem Frete"
     veicTransp:
       RNTC: "CODIGO ANTT"

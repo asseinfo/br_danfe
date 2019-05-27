@@ -114,6 +114,50 @@ describe BrDanfe::DanfeLib::Transp do
       end
     end
 
+    context "when modFrete is 3" do
+      let(:xml_as_string) do
+        <<-eos
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+            <transp>
+              <modFrete>3</modFrete>
+            </transp>
+          </infNFe>
+        </NFe>
+        eos
+      end
+
+      it "renders '3-Prop/Rem' to the pdf" do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}transp#render-modfrete_3.pdf").to have_same_content_of file: output_pdf
+      end
+    end
+
+    context "when modFrete is 4" do
+      let(:xml_as_string) do
+        <<-eos
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+            <transp>
+              <modFrete>4</modFrete>
+            </transp>
+          </infNFe>
+        </NFe>
+        eos
+      end
+
+      it "renders '4-Prop/Dest' to the pdf" do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}transp#render-modfrete_4.pdf").to have_same_content_of file: output_pdf
+      end
+    end
+
     context "when modFrete is 9" do
       let(:xml_as_string) do
         <<-eos
