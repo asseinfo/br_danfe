@@ -236,12 +236,12 @@ describe BrDanfe::DanfeLib::Xprod do
             </ICMS>
           </imposto>
         </det>
-          eos
+        eos
 
-          Nokogiri::XML(xml)
-        end
+        Nokogiri::XML(xml)
+      end
 
-        subject { BrDanfe::DanfeLib::Xprod.new(xml_st) }
+      subject { BrDanfe::DanfeLib::Xprod.new(xml_st) }
 
         it "returns product + ST" do
           expected = "MONITOR DE ARCO ELETRICO"

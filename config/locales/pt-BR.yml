@@ -111,7 +111,6 @@ pt-BR:
         xProdFCP: "FCP: Base: %{vBCFCP} * Alíq: %{pFCP}% * Vlr: %{vFCP}"
         xProdFCPICMS00: "FCP: Alíq: %{pFCP}% * Vlr: %{vFCP}"
         xProdFCPST: "FCP ST: Base: %{vBCFCPST} * Alíq: %{pFCPST}% * Vlr: %{vFCPST}"
-
       ICMS:
         CST: "CST"
         vBC: "BC ICMS"
