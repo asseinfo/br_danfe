@@ -29,8 +29,197 @@ describe BrDanfe::DanfeLib::Xprod do
     end
 
     context "when have ST" do
-      let(:xml_st) do
-        xml = <<-eos
+      context "when is Retido" do
+
+        context "when have vBCSTRet" do
+          let(:xml_st) do
+            xml = <<-eos
+            <det nItem="1">
+              <prod>
+                <xProd>MONITOR DE ARCO ELETRICO</xProd>
+              </prod>
+              <imposto>
+                <ICMS>
+                  <ICMSST>
+                    <orig>0</orig>
+                    <CST>60</CST>
+                    <pST>0.00</pST>
+                    <vBCSTRet>50.00</vBCSTRet>
+                    <vICMSSTRet>0.00</vICMSSTRet>
+                    <vBCSTDest>0.00</vBCSTDest>
+                    <vICMSSTDest>0.00</vICMSSTDest>
+                  </ICMSST>
+                </ICMS>
+                <PIS>
+                  <PISNT>
+                    <CST>04</CST>
+                  </PISNT>
+                </PIS>
+                <COFINS>
+                  <COFINSNT>
+                    <CST>04</CST>
+                  </COFINSNT>
+                </COFINS>
+              </imposto>
+            </det>
+            eos
+
+            Nokogiri::XML(xml)
+          end
+
+          subject {BrDanfe::DanfeLib::Xprod.new(xml_st)}
+
+          it "returns product + ST Retido" do
+            expected = "MONITOR DE ARCO ELETRICO"
+            expected += "\n"
+            expected += "ST Retido: Base: 50,00 * Alíq: 0,00% * Vlr: 0,00"
+
+            expect(subject.render).to eq expected
+          end
+        end
+
+        context "when have vICMSSTRet" do
+          let(:xml_st) do
+            xml = <<-eos
+            <det nItem="1">
+              <prod>
+                <xProd>MONITOR DE ARCO ELETRICO</xProd>
+              </prod>
+              <imposto>
+                <ICMS>
+                  <ICMSST>
+                    <orig>0</orig>
+                    <CST>60</CST>
+                    <pST>0.00</pST>
+                    <vBCSTRet>0.00</vBCSTRet>
+                    <vICMSSTRet>50.00</vICMSSTRet>
+                    <vBCSTDest>0.00</vBCSTDest>
+                    <vICMSSTDest>0.00</vICMSSTDest>
+                  </ICMSST>
+                </ICMS>
+                <PIS>
+                  <PISNT>
+                    <CST>04</CST>
+                  </PISNT>
+                </PIS>
+                <COFINS>
+                  <COFINSNT>
+                    <CST>04</CST>
+                  </COFINSNT>
+                </COFINS>
+              </imposto>
+            </det>
+            eos
+
+            Nokogiri::XML(xml)
+          end
+
+          subject {BrDanfe::DanfeLib::Xprod.new(xml_st)}
+
+          it "returns product + ST Retido" do
+            expected = "MONITOR DE ARCO ELETRICO"
+            expected += "\n"
+            expected += "ST Retido: Base: 0,00 * Alíq: 0,00% * Vlr: 50,00"
+
+            expect(subject.render).to eq expected
+          end
+        end
+
+        context "when have pST" do
+          let(:xml_st) do
+            xml = <<-eos
+            <det nItem="1">
+              <prod>
+                <xProd>MONITOR DE ARCO ELETRICO</xProd>
+              </prod>
+              <imposto>
+                <ICMS>
+                  <ICMSST>
+                    <orig>0</orig>
+                    <CST>60</CST>
+                    <pST>50.00</pST>
+                    <vBCSTRet>0.00</vBCSTRet>
+                    <vICMSSTRet>0.00</vICMSSTRet>
+                    <vBCSTDest>0.00</vBCSTDest>
+                    <vICMSSTDest>0.00</vICMSSTDest>
+                  </ICMSST>
+                </ICMS>
+                <PIS>
+                  <PISNT>
+                    <CST>04</CST>
+                  </PISNT>
+                </PIS>
+                <COFINS>
+                  <COFINSNT>
+                    <CST>04</CST>
+                  </COFINSNT>
+                </COFINS>
+              </imposto>
+            </det>
+            eos
+
+            Nokogiri::XML(xml)
+          end
+
+          subject {BrDanfe::DanfeLib::Xprod.new(xml_st)}
+
+          it "returns product + ST Retido" do
+            expected = "MONITOR DE ARCO ELETRICO"
+            expected += "\n"
+            expected += "ST Retido: Base: 0,00 * Alíq: 50,00% * Vlr: 0,00"
+
+            expect(subject.render).to eq expected
+          end
+        end
+
+        context "when do not have any fields" do
+          let(:xml_st) do
+            xml = <<-eos
+            <det nItem="1">
+              <prod>
+                <xProd>MONITOR DE ARCO ELETRICO</xProd>
+              </prod>
+              <imposto>
+                <ICMS>
+                  <ICMSST>
+                    <orig>0</orig>
+                    <CST>60</CST>
+                    <pST>0.00</pST>
+                    <vBCSTRet>0.00</vBCSTRet>
+                    <vICMSSTRet>0.00</vICMSSTRet>
+                    <vBCSTDest>0.00</vBCSTDest>
+                    <vICMSSTDest>0.00</vICMSSTDest>
+                  </ICMSST>
+                </ICMS>
+                <PIS>
+                  <PISNT>
+                    <CST>04</CST>
+                  </PISNT>
+                </PIS>
+                <COFINS>
+                  <COFINSNT>
+                    <CST>04</CST>
+                  </COFINSNT>
+                </COFINS>
+              </imposto>
+            </det>
+            eos
+
+            Nokogiri::XML(xml)
+          end
+
+          subject {BrDanfe::DanfeLib::Xprod.new(xml_st)}
+
+          it "returns product" do
+            expected = "MONITOR DE ARCO ELETRICO"
+
+            expect(subject.render).to eq expected
+          end
+        end
+      end
+      context "when is not Retido" do
+        let(:xml_st) do
+          xml = <<-eos
         <det nItem="1">
           <prod>
             <xProd>MONITOR DE ARCO ELETRICO</xProd>
@@ -47,19 +236,20 @@ describe BrDanfe::DanfeLib::Xprod do
             </ICMS>
           </imposto>
         </det>
-        eos
+          eos
 
-        Nokogiri::XML(xml)
-      end
+          Nokogiri::XML(xml)
+        end
 
-      subject { BrDanfe::DanfeLib::Xprod.new(xml_st) }
+        subject { BrDanfe::DanfeLib::Xprod.new(xml_st) }
 
-      it "returns product + ST" do
-        expected = "MONITOR DE ARCO ELETRICO"
-        expected += "\n"
-        expected += "ST: MVA: 56,00% * Alíq: 17,00% * BC: 479,82 * Vlr: 29,28"
+        it "returns product + ST" do
+          expected = "MONITOR DE ARCO ELETRICO"
+          expected += "\n"
+          expected += "ST: MVA: 56,00% * Alíq: 17,00% * BC: 479,82 * Vlr: 29,28"
 
-        expect(subject.render).to eq expected
+          expect(subject.render).to eq expected
+        end
       end
     end
 

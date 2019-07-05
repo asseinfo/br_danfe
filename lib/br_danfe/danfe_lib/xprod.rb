@@ -13,6 +13,7 @@ module BrDanfe
         xprod += icms_st if icms_st?
         xprod += fcp if fcp?
         xprod += fcp_st if fcp_st?
+        xprod += icms_st_ret if icms_st_ret?
 
         xprod
       end
@@ -79,9 +80,21 @@ module BrDanfe
 
       def fcp_st
         "\n#{I18n.t('danfe.det.prod.xProdFCPST',
-          vBCFCPST: Helper.numerify(@det.css('ICMS/*/vBCFCPST').text),
-          pFCPST: Helper.numerify(@det.css('ICMS/*/pFCPST').text),
-          vFCPST: Helper.numerify(@det.css('ICMS/*/vFCPST').text))}"
+                    vBCFCPST: Helper.numerify(@det.css('ICMS/*/vBCFCPST').text),
+                    pFCPST: Helper.numerify(@det.css('ICMS/*/pFCPST').text),
+                    vFCPST: Helper.numerify(@det.css('ICMS/*/vFCPST').text))}"
+      end
+
+      def icms_st_ret?
+        @det.css('ICMS/*/vBCSTRet').text.to_i > 0 || @det.css('ICMS/*/vICMSSTRet').text.to_i > 0 ||
+          @det.css('ICMS/*/pST').text.to_i > 0
+      end
+
+      def icms_st_ret
+        "\n#{I18n.t('danfe.det.prod.xProdSTRet',
+                    vBCSTRet: Helper.numerify(@det.css('ICMS/*/vBCSTRet').text),
+                    vICMSSTRet: Helper.numerify(@det.css('ICMS/*/vICMSSTRet').text),
+                    pST: Helper.numerify(@det.css('ICMS/*/pST').text))}"
       end
     end
   end
