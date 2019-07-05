@@ -96,11 +96,12 @@ module BrDanfe
       end
 
       def icms_st_ret
-        "\n
-        #{I18n.t('danfe.det.prod.xProdSTRet',
+        "\n #{I18n.t(
+          'danfe.det.prod.xProdSTRet',
           vBCSTRet: Helper.numerify(@det.css('ICMS/*/vBCSTRet').text),
           vICMSSTRet: Helper.numerify(@det.css('ICMS/*/vICMSSTRet').text),
-          pST: Helper.numerify(@det.css('ICMS/*/pST').text))}"
+          pST: Helper.numerify(@det.css('ICMS/*/pST').text)
+        )}"
       end
     end
   end
