@@ -106,6 +106,7 @@ pt-BR:
         vUnCom: "VL UNIT"
         vProd: "VL TOTAL"
         xProdST: "ST: MVA: %{pMVAST}% * Alíq: %{pICMSST}% * BC: %{vBCST} * Vlr: %{vICMSST}"
+        xProdSTRet: "ST Retido: Base: %{vBCSTRet} * Alíq: %{pST}% * Vlr: %{vICMSSTRet}"
         xProdFCI: "FCI: %{nFCI}"
         xProdFCP: "FCP: Base: %{vBCFCP} * Alíq: %{pFCP}% * Vlr: %{vFCP}"
         xProdFCPICMS00: "FCP: Alíq: %{pFCP}% * Vlr: %{vFCP}"
