@@ -11,7 +11,6 @@ describe BrDanfe::DanfeLib::Plate do
       it "returns a formated plate" do
         plate = "ABC1D23"
         expect(BrDanfe::DanfeLib::Plate.format(plate)).to eq "ABC-1D23"
-        p BrDanfe::DanfeLib::Plate.format(plate)
       end
     end
   end
