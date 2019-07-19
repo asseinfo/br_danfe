@@ -23,9 +23,9 @@ module BrDanfe
       def render_additional_data(volumes_number)
         y_position = Y_POSITION + 0.30
 
-        if render_volume?(volumes_number)
+        if volumes_number > 1
           render_volume_at y_position
-          y_position += y_position_with_volume(volumes_number)
+          y_position += volumes_number * 0.15 + 0.2
         end
 
         @pdf.ibox 2.65, 12.45, 0.75, y_position, '', generate_additional_data,
@@ -34,30 +34,20 @@ module BrDanfe
 
       def generate_additional_data
         additional_data = []
-        additional_data.push(complementary_content) if complementary_information?
-        additional_data.push(address_content) if address_too_big?
-        additional_data.push(difal_content) if difal?
+        additional_data.push(complementary_content) if complementary_content
+        additional_data.push(address_content) if address_content
+        additional_data.push(difal_content) if difal_content
         additional_data.join(' * ')
       end
 
       def complementary_content
-        @xml['infAdic/infCpl'].to_s
-      end
-
-      def complementary_information?
-        @xml['infAdic/infCpl'].to_s != ''
-      end
-
-      def address_too_big?
-        Helper.address_is_too_big @pdf, (Helper.generate_address @xml)
+        @xml['infAdic/infCpl'].to_s if @xml['infAdic/infCpl'].to_s != ''
       end
 
       def address_content
+        address = Helper.generate_address @xml
+        return unless Helper.address_is_too_big @pdf, address
         "Endereço: #{Helper.generate_address @xml}"
-      end
-
-      def y_position_with_volume(volumes_number)
-        volumes_number * 0.15 + 0.2
       end
 
       def render_reserved_fisco
@@ -74,11 +64,8 @@ module BrDanfe
                   I18n.t('danfe.infAdic.infCpl'), '', size: 7, valign: :top
       end
 
-      def difal?
-        !@xml['ICMSTot/vICMSUFDest'].to_f.zero?
-      end
-
       def difal_content
+        return unless @xml['ICMSTot/vICMSUFDest'].to_f != 0
         I18n.t(
           'danfe.infAdic.difal',
           vICMSUFDest: numerify(@xml['ICMSTot/vICMSUFDest']),
@@ -89,10 +76,6 @@ module BrDanfe
 
       def numerify(value)
         Helper.numerify(value) if value != ''
-      end
-
-      def render_volume?(volumes_number)
-        volumes_number > 1
       end
 
       def render_volume_title(y_position)
@@ -117,55 +100,41 @@ module BrDanfe
       end
 
       def render_volume_fields(det, y_position)
-        render_volume_item_title 0.50, 1.35, y_position, 'esp'
-        render_volume_item_field volume_value(det, 'esp'), 3.00, 1.75,
-                                 y_position, :text
+        render_item_title 0.5, 1.35, y_position, 'esp'
+        render_item_field value(det, 'esp'), 3, 1.75, y_position
 
-        render_volume_item_title 0.70, 4.15, y_position, 'marca'
-        render_volume_item_field volume_value(det, 'marca'), 2.00, 4.75,
-                                 y_position, :text
+        render_item_title 0.7, 4.15, y_position, 'marca'
+        render_item_field value(det, 'marca'), 2, 4.75, y_position
 
-        volumes_fields det, y_position
-        peso_fields det, y_position
+        render_item_title 0.7, 0.75, y_position, 'qVol'
+        render_item_field value(det, 'qVol'), 0.7, 1.04, y_position
+
+        render_item_title 1, 6.1, y_position, 'nVol'
+        render_item_field value(det, 'nVol'), 1, 6.7, y_position
+
+        render_item_title 1.3, 7, y_position, 'pesoB'
+        render_peso_item_field value(det, 'pesoB'), 1.3, 7, y_position
+
+        render_item_title 0.9, 8.5, y_position, 'pesoL'
+        render_peso_item_field value(det, 'pesoL'), 1.5, 8.5, y_position
       end
 
-      def volumes_fields(det, y_position)
-        render_volume_item_title 0.70, 0.75, y_position, 'qVol'
-        render_volume_item_field volume_value(det, 'qVol'), 0.70, 1.04,
-                                 y_position, :text
-
-        render_volume_item_title 1.00, 6.10, y_position, 'nVol'
-        render_volume_item_field volume_value(det, 'nVol'), 1.00, 6.70,
-                                 y_position, :text
+      def render_peso_item_field(value, width, x_position, y_position)
+        @pdf.inumeric 0.35, width, x_position, y_position, '', value,
+                      style_decimal
       end
 
-      def peso_fields(det, y_position)
-        render_volume_item_title 1.30, 7.00, y_position, 'pesoB'
-        render_volume_item_field volume_value(det, 'pesoB'), 1.30, 7.00,
-                                 y_position, :numeric
-
-        render_volume_item_title 0.90, 8.50, y_position, 'pesoL'
-        render_volume_item_field volume_value(det, 'pesoL'), 1.50, 8.50,
-                                 y_position, :numeric
-      end
-
-      def volume_value(det, field)
+      def value(det, field)
         det.css(field).text
       end
 
-      def render_volume_item_title(width, x_position, y_position, field)
+      def render_item_title(width, x_position, y_position, field)
         label = I18n.t("danfe.infAdic.vol.#{field}")
         @pdf.ibox 0.35, width, x_position, y_position, '', label, style_normal
       end
 
-      def render_volume_item_field(value, width, x_position, y_position, kind)
-        if kind == :numeric
-          @pdf.inumeric 0.35, width, x_position, y_position, '', value,
-                        style_decimal
-        else
-          @pdf.ibox 0.35, width, x_position, y_position, '', value,
-                    style_italic
-        end
+      def render_item_field(value, width, x_position, y_position)
+        @pdf.ibox 0.35, width, x_position, y_position, '', value, style_italic
       end
 
       def style_normal
