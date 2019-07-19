@@ -7,90 +7,164 @@ module BrDanfe
         @pdf = pdf
         @xml = xml
 
-        @title = Y_POSITION - 0.41
+        @title_position = Y_POSITION - 0.41
         @y_position = Y_POSITION
       end
 
-      def render(n_vol)
-        @pdf.ititle 0.42, 10.00, 0.75, @title, "infAdic.title"
-
-        if n_vol > 1
-          render_extra_volumes
-        elsif difal?
-          render_difal
-        else
-          title = I18n.t "danfe.infAdic.infCpl"
-          observation = generate_observation @xml["infAdic/infCpl"]
-          @pdf.ibox 2.65, 12.45, 0.75, @y_position, title, observation, { size: 6, valign: :top }
-        end
-
-        @pdf.ibox 2.65, 7.15, 13.20, @y_position, I18n.t("danfe.infAdic.reserved")
+      def render(volumes_number)
+        render_title
+        render_subtitle
+        render_additional_data volumes_number
+        render_reserved_fisco
       end
 
       private
 
-      def render_extra_volumes
-        @pdf.ibox 2.65, 12.45, 0.75, @y_position, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
+      def render_additional_data(volumes_number)
+        y_position = Y_POSITION + 0.30
 
-        y = Y_POSITION + 0.20
-
-        if difal?
-          @pdf.ibox 1.65, 12.45, 0.75, y, "", difal_content, { size: 5, valign: :top, border: 0 }
-          y += 0.27
-        else
-          y += 0.07
+        if render_volume?(volumes_number)
+          render_volume_at y_position
+          y_position += y_position_with_volume(volumes_number)
         end
 
-        @pdf.ibox 2.65, 12.45, 0.75, y, "", I18n.t("danfe.infAdic.vol.title"), { size: 5, valign: :top, border: 0 }
+        @pdf.ibox 2.65, 12.45, 0.75, y_position, '', generate_additional_data,
+                  size: 5, valign: :top, border: 0
+      end
 
-        volumes = 0
-        y += 0.07
+      def generate_additional_data
+        additional_data = []
+        additional_data.push(complementary_content) if complementary_information?
+        additional_data.push(address_content) if address_too_big?
+        additional_data.push(difal_content) if difal?
+        additional_data.join(' * ')
+      end
 
-        @xml.collect("xmlns", "vol") do |det|
-          volumes += 1
-          if volumes > 1
-            render_extra_volume(det, y + 0.10)
-            y += 0.15
-          end
-        end
+      def complementary_content
+        @xml['infAdic/infCpl'].to_s
+      end
 
-        render_info_cpl_with_others y
+      def complementary_information?
+        @xml['infAdic/infCpl'].to_s != ''
+      end
+
+      def address_too_big?
+        Helper.address_is_too_big @pdf, (Helper.generate_address @xml)
+      end
+
+      def address_content
+        "Endereço: #{Helper.generate_address @xml}"
+      end
+
+      def y_position_with_volume(volumes_number)
+        volumes_number * 0.15 + 0.2
+      end
+
+      def render_reserved_fisco
+        @pdf.ibox 2.65, 7.15, 13.20, @y_position,
+                  I18n.t('danfe.infAdic.reserved')
+      end
+
+      def render_title
+        @pdf.ititle 0.42, 10.00, 0.75, @title_position, 'infAdic.title'
+      end
+
+      def render_subtitle
+        @pdf.ibox 2.65, 12.45, 0.75, @y_position,
+                  I18n.t('danfe.infAdic.infCpl'), '', size: 7, valign: :top
       end
 
       def difal?
-        !@xml["ICMSTot/vICMSUFDest"].to_f.zero?
+        !@xml['ICMSTot/vICMSUFDest'].to_f.zero?
       end
 
       def difal_content
-        I18n.t("danfe.infAdic.difal",
-          vICMSUFDest: numerify(@xml["ICMSTot/vICMSUFDest"]),
-          vFCPUFDest: numerify(@xml["ICMSTot/vFCPUFDest"]),
-          vICMSUFRemet: numerify(@xml["ICMSTot/vICMSUFRemet"]))
+        I18n.t(
+          'danfe.infAdic.difal',
+          vICMSUFDest: numerify(@xml['ICMSTot/vICMSUFDest']),
+          vFCPUFDest: numerify(@xml['ICMSTot/vFCPUFDest']),
+          vICMSUFRemet: numerify(@xml['ICMSTot/vICMSUFRemet'])
+        )
       end
 
       def numerify(value)
-        Helper.numerify(value) if value != ""
+        Helper.numerify(value) if value != ''
       end
 
-      def render_extra_volume(det, y)
-        render_field "qVol", det, 0.70, 0.75, 0.70, 1.04, y, :text
-        render_field "esp", det, 0.50, 1.35, 3.00, 1.75, y, :text
-        render_field "marca", det, 0.70, 4.15, 2.00, 4.75, y, :text
-        render_field "nVol", det, 1.00, 6.10, 1.00, 6.70, y, :text
-        render_field "pesoB", det, 1.30, 7.00, 1.30, 7.00, y, :numeric
-        render_field "pesoL", det, 0.90, 8.50, 1.50, 8.50, y, :numeric
+      def render_volume?(volumes_number)
+        volumes_number > 1
       end
 
-      def render_field(field, det, w1, x1, w2, x2, y, kind)
+      def render_volume_title(y_position)
+        @pdf.ibox 2.65, 12.45, 0.75, y_position, '',
+                  I18n.t('danfe.infAdic.vol.title'),
+                  size: 5, valign: :top, border: 0
+      end
+
+      def render_volume_at(y_position)
+        render_volume_title y_position
+
+        volumes = 0
+
+        @xml.collect('xmlns', 'vol') do |det|
+          volumes += 1
+
+          if volumes > 1
+            render_volume_fields(det, y_position + 0.17)
+            y_position += 0.15
+          end
+        end
+      end
+
+      def render_volume_fields(det, y_position)
+        render_volume_item_title 0.50, 1.35, y_position, 'esp'
+        render_volume_item_field volume_value(det, 'esp'), 3.00, 1.75,
+                                 y_position, :text
+
+        render_volume_item_title 0.70, 4.15, y_position, 'marca'
+        render_volume_item_field volume_value(det, 'marca'), 2.00, 4.75,
+                                 y_position, :text
+
+        volumes_fields det, y_position
+        peso_fields det, y_position
+      end
+
+      def volumes_fields(det, y_position)
+        render_volume_item_title 0.70, 0.75, y_position, 'qVol'
+        render_volume_item_field volume_value(det, 'qVol'), 0.70, 1.04,
+                                 y_position, :text
+
+        render_volume_item_title 1.00, 6.10, y_position, 'nVol'
+        render_volume_item_field volume_value(det, 'nVol'), 1.00, 6.70,
+                                 y_position, :text
+      end
+
+      def peso_fields(det, y_position)
+        render_volume_item_title 1.30, 7.00, y_position, 'pesoB'
+        render_volume_item_field volume_value(det, 'pesoB'), 1.30, 7.00,
+                                 y_position, :numeric
+
+        render_volume_item_title 0.90, 8.50, y_position, 'pesoL'
+        render_volume_item_field volume_value(det, 'pesoL'), 1.50, 8.50,
+                                 y_position, :numeric
+      end
+
+      def volume_value(det, field)
+        det.css(field).text
+      end
+
+      def render_volume_item_title(width, x_position, y_position, field)
         label = I18n.t("danfe.infAdic.vol.#{field}")
-        value = det.css(field).text
+        @pdf.ibox 0.35, width, x_position, y_position, '', label, style_normal
+      end
 
-        @pdf.ibox 0.35, w1, x1, y, "", label, style_normal
-
+      def render_volume_item_field(value, width, x_position, y_position, kind)
         if kind == :numeric
-          @pdf.inumeric 0.35, w2, x2, y, "", value, style_decimal
+          @pdf.inumeric 0.35, width, x_position, y_position, '', value,
+                        style_decimal
         else
-          @pdf.ibox 0.35, w2, x2, y, "", value, style_italic
+          @pdf.ibox 0.35, width, x_position, y_position, '', value,
+                    style_italic
         end
       end
 
@@ -99,38 +173,11 @@ module BrDanfe
       end
 
       def style_italic
-        style_normal.merge({ style: :italic })
+        style_normal.merge(style: :italic)
       end
 
       def style_decimal
-        style_italic.merge({ decimals: 3 })
-      end
-
-      def render_info_cpl_with_others(y)
-        @pdf.ibox 1.65, 12.45, 0.75, y + 0.30, "", I18n.t("danfe.infAdic.others"), { size: 6, valign: :top, border: 0 }
-        @pdf.ibox 1.65, 12.45, 0.75, y + 0.50, "", @xml["infAdic/infCpl"], { size: 5, valign: :top, border: 0 }
-      end
-
-      def render_difal
-        @pdf.ibox 2.65, 12.45, 0.75, @y_position, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
-
-        y = Y_POSITION + 0.20
-        @pdf.ibox 1.65, 12.45, 0.75, y, "", difal_content, { size: 5, valign: :top, border: 0 }
-
-        y += 0.10
-
-        render_info_cpl_with_others y
-      end
-
-      def generate_observation(informations)
-        observation = informations
-
-        address = Helper.generate_address @xml
-        if Helper.address_is_too_big @pdf, address
-          observation = "#{observation} * Endereço: #{address}"
-        end
-
-        observation
+        style_italic.merge(decimals: 3)
       end
     end
   end

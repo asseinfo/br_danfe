@@ -125,10 +125,10 @@ describe BrDanfe::Danfe do
         it "renders xml to the pdf" do
           expect(File.exist?(output_pdf)).to be_falsey
 
-          danfe = BrDanfe::Danfe.new(File.read("#{base_dir}withot_issqn.xml"))
+          danfe = BrDanfe::Danfe.new(File.read("#{base_dir}without_issqn.xml"))
           danfe.save_pdf output_pdf
 
-          expect("#{base_dir}withot_issqn.fixture.pdf").to have_same_content_of file: output_pdf
+          expect("#{base_dir}without_issqn.fixture.pdf").to have_same_content_of file: output_pdf
         end
       end
 
