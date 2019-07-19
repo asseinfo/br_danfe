@@ -2,7 +2,7 @@ module BrDanfe
   module DanfeLib
     class Plate
       def self.format(plate)
-        plate.sub(/(\w{2})(\d{4})/, "\\1-\\2")
+        plate.delete('-').sub(/([A-Za-z]{3})/, '\\1-')
       end
     end
   end
