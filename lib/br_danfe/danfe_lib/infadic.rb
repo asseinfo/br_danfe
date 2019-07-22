@@ -93,14 +93,10 @@ module BrDanfe
           volumes += 1
 
           if volumes > 1
-            render_volume_fields(det, y_position + 0.17)
+            VolRenderer.new(@pdf, det, y_position + 0.17)
             y_position += 0.15
           end
         end
-      end
-
-      def render_volume_fields(det, y_position)
-        VolRenderer.new(@pdf, det, y_position)
       end
     end
   end
