@@ -19,6 +19,10 @@ module BrDanfe
         render_item_title 1, 6.1, y_position, 'nVol'
         render_item_field value(det, 'nVol'), 1, 6.7, y_position
 
+        render_peso_fields det, y_position
+      end
+
+      def render_peso_fields(det, y_position)
         render_item_title 1.3, 7, y_position, 'pesoB'
         render_peso_item_field value(det, 'pesoB'), 1.3, 7, y_position
 
