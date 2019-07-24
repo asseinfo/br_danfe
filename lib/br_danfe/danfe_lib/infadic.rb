@@ -35,7 +35,20 @@ module BrDanfe
       end
 
       def render_additional_data(y_position)
-        @pdf.ibox 2.65, 12.45, 0.75, y_position, '', generate_additional_data, size: 6, valign: :top, border: 0
+        data = generate_additional_data
+        @pdf.ibox 2.65, 12.45, 0.75, y_position, '', data, additional_data_style
+      end
+
+      def generate_additional_data
+        additional_data = []
+        additional_data.push(complementary_content) if complementary?
+        additional_data.push(address_content) if address?
+        additional_data.push(difal_content) if difal?
+        additional_data.join(' * ')
+      end
+
+      def additional_data_style
+        { size: 6, valign: :top, border: 0 }
       end
 
       def y_position(volumes_number)
@@ -47,14 +60,6 @@ module BrDanfe
 
       def additional_data?
         complementary? || address? || difal?
-      end
-
-      def generate_additional_data
-        additional_data = []
-        additional_data.push(complementary_content) if complementary?
-        additional_data.push(address_content) if address?
-        additional_data.push(difal_content) if difal?
-        additional_data.join(' * ')
       end
 
       def complementary_content

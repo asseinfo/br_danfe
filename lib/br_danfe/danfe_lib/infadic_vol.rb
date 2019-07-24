@@ -41,7 +41,7 @@ module BrDanfe
         render_qvol
         render_nvol
         render_pesob
-        render_pesoL
+        render_pesol
       end
 
       def render_esp
@@ -94,7 +94,7 @@ module BrDanfe
         style_italic.merge(decimals: 3)
       end
 
-      def render_pesoL
+      def render_pesol
         render_item_title 0.9, 8.5, 'pesoL'
         render_peso_item_field @det.css('pesoL').text, 1.5, 8.5, @y_position
       end
