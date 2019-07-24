@@ -119,7 +119,7 @@ describe BrDanfe::DanfeLib::Infadic do
         EOS
       end
 
-      it 'renders xml to the pdf' do
+      it 'renders title with box, subtitle and fisco box on the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
@@ -173,7 +173,7 @@ describe BrDanfe::DanfeLib::Infadic do
         EOS
       end
 
-      it 'renders xml to the pdf' do
+      it 'renders title with box, subtitle, fisco box and difal on the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
@@ -215,7 +215,7 @@ describe BrDanfe::DanfeLib::Infadic do
         EOS
       end
 
-      it 'renders xml to the pdf' do
+      it 'renders title with box, subtitle, fisco box and address on the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
@@ -295,7 +295,8 @@ describe BrDanfe::DanfeLib::Infadic do
         EOS
       end
 
-      it 'renders xml to the pdf' do
+      it 'renders title with box, subtitle, fisco box and complementary ' \
+        'information on the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
@@ -373,7 +374,8 @@ describe BrDanfe::DanfeLib::Infadic do
       end
       let(:volumes_number) { 2 }
 
-      it 'renders xml to the pdf' do
+      it 'renders title with box, subtitle, fisco box and extra volumes on the ' \
+      'pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
@@ -424,9 +426,17 @@ describe BrDanfe::DanfeLib::Infadic do
                 <pesoL>2000.000</pesoL>
                 <pesoB>2200.000</pesoB>
               </vol>
+              <vol>
+                <qVol>3</qVol>
+                <esp>VOLUMES 3</esp>
+                <marca>DIVERSOS 3</marca>
+                <nVol>3</nVol>
+                <pesoL>3000.000</pesoL>
+                <pesoB>3300.000</pesoB>
+              </vol>
             </transp>
             <infAdic>
-              <infCpl>Uma observação</infCpl>
+              <infCpl>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue in dolor sed sagittis.</infCpl>
             </infAdic>
             <ICMSTot>
               <vFCPUFDest>4892.78</vFCPUFDest>
@@ -437,9 +447,10 @@ describe BrDanfe::DanfeLib::Infadic do
         </NFe>
         EOS
       end
-      let(:volumes_number) { 2 }
+      let(:volumes_number) { 3 }
 
-      it 'renders xml to the pdf' do
+      it 'renders title with box, subtitle, fisco box, extra volumes, ' \
+      'complementary information, address and difal on the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
