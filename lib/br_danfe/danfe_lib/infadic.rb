@@ -25,8 +25,9 @@ module BrDanfe
       end
 
       def render_subtitle
-        @pdf.ibox 2.65, 12.45, 0.75, @y_position,
-          I18n.t('danfe.infAdic.infCpl'), '', size: 8, valign: :top
+        @pdf.ibox 2.65, 12.45, 0.75, @y_position, I18n.t(
+          'danfe.infAdic.infCpl'
+        ), '', size: 8, valign: :top
       end
 
       def render_volumes
@@ -34,8 +35,7 @@ module BrDanfe
       end
 
       def render_additional_data(y_position)
-        @pdf.ibox 2.65, 12.45, 0.75, y_position, '', generate_additional_data,
-          size: 6, valign: :top, border: 0
+        @pdf.ibox 2.65, 12.45, 0.75, y_position, '', generate_additional_data, size: 6, valign: :top, border: 0
       end
 
       def y_position(volumes_number)
@@ -91,8 +91,9 @@ module BrDanfe
       end
 
       def render_reserved_fisco
-        @pdf.ibox 2.65, 7.15, 13.20, @y_position,
-          I18n.t('danfe.infAdic.reserved')
+        @pdf.ibox 2.65, 7.15, 13.20, @y_position, I18n.t(
+          'danfe.infAdic.reserved'
+        )
       end
     end
   end
