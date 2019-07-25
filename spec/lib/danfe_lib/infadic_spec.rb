@@ -10,66 +10,6 @@ describe BrDanfe::DanfeLib::Infadic do
   subject { described_class.new(pdf, xml) }
 
   describe '#render' do
-    let(:xml_as_string) do
-      <<-EOS
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <dest>
-            <CNPJ>82743287000880</CNPJ>
-            <xNome>Schneider Electric Brasil Ltda</xNome>
-            <enderDest>
-              <xLgr>Av da Saudade</xLgr>
-              <nro>1125</nro>
-              <xBairro>Frutal</xBairro>
-              <xCpl>Em anexo ao super mercado maior do bairro</xCpl>
-              <cMun>3552403</cMun>
-              <xMun>SUMARE</xMun>
-              <UF>SP</UF>
-              <CEP>13171320</CEP>
-              <cPais>1058</cPais>
-              <xPais>BRASIL</xPais>
-              <fone>1921046300</fone>
-            </enderDest>
-            <IE>671008375110</IE>
-            </dest>
-            <transp>
-              <vol>
-                <qVol>1</qVol>
-                <esp>VOLUMES 1</esp>
-                <marca>DIVERSOS 1</marca>
-                <nVol>1</nVol>
-                <pesoL>1000.000</pesoL>
-                <pesoB>1100.000</pesoB>
-              </vol>
-              <vol>
-                <qVol>2</qVol>
-                <esp>VOLUMES 2</esp>
-                <marca>DIVERSOS 2</marca>
-                <nVol>2</nVol>
-                <pesoL>2000.000</pesoL>
-                <pesoB>2200.000</pesoB>
-              </vol>
-              <vol>
-                <qVol>3</qVol>
-                <esp>VOLUMES 3</esp>
-                <marca>DIVERSOS 3</marca>
-                <nVol>3</nVol>
-                <pesoL>3000.000</pesoL>
-                <pesoB>3300.000</pesoB>
-              </vol>
-            </transp>
-            <infAdic>
-              <infCpl>Uma observação</infCpl>
-            </infAdic>
-            <ICMSTot>
-              <vFCPUFDest>4892.78</vFCPUFDest>
-              <vICMSUFDest>2915.78</vICMSUFDest>
-              <vICMSUFRemet>75394.78</vICMSUFRemet>
-            </ICMSTot>
-          </infNFe>
-        </NFe>
-      EOS
-    end
     let(:volumes_number) { 1 }
 
     before do
