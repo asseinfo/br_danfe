@@ -6,131 +6,91 @@ module BrDanfe
       def initialize(pdf, xml)
         @pdf = pdf
         @xml = xml
-
-        @title = Y_POSITION - 0.41
+        @title_position = Y_POSITION - 0.41
         @y_position = Y_POSITION
       end
 
-      def render(n_vol)
-        @pdf.ititle 0.42, 10.00, 0.75, @title, "infAdic.title"
-
-        if n_vol > 1
-          render_extra_volumes
-        elsif difal?
-          render_difal
-        else
-          title = I18n.t "danfe.infAdic.infCpl"
-          observation = generate_observation @xml["infAdic/infCpl"]
-          @pdf.ibox 2.65, 12.45, 0.75, @y_position, title, observation, { size: 6, valign: :top }
-        end
-
-        @pdf.ibox 2.65, 7.15, 13.20, @y_position, I18n.t("danfe.infAdic.reserved")
+      def render(volumes_number)
+        render_title
+        render_subtitle
+        render_volumes if volumes_number > 1
+        render_additional_data generate_y_position(volumes_number) if additional_data?
+        render_reserved_fisco
       end
 
       private
 
-      def render_extra_volumes
-        @pdf.ibox 2.65, 12.45, 0.75, @y_position, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
-
-        y = Y_POSITION + 0.20
-
-        if difal?
-          @pdf.ibox 1.65, 12.45, 0.75, y, "", difal_content, { size: 5, valign: :top, border: 0 }
-          y += 0.27
-        else
-          y += 0.07
-        end
-
-        @pdf.ibox 2.65, 12.45, 0.75, y, "", I18n.t("danfe.infAdic.vol.title"), { size: 5, valign: :top, border: 0 }
-
-        volumes = 0
-        y += 0.07
-
-        @xml.collect("xmlns", "vol") do |det|
-          volumes += 1
-          if volumes > 1
-            render_extra_volume(det, y + 0.10)
-            y += 0.15
-          end
-        end
-
-        render_info_cpl_with_others y
+      def render_title
+        @pdf.ititle 0.42, 10.00, 0.75, @title_position, 'infAdic.title'
       end
 
-      def difal?
-        !@xml["ICMSTot/vICMSUFDest"].to_f.zero?
+      def render_subtitle
+        @pdf.ibox 2.65, 12.45, 0.75, @y_position, I18n.t('danfe.infAdic.infCpl'), '', size: 8, valign: :top
+      end
+
+      def render_volumes
+        InfadicVol.new(@xml, @pdf).render
+      end
+
+      def render_additional_data(y_position)
+        data = generate_additional_data
+        @pdf.ibox 2.65, 12.45, 0.75, y_position, '', data, { size: 6, valign: :top, border: 0 }
+      end
+
+      def generate_additional_data
+        additional_data = []
+        additional_data.push(complementary_content) if complementary?
+        additional_data.push(address_content) if address?
+        additional_data.push(difal_content) if difal?
+        additional_data.join(' * ')
+      end
+
+      def complementary_content
+        @xml['infAdic/infCpl'].to_s
+      end
+
+      def complementary?
+        @xml['infAdic/infCpl'].to_s != ''
+      end
+
+      def address_content
+        "Endereço: #{Helper.generate_address @xml}"
+      end
+
+      def address?
+        Helper.address_is_too_big @pdf, Helper.generate_address(@xml)
       end
 
       def difal_content
-        I18n.t("danfe.infAdic.difal",
-          vICMSUFDest: numerify(@xml["ICMSTot/vICMSUFDest"]),
-          vFCPUFDest: numerify(@xml["ICMSTot/vFCPUFDest"]),
-          vICMSUFRemet: numerify(@xml["ICMSTot/vICMSUFRemet"]))
+        I18n.t(
+          'danfe.infAdic.difal',
+          vICMSUFDest: numerify(@xml['ICMSTot/vICMSUFDest']),
+          vFCPUFDest: numerify(@xml['ICMSTot/vFCPUFDest']),
+          vICMSUFRemet: numerify(@xml['ICMSTot/vICMSUFRemet'])
+        )
       end
 
       def numerify(value)
-        Helper.numerify(value) if value != ""
+        Helper.numerify(value) if value != ''
       end
 
-      def render_extra_volume(det, y)
-        render_field "qVol", det, 0.70, 0.75, 0.70, 1.04, y, :text
-        render_field "esp", det, 0.50, 1.35, 3.00, 1.75, y, :text
-        render_field "marca", det, 0.70, 4.15, 2.00, 4.75, y, :text
-        render_field "nVol", det, 1.00, 6.10, 1.00, 6.70, y, :text
-        render_field "pesoB", det, 1.30, 7.00, 1.30, 7.00, y, :numeric
-        render_field "pesoL", det, 0.90, 8.50, 1.50, 8.50, y, :numeric
+      def difal?
+        @xml['ICMSTot/vICMSUFDest'].to_f != 0
       end
 
-      def render_field(field, det, w1, x1, w2, x2, y, kind)
-        label = I18n.t("danfe.infAdic.vol.#{field}")
-        value = det.css(field).text
-
-        @pdf.ibox 0.35, w1, x1, y, "", label, style_normal
-
-        if kind == :numeric
-          @pdf.inumeric 0.35, w2, x2, y, "", value, style_decimal
-        else
-          @pdf.ibox 0.35, w2, x2, y, "", value, style_italic
+      def generate_y_position(volumes_number)
+        if volumes_number > 1
+          return Y_POSITION + 0.30 + volumes_number * 0.15 + 0.2
         end
+        Y_POSITION + 0.30
       end
 
-      def style_normal
-        { size: 4, border: 0 }
+      def additional_data?
+        complementary? || address? || difal?
       end
 
-      def style_italic
-        style_normal.merge({ style: :italic })
-      end
-
-      def style_decimal
-        style_italic.merge({ decimals: 3 })
-      end
-
-      def render_info_cpl_with_others(y)
-        @pdf.ibox 1.65, 12.45, 0.75, y + 0.30, "", I18n.t("danfe.infAdic.others"), { size: 6, valign: :top, border: 0 }
-        @pdf.ibox 1.65, 12.45, 0.75, y + 0.50, "", @xml["infAdic/infCpl"], { size: 5, valign: :top, border: 0 }
-      end
-
-      def render_difal
-        @pdf.ibox 2.65, 12.45, 0.75, @y_position, I18n.t("danfe.infAdic.infCpl"), "", { size: 8, valign: :top }
-
-        y = Y_POSITION + 0.20
-        @pdf.ibox 1.65, 12.45, 0.75, y, "", difal_content, { size: 5, valign: :top, border: 0 }
-
-        y += 0.10
-
-        render_info_cpl_with_others y
-      end
-
-      def generate_observation(informations)
-        observation = informations
-
-        address = Helper.generate_address @xml
-        if Helper.address_is_too_big @pdf, address
-          observation = "#{observation} * Endereço: #{address}"
-        end
-
-        observation
+      def render_reserved_fisco
+        @pdf.ibox 2.65, 7.15, 13.20, @y_position, I18n.t('danfe.infAdic.reserved')
       end
     end
   end

@@ -130,7 +130,6 @@ pt-BR:
       title: "DADOS ADICIONAIS"
       infCpl: "INFORMAÇÕES COMPLEMENTARES"
       reserved: "RESERVADO AO FISCO"
-      others: "OUTRAS INFORMAÇÕES"
       difal: "Valores totais do ICMS Interestadual: DIFAL da UF destino R$%{vICMSUFDest} + FCP R$%{vFCPUFDest}; DIFAL da UF Origem R$%{vICMSUFRemet}."
       vol:
         title: "CONTINUAÇÃO TRANSPORTADOR/VOLUMES TRANSPORTADOS"
