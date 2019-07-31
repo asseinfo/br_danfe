@@ -42,6 +42,7 @@ module BrDanfe
         additional_data.push(complementary_content) if complementary?
         additional_data.push(address_content) if address?
         additional_data.push(difal_content) if difal?
+        additional_data.push(fisco_content) if fisco?
         additional_data.join(' * ')
       end
 
@@ -78,6 +79,14 @@ module BrDanfe
         @xml['ICMSTot/vICMSUFDest'].to_f != 0
       end
 
+      def fisco_content
+        @xml['infAdic/infAdFisco'].to_s
+      end
+
+      def fisco?
+        @xml['infAdic/infAdFisco'].to_s != ''
+      end
+
       def generate_y_position(volumes_number)
         if volumes_number > 1
           return Y_POSITION + 0.30 + volumes_number * 0.15 + 0.2
@@ -86,7 +95,7 @@ module BrDanfe
       end
 
       def additional_data?
-        complementary? || address? || difal?
+        complementary? || address? || difal? || fisco?
       end
 
       def render_reserved_fisco
