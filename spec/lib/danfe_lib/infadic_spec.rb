@@ -247,55 +247,14 @@ describe BrDanfe::DanfeLib::Infadic do
       end
     end
 
-    context 'when has fisco additional information' do
+    context 'when has additional fisco information' do
       let(:xml_as_string) do
         <<-EOS
           <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
             <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-              <ide>
-                <dEmi>2011-10-29</dEmi>
-                <dSaiEnt>2011-10-30</dSaiEnt>
-                <hSaiEnt>15:32:45</hSaiEnt>
-              </ide>
-              <dest>
-                <CNPJ>82743287000880</CNPJ>
-                <xNome>Schneider Electric Brasil Ltda</xNome>
-                <enderDest>
-                  <xLgr>Av da Saudade</xLgr>
-                  <nro>1125</nro>
-                  <xBairro>Frutal</xBairro>
-                  <xCpl>Sala 01 e 02</xCpl>
-                  <cMun>3552403</cMun>
-                  <xMun>SUMARE</xMun>
-                  <UF>SP</UF>
-                  <CEP>13171320</CEP>
-                  <cPais>1058</cPais>
-                  <xPais>BRASIL</xPais>
-                  <fone>1921046300</fone>
-                </enderDest>
-                <IE>671008375110</IE>
-              </dest>
-              <transp>
-                <vol>
-                  <qVol>1</qVol>
-                  <esp>VOLUMES 1</esp>
-                  <marca>DIVERSOS 1</marca>
-                  <nVol>1</nVol>
-                  <pesoL>1000.000</pesoL>
-                  <pesoB>1100.000</pesoB>
-                </vol>
-              </transp>
               <infAdic>
                 <infAdFisco>Total de FCP-ST: 348,96</infAdFisco>
               </infAdic>
-              <total>
-                <ICMSTot>
-                  <vFCPST>348.96</vFCPUFDest>
-                  <vFCPUFDest>0.00</vFCPUFDest>
-                  <vICMSUFDest>0.00</vICMSUFDest>
-                  <vICMSUFRemet>0.00</vICMSUFRemet>
-                </ICMSTot>
-              </total>
             </infNFe>
           </NFe>
         EOS

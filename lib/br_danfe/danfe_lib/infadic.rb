@@ -84,7 +84,7 @@ module BrDanfe
       end
 
       def fisco?
-        @xml['infAdic/infAdFisco'].to_s != ''
+        @xml['infAdic/infAdFisco'].to_s.present?
       end
 
       def generate_y_position(volumes_number)
