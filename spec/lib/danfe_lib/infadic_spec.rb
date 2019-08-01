@@ -247,6 +247,27 @@ describe BrDanfe::DanfeLib::Infadic do
       end
     end
 
+    context 'when has additional fisco information' do
+      let(:xml_as_string) do
+        <<-EOS
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <infAdic>
+                <infAdFisco>Total de FCP-ST: 348,96</infAdFisco>
+              </infAdic>
+            </infNFe>
+          </NFe>
+        EOS
+      end
+
+      it 'renders title with box, subtitle, fisco box and additional information about fisco on the pdf' do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+        expect("#{base_dir}infadic#render-with_fisco_additional_information.pdf").to have_same_content_of file: output_pdf
+      end
+    end
+
     context 'when has extra volume' do
       let(:xml_as_string) do
         <<-EOS
@@ -377,8 +398,10 @@ describe BrDanfe::DanfeLib::Infadic do
             </transp>
             <infAdic>
               <infCpl>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue in dolor sed sagittis.</infCpl>
+              <infAdFisco>Total de FCP-ST: 348,96</infAdFisco>
             </infAdic>
             <ICMSTot>
+              <vFCPST>348.96</vFCPST>
               <vFCPUFDest>4892.78</vFCPUFDest>
               <vICMSUFDest>2915.78</vICMSUFDest>
               <vICMSUFRemet>75394.78</vICMSUFRemet>
@@ -395,9 +418,7 @@ describe BrDanfe::DanfeLib::Infadic do
 
         pdf.render_file output_pdf
 
-        expect(
-          "#{base_dir}infadic#render-all_the_informations.pdf"
-        ).to have_same_content_of file: output_pdf
+        expect("#{base_dir}infadic#render-all_the_informations.pdf").to have_same_content_of file: output_pdf
       end
     end
   end
