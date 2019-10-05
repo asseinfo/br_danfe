@@ -20,15 +20,14 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'barby', '0.5.1'
   spec.add_dependency 'br_documents', '>= 0.0.15'
-  spec.add_dependency 'i18n', '0.8.6'
-  spec.add_dependency 'nokogiri', '~> 1.8'
+  spec.add_dependency 'i18n', '>= 0.8.6'
+  spec.add_dependency 'nokogiri', '>= 1.8'
   spec.add_dependency 'prawn', '2.1.0'
   spec.add_dependency 'prawn-table', '0.2.2'
 
   spec.add_development_dependency 'byebug', '3.5.1'
-  spec.add_development_dependency 'codeclimate-test-reporter', '1.0.8'
   spec.add_development_dependency 'rake', '12.0.0'
   spec.add_development_dependency 'rspec', '3.6.0'
-  spec.add_development_dependency 'simplecov', '0.11.1'
+  spec.add_development_dependency 'simplecov', '0.17.0'
   spec.add_development_dependency 'simplecov-html', '0.10.1'
 end
