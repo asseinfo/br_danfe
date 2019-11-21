@@ -115,7 +115,8 @@ module BrDanfe
       def render_table(data, start_position, height)
         @pdf.y = start_position
         @pdf.bounding_box [0.75.cm, @pdf.cursor], width: 19.56.cm, height: height do
-          @pdf.table data.map{ |item| [item] }, { header: true, cell_style: { border_width: 0 } }
+          options = { header: true, cell_style: { border_width: 0 } }
+          @pdf.table data.map{ |item| [item] }, options
         end
       end
 
