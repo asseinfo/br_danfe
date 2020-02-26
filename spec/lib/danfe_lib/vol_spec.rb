@@ -54,6 +54,7 @@ describe BrDanfe::DanfeLib::Vol do
       expect(File.exist?(output_pdf)).to be_falsey
 
       pdf.render_file output_pdf
+      pdf.render_file "#{base_dir}vol#render.pdf"
 
       expect("#{base_dir}vol#render.pdf").to have_same_content_of file: output_pdf
     end
