@@ -64,9 +64,7 @@ describe BrDanfe::DanfeLib::Infadic do
 
         pdf.render_file output_pdf
 
-        expect(
-          "#{base_dir}infadic#render.pdf"
-        ).to have_same_content_of file: output_pdf
+        expect("#{base_dir}infadic#render.pdf").to have_same_content_of file: output_pdf
       end
     end
 
@@ -160,9 +158,7 @@ describe BrDanfe::DanfeLib::Infadic do
 
         pdf.render_file output_pdf
 
-        expect(
-          "#{base_dir}infadic#render-with_street_data.pdf"
-        ).to have_same_content_of file: output_pdf
+        expect("#{base_dir}infadic#render-with_street_data.pdf").to have_same_content_of file: output_pdf
       end
     end
 
@@ -241,9 +237,7 @@ describe BrDanfe::DanfeLib::Infadic do
 
         pdf.render_file output_pdf
 
-        expect(
-          "#{base_dir}infadic#render-with_complementary_information.pdf"
-        ).to have_same_content_of file: output_pdf
+        expect("#{base_dir}infadic#render-with_complementary_information.pdf").to have_same_content_of file: output_pdf
       end
     end
 
@@ -264,6 +258,7 @@ describe BrDanfe::DanfeLib::Infadic do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
+
         expect("#{base_dir}infadic#render-with_fisco_additional_information.pdf").to have_same_content_of file: output_pdf
       end
     end
@@ -341,9 +336,7 @@ describe BrDanfe::DanfeLib::Infadic do
 
         pdf.render_file output_pdf
 
-        expect(
-          "#{base_dir}infadic#render-extra_volume.pdf"
-        ).to have_same_content_of file: output_pdf
+        expect("#{base_dir}infadic#render-extra_volume.pdf").to have_same_content_of file: output_pdf
       end
     end
 

@@ -62,6 +62,10 @@ endobj
 << /Type /Page
 /Parent 3 0 R
 /MediaBox [0 0 595.28 841.89]
+/CropBox [0 0 595.28 841.89]
+/BleedBox [0 0 595.28 841.89]
+/TrimBox [0 0 595.28 841.89]
+/ArtBox [0 0 595.28 841.89]
 /Contents 4 0 R
 /Resources << /ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
 /Font << /F2.0 6 0 R
@@ -92,13 +96,13 @@ xref
 0000000158 00000 n 
 0000000215 00000 n 
 0000000857 00000 n 
-0000001049 00000 n 
-0000001147 00000 n 
+0000001165 00000 n 
+0000001263 00000 n 
 trailer
 << /Size 8
 /Root 2 0 R
 /Info 1 0 R
 >>
 startxref
-1246
+1362
 %%EOF
