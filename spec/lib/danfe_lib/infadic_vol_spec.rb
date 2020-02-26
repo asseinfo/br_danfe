@@ -87,9 +87,7 @@ describe BrDanfe::DanfeLib::InfadicVol do
 
       pdf.render_file output_pdf
 
-      expect(
-        "#{base_dir}infadic_vol#render-extra_volume.pdf"
-      ).to have_same_content_of file: output_pdf
+      expect("#{base_dir}infadic_vol#render-extra_volume.pdf").to have_same_content_of file: output_pdf
     end
   end
 
