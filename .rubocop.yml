@@ -1,0 +1,94 @@
+require: rubocop-performance
+
+AllCops:
+  TargetRubyVersion: 2.4
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'log/**/*'
+    - 'public/**/*'
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'script/**/*'
+    - 'node_modules/**/*'
+    - 'spec/spec_helper.rb'
+    - 'spec/rails_helper.rb'
+    - !ruby/regexp /old_and_unused\.rb$/
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Layout/AlignHash:
+  Enabled: false
+
+Layout/AlignParameters:
+  Enabled: false
+
+Layout/IndentArray:
+  EnforcedStyle: consistent
+
+Layout/SpaceBeforeBlockBraces:
+  EnforcedStyleForEmptyBraces: space
+
+Metrics/ClassLength:
+  Max: 230
+  Exclude:
+  - 'app/models/invoice_product.rb'
+
+Metrics/CyclomaticComplexity:
+  Max: 8
+
+Metrics/PerceivedComplexity:
+  Max: 8
+
+Metrics/MethodLength:
+  Max: 19
+
+Metrics/BlockLength:
+  Exclude:
+   - 'spec/**/*.rb'
+   - 'lib/tasks/export_nfes_to_portal.rake'
+   - 'lib/tasks/karma.rake'
+   - 'lib/tasks/backup_restore.rake'
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Style/DateTime:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FormatStringToken:
+  EnforcedStyle: unannotated
+
+Style/GuardClause:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Metrics/LineLength:
+  Max: 200
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/ModuleLength:
+  Max: 118
+
+Metrics/AbcSize:
+  Max: 50
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+
+Naming/RescuedExceptionsVariableName:
+  Enabled: false
