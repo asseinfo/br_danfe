@@ -3,16 +3,8 @@ require: rubocop-performance
 AllCops:
   TargetRubyVersion: 2.5.1
   Exclude:
-    - 'bin/**/*'
     - 'config/**/*'
-    - 'log/**/*'
-    - 'public/**/*'
-    - 'vendor/**/*'
-    - 'db/**/*'
-    - 'script/**/*'
-    - 'node_modules/**/*'
     - 'spec/spec_helper.rb'
-    - 'spec/rails_helper.rb'
     - !ruby/regexp /old_and_unused\.rb$/
   DisplayCopNames: true
   DisplayStyleGuide: true
