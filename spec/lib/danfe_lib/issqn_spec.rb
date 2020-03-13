@@ -1,7 +1,7 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe BrDanfe::DanfeLib::Issqn do
-  let(:base_dir) { "./spec/fixtures/nfe/lib/"}
+  let(:base_dir) { './spec/fixtures/nfe/lib/' }
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
@@ -9,7 +9,7 @@ describe BrDanfe::DanfeLib::Issqn do
 
   subject { described_class.new(pdf, xml) }
 
-  describe "#render" do
+  describe '#render' do
     let(:xml_as_string) do
       <<-eos
       <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -40,8 +40,8 @@ describe BrDanfe::DanfeLib::Issqn do
       File.delete(output_pdf) if File.exist?(output_pdf)
     end
 
-    context "with ISSQN" do
-      it "renders xml to the pdf" do
+    context 'with ISSQN' do
+      it 'renders xml to the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
@@ -49,10 +49,10 @@ describe BrDanfe::DanfeLib::Issqn do
         expect("#{base_dir}issqn#render-with_issqn.pdf").to have_same_content_of file: output_pdf
       end
 
-      context "when there is only one issqn value" do
-        let(:issqn) { "<vServ>1.43</vServ>" }
+      context 'when there is only one issqn value' do
+        let(:issqn) { '<vServ>1.43</vServ>' }
 
-        it "renders xml to the pdf" do
+        it 'renders xml to the pdf' do
           expect(File.exist?(output_pdf)).to be_falsey
 
           pdf.render_file output_pdf
@@ -62,10 +62,10 @@ describe BrDanfe::DanfeLib::Issqn do
       end
     end
 
-    context "without ISSQN" do
-      let(:issqn) { "" }
+    context 'without ISSQN' do
+      let(:issqn) { '' }
 
-      it "renders xml to the pdf" do
+      it 'renders xml to the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf

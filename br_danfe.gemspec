@@ -1,6 +1,4 @@
-# coding: utf-8
-
-$LOAD_PATH.push File.expand_path('../lib', __FILE__)
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 require 'br_danfe/version'
 
 Gem::Specification.new do |spec|
@@ -16,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = `git ls-files -- { test,spec,features }/*`.split("\n")
   spec.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   spec.require_paths = ['lib']
-  spec.required_ruby_version = '>= 2.1'
+  spec.required_ruby_version = '>= 2.5.1'
 
   spec.add_dependency 'barby', '0.5.1'
   spec.add_dependency 'br_documents', '>= 0.1.3'
@@ -24,8 +22,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'nokogiri', '>= 1.8'
   spec.add_dependency 'prawn', '~> 2.0'
   spec.add_dependency 'prawn-table', '0.2.2'
-  spec.add_dependency 'rubocop', '0.67.0'
-  spec.add_dependency 'rubocop-performance', '~> 1.1.0'
+  spec.add_dependency 'rubocop', '0.80.1'
+  spec.add_dependency 'rubocop-performance', '~> 1.5.2'
 
   spec.add_development_dependency 'byebug', '3.5.1'
   spec.add_development_dependency 'rake', '12.0.0'
