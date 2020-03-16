@@ -5,3 +5,4 @@ pkg
 output.pdf
 coverage
 .tool-versions
+.DS_Store

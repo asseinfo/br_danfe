@@ -3,29 +3,58 @@ module BrDanfe
     class Document
       def initialize
         @document = Prawn::Document.new(
-          page_size: 'A4',
+          page_size: [227, 2000],
           page_layout: :portrait,
-          left_margin: 0,
-          right_margin: 0,
-          top_margin: 0,
-          botton_margin: 0
+          left_margin: 6,
+          right_margin: 6,
+          top_margin: 10,
+          botton_margin: 10
         )
 
-        @document.font 'Times-Roman'
+        # Carta	216 x 279 mm	8,5 x 11,0 pol
+        # 612.00x x 792.00x
+
+        # 2.8333
+        # 80 cm
+
+        @document.font 'Courier' #'Helvetica' #'Times-Roman' #'Courier'
         @document.line_width = 0.3
       end
 
-      # def method_missing(method_name, *args, &block)
-      #   if @document.respond_to? method_name
-      #     @document.send method_name, *args, &block
-      #   else
-      #     super
-      #   end
-      # end
+      def method_missing(method_name, *args, &block)
+        if @document.respond_to? method_name
+          @document.send method_name, *args, &block
+        else
+          super
+        end
+      end
 
-      # def respond_to_missing?(method_name, include_private = false)
-      #   @document.respond_to?(method_name, include_private) || super
-      # end
+      def respond_to_missing?(method_name, include_private = false)
+        @document.respond_to?(method_name, include_private) || super
+      end
+
+      def box(height:, pad: 6)
+        bounding_box([0, cursor], width: page_width, height: height) do
+          pad(pad) { indent(pad) { yield if block_given? } }
+          stroke_bounds
+        end
+      end
+
+      def text(text, options = {})
+        pad = options.delete(:pad) || 0
+        options = { align: :left, size: 7, style: nil }.merge(options)
+
+        pad(pad) do
+          @document.text text, size: options[:size], style: options[:style],
+            align: options[:align]
+        end
+      end
+
+      private
+
+      def page_width
+        page.dimensions[2] - (page.margins[:left] + page.margins[:right])
+      end
 
       # def ititle(h, w, x, y, i18n)
       #   title = ''
