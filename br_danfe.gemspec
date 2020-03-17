@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'prawn', '~> 2.0'
   spec.add_dependency 'prawn-table', '0.2.2'
 
-  spec.add_development_dependency 'byebug', '3.5.1'
+  spec.add_development_dependency 'byebug', '9.0.6'
   spec.add_development_dependency 'rake', '12.0.0'
   spec.add_development_dependency 'rspec', '3.6.0'
   spec.add_development_dependency 'simplecov', '0.17.0'
