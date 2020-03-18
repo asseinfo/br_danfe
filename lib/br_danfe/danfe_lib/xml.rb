@@ -11,18 +11,18 @@ module BrDanfe
 
       def [](xpath)
         node = @xml.css(xpath)
-        return node ? node.text : ""
+        node ? node.text : ''
       end
 
-      def collect(ns, tag, &block)
+      def collect(ns, tag)
         result = []
-        # Tenta primeiro com uso de namespace
+        # With namespace
         begin
           @xml.xpath("//#{ns}:#{tag}").each do |det|
             result << yield(det)
           end
-        rescue
-          # Caso dê erro, tenta sem
+        rescue StandardError
+          # Without namespace
           @xml.xpath("//#{tag}").each do |det|
             result << yield(det)
           end
@@ -31,7 +31,7 @@ module BrDanfe
       end
 
       def version_is_310_or_newer?
-        @xml.css("infNFe").attr("versao").to_s.to_f >= 3.10
+        @xml.css('infNFe').attr('versao').to_s.to_f >= 3.10
       end
     end
   end

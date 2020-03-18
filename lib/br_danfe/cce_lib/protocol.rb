@@ -8,15 +8,16 @@ module BrDanfe
 
       def render
         @pdf.box(height: 36) do
-          @pdf.text I18n.t("cce.protocol"), size: 8, style: :bold
+          @pdf.text I18n.t('cce.protocol'), size: 8, style: :bold
           @pdf.text protocol, pad: 5
         end
       end
 
       private
+
       def protocol
-        node = @xml.css("procEventoNFe > retEvento > infEvento > nProt")
-        return node ? node.text : ""
+        node = @xml.css('procEventoNFe > retEvento > infEvento > nProt')
+        node ? node.text : ''
       end
     end
   end

@@ -91,6 +91,7 @@ module BrDanfe
         if volumes_number > 1
           return Y_POSITION + 0.30 + volumes_number * 0.15 + 0.2
         end
+
         Y_POSITION + 0.30
       end
 
