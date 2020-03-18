@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe BrDanfe::DanfeLib::DetBody do
-  let(:base_dir) { './spec/fixtures/nfe/lib/' }
+  let(:base_dir) { "./spec/fixtures/nfe/lib/" }
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
@@ -56,13 +56,13 @@ describe BrDanfe::DanfeLib::DetBody do
 
   subject { described_class.new(pdf, xml) }
 
-  describe '#render' do
+  describe "#render" do
     before do
       subject.render has_issqn
       File.delete(output_pdf) if File.exist?(output_pdf)
     end
 
-    context 'with CSOSN' do
+    context "with CSOSN" do
       let(:products) do
         <<-eos
         <det nItem="1">
@@ -155,7 +155,7 @@ describe BrDanfe::DanfeLib::DetBody do
         eos
       end
 
-      it 'renders xml to the pdf' do
+      it "renders xml to the pdf" do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
@@ -164,7 +164,7 @@ describe BrDanfe::DanfeLib::DetBody do
       end
     end
 
-    context 'with CST' do
+    context "with CST" do
       let(:products) do
         <<-eos
         <det nItem="1">
@@ -242,7 +242,7 @@ describe BrDanfe::DanfeLib::DetBody do
         eos
       end
 
-      it 'renders xml to the pdf' do
+      it "renders xml to the pdf" do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
@@ -251,7 +251,7 @@ describe BrDanfe::DanfeLib::DetBody do
       end
     end
 
-    context 'with FCI' do
+    context "with FCI" do
       let(:products) do
         <<-eos
         <det nItem="1">
@@ -279,7 +279,7 @@ describe BrDanfe::DanfeLib::DetBody do
         eos
       end
 
-      it 'renders xml to the pdf' do
+      it "renders xml to the pdf" do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
@@ -288,7 +288,7 @@ describe BrDanfe::DanfeLib::DetBody do
       end
     end
 
-    context 'with ICMS ST' do
+    context "with ICMS ST" do
       let(:products) do
         <<-eos
         <det nItem="1">
@@ -318,7 +318,7 @@ describe BrDanfe::DanfeLib::DetBody do
         eos
       end
 
-      it 'renders xml to the pdf' do
+      it "renders xml to the pdf" do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
@@ -327,7 +327,7 @@ describe BrDanfe::DanfeLib::DetBody do
       end
     end
 
-    context 'when the unit price of the product has a custom precision' do
+    context "when the unit price of the product has a custom precision" do
       let(:products) do
         <<-eos
         <det nItem="1">
@@ -345,7 +345,7 @@ describe BrDanfe::DanfeLib::DetBody do
         eos
       end
 
-      it 'renders xml to the pdf' do
+      it "renders xml to the pdf" do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
@@ -354,7 +354,7 @@ describe BrDanfe::DanfeLib::DetBody do
       end
     end
 
-    context 'when the quantity of the product has a custom precision' do
+    context "when the quantity of the product has a custom precision" do
       let(:products) do
         <<-eos
         <det nItem="1">
@@ -372,7 +372,7 @@ describe BrDanfe::DanfeLib::DetBody do
         eos
       end
 
-      it 'renders xml to the pdf' do
+      it "renders xml to the pdf" do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
@@ -381,11 +381,11 @@ describe BrDanfe::DanfeLib::DetBody do
       end
     end
 
-    context 'when there is ISSQN' do
+    context "when there is ISSQN" do
       let(:has_issqn) { true }
       let(:products) { "#{product_1}\n#{product_2}" * 10 }
 
-      it 'renders xml to the pdf' do
+      it "renders xml to the pdf" do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
@@ -397,7 +397,7 @@ describe BrDanfe::DanfeLib::DetBody do
     context "when there isn't ISSQN" do
       let(:products) { "#{product_1}\n#{product_2}" * 10 }
 
-      it 'renders xml to the pdf' do
+      it "renders xml to the pdf" do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
@@ -406,10 +406,10 @@ describe BrDanfe::DanfeLib::DetBody do
       end
     end
 
-    context 'with infAdProd' do
-      let(:products) { product_2.to_s }
+    context "with infAdProd" do
+      let(:products) { "#{product_2}" }
 
-      it 'renders xml to the pdf' do
+      it "renders xml to the pdf" do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
@@ -418,11 +418,11 @@ describe BrDanfe::DanfeLib::DetBody do
       end
     end
 
-    context 'when the product table occupies more than one page' do
-      context 'when the product table occupies two pages' do
+    context "when the product table occupies more than one page" do
+      context "when the product table occupies two pages" do
         let(:products) { ("#{product_1}\n#{product_2}" * 22) + "\n#{product_1}" }
 
-        it 'renders xml to the pdf' do
+        it "renders xml to the pdf" do
           expect(File.exist?(output_pdf)).to be_falsey
 
           pdf.render_file output_pdf
@@ -431,10 +431,10 @@ describe BrDanfe::DanfeLib::DetBody do
         end
       end
 
-      context 'when the product table occupies three pages' do
+      context "when the product table occupies three pages" do
         let(:products) { ("#{product_1}\n#{product_2}" * 23) }
 
-        it 'renders xml to the pdf' do
+        it "renders xml to the pdf" do
           expect(File.exist?(output_pdf)).to be_falsey
 
           pdf.render_file output_pdf

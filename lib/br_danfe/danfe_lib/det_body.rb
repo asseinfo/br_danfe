@@ -27,11 +27,11 @@ module BrDanfe
 
       def create_header
         header = [[
-          header_column('prod.cProd'), header_column('prod.xProd'), header_column('prod.NCM'),
-          header_column('ICMS.CST'), header_column('prod.CFOP'), header_column('prod.uCom'),
-          header_column('prod.qCom'), header_column('prod.vUnCom'), header_column('prod.vProd'),
-          header_column('ICMS.vBC'), header_column('ICMS.vICMS'), header_column('IPI.vIPI'),
-          header_column('ICMS.pICMS'), header_column('IPI.pIPI')
+          header_column("prod.cProd"), header_column("prod.xProd"), header_column("prod.NCM"),
+          header_column("ICMS.CST"), header_column("prod.CFOP"), header_column("prod.uCom"),
+          header_column("prod.qCom"), header_column("prod.vUnCom"), header_column("prod.vProd"),
+          header_column("ICMS.vBC"), header_column("ICMS.vICMS"), header_column("IPI.vIPI"),
+          header_column("ICMS.pICMS"), header_column("IPI.pIPI")
         ]]
         @pdf.make_table(header, options)
       end
@@ -62,25 +62,25 @@ module BrDanfe
       end
 
       def products
-        @xml.collect('xmlns', 'det') { |det| product(det) }
+        @xml.collect("xmlns", "det") { |det| product(det) }
       end
 
       def product(det)
         [
-          cell_text(det.css('prod/cProd').text),
+          cell_text(det.css("prod/cProd").text),
           cell_text(Xprod.new(det).render),
-          cell_text(det.css('prod/NCM').text),
+          cell_text(det.css("prod/NCM").text),
           cell_text(Cst.to_danfe(det)),
-          cell_text(det.css('prod/CFOP').text),
-          cell_text(det.css('prod/uCom').text),
-          cell_number(numerify(det, 'prod/qCom')),
-          cell_number(numerify(det, 'prod/vUnCom')),
-          cell_number(numerify(det, 'prod/vProd')),
-          cell_number(numerify(det, 'ICMS/*/vBC')),
-          cell_number(numerify(det, 'ICMS/*/vICMS')),
-          cell_number(numerify(det, 'IPI/*/vIPI')),
-          cell_number(numerify(det, 'ICMS/*/pICMS')),
-          cell_number(numerify(det, 'IPI/*/pIPI'))
+          cell_text(det.css("prod/CFOP").text),
+          cell_text(det.css("prod/uCom").text),
+          cell_number(numerify(det, "prod/qCom")),
+          cell_number(numerify(det, "prod/vUnCom")),
+          cell_number(numerify(det, "prod/vProd")),
+          cell_number(numerify(det, "ICMS/*/vBC")),
+          cell_number(numerify(det, "ICMS/*/vICMS")),
+          cell_number(numerify(det, "IPI/*/vIPI")),
+          cell_number(numerify(det, "ICMS/*/pICMS")),
+          cell_number(numerify(det, "IPI/*/pIPI"))
         ]
       end
 
@@ -95,7 +95,7 @@ module BrDanfe
       end
 
       def numerify(det, xpath)
-        Helper.numerify(det.css(xpath.to_s).text)
+        Helper.numerify(det.css("#{xpath}").text)
       end
 
       def create_row(data)
@@ -115,7 +115,7 @@ module BrDanfe
       def render_table(data, start_position, height)
         @pdf.y = start_position
         @pdf.bounding_box [0.75.cm, @pdf.cursor], width: 19.56.cm, height: height do
-          @pdf.table data.map { |item| [item] }, { header: true }
+          @pdf.table data.map{ |item| [item] }, { header: true }
         end
       end
 
