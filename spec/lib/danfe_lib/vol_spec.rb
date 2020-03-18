@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe BrDanfe::DanfeLib::Vol do
-  let(:base_dir) { './spec/fixtures/nfe/lib/' }
+  let(:base_dir) { "./spec/fixtures/nfe/lib/"}
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
@@ -9,7 +9,7 @@ describe BrDanfe::DanfeLib::Vol do
 
   subject { described_class.new(pdf, xml) }
 
-  describe '#render' do
+  describe "#render" do
     let(:xml_as_string) do
       <<-eos
       <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -50,7 +50,7 @@ describe BrDanfe::DanfeLib::Vol do
       File.delete(output_pdf) if File.exist?(output_pdf)
     end
 
-    it 'renders xml to the pdf' do
+    it "renders xml to the pdf" do
       expect(File.exist?(output_pdf)).to be_falsey
 
       pdf.render_file output_pdf
@@ -58,11 +58,11 @@ describe BrDanfe::DanfeLib::Vol do
       expect("#{base_dir}vol#render.pdf").to have_same_content_of file: output_pdf
     end
 
-    it 'returns the quantity of volumes' do
+    it "returns the quantity of volumes" do
       expect(subject.render).to eq 3
     end
 
-    context 'when any <vol> tag is found' do
+    context "when any <vol> tag is found" do
       let(:xml_as_string) do
         <<-eos
         <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -74,7 +74,7 @@ describe BrDanfe::DanfeLib::Vol do
         eos
       end
 
-      it 'renders blank boxes' do
+      it "renders blank boxes" do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf

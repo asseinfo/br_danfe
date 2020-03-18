@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe BrDanfe::DanfeLib::Transp do
-  let(:base_dir) { './spec/fixtures/nfe/lib/' }
+  let(:base_dir) { "./spec/fixtures/nfe/lib/"}
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
@@ -9,7 +9,7 @@ describe BrDanfe::DanfeLib::Transp do
 
   subject { described_class.new(pdf, xml) }
 
-  describe '#render' do
+  describe "#render" do
     let(:xml_as_string) do
       <<-eos
       <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -40,7 +40,7 @@ describe BrDanfe::DanfeLib::Transp do
       File.delete(output_pdf) if File.exist?(output_pdf)
     end
 
-    it 'renders xml to the pdf' do
+    it "renders xml to the pdf" do
       expect(File.exist?(output_pdf)).to be_falsey
 
       pdf.render_file output_pdf
@@ -48,7 +48,7 @@ describe BrDanfe::DanfeLib::Transp do
       expect("#{base_dir}transp#render.pdf").to have_same_content_of file: output_pdf
     end
 
-    context 'when modFrete is 0' do
+    context "when modFrete is 0" do
       let(:xml_as_string) do
         <<-eos
         <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -70,7 +70,7 @@ describe BrDanfe::DanfeLib::Transp do
       end
     end
 
-    context 'when modFrete is 1' do
+    context "when modFrete is 1" do
       let(:xml_as_string) do
         <<-eos
         <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -92,7 +92,7 @@ describe BrDanfe::DanfeLib::Transp do
       end
     end
 
-    context 'when modFrete is 2' do
+    context "when modFrete is 2" do
       let(:xml_as_string) do
         <<-eos
         <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -114,7 +114,7 @@ describe BrDanfe::DanfeLib::Transp do
       end
     end
 
-    context 'when modFrete is 3' do
+    context "when modFrete is 3" do
       let(:xml_as_string) do
         <<-eos
         <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -136,7 +136,7 @@ describe BrDanfe::DanfeLib::Transp do
       end
     end
 
-    context 'when modFrete is 4' do
+    context "when modFrete is 4" do
       let(:xml_as_string) do
         <<-eos
         <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -158,7 +158,7 @@ describe BrDanfe::DanfeLib::Transp do
       end
     end
 
-    context 'when modFrete is 9' do
+    context "when modFrete is 9" do
       let(:xml_as_string) do
         <<-eos
         <NFe xmlns="http://www.portalfiscal.inf.br/nfe">

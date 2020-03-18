@@ -1,9 +1,9 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe BrDanfe::DanfeLib::XML do
   subject { BrDanfe::DanfeLib::XML.new(xml_as_string) }
 
-  describe '#version_is_310_or_newer?' do
+  describe "#version_is_310_or_newer?" do
     describe "when xml's version is equal 3.10" do
       let(:xml_as_string) do
         <<-eos
@@ -14,7 +14,7 @@ describe BrDanfe::DanfeLib::XML do
         eos
       end
 
-      it 'returns true' do
+      it "returns true" do
         expect(subject.version_is_310_or_newer?).to eql true
       end
     end
@@ -29,7 +29,7 @@ describe BrDanfe::DanfeLib::XML do
         eos
       end
 
-      it 'returns true' do
+      it "returns true" do
         expect(subject.version_is_310_or_newer?).to eql true
       end
     end
@@ -44,7 +44,7 @@ describe BrDanfe::DanfeLib::XML do
         eos
       end
 
-      it 'returns false' do
+      it "returns false" do
         expect(subject.version_is_310_or_newer?).to eql false
       end
     end

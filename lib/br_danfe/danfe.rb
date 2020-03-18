@@ -10,12 +10,12 @@ module BrDanfe
       create_watermark
     end
 
-    def save_pdf(filename, footer_info = '')
+    def save_pdf(filename, footer_info = "")
       generate footer_info
       @pdf.render_file filename
     end
 
-    def render_pdf(footer_info = '')
+    def render_pdf(footer_info = "")
       generate footer_info
       @pdf.render
     end
@@ -23,17 +23,17 @@ module BrDanfe
     private
 
     def create_watermark
-      @pdf.create_stamp('has_no_fiscal_value') do
-        @pdf.fill_color '7d7d7d'
-        @pdf.text_box I18n.t('danfe.others.has_no_fiscal_value'),
-                      size: 2.2.cm,
-                      width: @pdf.bounds.width,
-                      height: @pdf.bounds.height,
-                      align: :center,
-                      valign: :center,
-                      at: [0, @pdf.bounds.height],
-                      rotate: 45,
-                      rotate_around: :center
+      @pdf.create_stamp("has_no_fiscal_value") do
+        @pdf.fill_color "7d7d7d"
+        @pdf.text_box I18n.t("danfe.others.has_no_fiscal_value"),
+          size: 2.2.cm,
+          width: @pdf.bounds.width,
+          height: @pdf.bounds.height,
+          align: :center,
+          valign: :center,
+          at: [0, @pdf.bounds.height],
+          rotate: 45,
+          rotate_around: :center
       end
     end
 
@@ -65,7 +65,7 @@ module BrDanfe
 
       @pdf.page_count.times do |i|
         page = i + 1
-        position = page == 1 ? 3.96 : 1.85
+        position = page === 1 ? 3.96 : 1.85
         repeated_information page, position, emitter, footer_info
       end
     end
@@ -81,17 +81,17 @@ module BrDanfe
 
     def render_product_table_title(page)
       y_position = page == 1 ? 18.91 : 7.40
-      @pdf.ititle 0.42, 10.00, 0.75, y_position, 'det.title'
+      @pdf.ititle 0.42, 10.00, 0.75, y_position, "det.title"
     end
 
     def render_footer_information(footer_info)
       if footer_info.present?
-        @pdf.ibox 0.35, 12.45, 0.75, 30.21, '', footer_info, { size: 5, border: 0 }
+        @pdf.ibox 0.35, 12.45, 0.75, 30.21, "", footer_info, { size: 5, border: 0 }
       end
     end
 
     def render_no_fiscal_value
-      @pdf.stamp('has_no_fiscal_value') if DanfeLib::Helper.no_fiscal_value?(@xml)
+      @pdf.stamp("has_no_fiscal_value") if DanfeLib::Helper.has_no_fiscal_value?(@xml)
     end
   end
 end

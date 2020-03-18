@@ -7,7 +7,7 @@ module BrDanfe
 
       def render
         @pdf.box(height: 110) do
-          @pdf.text I18n.t('cce.legal_note')
+          @pdf.text I18n.t("cce.legal_note")
         end
       end
     end

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe BrDanfe::DanfeLib::Cst do
   let(:xml_cst) do
@@ -35,16 +35,16 @@ describe BrDanfe::DanfeLib::Cst do
     Nokogiri::XML(xml)
   end
 
-  describe '.to_danfe' do
-    context 'when CST' do
-      it 'returns origin + CST' do
-        expect(BrDanfe::DanfeLib::Cst.to_danfe(xml_cst)).to eq '500'
+  describe ".to_danfe" do
+    context "when CST" do
+      it "returns origin + CST" do
+        expect(BrDanfe::DanfeLib::Cst.to_danfe(xml_cst)).to eq "500"
       end
     end
 
-    context 'when CSOSN' do
-      it 'returns origin + CSOSN' do
-        expect(BrDanfe::DanfeLib::Cst.to_danfe(xml_csosn)).to eq '4102'
+    context "when CSOSN" do
+      it "returns origin + CSOSN" do
+        expect(BrDanfe::DanfeLib::Cst.to_danfe(xml_csosn)).to eq "4102"
       end
     end
   end

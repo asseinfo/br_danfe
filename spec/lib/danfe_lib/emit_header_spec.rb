@@ -1,16 +1,16 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe BrDanfe::DanfeLib::EmitHeader do
-  let(:base_dir) { './spec/fixtures/nfe/lib/' }
+  let(:base_dir) { "./spec/fixtures/nfe/lib/"}
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
   let(:xml) { BrDanfe::DanfeLib::XML.new(xml_as_string) }
-  let(:logo) { 'spec/fixtures/logo.png' }
+  let(:logo) { "spec/fixtures/logo.png" }
 
   subject { described_class.new(pdf, xml, logo, { width: 100, height: 100 }) }
 
-  describe '#render' do
+  describe "#render" do
     let(:xml_as_string) do
       <<-eos
       <nfeProc xmlns="http://www.portalfiscal.inf.br/nfe" versao="2.00">
@@ -51,14 +51,14 @@ describe BrDanfe::DanfeLib::EmitHeader do
       eos
     end
 
-    context 'render emitter on first page' do
+    context "render emitter on first page" do
       before do
         subject.render 1, 3.96
         File.delete(output_pdf) if File.exist?(output_pdf)
       end
 
-      context 'with logo' do
-        it 'renders xml to the pdf' do
+      context "with logo" do
+        it "renders xml to the pdf" do
           expect(File.exist?(output_pdf)).to be_falsey
 
           pdf.render_file output_pdf
@@ -67,10 +67,10 @@ describe BrDanfe::DanfeLib::EmitHeader do
         end
       end
 
-      context 'without logo' do
-        let(:logo) { '' }
+      context "without logo" do
+        let(:logo) { "" }
 
-        it 'renders xml to the pdf' do
+        it "renders xml to the pdf" do
           expect(File.exist?(output_pdf)).to be_falsey
 
           pdf.render_file output_pdf
@@ -80,14 +80,14 @@ describe BrDanfe::DanfeLib::EmitHeader do
       end
     end
 
-    context 'render emitter on second page' do
+    context "render emitter on second page" do
       before do
         subject.render 2, 1.85
         File.delete(output_pdf) if File.exist?(output_pdf)
       end
 
-      context 'with logo' do
-        it 'renders xml to the pdf' do
+      context "with logo" do
+        it "renders xml to the pdf" do
           expect(File.exist?(output_pdf)).to be_falsey
 
           pdf.render_file output_pdf
