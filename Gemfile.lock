@@ -78,7 +78,7 @@ GEM
     rubocop-performance (1.1.0)
       rubocop (>= 0.67.0)
     ruby-progressbar (1.10.1)
-    simplecov (0.17.0)
+    simplecov (0.17.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
@@ -101,7 +101,7 @@ DEPENDENCIES
   rspec (= 3.6.0)
   rubocop (= 0.67.0)
   rubocop-performance (~> 1.1.0)
-  simplecov (= 0.17.0)
+  simplecov (= 0.17.1)
   simplecov-html (= 0.10.2)
 
 BUNDLED WITH
