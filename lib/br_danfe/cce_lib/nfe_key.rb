@@ -8,15 +8,16 @@ module BrDanfe
 
       def render
         @pdf.box(height: 36) do
-          @pdf.text I18n.t("cce.key"), size: 8, style: :bold
+          @pdf.text I18n.t('cce.key'), size: 8, style: :bold
           @pdf.text nfe_key, pad: 5
         end
       end
 
       private
+
       def nfe_key
-        node = @xml.css("procEventoNFe > evento > infEvento > chNFe")
-        return node ? node.text : ""
+        node = @xml.css('procEventoNFe > evento > infEvento > chNFe')
+        node ? node.text : ''
       end
     end
   end

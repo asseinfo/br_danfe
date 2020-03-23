@@ -7,7 +7,7 @@ module BrDanfe
 
       def render
         @pdf.box(height: 40) do
-          @pdf.text I18n.t("cce.title"), align: :center, size: 25, pad: 6
+          @pdf.text I18n.t('cce.title'), align: :center, size: 25, pad: 6
         end
       end
     end

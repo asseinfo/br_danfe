@@ -16,6 +16,7 @@ module BrDanfe
     end
 
     private
+
     def generate
       CceLib::Header.new(@pdf).render
       CceLib::Barcode.new(@pdf, @xml).render

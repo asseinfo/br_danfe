@@ -1,14 +1,14 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe BrDanfe::DanfeLib::Dest do
-  let(:path_of_expected_pdf) { "./spec/fixtures/nfe/lib/output.pdf" }
+  let(:path_of_expected_pdf) { './spec/fixtures/nfe/lib/output.pdf' }
 
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
   let(:xml) { BrDanfe::DanfeLib::XML.new(xml_as_string) }
 
   subject { described_class.new(pdf, xml) }
 
-  describe "#render" do
+  describe '#render' do
     before do
       File.delete(path_of_expected_pdf) if File.exist?(path_of_expected_pdf)
       subject.render
@@ -47,12 +47,12 @@ describe BrDanfe::DanfeLib::Dest do
         eos
       end
 
-      it "renders xml to the pdf" do
+      it 'renders xml to the pdf' do
         expect(File.exist?(path_of_expected_pdf)).to eql false
 
         pdf.render_file path_of_expected_pdf
 
-        expect("./spec/fixtures/nfe/lib/dest#render-v2.00.pdf").to have_same_content_of file: path_of_expected_pdf
+        expect('./spec/fixtures/nfe/lib/dest#render-v2.00.pdf').to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -88,12 +88,12 @@ describe BrDanfe::DanfeLib::Dest do
         eos
       end
 
-      it "renders xml to the pdf" do
+      it 'renders xml to the pdf' do
         expect(File.exist?(path_of_expected_pdf)).to eql false
 
         pdf.render_file path_of_expected_pdf
 
-        expect("./spec/fixtures/nfe/lib/dest#render-v3.10.pdf").to have_same_content_of file: path_of_expected_pdf
+        expect('./spec/fixtures/nfe/lib/dest#render-v3.10.pdf').to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -129,16 +129,16 @@ describe BrDanfe::DanfeLib::Dest do
         eos
       end
 
-      it "renders xml to the pdf" do
+      it 'renders xml to the pdf' do
         expect(File.exist?(path_of_expected_pdf)).to eql false
 
         pdf.render_file path_of_expected_pdf
 
-        expect("./spec/fixtures/nfe/lib/dest#render-v4.00.pdf").to have_same_content_of file: path_of_expected_pdf
+        expect('./spec/fixtures/nfe/lib/dest#render-v4.00.pdf').to have_same_content_of file: path_of_expected_pdf
       end
     end
 
-    context "when recipient has CNPJ" do
+    context 'when recipient has CNPJ' do
       let(:xml_as_string) do
         <<-eos
         <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -151,16 +151,16 @@ describe BrDanfe::DanfeLib::Dest do
         eos
       end
 
-      it "renders xml to the pdf" do
+      it 'renders xml to the pdf' do
         expect(File.exist?(path_of_expected_pdf)).to eql false
 
         pdf.render_file path_of_expected_pdf
 
-        expect("./spec/fixtures/nfe/lib/dest#render-with_cnpj.pdf").to have_same_content_of file: path_of_expected_pdf
+        expect('./spec/fixtures/nfe/lib/dest#render-with_cnpj.pdf').to have_same_content_of file: path_of_expected_pdf
       end
     end
 
-    context "when recipient has CPF" do
+    context 'when recipient has CPF' do
       let(:xml_as_string) do
         <<-eos
         <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -173,16 +173,16 @@ describe BrDanfe::DanfeLib::Dest do
         eos
       end
 
-      it "renders xml to the pdf" do
+      it 'renders xml to the pdf' do
         expect(File.exist?(path_of_expected_pdf)).to eql false
 
         pdf.render_file path_of_expected_pdf
 
-        expect("./spec/fixtures/nfe/lib/dest#render-with_cpf.pdf").to have_same_content_of file: path_of_expected_pdf
+        expect('./spec/fixtures/nfe/lib/dest#render-with_cpf.pdf').to have_same_content_of file: path_of_expected_pdf
       end
     end
 
-    context "when recipient has IE" do
+    context 'when recipient has IE' do
       let(:xml_as_string) do
         <<-eos
         <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -198,12 +198,12 @@ describe BrDanfe::DanfeLib::Dest do
         eos
       end
 
-      it "renders xml to the pdf" do
+      it 'renders xml to the pdf' do
         expect(File.exist?(path_of_expected_pdf)).to eql false
 
         pdf.render_file path_of_expected_pdf
 
-        expect("./spec/fixtures/nfe/lib/dest#render-with_ie.pdf").to have_same_content_of file: path_of_expected_pdf
+        expect('./spec/fixtures/nfe/lib/dest#render-with_ie.pdf').to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -238,17 +238,17 @@ describe BrDanfe::DanfeLib::Dest do
         eos
       end
 
-      it "renders xml to the pdf" do
+      it 'renders xml to the pdf' do
         expect(File.exist?(path_of_expected_pdf)).to eql false
 
         pdf.render_file path_of_expected_pdf
 
-        expect("./spec/fixtures/nfe/lib/dest#render-without-address-complement.pdf")
+        expect('./spec/fixtures/nfe/lib/dest#render-without-address-complement.pdf')
           .to have_same_content_of file: path_of_expected_pdf
       end
     end
 
-    context "when recipient address (xLgr + nro + xCpl) has more than 63 characters" do
+    context 'when recipient address (xLgr + nro + xCpl) has more than 63 characters' do
       let(:xml_as_string) do
         <<-eos
         <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -280,12 +280,12 @@ describe BrDanfe::DanfeLib::Dest do
         eos
       end
 
-      it "renders xml to pdf discarding the address of after 63 characters" do
+      it 'renders xml to pdf discarding the address of after 63 characters' do
         expect(File.exist?(path_of_expected_pdf)).to eql false
 
         pdf.render_file path_of_expected_pdf
 
-        expect("./spec/fixtures/nfe/lib/dest#render-with-address-bigger.pdf")
+        expect('./spec/fixtures/nfe/lib/dest#render-with-address-bigger.pdf')
           .to have_same_content_of file: path_of_expected_pdf
       end
     end
