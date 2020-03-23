@@ -3,34 +3,35 @@ require 'spec_helper'
 describe BrDanfe::DanfeNfce do
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
-  describe '#render_pdf' do
-    let(:base_dir) { './spec/fixtures/nfce/v4.00/' }
+  # describe '#render_pdf' do
+  #   let(:base_dir) { './spec/fixtures/nfce/v4.00/' }
 
-    it 'xxx' do
-      danfe = BrDanfe::DanfeNfce.new(File.read("#{base_dir}test.xml"))
+  #   it 'xxx' do
+  #     danfe = BrDanfe::DanfeNfce.new(File.read("#{base_dir}test.xml"))
 
-      expected = IO.binread("#{base_dir}test.xml.fixture.pdf")
+  #     expected = IO.binread("#{base_dir}test.xml.fixture.pdf")
 
-      expect(danfe.render_pdf).to eq expected
-    end
-  end
+  #     expect(danfe.render_pdf).to eq expected
+  #   end
+  # end
 
   fdescribe '#save_pdf' do
-    context 'xxxx' do
-      let(:base_dir) { './spec/fixtures/nfce/v4.00/' }
+    # context 'xxxx' do
+    let(:base_dir) { './spec/fixtures/nfce/v4.00/' }
 
-      before { File.delete(output_pdf) if File.exist?(output_pdf) }
+    before { File.delete(output_pdf) if File.exist?(output_pdf) }
 
-      it 'render a NF-e with customized options' do
-        expect(File.exist?(output_pdf)).to be_falsey
+    it 'render a NF-e with customized options' do
+      expect(File.exist?(output_pdf)).to be_falsey
 
-        danfe = BrDanfe::DanfeNfce.new(File.read("#{base_dir}test.xml"))
+      danfe = BrDanfe::DanfeNfce.new(File.read("#{base_dir}test.xml"))
+      danfe.options.logo = 'spec/fixtures/logo.png'
+      danfe.options.logo_dimensions = { width: 100, height: 100 }
+      danfe.save_pdf output_pdf
 
-        danfe.save_pdf output_pdf
-
-        expect("#{base_dir}test.fixture.pdf").to have_same_content_of file: output_pdf
-      end
+      expect("#{base_dir}test.fixture.pdf").to have_same_content_of file: output_pdf
     end
+    # end
   end
   #   context "when xml's version is v2.00" do
   #     let(:base_dir) { './spec/fixtures/nfe/v2.00/' }

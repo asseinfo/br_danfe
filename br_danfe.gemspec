@@ -22,14 +22,19 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'nokogiri', '>= 1.8'
   spec.add_dependency 'prawn', '~> 2.0'
   spec.add_dependency 'prawn-table', '0.2.2'
-  spec.add_dependency 'rubocop', '0.80.1'
-  spec.add_dependency 'rubocop-performance', '~> 1.5.2'
 
   spec.add_development_dependency 'byebug', '3.5.1'
+  spec.add_development_dependency 'guard', '~> 2.16'
+  spec.add_development_dependency 'guard-rspec', '~> 4.7'
   spec.add_development_dependency 'rake', '12.0.0'
   spec.add_development_dependency 'rspec', '3.6.0'
   spec.add_development_dependency 'rubocop', '0.67.0'
   spec.add_development_dependency 'rubocop-performance', '~> 1.1.0'
   spec.add_development_dependency 'simplecov', '0.17.0'
   spec.add_development_dependency 'simplecov-html', '0.10.1'
+
+  if RUBY_PLATFORM.match?(/darwin/)
+    spec.add_development_dependency 'terminal-notifier', '~> 2.0'
+    spec.add_development_dependency 'terminal-notifier-guard', '~> 1.7'
+  end
 end

@@ -6,8 +6,7 @@ module BrDanfe
         @xml = xml
       end
 
-      def render
-      end
+      def render; end
     end
   end
 end
