@@ -1,7 +1,7 @@
 module BrDanfe
   class DanfeNfce
     PAGE_WIDTH = 8.cm
-    PAGE_HEIGHT = 8.cm
+    PAGE_HEIGHT = 100.cm
 
     attr_reader :options
 

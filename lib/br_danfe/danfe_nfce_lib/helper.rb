@@ -10,17 +10,16 @@ module BrDanfe
       end
 
       # FIXME: CENTRALIZAR
+      def self.numerify(number)
+        return '' if !number || number == ''
 
-      # def self.numerify(number)
-      #   return '' if !number || number == ''
+        separated_number = number.to_s.split('.')
+        integer_part = separated_number[0].reverse.gsub(/\d{3}(?=\d)/, '\&.').reverse
+        decimal_part = separated_number[1] || '00'
+        decimal_part += '0' if decimal_part.size < 2
 
-      #   separated_number = number.to_s.split('.')
-      #   integer_part = separated_number[0].reverse.gsub(/\d{3}(?=\d)/, '\&.').reverse
-      #   decimal_part = separated_number[1] || '00'
-      #   decimal_part += '0' if decimal_part.size < 2
-
-      #   integer_part + ',' + decimal_part
-      # end
+        integer_part + ',' + decimal_part
+      end
 
       # def self.format_datetime(xml_datetime)
       #   formated = ''
