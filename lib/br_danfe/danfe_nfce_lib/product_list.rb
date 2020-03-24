@@ -79,8 +79,17 @@ module BrDanfe
       def render_table(data)
         table = []
         table << @pdf.make_table(data, options)
-        @pdf.bounding_box [0, BrDanfe::DanfeNfceLib::Helper.invert(@pdf.page_height, 2.cm)], width: 8.cm, height: 0.cm do
-          @pdf.table table.map { |item| [item] }
+        height = table.inject(0) do |sum, line|
+          sum + line.height
+        end
+
+        @pdf.bounding_box [0, BrDanfe::DanfeNfceLib::Helper.invert(@pdf.page_height, 2.cm)], width: 8.cm, height: height do
+          mapped_table = table.map { |item| [item] }
+
+          @pdf.table(mapped_table) do |item|
+            item.cells.border_width = 0
+          end
+
         end
 
 

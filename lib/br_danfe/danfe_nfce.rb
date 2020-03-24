@@ -24,8 +24,11 @@ module BrDanfe
     private
 
     def generate
+      p "BEFORE ==>> #{@pdf.y}"
       DanfeNfceLib::Header.new(@pdf, @xml, @options.logo, @options.logo_dimensions).render
+      p "HEADER ==>> #{@pdf.y}"
       DanfeNfceLib::ProductList.new(@pdf, @xml).render
+      p "LIST ==>> #{@pdf.y}"
       # DanfeNfceLib::TotalList.new(@pdf, @xml).render
       # DanfeNfceLib::Key.new(@pdf, @xml).render
       # DanfeNfceLib::QrCode.new(@pdf, @xml).render
@@ -33,13 +36,13 @@ module BrDanfe
       # DanfeNfceLib::NfceIdentification.new(@pdf, @xml).render
       # DanfeNfceLib::Footer.new(@pdf, @xml).render
 
-      grid
+      # grid
       @pdf.page.dictionary.data[:MediaBox] = [0, @pdf.y - 10, PAGE_WIDTH, PAGE_HEIGHT]
     end
 
     def grid
-      @pdf.canvas { stroke_grid }
-      30.times { @pdf.text(' ') }
+      # @pdf.canvas { stroke_grid }
+      1.times { @pdf.text(' ') }
     end
 
     def stroke_grid(options = {})
