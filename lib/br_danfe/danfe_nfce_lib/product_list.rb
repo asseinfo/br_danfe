@@ -74,34 +74,19 @@ module BrDanfe
         }
       end
 
-
-
       def render_table(data)
         table = []
         table << @pdf.make_table(data, options)
-        height = table.inject(0) do |sum, line|
-          sum + line.height
-        end
+        height = table.inject(0) { |sum, line| sum + line.height }
 
-        @pdf.bounding_box [0, BrDanfe::DanfeNfceLib::Helper.invert(@pdf.page_height, 2.cm)], width: 8.cm, height: height do
+        @pdf.y -= 0.5.cm
+        @pdf.bounding_box [0, @pdf.cursor], width: 8.cm, height: height do
           mapped_table = table.map { |item| [item] }
 
           @pdf.table(mapped_table) do |item|
             item.cells.border_width = 0
           end
-
         end
-
-
-      # @pdf.table(data) do |t|
-      #   t.cells.border_width = 0
-      # end
-      # cells.borders
-      # borders => :bottom
-
-        # @pdf.bounding_box([0, BrDanfe::DanfeNfceLib::Helper.invert(@pdf.page_height, 0.1.cm)], width: box_size, height: box_size) do
-        #   @pdf.image @logo, logo_options
-        # end
       end
     end
   end

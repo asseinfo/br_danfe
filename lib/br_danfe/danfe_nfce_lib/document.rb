@@ -42,12 +42,13 @@ module BrDanfe
         end
       end
 
+      #FIXME olhar o do danfe e não ter duplicado
       def iboxI(h, w, x, y, title = '', info = '', options = {})
         box [x.cm, BrDanfe::DanfeNfceLib::Helper.invert(@page_height, y.cm)], w.cm, h.cm, title, info, options
       end
 
       def ibox(h, w, x, y, title = '', info = '', options = {})
-        box [x.cm, y.cm], w.cm, h.cm, title, info, options
+        box [x.cm, y], w.cm, h.cm, title, info, options
       end
 
       def cnpj(h, w, x, y, info, options = {})
@@ -56,6 +57,11 @@ module BrDanfe
 
         iboxI(h, w, x, y, '', data, options)
       end
+
+      def inumeric(h, w, x, y, data, options = {})
+        numeric [x.cm, y], w.cm, h.cm, '', data, options
+      end
+
 
       # def ititle(h, w, x, y, i18n)
       #   title = ''
@@ -96,17 +102,6 @@ module BrDanfe
       #   i18n_lbox(h, w, x, y, i18n, data, options)
       # end
 
-      # def lnumeric(h, w, x, y, xml, xpath, options = {})
-      #   i18n = xpath.tr('/', '.')
-      #   data = xml[xpath]
-      #   inumeric(h, w, x, y, i18n, data, options)
-      # end
-
-      # def inumeric(h, w, x, y, i18n = '', data = '', options = {})
-      #   label = i18n != '' ? I18n.t("danfe.#{i18n}") : ''
-      #   numeric [x.cm, Helper.invert(y.cm)], w.cm, h.cm, label, data, options
-      # end
-
       # def i18n_lbox(h, w, x, y, i18n = '', info = '', options = {})
       #   label = i18n != '' ? I18n.t("danfe.#{i18n}") : ''
       #   ibox h, w, x, y, label, info, options
@@ -114,10 +109,10 @@ module BrDanfe
 
       private
 
-      # def numeric(at, w, h, title = '', info = '', options = {})
-      #   info = Helper.numerify(info) if info != ''
-      #   box at, w, h, title, info, options.merge({ align: :right })
-      # end
+      def numeric(at, w, h, title = '', info = '', options = {})
+        info = Helper.numerify(info) if info != ''
+        box at, w, h, title, info, options.merge({ align: :right })
+      end
 
       def box(at, w, h, title = '', info = '', options = {})
         options = {

@@ -17,7 +17,6 @@ module BrDanfe
       # border: 0
       # remover o guard
       def render
-        # ibox(h,              w, x, y, title = '', info = '', options = {})
         @pdf.iboxI LINE_HEIGHT, 5.7, 1.7, 0, '', @xml['emit/xNome'], { size: 7, align: :left, border: 0, style: :bold }
         @pdf.cnpj LINE_HEIGHT, 5.7, 1.7, 0.25, @xml['emit/CNPJ'], { size: 7, align: :left, border: 0 }
         @pdf.iboxI LINE_HEIGHT, 5.7, 1.7, 0.50, '', address, { size: 7, align: :left, border: 0 }

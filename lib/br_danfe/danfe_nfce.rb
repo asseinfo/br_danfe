@@ -24,12 +24,9 @@ module BrDanfe
     private
 
     def generate
-      p "BEFORE ==>> #{@pdf.y}"
       DanfeNfceLib::Header.new(@pdf, @xml, @options.logo, @options.logo_dimensions).render
-      p "HEADER ==>> #{@pdf.y}"
       DanfeNfceLib::ProductList.new(@pdf, @xml).render
-      p "LIST ==>> #{@pdf.y}"
-      # DanfeNfceLib::TotalList.new(@pdf, @xml).render
+      DanfeNfceLib::TotalList.new(@pdf, @xml).render
       # DanfeNfceLib::Key.new(@pdf, @xml).render
       # DanfeNfceLib::QrCode.new(@pdf, @xml).render
       # DanfeNfceLib::Recipient.new(@pdf, @xml).render
