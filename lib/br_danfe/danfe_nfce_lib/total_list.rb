@@ -36,21 +36,26 @@ module BrDanfe
       end
 
       def payment_methods
-        @pdf.y -= 0.6.cm
-        @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', 'Forma de pagamento', { size: 7, align: :left, border: 0, style: :bold }
-        @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', 'Valor pago R$', { size: 7, align: :right, border: 0, style: :bold }
-
         payments = {}
+        without_payment = '90'
+
         @xml.css('detPag').each do |detPag|
+          next if detPag.css('tPag').text == without_payment
           payments[detPag.css('tPag').text] ||= BigDecimal('0')
           actual_payment_value = BigDecimal(detPag.css('vPag').text)
           payments[detPag.css('tPag').text] += actual_payment_value
         end
 
-        payments.each do |key, value|
-          @pdf.y -= 0.3.cm
-          @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', I18n.t("nfce.payment_methods.#{key}"), { size: 7, align: :left, border: 0 }
-          @pdf.inumeric LINE_HEIGHT, 7.4, 0, @pdf.cursor, value.to_f, { size: 7, align: :right, border: 0 }
+        if payments.present?
+          @pdf.y -= 0.6.cm
+          @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', 'Forma de pagamento', { size: 7, align: :left, border: 0, style: :bold }
+          @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', 'Valor pago R$', { size: 7, align: :right, border: 0, style: :bold }
+
+          payments.each do |key, value|
+            @pdf.y -= 0.3.cm
+            @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', I18n.t("nfce.payment_methods.#{key}"), { size: 7, align: :left, border: 0 }
+            @pdf.inumeric LINE_HEIGHT, 7.4, 0, @pdf.cursor, value.to_f, { size: 7, align: :right, border: 0 }
+          end
         end
       end
     end

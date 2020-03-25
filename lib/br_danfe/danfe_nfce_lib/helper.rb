@@ -21,6 +21,10 @@ module BrDanfe
         integer_part + ',' + decimal_part
       end
 
+      def self.homologation?(xml)
+        xml_text(xml, 'nfeProc/NFe/infNFe/ide/tpAmb') == '2'
+      end
+
       # def self.format_datetime(xml_datetime)
       #   formated = ''
 
@@ -60,9 +64,6 @@ module BrDanfe
       #   homologation?(xml) || unauthorized?(xml)
       # end
 
-      # def self.homologation?(xml)
-      #   xml_text(xml, 'nfeProc/NFe/infNFe/ide/tpAmb') == '2'
-      # end
 
       # def self.unauthorized?(xml)
       #   xml.css('nfeProc/protNFe/infProt/dhRecbto').empty?
@@ -82,11 +83,11 @@ module BrDanfe
       #   "#{xml_text(xml, 'enderDest/xLgr')}#{address_number}#{address_complement}"
       # end
 
-      # def self.xml_text(xml, property)
-      #   xml.css(property).text
-      # end
+      def self.xml_text(xml, property)
+        xml.css(property).text
+      end
 
-      # private_class_method :xml_text
+      private_class_method :xml_text
     end
   end
 end

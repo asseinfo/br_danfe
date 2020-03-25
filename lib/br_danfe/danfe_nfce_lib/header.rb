@@ -22,13 +22,15 @@ module BrDanfe
         @pdf.iboxI LINE_HEIGHT, 5.7, 1.7, 0.50, '', address, { size: 7, align: :left, border: 0 }
         @pdf.iboxI LINE_HEIGHT, 5.7, 1.7, 1.25, '', 'Documento Auxiliar da Nota Fiscal de Consumidor Eletrônica', { size: 6, align: :left, border: 0 }
 
+        #FIXME: testar com endereço de mais de duas linhas
         logo
       end
 
       private
 
+      # FIXME: refatorar com o endereço do destinatário
       def address
-        "#{@xml['enderEmit/xLgr']}, #{@xml['enderEmit/nro']}, #{@xml['enderEmit/xBairro']}, #{@xml['enderEmit/xMun']}, #{@xml['enderEmit/UF']}"
+        "#{@xml['enderEmit/xLgr']}, #{@xml['enderEmit/nro']}, #{@xml['enderEmit/xBairro']}, #{@xml['enderEmit/xMun']} - #{@xml['enderEmit/UF']}"
       end
 
       # FIXME: ver se não ficou duplicado

@@ -51,6 +51,7 @@ module BrDanfe
         box [x.cm, y], w.cm, h.cm, title, info, options
       end
 
+      # FIXME: talvez não seja necessário estar extraido, tem o cnpj do emit e do dest
       def cnpj(h, w, x, y, info, options = {})
         cnpj = BrDocuments::CnpjCpf::Cnpj.new info
         data = "CNPJ: #{cnpj.valid? ? cnpj.formatted : ''}"
