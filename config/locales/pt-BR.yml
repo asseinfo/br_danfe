@@ -144,3 +144,12 @@ pt-BR:
         received_at: "DATA DE RECEBIMENTO"
         receiver: "IDENTIFICAÇÃO E ASSINATURA DO RECEBEDOR"
         document: "NF-e\nN°. %{nNF}\nSÉRIE %{serie}"
+  nfce:
+    payment_methods:
+      01:
+      02:
+      03:
+      04:
+      05:
+      90:
+      99:

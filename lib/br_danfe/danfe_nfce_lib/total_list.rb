@@ -40,7 +40,11 @@ module BrDanfe
           payments[detPag.css('tPag').text] += actual_payment_value
         end
 
-        p "payments ==> #{payments["05"].to_f}"
+        payments.each do |key, value|
+          @pdf.y -= 0.30.cm
+          @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', Helper.payment_method_name(key), { size: 7, align: :left, border: 0, style: :bold }
+          @pdf.inumeric LINE_HEIGHT, 7.4, 0, @pdf.cursor, value.to_f, { size: 7, align: :right, border: 0 }
+        end
         # payments.
         # @pdf.inumeric LINE_HEIGHT, 7.4, 0, @pdf.cursor, @xml['ICMSTot > vNF'], { size: 7, align: :right, border: 0 }
       end
