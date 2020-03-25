@@ -48,7 +48,7 @@ module BrDanfe
         end
 
         payments.each do |key, value|
-          @pdf.y -= 0.30.cm
+          @pdf.y -= 0.3.cm
           @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', I18n.t("nfce.payment_methods.#{key}"), { size: 7, align: :left, border: 0 }
           @pdf.inumeric LINE_HEIGHT, 7.4, 0, @pdf.cursor, value.to_f, { size: 7, align: :right, border: 0 }
         end

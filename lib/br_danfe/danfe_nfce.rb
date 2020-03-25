@@ -27,7 +27,7 @@ module BrDanfe
       DanfeNfceLib::Header.new(@pdf, @xml, @options.logo, @options.logo_dimensions).render
       DanfeNfceLib::ProductList.new(@pdf, @xml).render
       DanfeNfceLib::TotalList.new(@pdf, @xml).render
-      # DanfeNfceLib::Key.new(@pdf, @xml).render
+      DanfeNfceLib::Key.new(@pdf, @xml).render('url_de_teste.com/key')
       # DanfeNfceLib::QrCode.new(@pdf, @xml).render
       # DanfeNfceLib::Recipient.new(@pdf, @xml).render
       # DanfeNfceLib::NfceIdentification.new(@pdf, @xml).render
@@ -38,7 +38,7 @@ module BrDanfe
     end
 
     def grid
-      # @pdf.canvas { stroke_grid }
+      @pdf.canvas { stroke_grid }
       1.times { @pdf.text(' ') }
     end
 
