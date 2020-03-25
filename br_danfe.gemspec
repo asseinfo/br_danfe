@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-performance', '~> 1.1.0'
   spec.add_development_dependency 'simplecov', '0.17.1'
   spec.add_development_dependency 'simplecov-html', '0.10.2'
-  
+
   if RUBY_PLATFORM.match?(/darwin/)
     spec.add_development_dependency 'terminal-notifier', '~> 2.0'
     spec.add_development_dependency 'terminal-notifier-guard', '~> 1.7'

@@ -98,6 +98,5 @@ module BrDanfe
     #   pdf.text @application.name
     #   pdf.text @application.address.try(:split, '|').select{|x| !x.blank?}.join("\n") rescue ''
     # end
-
   end
 end

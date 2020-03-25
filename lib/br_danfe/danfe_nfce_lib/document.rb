@@ -42,7 +42,7 @@ module BrDanfe
         end
       end
 
-      #FIXME olhar o do danfe e não ter duplicado
+      # FIXME: olhar o do danfe e não ter duplicado
       def iboxI(h, w, x, y, title = '', info = '', options = {})
         box [x.cm, BrDanfe::DanfeNfceLib::Helper.invert(@page_height, y.cm)], w.cm, h.cm, title, info, options
       end
@@ -61,7 +61,6 @@ module BrDanfe
       def inumeric(h, w, x, y, data, options = {})
         numeric [x.cm, y], w.cm, h.cm, '', data, options
       end
-
 
       # def ititle(h, w, x, y, i18n)
       #   title = ''

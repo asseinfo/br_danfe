@@ -21,12 +21,6 @@ module BrDanfe
         integer_part + ',' + decimal_part
       end
 
-      def self.payment_method_name(payment_method)
-        payment_methods = { money: '01', check: '02', credit_card: '03', debit_card: '04', credit: '05',
-          without_payment: '90', others: '99' }
-
-        payment_methods[payment_method]
-      end
       # def self.format_datetime(xml_datetime)
       #   formated = ''
 

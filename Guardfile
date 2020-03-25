@@ -68,5 +68,5 @@ guard :rspec, cmd: 'bundle exec rspec' do
     Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance'
   end
 
-  watch(%r{.+\.rb$}) { |m| 'spec/features/danfe_nfce_spec.rb' }
+  watch(/.+\.rb$/) { |_m| 'spec/features/danfe_nfce_spec.rb' }
 end
