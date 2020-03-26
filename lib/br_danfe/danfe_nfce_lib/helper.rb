@@ -25,16 +25,16 @@ module BrDanfe
         xml_text(xml, 'nfeProc/NFe/infNFe/ide/tpAmb') == '2'
       end
 
-      # def self.format_datetime(xml_datetime)
-      #   formated = ''
+      def self.format_datetime(xml_datetime)
+        formated = ''
 
-      #   unless xml_datetime.empty?
-      #     date = DateTime.strptime(xml_datetime, '%Y-%m-%dT%H:%M:%S')
-      #     formated = date.strftime('%d/%m/%Y %H:%M:%S')
-      #   end
+        unless xml_datetime.empty?
+          date = DateTime.strptime(xml_datetime, '%Y-%m-%dT%H:%M:%S')
+          formated = date.strftime('%d/%m/%Y %H:%M:%S')
+        end
 
-      #   formated
-      # end
+        formated
+      end
 
       # def self.format_date(xml_datetime)
       #   formated = ''

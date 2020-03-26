@@ -29,8 +29,8 @@ module BrDanfe
       DanfeNfceLib::TotalList.new(@pdf, @xml).render
       DanfeNfceLib::Key.new(@pdf, @xml).render
       DanfeNfceLib::Recipient.new(@pdf, @xml).render
+      DanfeNfceLib::NfceIdentification.new(@pdf, @xml).render
       # DanfeNfceLib::QrCode.new(@pdf, @xml).render
-      # DanfeNfceLib::NfceIdentification.new(@pdf, @xml).render
       # DanfeNfceLib::Footer.new(@pdf, @xml).render
 
       # grid

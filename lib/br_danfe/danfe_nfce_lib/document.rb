@@ -33,14 +33,14 @@ module BrDanfe
         @document.respond_to?(method_name, include_private) || super
       end
 
-      def text(text, options = {})
-        pad = options.delete(:pad) || 0
-        options = { align: :left, size: 7, style: nil }.merge(options)
+      # def text(text, options = {})
+      #   pad = options.delete(:pad) || 0
+      #   options = { align: :left, size: 7, style: nil }.merge(options)
 
-        pad(pad) do
-          @document.text text, size: options[:size], style: options[:style], align: options[:align]
-        end
-      end
+      #   pad(pad) do
+      #     @document.text text, size: options[:size], style: options[:style], align: options[:align]
+      #   end
+      # end
 
       # FIXME: olhar o do danfe e não ter duplicado
       def iboxI(h, w, x, y, title = '', info = '', options = {})
