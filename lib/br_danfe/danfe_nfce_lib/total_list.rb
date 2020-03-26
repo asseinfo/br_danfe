@@ -61,3 +61,8 @@ module BrDanfe
     end
   end
 end
+
+
+# @pdf.text "<b>Texto</b>", inline_format: true, align: :left
+# @pdf.y += @pdf.height_of("Texto")
+# @pdf.text "Texto", inline_format: true, align: :right

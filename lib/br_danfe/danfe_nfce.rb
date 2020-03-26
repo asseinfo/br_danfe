@@ -30,7 +30,7 @@ module BrDanfe
       DanfeNfceLib::Key.new(@pdf, @xml).render
       DanfeNfceLib::Recipient.new(@pdf, @xml).render
       DanfeNfceLib::NfceIdentification.new(@pdf, @xml).render
-      # DanfeNfceLib::QrCode.new(@pdf, @xml).render
+      DanfeNfceLib::QrCode.new(@pdf, @xml).render
       DanfeNfceLib::Footer.new(@pdf, @xml).render
 
       # grid

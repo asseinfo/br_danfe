@@ -323,7 +323,7 @@
          </infRespTec>
       </infNFe>
         <infNFeSupl>
-          <qrCode><![CDATA[http://sistemas.sefaz.am.gov.br/nfceweb/consultarNFCe.jsp?p=#{nfe_key}|2|2|1|A604FD51E40ED8465B787B3E9CF8C1D90E61DB13]]></qrCode>
+          <qrCode><![CDATA[http://sistemas.sefaz.am.gov.br/nfceweb/consultarNFCe.jsp?p=13130901144012000152651231234567891123456786|2|2|1|A604FD51E40ED8465B787B3E9CF8C1D90E61DB13]]></qrCode>
           <urlChave>www.sefaz.am.gov.br/nfce/consulta</urlChave>
         </infNFeSupl>
       <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
