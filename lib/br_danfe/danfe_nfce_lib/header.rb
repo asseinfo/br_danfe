@@ -36,7 +36,7 @@ module BrDanfe
       # FIXME: ver se não ficou duplicado
       def logo
         box_size = 45
-        logo_options = BrDanfe::DanfeLib::LogoOptions.new(box_size, @logo_dimensions).options
+        logo_options = BrDanfe::Helper::Logo::Options.new(box_size, @logo_dimensions).options
 
         @pdf.bounding_box([0, BrDanfe::DanfeNfceLib::Helper.invert(@pdf.page_height, 0.1.cm)], width: box_size, height: box_size) do
           @pdf.image @logo, logo_options

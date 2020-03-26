@@ -18,7 +18,6 @@ module BrDanfe
         @document.line_width = 0.3
       end
 
-      # FIXME: colocar um attr_reader
       attr_reader :page_height
 
       def method_missing(method_name, *args, &block)
