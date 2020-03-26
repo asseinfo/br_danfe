@@ -31,7 +31,7 @@ module BrDanfe
       DanfeNfceLib::Recipient.new(@pdf, @xml).render
       DanfeNfceLib::NfceIdentification.new(@pdf, @xml).render
       # DanfeNfceLib::QrCode.new(@pdf, @xml).render
-      # DanfeNfceLib::Footer.new(@pdf, @xml).render
+      DanfeNfceLib::Footer.new(@pdf, @xml).render
 
       # grid
       @pdf.page.dictionary.data[:MediaBox] = [0, @pdf.y - 10, PAGE_WIDTH, PAGE_HEIGHT]
