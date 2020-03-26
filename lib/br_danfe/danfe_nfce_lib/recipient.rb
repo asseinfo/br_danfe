@@ -10,7 +10,8 @@ module BrDanfe
 
       def render
         @pdf.y -= 0.6.cm
-        BrDanfe::DanfeNfceLib::Helper.homologation?(@xml) ? render_homologation : render_recipient
+        # BrDanfe::DanfeNfceLib::Helper.homologation?(@xml) ? render_homologation : render_recipient
+        render_recipient
       end
 
       private
