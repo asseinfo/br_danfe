@@ -7,15 +7,13 @@ module BrDanfe
       end
 
       def render
-        data = []
-        data.push create_header
-        data += products
-        render_table data
+        render_headers(headers)
+        render_products(products)
       end
 
       private
 
-      def create_header
+      def headers
         [
           header_column('Código', :left),
           header_column('Descrição', :left),
@@ -27,7 +25,7 @@ module BrDanfe
       end
 
       def header_column(title, align)
-        { content: title, align: align, size: 6, valign: :top }
+        { content: title, options: { align: align, size: 6, style: :bold } }
       end
 
       def products
@@ -46,8 +44,8 @@ module BrDanfe
       end
 
       def cell_text(text, options = {})
-        cell = { content: text, border_width: 0, size: 6 }
-        cell.merge!(options)
+        cell = { content: text, options: { border_width: 0, size: 6 } }
+        cell[:options].merge!(options)
         cell
       end
 
@@ -59,34 +57,47 @@ module BrDanfe
         BrDanfe::DanfeNfceLib::Helper.numerify(det.css(xpath.to_s).text)
       end
 
-      def options
-        { column_widths: column_widths, cell_style: { padding: 2, border_width: 0 } }
+      def columns
+        [
+          { width: 0.85.cm, position: 0.05.cm },
+          { width: 2.6.cm, position: 0.9.cm },
+          { width: 1.1.cm, position: 3.4.cm },
+          { width: 0.4.cm, position: 4.6.cm },
+          { width: 1.2.cm, position: 4.9.cm },
+          { width: 1.2.cm, position: 6.1.cm }
+        ]
       end
 
-      def column_widths
-        {
-          0 => 0.9.cm,
-          1 => 2.7.cm,
-          2 => 1.cm,
-          3 => 0.4.cm,
-          4 => 1.2.cm,
-          5 => 1.2.cm
-        }
-      end
-
-      def render_table(data)
-        table = []
-        table << @pdf.make_table(data, options)
-        height = table.inject(0) { |sum, line| sum + line.height }
-
-        @pdf.y -= 0.5.cm
-        @pdf.bounding_box [0, @pdf.cursor], width: 8.cm, height: height do
-          mapped_table = table.map { |item| [item] }
-
-          @pdf.table(mapped_table) do |item|
-            item.cells.border_width = 0
+      def render_headers(headers)
+        2.times { @pdf.render_blank_line }
+        cursor = @pdf.cursor
+        headers.each_with_index do |header, index|
+          @pdf.bounding_box [columns[index][:position], cursor], width: columns[index][:width], height: 0.2.cm do
+            @pdf.text header[:content], header[:options]
           end
         end
+      end
+
+      def render_products(products)
+        @pdf.render_blank_line
+        index_of_product_name = 1
+        products.each do |product|
+          box_height = box_height(product[index_of_product_name][:content])
+          cursor = @pdf.cursor
+
+          product.each_with_index do |product, index|
+            @pdf.bounding_box [columns[index][:position], cursor], width: columns[index][:width], height: box_height do
+              @pdf.text product[:content], product[:options]
+            end
+          end
+        end
+      end
+
+      def box_height(content)
+        line_height_base = 0.23.cm
+
+        lines = content.scan(/[\s\S]{1,20}( |$)/).length
+        line_height_base * lines
       end
     end
   end

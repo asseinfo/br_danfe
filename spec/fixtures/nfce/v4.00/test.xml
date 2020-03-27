@@ -64,17 +64,17 @@
             <prod>
                <cProd>1173</cProd>
                <cEAN>568754456745</cEAN>
-               <xProd>Abraçadeira</xProd>
+               <xProd>Abraçadeira de testea com o nome bem grande</xProd>
                <NCM>01022990</NCM>
                <CFOP>5101</CFOP>
                <uCom>UN</uCom>
-               <qCom>1.0</qCom>
-               <vUnCom>10.0</vUnCom>
-               <vProd>10.00</vProd>
+               <qCom>1000.0</qCom>
+               <vUnCom>10000.0</vUnCom>
+               <vProd>10000.00</vProd>
                <cEANTrib>568754456745</cEANTrib>
                <uTrib>UN</uTrib>
                <qTrib>1.0</qTrib>
-               <vUnTrib>10.0</vUnTrib>
+               <vUnTrib>10000.0</vUnTrib>
                <vDesc>0.98</vDesc>
                <indTot>1</indTot>
             </prod>
