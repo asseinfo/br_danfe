@@ -17,22 +17,30 @@ module BrDanfe
 
       private
 
+      def print_text(text, cursor, options)
+        @pdf.bounding_box [0.085.cm, cursor], width: 7.25.cm, height: 0.25.cm do
+          @pdf.text text, options
+        end
+      end
+
       def totals
-        @pdf.y -= 0.3.cm
-        @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', 'Qtde. total de itens', { size: 7, align: :left, border: 0 }
-        @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', @xml.css('det').count.to_s, { size: 7, align: :right, border: 0 }
+        @pdf.render_blank_line
 
-        @pdf.y -= 0.3.cm
-        @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', 'Subtotal R$', { size: 7, align: :left, border: 0 }
-        @pdf.inumeric LINE_HEIGHT, 7.4, 0, @pdf.cursor, @xml['ICMSTot > vProd'], { size: 7, align: :right, border: 0 }
+        cursor = @pdf.cursor
+        print_text('Qtde. total de itens', cursor, { size: 7, align: :left })
+        print_text(@xml.css('det').count.to_s, cursor, { size: 7, align: :right })
 
-        @pdf.y -= 0.3.cm
-        @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', 'Desconto R$', { size: 7, align: :left, border: 0 }
-        @pdf.inumeric LINE_HEIGHT, 7.4, 0, @pdf.cursor, @xml['ICMSTot > vDesc'], { size: 7, align: :right, border: 0 }
+        cursor = @pdf.cursor
+        print_text('Subtotal R$', cursor, { size: 7, align: :left})
+        print_text(@xml['ICMSTot > vProd'], cursor, { size: 7, align: :right })
 
-        @pdf.y -= 0.3.cm
-        @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', 'Valor Total R$', { size: 7, align: :left, border: 0, style: :bold }
-        @pdf.inumeric LINE_HEIGHT, 7.4, 0, @pdf.cursor, @xml['ICMSTot > vNF'], { size: 7, align: :right, border: 0, style: :bold }
+        cursor = @pdf.cursor
+        print_text('Desconto R$', cursor, { size: 7, align: :left})
+        print_text(@xml['ICMSTot > vDesc'], cursor, { size: 7, align: :right })
+
+        cursor = @pdf.cursor
+        print_text('Valor Total R$', cursor, { size: 7, align: :left, style: :bold })
+        print_text(@xml['ICMSTot > vDesc'], cursor, { size: 7, align: :right, style: :bold })
       end
 
       def payment_methods
