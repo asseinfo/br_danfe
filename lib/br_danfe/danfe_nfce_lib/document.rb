@@ -10,7 +10,7 @@ module BrDanfe
           page_layout: :portrait,
           left_margin: 0.3.cm,
           right_margin: 0.3.cm,
-          top_margin: 0,
+          top_margin: 0.3.cm,
           botton_margin: 0
         )
 
@@ -32,15 +32,6 @@ module BrDanfe
         @document.respond_to?(method_name, include_private) || super
       end
 
-      # def text(text, options = {})
-      #   pad = options.delete(:pad) || 0
-      #   options = { align: :left, size: 7, style: nil }.merge(options)
-
-      #   pad(pad) do
-      #     @document.text text, size: options[:size], style: options[:style], align: options[:align]
-      #   end
-      # end
-
       # FIXME: olhar o do danfe e não ter duplicado
       def iboxI(h, w, x, y, title = '', info = '', options = {})
         box [x.cm, BrDanfe::DanfeNfceLib::Helper.invert(@page_height, y.cm)], w.cm, h.cm, title, info, options
@@ -61,50 +52,6 @@ module BrDanfe
       def inumeric(h, w, x, y, data, options = {})
         numeric [x.cm, y], w.cm, h.cm, '', data, options
       end
-
-      # def ititle(h, w, x, y, i18n)
-      #   title = ''
-      #   title = I18n.t("danfe.#{i18n}") if i18n != ''
-      #   text_box title, size: 8, at: [x.cm, Helper.invert(y.cm) - 4], width: w.cm, height: h.cm, style: :bold
-      # end
-
-      # def ibarcode(h, w, x, y, info)
-      #   if info != ''
-      #     Barby::Code128C.new(info).annotate_pdf(self, x: x.cm, y: Helper.invert(y.cm), width: w.cm, height: h.cm)
-      #   end
-      # end
-
-      # def lbox(h, w, x, y, xml, xpath, options = {})
-      #   i18n = xpath.tr('/', '.')
-      #   label = I18n.t("danfe.#{i18n}")
-      #   data = xml[xpath]
-      #   ibox(h, w, x, y, label, data, options)
-      # end
-
-      # def ldate(h, w, x, y, i18n = '', info = '', options = {})
-      #   data = Helper.format_date(info)
-      #   i18n_lbox(h, w, x, y, i18n, data, options)
-      # end
-
-      # def ltime(h, w, x, y, i18n = '', info = '', options = {})
-      #   data = Helper.format_time(info)
-      #   i18n_lbox(h, w, x, y, i18n, data, options)
-      # end
-
-      # def lie(h, w, x, y, xml, xpath_uf, xpath_ie, options = {})
-      #   i18n = xpath_ie.tr('/', '.')
-      #   data = ''
-      #   if BrDanfe::Uf.include?(xml[xpath_uf])
-      #     ie = BrDocuments::IE::Factory.create(xml[xpath_uf], xml[xpath_ie])
-      #     data = ie.formatted if ie.valid?
-      #   end
-      #   i18n_lbox(h, w, x, y, i18n, data, options)
-      # end
-
-      # def i18n_lbox(h, w, x, y, i18n = '', info = '', options = {})
-      #   label = i18n != '' ? I18n.t("danfe.#{i18n}") : ''
-      #   ibox h, w, x, y, label, info, options
-      # end
 
       private
 
