@@ -20,6 +20,10 @@ module BrDanfe
 
       attr_reader :page_height
 
+      def render_blank_line(font_size = 6)
+        @document.text ' ', size: font_size
+      end
+
       def method_missing(method_name, *args, &block)
         if @document.respond_to? method_name
           @document.send method_name, *args, &block
@@ -39,14 +43,6 @@ module BrDanfe
 
       def ibox(h, w, x, y, title = '', info = '', options = {})
         box [x.cm, y], w.cm, h.cm, title, info, options
-      end
-
-      # FIXME: talvez não seja necessário estar extraido, tem o cnpj do emit e do dest
-      def cnpj(h, w, x, y, info, options = {})
-        cnpj = BrDocuments::CnpjCpf::Cnpj.new info
-        data = "CNPJ: #{cnpj.valid? ? cnpj.formatted : ''}"
-
-        iboxI(h, w, x, y, '', data, options)
       end
 
       def inumeric(h, w, x, y, data, options = {})

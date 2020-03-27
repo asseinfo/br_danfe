@@ -17,30 +17,13 @@ module BrDanfe
       # border: 0
       # remover o guard
       def render
-        #
-        # @pdf.bounding_box([1.7.cm, @pdf.cursor], width: 5.7.cm, height: LINE_HEIGHT) do
-        #   @pdf.text "<b>Texto</b>", inline_format: true, align: :left
-        # end
-
-        # y = BrDanfe::DanfeNfceLib::Helper.invert(100.cm, 0.cm)
-        # @pdf.draw_text @xml['emit/xNome'], at: [1.7.cm, @pdf.cursor], size: 7, style: :bold
-
         @pdf.bounding_box([1.7.cm, @pdf.cursor], width: 5.7.cm, height: 300) do
-          @pdf.text @xml['emit/xNome'], size: 7, align: :left, style: :bold
+          @pdf.text "#{@xml['emit/xNome']}", size: 7, align: :left, style: :bold
+          @pdf.text Helper.cnpj(@xml['emit/CNPJ']), size: 6, align: :left
+          @pdf.text address.strip, size: 6, align: :left
+          @pdf.render_blank_line
+          @pdf.text 'Documento Auxiliar da Nota Fiscal de Consumidor Eletrônica', size: 5, align: :left
         end
-
-        # @pdf.text_box @xml['emit/xNome'], size: 7, at: [1.7.cm, y], width: 5.7.cm - 4, height: LINE_HEIGHT, align: :left,
-        #   style: :bold
-
-        # @pdf.iboxI LINE_HEIGHT, 5.7, 1.7, 0, '', @xml['emit/xNome'], { size: 7, align: :left, border: 0, style: :bold }
-        # @pdf.cnpj LINE_HEIGHT, 5.7, 1.7, 0.25, @xml['emit/CNPJ'], { size: 7, align: :left, border: 0 }
-        # @pdf.iboxI LINE_HEIGHT, 5.7, 1.7, 0.50, '', address, { size: 7, align: :left, border: 0 }
-        # @pdf.iboxI LINE_HEIGHT, 5.7, 1.7, 1.25, '', 'Documento Auxiliar da Nota Fiscal de Consumidor Eletrônica', { size: 6, align: :left, border: 0 }
-
-
-        # @pdf.text "<b>Texto</b>", inline_format: true, align: :left
-        # @pdf.y += @pdf.height_of("Texto")
-        # @pdf.text "Texto", inline_format: true, align: :right
 
         #FIXME: testar com endereço de mais de duas linhas
         logo

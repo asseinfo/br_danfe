@@ -40,6 +40,13 @@ module BrDanfe
         xml.css(property).text
       end
 
+      def self.cnpj(info)
+        cnpj = BrDocuments::CnpjCpf::Cnpj.new info
+        data = "CNPJ: #{cnpj.valid? ? cnpj.formatted : ''}"
+        data
+      end
+
+
       private_class_method :xml_text
     end
   end
