@@ -55,22 +55,19 @@ module BrDanfe
         end
 
         if payments.present?
-          @pdf.y -= 0.6.cm
-          @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', 'Forma de pagamento', { size: 7, align: :left, border: 0, style: :bold }
-          @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', 'Valor pago R$', { size: 7, align: :right, border: 0, style: :bold }
+          @pdf.render_blank_line
+
+          cursor = @pdf.cursor
+          print_text('Forma de pagamento', cursor, { size: 7, align: :left, style: :bold })
+          print_text('Valor pago R$', cursor, { size: 7, align: :right, style: :bold })
 
           payments.each do |key, value|
-            @pdf.y -= 0.3.cm
-            @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', I18n.t("nfce.payment_methods.#{key}"), { size: 7, align: :left, border: 0 }
-            @pdf.inumeric LINE_HEIGHT, 7.4, 0, @pdf.cursor, value.to_f, { size: 7, align: :right, border: 0 }
+            cursor = @pdf.cursor
+            print_text(I18n.t("nfce.payment_methods.#{key}"), cursor, { size: 7, align: :left })
+            print_text(BrDanfe::DanfeNfceLib::Helper.numerify(value.to_f), cursor, { size: 7, align: :right })
           end
         end
       end
     end
   end
 end
-
-
-# @pdf.text "<b>Texto</b>", inline_format: true, align: :left
-# @pdf.y += @pdf.height_of("Texto")
-# @pdf.text "Texto", inline_format: true, align: :right
