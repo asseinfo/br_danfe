@@ -9,12 +9,11 @@ module BrDanfe
       end
 
       def render
-        @pdf.y -= 0.6.cm
-        @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', 'Consulte pela Chave de Acesso em', { size: 7, align: :center, border: 0, style: :bold }
-        @pdf.y -= 0.3.cm
-        @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', @xml['urlChave'], { size: 7, align: :center, border: 0 }
-        @pdf.y -= 0.3.cm
-        @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', @xml['chNFe'].gsub(/(\d)(?=(\d\d\d\d)+(?!\d))/, '\\1 '), { size: 6, align: :center, border: 0 }
+        @pdf.render_blank_line
+
+        @pdf.text 'Consulte pela Chave de Acesso em', size: 7, align: :center, style: :bold
+        @pdf.text @xml['urlChave'], size: 7, align: :center
+        @pdf.text @xml['chNFe'].gsub(/(\d)(?=(\d\d\d\d)+(?!\d))/, '\\1 '), size: 6, align: :center
       end
     end
   end
