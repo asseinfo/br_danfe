@@ -5,7 +5,7 @@ describe BrDanfe::DanfeLib::DetBody do
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
-  let(:xml) { BrDanfe::DanfeLib::XML.new(xml_as_string) }
+  let(:xml) { BrDanfe::XML.new(xml_as_string) }
 
   let(:xml_as_string) do
     <<-eos

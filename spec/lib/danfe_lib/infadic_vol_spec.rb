@@ -4,7 +4,7 @@ describe BrDanfe::DanfeLib::InfadicVol do
   let(:base_dir) { './spec/fixtures/nfe/lib/' }
   let(:output_pdf) { "#{base_dir}output.pdf" }
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
-  let(:xml) { BrDanfe::DanfeLib::XML.new(xml_as_string) }
+  let(:xml) { BrDanfe::XML.new(xml_as_string) }
   subject { described_class.new(xml, pdf) }
 
   describe '#render' do

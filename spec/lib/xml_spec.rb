@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe BrDanfe::DanfeLib::XML do
-  subject { BrDanfe::DanfeLib::XML.new(xml_as_string) }
+describe BrDanfe::XML do
+  subject { described_class.new(xml_as_string) }
 
   describe '#version_is_310_or_newer?' do
     describe "when xml's version is equal 3.10" do

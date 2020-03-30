@@ -6,7 +6,7 @@ module BrDanfe
     attr_reader :options
 
     def initialize(xml)
-      @xml = DanfeNfceLib::XML.new(xml)
+      @xml = BrDanfe::XML.new(xml)
       @pdf = DanfeNfceLib::Document.new(PAGE_WIDTH, PAGE_HEIGHT)
       @options = BrDanfe::Logo::Config.new
     end

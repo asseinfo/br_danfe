@@ -22,8 +22,8 @@ describe BrDanfe::DanfeNfceLib::Key do
     eos
   end
 
-  let(:xml_key) { BrDanfe::DanfeNfceLib::XML.new(xml_as_string) }
   let(:pdf) { BrDanfe::DanfeNfceLib::Document.new(8.cm, 5.cm) }
+  let(:xml_key) { BrDanfe::XML.new(xml_as_string) }
 
   subject { described_class.new pdf, xml_key }
 
