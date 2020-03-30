@@ -33,35 +33,11 @@ module BrDanfe
       DanfeNfceLib::QrCode.new(@pdf, @xml).render
       DanfeNfceLib::Footer.new(@pdf, @xml).render
 
-      grid
       resize_page_height
     end
 
     def resize_page_height
       @pdf.page.dictionary.data[:MediaBox] = [0, @pdf.y - 10, PAGE_WIDTH, PAGE_HEIGHT]
-    end
-
-    #FIXME: REMOVER
-    def grid
-      @pdf.canvas { stroke_grid }
-    end
-
-    def stroke_grid(options = {})
-      options = { at: [0, 0], height: @pdf.bounds.height.to_i - (options[:at] || [0, 0])[1], width: @pdf.bounds.width.to_i - (options[:at] || [0, 0])[0], step_length: 50, negative_axes_length: 0, color: '000000' }.merge(options)
-      Prawn.verify_options([:at, :width, :height, :step_length, :negative_axes_length, :color], options)
-
-      @pdf.save_graphics_state do
-        @pdf.fill_color(options[:color])
-        @pdf.stroke_color(options[:color])
-        @pdf.stroke_bounds
-        @pdf.fill_circle(options[:at], 1)
-
-        (0..options[:width]).step(5) do |point|
-          @pdf.transparent(0.2) do
-            @pdf.stroke_vertical_line(options[:at][1], options[:at][1] + options[:height], at: options[:at][0] + point)
-          end
-        end
-      end
     end
   end
 end
