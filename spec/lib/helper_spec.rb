@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe BrDanfe::Helper do
-  let(:options) { {} }
-
   describe '.homologation?' do
     context 'when tpAmb is equal to "2"' do
       let(:xml_homologation) do
