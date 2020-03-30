@@ -1,8 +1,6 @@
 module BrDanfe
   module DanfeNfceLib
     class Key
-      LINE_HEIGHT = 1.35
-
       def initialize(pdf, xml)
         @pdf = pdf
         @xml = xml

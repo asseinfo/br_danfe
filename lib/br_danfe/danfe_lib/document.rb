@@ -107,7 +107,7 @@ module BrDanfe
       private
 
       def numeric(at, w, h, title = '', info = '', options = {})
-        info = Helper.numerify(info) if info != ''
+        info = BrDanfe::Helper.numerify(info) if info != ''
         box at, w, h, title, info, options.merge({ align: :right })
       end
 

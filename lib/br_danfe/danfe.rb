@@ -5,7 +5,7 @@ module BrDanfe
     def initialize(xml)
       @xml = DanfeLib::XML.new(xml)
       @pdf = DanfeLib::Document.new
-      @options = DanfeLib::Options.new
+      @options = BrDanfe::Logo::Config.new
 
       create_watermark
     end

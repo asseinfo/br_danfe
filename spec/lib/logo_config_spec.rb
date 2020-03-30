@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BrDanfe::Helper::Logo::Config do
+describe BrDanfe::Logo::Config do
   let(:options) { {} }
 
   subject { described_class.new options }

@@ -8,7 +8,7 @@ module BrDanfe
     def initialize(xml)
       @xml = DanfeNfceLib::XML.new(xml)
       @pdf = DanfeNfceLib::Document.new(PAGE_WIDTH, PAGE_HEIGHT)
-      @options = BrDanfe::Helper::Logo::Config.new
+      @options = BrDanfe::Logo::Config.new
     end
 
     def save_pdf(filename)

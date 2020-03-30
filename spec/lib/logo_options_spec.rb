@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe BrDanfe::Helper::Logo::Options do
+RSpec.describe BrDanfe::Logo::Options do
   let(:box_size) { 100 }
   let(:logo_dimensions) {{ width: 50, height: 50 }}
 

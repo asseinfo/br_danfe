@@ -18,7 +18,7 @@ module BrDanfe
           header_column('Código', :left),
           header_column('Descrição', :left),
           header_column('Qtde', :right),
-          header_column('UN', :left),
+          header_column('UN', :right),
           header_column('Vl Unit', :right),
           header_column('Vl Total', :right)
         ]
@@ -36,10 +36,10 @@ module BrDanfe
         [
           cell_text(det.css('prod/cProd').text),
           cell_text(det.css('prod/xProd').text),
-          cell_number(numerify(det, 'prod/qCom')),
-          cell_text(det.css('prod/uCom').text),
-          cell_number(numerify(det, 'prod/vUnCom')),
-          cell_number(numerify(det, 'prod/vProd'))
+          cell_number(BrDanfe::Helper.numerify(det.css('prod/qCom').text)),
+          cell_text(det.css('prod/uCom').text, { align: :right }),
+          cell_number(BrDanfe::Helper.numerify(det.css('prod/vUnCom').text)),
+          cell_number(BrDanfe::Helper.numerify(det.css('prod/vProd').text))
         ]
       end
 
@@ -53,18 +53,14 @@ module BrDanfe
         cell_text(text, { align: :right })
       end
 
-      def numerify(det, xpath)
-        BrDanfe::DanfeNfceLib::Helper.numerify(det.css(xpath.to_s).text)
-      end
-
       def columns
         [
-          { width: 0.85.cm, position: 0.05.cm },
+          { width: 0.9.cm, position: 0 },
           { width: 2.6.cm, position: 0.9.cm },
-          { width: 1.1.cm, position: 3.4.cm },
+          { width: 1.1.cm, position: 3.5.cm },
           { width: 0.4.cm, position: 4.6.cm },
-          { width: 1.2.cm, position: 4.9.cm },
-          { width: 1.2.cm, position: 6.1.cm }
+          { width: 1.2.cm, position: 5.cm },
+          { width: 1.2.cm, position: 6.2.cm }
         ]
       end
 

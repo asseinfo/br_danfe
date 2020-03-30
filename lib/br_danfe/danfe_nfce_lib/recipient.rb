@@ -1,31 +1,25 @@
 module BrDanfe
   module DanfeNfceLib
     class Recipient
-      LINE_HEIGHT = 1.35
-
       def initialize(pdf, xml)
         @pdf = pdf
         @xml = xml
       end
 
       def render
-        render_recipient
-      end
-
-      private
-
-      def render_recipient
         @pdf.render_blank_line
 
         if identified_recipient?
           render_document
 
           @pdf.text @xml['dest/xNome'], size: 7, align: :center
-          @pdf.text address, size: 7, align: :center
+          @pdf.text BrDanfe::DanfeNfceLib::Helper.address(@xml.css('enderDest')), size: 7, align: :center
         else
           @pdf.text 'CONSUMIDOR NÃO IDENTIFICADO', size: 7, align: :center
         end
       end
+
+      private
 
       def identified_recipient?
         @xml['dest/xNome'].present?
@@ -68,10 +62,6 @@ module BrDanfe
 
       def foreign
         "CONSUMIDOR Id. Estrangeiro: #{@xml['dest/idEstrangeiro']}"
-      end
-
-      def address
-        "#{@xml['enderDest/xLgr']}, #{@xml['enderDest/nro']}, #{@xml['enderDest/xBairro']}, #{@xml['enderDest/xMun']} - #{@xml['enderDest/UF']}"
       end
     end
   end

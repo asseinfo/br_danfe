@@ -3,8 +3,6 @@ module BrDanfe
     class TotalList
       require 'bigdecimal'
 
-      LINE_HEIGHT = 1.35
-
       def initialize(pdf, xml)
         @pdf = pdf
         @xml = xml
@@ -17,12 +15,6 @@ module BrDanfe
 
       private
 
-      def print_text(text, cursor, options)
-        @pdf.bounding_box [0.085.cm, cursor], width: 7.25.cm, height: 0.25.cm do
-          @pdf.text text, options
-        end
-      end
-
       def totals
         @pdf.render_blank_line
 
@@ -32,15 +24,15 @@ module BrDanfe
 
         cursor = @pdf.cursor
         print_text('Subtotal R$', cursor, { size: 7, align: :left})
-        print_text(@xml['ICMSTot > vProd'], cursor, { size: 7, align: :right })
+        print_text(BrDanfe::Helper.numerify(@xml['ICMSTot > vProd'].to_f), cursor, { size: 7, align: :right })
 
         cursor = @pdf.cursor
         print_text('Desconto R$', cursor, { size: 7, align: :left})
-        print_text(@xml['ICMSTot > vDesc'], cursor, { size: 7, align: :right })
+        print_text(BrDanfe::Helper.numerify(@xml['ICMSTot > vDesc'].to_f), cursor, { size: 7, align: :right })
 
         cursor = @pdf.cursor
         print_text('Valor Total R$', cursor, { size: 7, align: :left, style: :bold })
-        print_text(@xml['ICMSTot > vDesc'], cursor, { size: 7, align: :right, style: :bold })
+        print_text(BrDanfe::Helper.numerify(@xml['ICMSTot > vNF'].to_f), cursor, { size: 7, align: :right, style: :bold })
       end
 
       def payment_methods
@@ -64,8 +56,14 @@ module BrDanfe
           payments.each do |key, value|
             cursor = @pdf.cursor
             print_text(I18n.t("nfce.payment_methods.#{key}"), cursor, { size: 7, align: :left })
-            print_text(BrDanfe::DanfeNfceLib::Helper.numerify(value.to_f), cursor, { size: 7, align: :right })
+            print_text(BrDanfe::Helper.numerify(value.to_f), cursor, { size: 7, align: :right })
           end
+        end
+      end
+
+      def print_text(text, cursor, options)
+        @pdf.bounding_box [0, cursor], width: 7.4.cm, height: 0.25.cm do
+          @pdf.text text, options
         end
       end
     end
