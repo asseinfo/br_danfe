@@ -12,14 +12,18 @@ module BrDanfe
         if identified_recipient?
           render_document
 
-          @pdf.text @xml['dest/xNome'], size: 7, align: :center
-          @pdf.text BrDanfe::DanfeNfceLib::Helper.address(@xml.css('enderDest')), size: 7, align: :center
+          @pdf.text @xml['dest/xNome'], options
+          @pdf.text BrDanfe::DanfeNfceLib::Helper.address(@xml.css('enderDest')), options
         else
-          @pdf.text 'CONSUMIDOR NÃO IDENTIFICADO', size: 7, align: :center
+          @pdf.text 'CONSUMIDOR NÃO IDENTIFICADO', options
         end
       end
 
       private
+
+      def options
+        { size: 7, align: :center }
+      end
 
       def identified_recipient?
         @xml['dest/xNome'].present?
@@ -28,7 +32,7 @@ module BrDanfe
       def render_document
         document_text = document
 
-        @pdf.text document_text, size: 7, align: :center if document_text.present?
+        @pdf.text document_text, options if document_text.present?
       end
 
       def document

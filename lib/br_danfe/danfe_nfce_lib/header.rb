@@ -22,14 +22,13 @@ module BrDanfe
       def render_company_info(cursor)
         x_position = @logo.present? ? 1.7.cm : 0
         width_box = @logo.present? ? 5.7.cm : 7.4.cm
-        align = @logo.present? ? :left : :center
 
         @pdf.bounding_box([x_position, cursor], width: width_box, height: 45) do
-          @pdf.text "#{@xml['emit/xNome']}", size: 7, align: align, style: :bold
-          @pdf.text cnpj(@xml['emit/CNPJ']), size: 6, align: align
-          @pdf.text BrDanfe::DanfeNfceLib::Helper.address(@xml.css('enderEmit')), size: 6, align: align
+          @pdf.text "#{@xml['emit/xNome']}", size: 7, align: :left, style: :bold
+          @pdf.text cnpj(@xml['emit/CNPJ']), size: 6, align: :left
+          @pdf.text BrDanfe::DanfeNfceLib::Helper.address(@xml.css('enderEmit')), size: 6, align: :left
           @pdf.render_blank_line
-          @pdf.text 'Documento Auxiliar da Nota Fiscal de Consumidor Eletrônica', size: 6, align: align
+          @pdf.text 'Documento Auxiliar da Nota Fiscal de Consumidor Eletrônica', size: 6, align: :left
         end
       end
 

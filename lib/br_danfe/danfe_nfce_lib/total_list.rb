@@ -9,11 +9,22 @@ module BrDanfe
       end
 
       def render
+        subtotal
         totals
         payment_methods
       end
 
       private
+
+      def subtotal
+        cursor = @pdf.cursor
+        @pdf.bounding_box [4.8.cm, cursor], width: 1.4.cm, height: 0.2.cm do
+          @pdf.text 'Subtotal R$', { size: 6, align: :left }
+        end
+        @pdf.bounding_box [6.2.cm, cursor], width: 1.2.cm, height: 0.2.cm do
+          @pdf.text BrDanfe::Helper.numerify(@xml['ICMSTot > vProd'].to_f), { size: 6, align: :right }
+        end
+      end
 
       def totals
         @pdf.render_blank_line
@@ -21,10 +32,6 @@ module BrDanfe
         cursor = @pdf.cursor
         print_text('Qtde. total de itens', cursor, { size: 7, align: :left })
         print_text(@xml.css('det').count.to_s, cursor, { size: 7, align: :right })
-
-        cursor = @pdf.cursor
-        print_text('Subtotal R$', cursor, { size: 7, align: :left})
-        print_text(BrDanfe::Helper.numerify(@xml['ICMSTot > vProd'].to_f), cursor, { size: 7, align: :right })
 
         cursor = @pdf.cursor
         print_text('Desconto R$', cursor, { size: 7, align: :left})
