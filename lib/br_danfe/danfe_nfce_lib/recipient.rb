@@ -9,26 +9,21 @@ module BrDanfe
       end
 
       def render
-        @pdf.y -= 0.6.cm
-        # BrDanfe::DanfeNfceLib::Helper.homologation?(@xml) ? render_homologation : render_recipient
         render_recipient
       end
 
       private
 
-      def render_homologation
-        @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', 'EMITIDA EM AMBIENTE DE HOMOLOGAÇÃO – SEM VALOR FISCAL', { size: 7, align: :center, border: 0, style: :bold }
-      end
-
       def render_recipient
+        @pdf.render_blank_line
+
         if identified_recipient?
           render_document
 
-          @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', @xml['dest/xNome'], { size: 7, align: :center, border: 0 }
-          @pdf.y -= 0.6.cm
-          @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', address, { size: 7, align: :center, border: 0 }
+          @pdf.text @xml['dest/xNome'], size: 7, align: :center
+          @pdf.text address, size: 7, align: :center
         else
-          @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', 'CONSUMIDOR NÃO IDENTIFICADO', { size: 7, align: :center, border: 0, style: :bold }
+          @pdf.text 'CONSUMIDOR NÃO IDENTIFICADO', size: 7, align: :center
         end
       end
 
@@ -38,10 +33,8 @@ module BrDanfe
 
       def render_document
         document_text = document
-        if document_text.present?
-          @pdf.ibox LINE_HEIGHT, 7.4, 0, @pdf.cursor, '', document, { size: 7, align: :center, border: 0 }
-          @pdf.y -= 0.3.cm
-        end
+
+        @pdf.text document_text, size: 7, align: :center if document_text.present?
       end
 
       def document
@@ -80,17 +73,6 @@ module BrDanfe
       def address
         "#{@xml['enderDest/xLgr']}, #{@xml['enderDest/nro']}, #{@xml['enderDest/xBairro']}, #{@xml['enderDest/xMun']} - #{@xml['enderDest/UF']}"
       end
-
-      # def test(text, options)
-      #   text_width = @pdf.width_of text, options
-        # FIXME: resolver depois o tamanho do endereço
-        # nessa refatoração, criar um método que saiba imprimir um texto, passando somente o X e o texto,
-        # já haveria as options defaults, fonte etc
-        # nesse metodo, ele sempre imprime o texto e já deixa o cursor na posição correta (ex @pdf.y -= 0.3.cm)
-        # se o texto for maior que o espaço, ele imprime com quebra de linha, e posiciona o cursor abaixo da quebra...
-
-        # no caso acima (nome e endereço, ver se depois desse método pronto, não ficará melhor imprimir um do lado do outro nome - endereço)
-      # end
     end
   end
 end
