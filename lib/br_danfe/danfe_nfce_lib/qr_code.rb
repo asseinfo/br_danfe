@@ -12,7 +12,7 @@ module BrDanfe
 
       def render
         qrcode = RQRCode::QRCode.new(@xml['qrCode'])
-        image = Tempfile.create('test.png')
+        image = Tempfile.create('qrcode.png')
         image.write(qrcode.as_png(module_px_size: 12).to_s)
 
         box_size = 3.cm
