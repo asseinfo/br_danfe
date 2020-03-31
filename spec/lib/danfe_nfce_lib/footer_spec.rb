@@ -9,7 +9,7 @@ describe BrDanfe::DanfeNfceLib::Footer do
   let(:xml_footer) do
     xml = <<-eos
       <nfeProc>
-          <NFe>
+        <NFe>
           <infNFe>
             <total>
               <ICMSTot>
@@ -21,7 +21,7 @@ describe BrDanfe::DanfeNfceLib::Footer do
       </nfeProc>
     eos
 
-    Nokogiri::XML(xml)
+    BrDanfe::XML.new(xml)
   end
 
   subject { described_class.new pdf, xml_footer }
@@ -34,7 +34,6 @@ describe BrDanfe::DanfeNfceLib::Footer do
 
     it 'renders footer to the pdf' do
       expect(File.exist?(output_pdf)).to be_falsey
-
       pdf.render_file output_pdf
 
       expect("#{base_dir}footer#render.pdf").to have_same_content_of file: output_pdf

@@ -1,11 +1,10 @@
 require 'spec_helper'
 
 describe BrDanfe::DanfeNfceLib::QrCode do
-  let(:file_name) { 'qrcode' }
   let(:base_dir) { './spec/fixtures/nfce/lib/' }
-  let(:logo) { './spec/fixtures/logo.png' }
-  let(:output_pdf) { "#{base_dir}#{file_name}.pdf" }
-  let(:company_name) {}
+  let(:output_pdf) { "#{base_dir}output.pdf" }
+
+  let(:pdf) { BrDanfe::DanfeNfceLib::Document.new(8.cm, 5.cm) }
 
   let(:xml) do
     xml = <<-eos
@@ -18,19 +17,19 @@ describe BrDanfe::DanfeNfceLib::QrCode do
     BrDanfe::XML.new(xml)
   end
 
-  let(:danfe) { BrDanfe::DanfeNfceLib::Document.new(8.cm, 5.cm) }
+  subject { described_class.new pdf, xml }
 
-  before { File.delete(output_pdf) if File.exist?(output_pdf) }
-  after { File.delete(output_pdf) if File.exist?(output_pdf) }
+  describe '#render' do
+    before do
+      subject.render
+      File.delete(output_pdf) if File.exist?(output_pdf)
+    end
 
-  it 'renders the document' do
-    expect(File.exist?(output_pdf)).to be_falsey
+    it 'renders qr-code to the pdf' do
+      expect(File.exist?(output_pdf)).to be_falsey
+      pdf.render_file output_pdf
 
-    subject = described_class.new(danfe, xml)
-    subject.render
-
-    danfe.render_file output_pdf
-
-    expect("#{base_dir}#{file_name}.fixture.pdf").to have_same_content_of file: output_pdf
+      expect("#{base_dir}qr_code#render.pdf").to have_same_content_of file: output_pdf
+    end
   end
 end

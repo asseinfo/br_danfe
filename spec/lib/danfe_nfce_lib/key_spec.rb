@@ -4,7 +4,7 @@ describe BrDanfe::DanfeNfceLib::Key do
   let(:base_dir) { './spec/fixtures/nfce/lib/' }
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
-  let(:xml_as_string) do
+  let(:xml_key) do
     xml = <<-eos
       <nfeProc>
         <NFe>
@@ -20,10 +20,11 @@ describe BrDanfe::DanfeNfceLib::Key do
         </protNFe>
       </nfeProc>
     eos
+
+    BrDanfe::XML.new(xml)
   end
 
   let(:pdf) { BrDanfe::DanfeNfceLib::Document.new(8.cm, 5.cm) }
-  let(:xml_key) { BrDanfe::XML.new(xml_as_string) }
 
   subject { described_class.new pdf, xml_key }
 
