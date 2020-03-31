@@ -7,27 +7,41 @@ describe BrDanfe::DanfeNfceLib::NfceIdentification do
 
   let(:xml) do
     xml = <<-eos
-      <ide>
-        <cUF>42</cUF>
-        <cNF>18291023</cNF>
-        <natOp>Venda</natOp>
-        <mod>55</mod>
-        <serie>1</serie>
-        <nNF>1629</nNF>
-        <dhEmi>2020-03-24T13:33:20-05:00</dhEmi>
-        <tpNF>1</tpNF>
-        <idDest>1</idDest>
-        <cMunFG>4202859</cMunFG>
-        <tpImp>1</tpImp>
-        <tpEmis>1</tpEmis>
-        <cDV>2</cDV>
-        <tpAmb>2</tpAmb>
-        <finNFe>1</finNFe>
-        <indFinal>1</indFinal>
-        <indPres>9</indPres>
-        <procEmi>0</procEmi>
-        <verProc>facil123.com.br</verProc>
-      </ide>
+      </nfeProc>
+        <ide>
+          <cUF>42</cUF>
+          <cNF>18291023</cNF>
+          <natOp>Venda</natOp>
+          <mod>55</mod>
+          <serie>1</serie>
+          <nNF>1629</nNF>
+          <dhEmi>2020-03-24T13:33:20-05:00</dhEmi>
+          <tpNF>1</tpNF>
+          <idDest>1</idDest>
+          <cMunFG>4202859</cMunFG>
+          <tpImp>1</tpImp>
+          <tpEmis>1</tpEmis>
+          <cDV>2</cDV>
+          <tpAmb>2</tpAmb>
+          <finNFe>1</finNFe>
+          <indFinal>1</indFinal>
+          <indPres>9</indPres>
+          <procEmi>0</procEmi>
+          <verProc>facil123.com.br</verProc>
+        </ide>
+        <protNFe versao="4.00">
+          <infProt>
+            <tpAmb>2</tpAmb>
+            <verAplic>SVRS201908091113</verAplic>
+            <chNFe>42200310845180000166550010000016291182910232</chNFe>
+            <dhRecbto>2020-03-24T15:36:14-03:00</dhRecbto>
+            <nProt>342200000151784</nProt>
+            <digVal>3usUeRVacbmm1YX7mhrFM06rWcM=</digVal>
+            <cStat>100</cStat>
+            <xMotivo>Autorizado o uso da NF-e</xMotivo>
+          </infProt>
+        </protNFe>
+      </nfeProc>
     eos
 
     BrDanfe::XML.new(xml)
