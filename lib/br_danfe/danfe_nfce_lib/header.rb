@@ -27,7 +27,7 @@ module BrDanfe
           @pdf.text "#{@xml['emit/xNome']}", size: 7, align: :left, style: :bold
           @pdf.text cnpj(@xml['emit/CNPJ']), size: 6, align: :left
           @pdf.text BrDanfe::DanfeNfceLib::Helper.address(@xml.css('enderEmit')), size: 6, align: :left
-          @pdf.render_blank_line
+          @pdf.render_blank_line if count_name_lines(@xml['emit/xNome']) == 1
           @pdf.text 'Documento Auxiliar da Nota Fiscal de Consumidor Eletrônica', size: 6, align: :left
         end
       end
@@ -36,6 +36,10 @@ module BrDanfe
         cnpj = BrDocuments::CnpjCpf::Cnpj.new info
         data = "CNPJ: #{cnpj.valid? ? cnpj.formatted : ''}"
         data
+      end
+
+      def count_name_lines(company_name)
+        company_name.scan(/([\s\S]{1,38}( |$)|[\s\S]{1,38})/).length
       end
 
       def render_logo(cursor)
