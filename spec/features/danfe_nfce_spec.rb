@@ -29,7 +29,3 @@ describe BrDanfe::DanfeNfce do
     end
   end
 end
-
-
-
-
