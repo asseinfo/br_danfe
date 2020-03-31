@@ -15,11 +15,12 @@ describe BrDanfe::DanfeNfce do
   #   end
   # end
 
-  fdescribe '#save_pdf' do
+  describe '#save_pdf' do
     # context 'xxxx' do
     let(:base_dir) { './spec/fixtures/nfce/v4.00/' }
 
     before { File.delete(output_pdf) if File.exist?(output_pdf) }
+    after { File.delete(output_pdf) if File.exist?(output_pdf) }
 
     it 'render a NF-e with customized options' do
       expect(File.exist?(output_pdf)).to be_falsey
