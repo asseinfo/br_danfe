@@ -20,16 +20,23 @@ module BrDanfe
       private
 
       def render_company_info(cursor)
-        x_position = @logo.present? ? 1.7.cm : 0
-        width_box = @logo.present? ? 5.7.cm : 7.4.cm
+        one_line = 1
 
         @pdf.bounding_box([x_position, cursor], width: width_box, height: 45) do
           @pdf.text "#{@xml['emit/xNome']}", size: 7, align: :left, style: :bold
           @pdf.text cnpj(@xml['emit/CNPJ']), size: 6, align: :left
           @pdf.text BrDanfe::DanfeNfceLib::Helper.address(@xml.css('enderEmit')), size: 6, align: :left
-          @pdf.render_blank_line if count_name_lines(@xml['emit/xNome']) == 1
+          @pdf.render_blank_line if count_name_lines(@xml['emit/xNome']) == one_line
           @pdf.text 'Documento Auxiliar da Nota Fiscal de Consumidor Eletrônica', size: 6, align: :left
         end
+      end
+
+      def x_position
+        @logo.present? ? 1.7.cm : 0
+      end
+
+      def width_box
+        @logo.present? ? 5.7.cm : 7.4.cm
       end
 
       def cnpj(info)
