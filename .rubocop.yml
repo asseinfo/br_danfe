@@ -12,13 +12,13 @@ AllCops:
 Bundler/OrderedGems:
   Enabled: false
 
-Layout/HashAlignment:
+Layout/AlignHash:
   Enabled: false
 
-Layout/ParameterAlignment:
+Layout/AlignParameters:
   Enabled: false
 
-Layout/FirstArrayElementIndentation:
+Layout/IndentArray:
   EnforcedStyle: consistent
 
 Layout/SpaceBeforeBlockBraces:
@@ -26,8 +26,6 @@ Layout/SpaceBeforeBlockBraces:
 
 Metrics/ClassLength:
   Max: 230
-  Exclude:
-  - 'app/models/invoice_product.rb'
 
 Metrics/CyclomaticComplexity:
   Max: 8
@@ -38,12 +36,8 @@ Metrics/PerceivedComplexity:
 Metrics/MethodLength:
   Max: 19
 
-Metrics/BlockLength:
-  Exclude:
-   - 'spec/**/*.rb'
-   - 'lib/tasks/export_nfes_to_portal.rake'
-   - 'lib/tasks/karma.rake'
-   - 'lib/tasks/backup_restore.rake'
+Style/ClassAndModuleChildren:
+  Enabled: false
 
 Style/DateTime:
   Enabled: false
@@ -63,21 +57,17 @@ Style/IfUnlessModifier:
 Style/SymbolArray:
   EnforcedStyle: brackets
 
-Style/HashEachMethods:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true
-
-Layout/LineLength:
-  Max: 150
+Metrics/LineLength:
+  Max: 200
 
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - 'spec/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'br_danfe.gemspec'
 
 Metrics/ModuleLength:
   Max: 118
@@ -97,7 +87,7 @@ Naming/HeredocDelimiterNaming:
 Naming/HeredocDelimiterCase:
   Enabled: false
 
-Naming/MethodParameterName:
+Naming/UncommunicativeMethodParamName:
   Enabled: false
 
 Naming/MethodName:
@@ -106,8 +96,8 @@ Naming/MethodName:
 Naming/VariableName:
   Enabled: false
 
-Style/ClassAndModuleChildren:
+Metrics/ParameterLists:
   Enabled: false
 
-Metrics/ParameterLists:
+Naming/UncommunicativeBlockParamName:
   Enabled: false

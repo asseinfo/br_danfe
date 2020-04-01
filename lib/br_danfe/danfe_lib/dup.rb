@@ -46,7 +46,7 @@ module BrDanfe
       end
 
       def italic
-        normal.merge({ style: :italic })
+        normal.merge(style: :italic)
       end
     end
   end

@@ -91,7 +91,7 @@ module BrDanfe
       end
 
       def cell_number(text)
-        cell_text(text, { align: :right })
+        cell_text(text, align: :right)
       end
 
       def numerify(det, xpath)
@@ -115,7 +115,7 @@ module BrDanfe
       def render_table(data, start_position, height)
         @pdf.y = start_position
         @pdf.bounding_box [0.75.cm, @pdf.cursor], width: 19.56.cm, height: height do
-          @pdf.table data.map { |item| [item] }, { header: true }
+          @pdf.table data.map { |item| [item] }, header: true
         end
       end
 

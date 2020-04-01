@@ -86,7 +86,7 @@ module BrDanfe
 
     def render_footer_information(footer_info)
       if footer_info.present?
-        @pdf.ibox 0.35, 12.45, 0.75, 30.21, '', footer_info, { size: 5, border: 0 }
+        @pdf.ibox 0.35, 12.45, 0.75, 30.21, '', footer_info, size: 5, border: 0
       end
     end
 

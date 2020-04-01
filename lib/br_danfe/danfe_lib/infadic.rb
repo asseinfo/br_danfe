@@ -34,7 +34,7 @@ module BrDanfe
 
       def render_additional_data(y_position)
         data = generate_additional_data
-        @pdf.ibox 2.65, 12.45, 0.75, y_position, '', data, { size: 6, valign: :top, border: 0 }
+        @pdf.ibox 2.65, 12.45, 0.75, y_position, '', data, size: 6, valign: :top, border: 0
       end
 
       def generate_additional_data

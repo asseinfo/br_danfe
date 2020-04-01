@@ -18,7 +18,7 @@ describe BrDanfe::DanfeNfceLib::Recipient do
     context 'when has identified recipient' do
       context 'when the recipient is a company' do
         let(:xml_as_string) do
-          xml = <<-eos
+          <<-eos
             <nfeProc>
               <NFe>
                 <dest>
@@ -47,7 +47,7 @@ describe BrDanfe::DanfeNfceLib::Recipient do
 
       context 'when the recipient is an individual person' do
         let(:xml_as_string) do
-          xml = <<-eos
+          <<-eos
             <nfeProc>
               <NFe>
                 <dest>
@@ -76,7 +76,7 @@ describe BrDanfe::DanfeNfceLib::Recipient do
 
       context 'when the recipient is a foreign' do
         let(:xml_as_string) do
-          xml = <<-eos
+          <<-eos
             <nfeProc>
               <NFe>
                 <dest>
@@ -105,7 +105,7 @@ describe BrDanfe::DanfeNfceLib::Recipient do
 
       context 'when the recipient does not have document' do
         let(:xml_as_string) do
-          xml = <<-eos
+          <<-eos
             <nfeProc>
               <NFe>
                 <dest>
@@ -134,7 +134,7 @@ describe BrDanfe::DanfeNfceLib::Recipient do
 
     context 'when does not have identified recipient' do
       let(:xml_as_string) do
-        xml = <<-eos
+        <<-eos
           <nfeProc>
             <NFe>
               <dest>

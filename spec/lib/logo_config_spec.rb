@@ -15,7 +15,7 @@ describe BrDanfe::Logo::Config do
 
     it 'returns the config set in params' do
       expect(subject.logo).to eq('/fake/path/file.png')
-      expect(subject.logo_dimensions).to eq({ width: 50, height: 50 })
+      expect(subject.logo_dimensions).to eq(width: 50, height: 50)
     end
   end
 end

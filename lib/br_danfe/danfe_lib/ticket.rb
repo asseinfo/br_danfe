@@ -12,7 +12,7 @@ module BrDanfe
         @pdf.ibox 0.85, 11.75, 4.60, 2.7, I18n.t('danfe.ticket.receiver')
         @pdf.ibox 1.70, 4.00, 16.35, 1.85, '',
                   I18n.t('danfe.ticket.document', nNF: @xml['ide/nNF'], serie: @xml['ide/serie']),
-                  { align: :center, valign: :center }
+                  align: :center, valign: :center
       end
     end
   end

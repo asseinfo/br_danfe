@@ -24,7 +24,7 @@ describe BrDanfe::DanfeNfceLib::TotalList do
     eos
   end
   let(:xml_as_string) do
-    xml = <<-eos
+    <<-eos
       <nfeProc>
         <NFe>
           <infNFe>
@@ -64,7 +64,7 @@ describe BrDanfe::DanfeNfceLib::TotalList do
 
     describe 'about totals' do
       let(:xml_as_string) do
-        xml = <<-eos
+        <<-eos
           <nfeProc>
             <NFe>
               <infNFe>

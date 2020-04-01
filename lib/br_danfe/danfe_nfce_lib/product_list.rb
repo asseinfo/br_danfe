@@ -8,7 +8,7 @@ module BrDanfe
 
       def render
         render_headers(headers)
-        render_products(products)
+        render_products
       end
 
       private
@@ -37,7 +37,7 @@ module BrDanfe
           cell_text(det.css('prod/cProd').text),
           cell_text(det.css('prod/xProd').text),
           cell_number(BrDanfe::Helper.numerify(det.css('prod/qCom').text)),
-          cell_text(det.css('prod/uCom').text, { align: :right }),
+          cell_text(det.css('prod/uCom').text, align: :right),
           cell_number(BrDanfe::Helper.numerify(det.css('prod/vUnCom').text)),
           cell_number(BrDanfe::Helper.numerify(det.css('prod/vProd').text))
         ]
@@ -50,7 +50,7 @@ module BrDanfe
       end
 
       def cell_number(text)
-        cell_text(text, { align: :right })
+        cell_text(text, align: :right)
       end
 
       def columns
@@ -74,16 +74,16 @@ module BrDanfe
         end
       end
 
-      def render_products(products)
+      def render_products
         @pdf.render_blank_line
         index_of_product_name = 1
         products.each do |product|
           box_height = box_height(product[index_of_product_name][:content])
           cursor = @pdf.cursor
 
-          product.each_with_index do |product, index|
+          product.each_with_index do |cell, index|
             @pdf.bounding_box [columns[index][:position], cursor], width: columns[index][:width], height: box_height do
-              @pdf.text product[:content], product[:options]
+              @pdf.text cell[:content], cell[:options]
             end
           end
         end

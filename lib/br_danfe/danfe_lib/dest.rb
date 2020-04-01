@@ -81,9 +81,9 @@ module BrDanfe
       end
 
       def render_dates(emitted_at_date_and_hour, exited_at_date, exited_at_hour)
-        @pdf.ldate LINE_HEIGHT, 2.92, 17.40, @l1, 'ide.dEmi', @xml[emitted_at_date_and_hour], { align: :right }
-        @pdf.ldate LINE_HEIGHT, 2.92, 17.40, @l2, 'ide.dSaiEnt', @xml[exited_at_date], { align: :right }
-        @pdf.ltime LINE_HEIGHT, 2.92, 17.40, @l3, 'ide.hSaiEnt', @xml[exited_at_hour], { align: :right }
+        @pdf.ldate LINE_HEIGHT, 2.92, 17.40, @l1, 'ide.dEmi', @xml[emitted_at_date_and_hour], align: :right
+        @pdf.ldate LINE_HEIGHT, 2.92, 17.40, @l2, 'ide.dSaiEnt', @xml[exited_at_date], align: :right
+        @pdf.ltime LINE_HEIGHT, 2.92, 17.40, @l3, 'ide.hSaiEnt', @xml[exited_at_hour], align: :right
       end
 
       def render_dates_for_older_nfes

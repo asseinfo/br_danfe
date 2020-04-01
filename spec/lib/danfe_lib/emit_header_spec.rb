@@ -8,7 +8,7 @@ describe BrDanfe::DanfeLib::EmitHeader do
   let(:xml) { BrDanfe::XML.new(xml_as_string) }
   let(:logo) { 'spec/fixtures/logo.png' }
 
-  subject { described_class.new(pdf, xml, logo, { width: 100, height: 100 }) }
+  subject { described_class.new(pdf, xml, logo, width: 100, height: 100) }
 
   describe '#render' do
     let(:xml_as_string) do

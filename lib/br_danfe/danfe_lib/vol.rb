@@ -30,8 +30,8 @@ module BrDanfe
         @pdf.ibox 0.85, 3.05, 3.17, @l1, I18n.t('danfe.vol.esp'), det.css('esp').text
         @pdf.ibox 0.85, 3.05, 6.22, @l1, I18n.t('danfe.vol.marca'), det.css('marca').text
         @pdf.ibox 0.85, 4.83, 9.27, @l1, I18n.t('danfe.vol.nVol')
-        @pdf.inumeric 0.85, 3.43, 14.10, @l1, 'vol.pesoB', det.css('pesoB').text, { decimals: 3 }
-        @pdf.inumeric 0.85, 2.80, 17.53, @l1, 'vol.pesoL', det.css('pesoL').text, { decimals: 3 }
+        @pdf.inumeric 0.85, 3.43, 14.10, @l1, 'vol.pesoB', det.css('pesoB').text, decimals: 3
+        @pdf.inumeric 0.85, 2.80, 17.53, @l1, 'vol.pesoL', det.css('pesoL').text, decimals: 3
       end
 
       def render_blank_boxes

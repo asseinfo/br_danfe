@@ -39,7 +39,8 @@ module BrDanfe
         return company if company?
         return individual if individual?
         return foreign if foreign?
-        return ''
+
+        ''
       end
 
       def company?
