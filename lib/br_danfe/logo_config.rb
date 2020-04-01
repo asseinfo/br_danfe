@@ -1,6 +1,6 @@
 module BrDanfe
-  module DanfeLib
-    class Options < OpenStruct
+  module Logo
+    class Config < OpenStruct
       DEFAULTOPTIONS = { logo: '', logo_dimensions: {} }.freeze
 
       def initialize(new_options = {})

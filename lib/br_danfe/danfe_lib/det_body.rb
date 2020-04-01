@@ -95,7 +95,7 @@ module BrDanfe
       end
 
       def numerify(det, xpath)
-        Helper.numerify(det.css(xpath.to_s).text)
+        BrDanfe::Helper.numerify(det.css(xpath.to_s).text)
       end
 
       def create_row(data)

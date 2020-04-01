@@ -5,3 +5,5 @@ pkg
 output.pdf
 coverage
 .tool-versions
+.DS_Store
+.byebug_history

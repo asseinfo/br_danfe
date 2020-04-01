@@ -72,7 +72,7 @@ module BrDanfe
       end
 
       def numerify(value)
-        Helper.numerify(value) if value != ''
+        BrDanfe::Helper.numerify(value) if value != ''
       end
 
       def difal?

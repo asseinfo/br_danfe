@@ -3,9 +3,9 @@ module BrDanfe
     attr_reader :options
 
     def initialize(xml)
-      @xml = DanfeLib::XML.new(xml)
+      @xml = BrDanfe::XML.new(xml)
       @pdf = DanfeLib::Document.new
-      @options = DanfeLib::Options.new
+      @options = BrDanfe::Logo::Config.new
 
       create_watermark
     end

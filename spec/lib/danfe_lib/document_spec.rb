@@ -4,7 +4,7 @@ describe BrDanfe::DanfeLib::Document do
   let(:base_dir) { './spec/fixtures/nfe/lib/' }
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
-  let(:xml) { BrDanfe::DanfeLib::XML.new(xml_as_string) }
+  let(:xml) { BrDanfe::XML.new(xml_as_string) }
 
   describe '#lie' do
     before do

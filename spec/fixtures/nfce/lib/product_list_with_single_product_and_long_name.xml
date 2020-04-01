@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nfeProc xmlns="http://www.portalfiscal.inf.br/nfe" versao="4.00">
+   <NFe>
+      <infNFe versao="4.00" Id="NFe42200310845180000166550010000016291182910232">
+         <ide>
+            <cUF>42</cUF>
+            <cNF>18291023</cNF>
+            <natOp>Venda</natOp>
+            <mod>55</mod>
+            <serie>1</serie>
+            <nNF>1629</nNF>
+            <dhEmi>2020-03-24T13:33:20-05:00</dhEmi>
+            <tpNF>1</tpNF>
+            <idDest>1</idDest>
+            <cMunFG>4202859</cMunFG>
+            <tpImp>1</tpImp>
+            <tpEmis>1</tpEmis>
+            <cDV>2</cDV>
+            <tpAmb>2</tpAmb>
+            <finNFe>1</finNFe>
+            <indFinal>1</indFinal>
+            <indPres>9</indPres>
+            <procEmi>0</procEmi>
+            <verProc>facil123.com.br</verProc>
+         </ide>
+         <emit>
+            <CNPJ>10845180000166</CNPJ>
+            <xNome>Empresa teste</xNome>
+            <xFant>Empresa teste</xFant>
+            <enderEmit>
+               <xLgr>R GEREMIAS EUGENIO DA SILVA</xLgr>
+               <nro>85</nro>
+               <xBairro>SERRARIA</xBairro>
+               <cMun>4202859</cMun>
+               <xMun>BRACO DO TROMBUDO</xMun>
+               <UF>SC</UF>
+               <CEP>88113160</CEP>
+               <cPais>1058</cPais>
+               <xPais>Brasil</xPais>
+               <fone>4832579854</fone>
+            </enderEmit>
+            <IE>255916191</IE>
+            <CRT>1</CRT>
+         </emit>
+         <dest>
+            <CNPJ>18191228000171</CNPJ>
+            <xNome>NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL</xNome>
+            <enderDest>
+               <xLgr>Rua Tijucas</xLgr>
+               <nro>99</nro>
+               <xCpl>dwdwa</xCpl>
+               <xBairro>Centro</xBairro>
+               <cMun>4218004</cMun>
+               <xMun>TIJUCAS</xMun>
+               <UF>SC</UF>
+               <CEP>88200000</CEP>
+               <cPais>1058</cPais>
+               <xPais>Brasil</xPais>
+            </enderDest>
+            <indIEDest>2</indIEDest>
+            <email>teste123@hotmail.com</email>
+         </dest>
+         <det nItem="1">
+            <prod>
+               <cProd>1173</cProd>
+               <cEAN>568754456745</cEAN>
+               <xProd>Abraçadeira with a larger name with line breaks</xProd>
+               <NCM>01022990</NCM>
+               <CFOP>5101</CFOP>
+               <uCom>UN</uCom>
+               <qCom>1000.0</qCom>
+               <vUnCom>10000.0</vUnCom>
+               <vProd>10000.00</vProd>
+               <cEANTrib>568754456745</cEANTrib>
+               <uTrib>UN</uTrib>
+               <qTrib>1.0</qTrib>
+               <vUnTrib>10000.0</vUnTrib>
+               <vDesc>0.98</vDesc>
+               <indTot>1</indTot>
+            </prod>
+            <imposto>
+               <ICMS>
+                  <ICMSSN102>
+                     <orig>0</orig>
+                     <CSOSN>102</CSOSN>
+                  </ICMSSN102>
+               </ICMS>
+               <PIS>
+                  <PISOutr>
+                     <CST>99</CST>
+                     <vBC>0.00</vBC>
+                     <pPIS>0.00</pPIS>
+                     <vPIS>0.00</vPIS>
+                  </PISOutr>
+               </PIS>
+               <COFINS>
+                  <COFINSOutr>
+                     <CST>99</CST>
+                     <vBC>0.00</vBC>
+                     <pCOFINS>0.00</pCOFINS>
+                     <vCOFINS>0.00</vCOFINS>
+                  </COFINSOutr>
+               </COFINS>
+            </imposto>
+         </det>
+         <total>
+            <ICMSTot>
+               <vBC>0.00</vBC>
+               <vICMS>0.00</vICMS>
+               <vICMSDeson>0.00</vICMSDeson>
+               <vFCPUFDest>0.00</vFCPUFDest>
+               <vICMSUFDest>0.00</vICMSUFDest>
+               <vICMSUFRemet>0.00</vICMSUFRemet>
+               <vFCP>0.00</vFCP>
+               <vBCST>0.00</vBCST>
+               <vST>0.00</vST>
+               <vFCPST>0.00</vFCPST>
+               <vFCPSTRet>0.00</vFCPSTRet>
+               <vProd>104.00</vProd>
+               <vFrete>0.00</vFrete>
+               <vSeg>0.00</vSeg>
+               <vDesc>12.00</vDesc>
+               <vII>0.00</vII>
+               <vIPI>0.00</vIPI>
+               <vIPIDevol>0.00</vIPIDevol>
+               <vPIS>0.00</vPIS>
+               <vCOFINS>0.00</vCOFINS>
+               <vOutro>0.00</vOutro>
+               <vNF>92.00</vNF>
+            </ICMSTot>
+         </total>
+         <transp>
+            <modFrete>9</modFrete>
+         </transp>
+         <cobr>
+            <fat>
+               <nFat>1629</nFat>
+               <vOrig>102.00</vOrig>
+               <vDesc>10.00</vDesc>
+               <vLiq>92.00</vLiq>
+            </fat>
+            <dup>
+               <nDup>001</nDup>
+               <dVenc>2020-04-23</dVenc>
+               <vDup>30.67</vDup>
+            </dup>
+            <dup>
+               <nDup>002</nDup>
+               <dVenc>2020-05-23</dVenc>
+               <vDup>30.67</vDup>
+            </dup>
+            <dup>
+               <nDup>003</nDup>
+               <dVenc>2020-06-22</dVenc>
+               <vDup>30.66</vDup>
+            </dup>
+         </cobr>
+         <pag>
+            <detPag>
+               <indPag>1</indPag>
+               <tPag>05</tPag>
+               <vPag>20.67</vPag>
+            </detPag>
+            <detPag>
+               <indPag>1</indPag>
+               <tPag>05</tPag>
+               <vPag>30.67</vPag>
+            </detPag>
+            <detPag>
+               <indPag>1</indPag>
+               <tPag>05</tPag>
+               <vPag>15.66</vPag>
+            </detPag>
+
+            <detPag>
+               <indPag>1</indPag>
+               <tPag>01</tPag>
+               <vPag>10.00</vPag>
+            </detPag>
+            <detPag>
+               <indPag>1</indPag>
+               <tPag>02</tPag>
+               <vPag>15.00</vPag>
+            </detPag>
+         </pag>
+         <infAdic>
+            <infCpl>DOCUMENTO EMITIDO POR ME OU EPP OPTANTE PELO SIMPLES NACIONAL * NÃO GERA DIREITO A CRÉDITO FISCAL DE IPI * Trib aprox R$: 3,87 Federal e 11,04 Estadual Fonte: IBPT/empresometro.com.br M2L5P8</infCpl>
+         </infAdic>
+         <infRespTec>
+            <CNPJ>04267593000108</CNPJ>
+            <xContato>César Luiz dos Anjos Júnior</xContato>
+            <email>desenvolvedores@asseinfo.com.br</email>
+            <fone>4832637137</fone>
+         </infRespTec>
+      </infNFe>
+        <infNFeSupl>
+          <qrCode><![CDATA[http://sistemas.sefaz.am.gov.br/nfceweb/consultarNFCe.jsp?p=13130901144012000152651231234567891123456786|2|2|1|A604FD51E40ED8465B787B3E9CF8C1D90E61DB13]]></qrCode>
+          <urlChave>www.sefaz.am.gov.br/nfce/consulta</urlChave>
+        </infNFeSupl>
+      <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+         <SignedInfo>
+            <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+            <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+            <Reference URI="#NFe42200310845180000166550010000016291182910232">
+               <Transforms>
+                  <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+                  <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+               </Transforms>
+               <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+               <DigestValue>3usUeRVacbmm1YX7mhrFM06rWcM=</DigestValue>
+            </Reference>
+         </SignedInfo>
+         <SignatureValue>Roj8hVHGHe6R/R8n81UvEIYM0v602lJ/ChS4dhJDuaQbOJ31zn5oV6+E8FpD
+YFe8A+OeFxSTftkA8/8pbcDQUY/vfpoSHUxGsayKfG8vJc7KH50Xm6hpSBol
+bsICBKDUOjY1gP5x6af0lDOoNNialPPWRxlnJJHopLhxnb0Xpj03T+RSzcK5
+JApXv+cr6aWjpEmSTu/bo1PdCIPQySAhC1OzplzHuz+yAprvxCixdn89/4QA
+w3h58h0VgX62YAKJSg4vRriJ72GpWdhHqIbvrVsKyg00hVy7iBta0IR1m62d
+FPbE+iPqSrIJitGByRpQUIE4Oz+765RpKEd7whcggA==</SignatureValue>
+         <KeyInfo>
+            <X509Data>
+               <X509Certificate>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</X509Certificate>
+            </X509Data>
+         </KeyInfo>
+      </Signature>
+   </NFe>
+   <protNFe versao="4.00">
+      <infProt>
+         <tpAmb>2</tpAmb>
+         <verAplic>SVRS201908091113</verAplic>
+         <chNFe>42200310845180000166550010000016291182910232</chNFe>
+         <dhRecbto>2020-03-24T15:36:14-03:00</dhRecbto>
+         <nProt>342200000151784</nProt>
+         <digVal>3usUeRVacbmm1YX7mhrFM06rWcM=</digVal>
+         <cStat>100</cStat>
+         <xMotivo>Autorizado o uso da NF-e</xMotivo>
+      </infProt>
+   </protNFe>
+</nfeProc>

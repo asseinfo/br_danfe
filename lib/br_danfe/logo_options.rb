@@ -1,6 +1,6 @@
 module BrDanfe
-  module DanfeLib
-    class LogoOptions
+  module Logo
+    class Options
       def initialize(bounding_box_size, logo_dimensions)
         @bounding_box_size = bounding_box_size
         @logo_width = logo_dimensions[:width]

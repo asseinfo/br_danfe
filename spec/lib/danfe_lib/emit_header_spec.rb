@@ -5,7 +5,7 @@ describe BrDanfe::DanfeLib::EmitHeader do
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
-  let(:xml) { BrDanfe::DanfeLib::XML.new(xml_as_string) }
+  let(:xml) { BrDanfe::XML.new(xml_as_string) }
   let(:logo) { 'spec/fixtures/logo.png' }
 
   subject { described_class.new(pdf, xml, logo, { width: 100, height: 100 }) }

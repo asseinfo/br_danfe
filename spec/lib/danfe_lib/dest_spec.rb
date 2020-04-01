@@ -4,7 +4,7 @@ describe BrDanfe::DanfeLib::Dest do
   let(:path_of_expected_pdf) { './spec/fixtures/nfe/lib/output.pdf' }
 
   let(:pdf) { BrDanfe::DanfeLib::Document.new }
-  let(:xml) { BrDanfe::DanfeLib::XML.new(xml_as_string) }
+  let(:xml) { BrDanfe::XML.new(xml_as_string) }
 
   subject { described_class.new(pdf, xml) }
 
