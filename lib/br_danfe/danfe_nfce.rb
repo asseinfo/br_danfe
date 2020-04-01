@@ -11,19 +11,19 @@ module BrDanfe
       @options = BrDanfe::Logo::Config.new
     end
 
-    def save_pdf(filename)
-      generate
+    def save_pdf(filename, footer_info = '')
+      generate footer_info
       @pdf.render_file filename
     end
 
-    def render_pdf
-      generate
+    def render_pdf(footer_info = '')
+      generate footer_info
       @pdf.render
     end
 
     private
 
-    def generate
+    def generate(footer_info)
       DanfeNfceLib::Header.new(@pdf, @xml, @options.logo, @options.logo_dimensions).render
       DanfeNfceLib::ProductList.new(@pdf, @xml).render
       DanfeNfceLib::TotalList.new(@pdf, @xml).render
@@ -31,7 +31,7 @@ module BrDanfe
       DanfeNfceLib::Recipient.new(@pdf, @xml).render
       DanfeNfceLib::NfceIdentification.new(@pdf, @xml).render
       DanfeNfceLib::QrCode.new(@pdf, @xml).render
-      DanfeNfceLib::Footer.new(@pdf, @xml).render
+      DanfeNfceLib::Footer.new(@pdf, @xml).render(footer_info)
 
       resize_page_height
     end
