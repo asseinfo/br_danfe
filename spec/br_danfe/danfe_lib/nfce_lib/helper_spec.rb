@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BrDanfe::DanfeNfceLib::Helper do
+describe BrDanfe::DanfeLib::NfceLib::Helper do
   let(:xml) do
     xml = <<-eos
       <enderDest>

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BrDanfe::DanfeNfceLib::Header do
+describe BrDanfe::DanfeLib::NfceLib::Header do
   let(:base_dir) { './spec/fixtures/nfce/lib/' }
   let(:output_pdf) { "#{base_dir}output.pdf" }
   let(:logo) { './spec/fixtures/logo.png' }
@@ -42,7 +42,7 @@ describe BrDanfe::DanfeNfceLib::Header do
     BrDanfe::XML.new(xml)
   end
 
-  let(:pdf) { BrDanfe::DanfeNfceLib::Document.new(8.cm, 5.cm) }
+  let(:pdf) { BrDanfe::DanfeLib::NfceLib::Document.new(8.cm, 5.cm) }
 
   subject { described_class.new pdf, xml, logo, logo_options }
 

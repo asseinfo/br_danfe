@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe BrDanfe::DanfeNfceLib::ProductList do
+describe BrDanfe::DanfeLib::NfceLib::ProductList do
   let(:base_dir) { './spec/fixtures/nfce/lib/' }
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
-  let(:subject) { BrDanfe::DanfeNfceLib::Document.new(8.cm, 1.8.cm) }
+  let(:subject) { BrDanfe::DanfeLib::NfceLib::Document.new(8.cm, 1.8.cm) }
 
   before { File.delete(output_pdf) if File.exist?(output_pdf) }
 

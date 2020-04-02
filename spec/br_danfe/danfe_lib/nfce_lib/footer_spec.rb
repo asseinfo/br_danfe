@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe BrDanfe::DanfeNfceLib::Footer do
+describe BrDanfe::DanfeLib::NfceLib::Footer do
   let(:base_dir) { './spec/fixtures/nfce/lib/' }
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
-  let(:pdf) { BrDanfe::DanfeNfceLib::Document.new(8.cm, 5.cm) }
+  let(:pdf) { BrDanfe::DanfeLib::NfceLib::Document.new(8.cm, 5.cm) }
 
   let(:xml_footer) do
     xml = <<-eos
