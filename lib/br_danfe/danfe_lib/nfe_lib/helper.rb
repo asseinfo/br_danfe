@@ -30,14 +30,6 @@ module BrDanfe
           formated
         end
 
-        def self.no_fiscal_value?(xml)
-          BrDanfe::Helper.homologation?(xml) || unauthorized?(xml)
-        end
-
-        def self.unauthorized?(xml)
-          xml.css('nfeProc/protNFe/infProt/dhRecbto').empty?
-        end
-
         def self.mensure_text(pdf, text)
           pdf.width_of(text)
         end

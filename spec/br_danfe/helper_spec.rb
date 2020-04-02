@@ -1,6 +1,120 @@
 require 'spec_helper'
 
 describe BrDanfe::Helper do
+  describe '.no_fiscal_value?' do
+    let(:xml_homologation) do
+      xml = <<-eos
+        <nfeProc>
+          <NFe>
+            <infNFe>
+              <ide>
+                <tpAmb>2</tpAmb>
+              </ide>
+            </infNFe>
+            <protNFe>
+              <infProt>
+                <dhRecbto>2011-10-29T14:37:09</dhRecbto>
+              </infProt>
+            </protNFe>
+          </NFe>
+        </nfeProc>
+      eos
+
+      Nokogiri::XML(xml)
+    end
+
+    let(:xml_unauthorized) do
+      xml = <<-eos
+        <nfeProc>
+          <protNFe>
+            <infProt></infProt>
+          </protNFe>
+        </nfeProc>
+      eos
+
+      Nokogiri::XML(xml)
+    end
+
+    let(:xml_authorized) do
+      xml = <<-eos
+        <nfeProc>
+          <NFe>
+            <infNFe>
+              <ide>
+                <tpAmb>1</tpAmb>
+              </ide>
+            </infNFe>
+          </NFe>
+          <protNFe>
+            <infProt>
+              <dhRecbto>2011-10-29T14:37:09</dhRecbto>
+            </infProt>
+          </protNFe>
+        </nfeProc>
+      eos
+
+      Nokogiri::XML(xml)
+    end
+
+    context 'when XML is unauthorized' do
+      it 'returns true' do
+        expect(described_class.no_fiscal_value?(xml_unauthorized)).to eq true
+      end
+    end
+
+    context 'when XML is in homologation environment' do
+      it 'returns true' do
+        expect(described_class.no_fiscal_value?(xml_homologation)).to eq true
+      end
+    end
+
+    context 'when XML is authorized' do
+      it 'returns false' do
+        expect(described_class.no_fiscal_value?(xml_authorized)).to eq false
+      end
+    end
+  end
+
+  describe '.unauthorized?' do
+    context 'when XML is unauthorized' do
+      let(:xml_unauthorized) do
+        xml = <<-eos
+          <nfeProc>
+            <protNFe>
+              <infProt></infProt>
+            </protNFe>
+          </nfeProc>
+        eos
+
+        Nokogiri::XML(xml)
+      end
+
+      it 'returns true' do
+        expect(described_class.unauthorized?(xml_unauthorized)).to eq true
+      end
+    end
+
+    context 'when XML is authorized' do
+      let(:xml_authorized) do
+        xml = <<-eos
+          <nfeProc>
+            <protNFe>
+              <infProt>
+                <dhRecbto>2011-10-29T14:37:09</dhRecbto>
+              </infProt>
+            </protNFe>
+          </nfeProc>
+        eos
+
+        Nokogiri::XML(xml)
+      end
+
+      it 'returns false' do
+        expect(described_class.unauthorized?(xml_authorized)).to eq false
+      end
+    end
+  end
+
   describe '.homologation?' do
     context 'when tpAmb is equal to "2"' do
       let(:xml_homologation) do

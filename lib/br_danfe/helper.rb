@@ -1,7 +1,15 @@
 module BrDanfe
   class Helper
+    def self.no_fiscal_value?(xml)
+      homologation?(xml) || unauthorized?(xml)
+    end
+
     def self.homologation?(xml)
       xml.css('nfeProc/NFe/infNFe/ide/tpAmb').text == '2'
+    end
+
+    def self.unauthorized?(xml)
+      xml.css('nfeProc/protNFe/infProt/dhRecbto').empty?
     end
 
     def self.numerify(number)

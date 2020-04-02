@@ -76,7 +76,7 @@ module BrDanfe
       end
 
       def render_no_fiscal_value
-        @document.stamp('has_no_fiscal_value') if NfeLib::Helper.no_fiscal_value?(@xml)
+        @document.stamp('has_no_fiscal_value') if BrDanfe::Helper.no_fiscal_value?(@xml)
       end
     end
   end

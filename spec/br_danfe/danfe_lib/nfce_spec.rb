@@ -29,5 +29,29 @@ describe BrDanfe::DanfeLib::Nfce do
 
       expect("#{base_dir}saved_nfce.fixture.pdf").to have_same_content_of file: output_pdf
     end
+
+    context 'when nfc-e is unauthorized' do
+      context 'when nfc-e is in homologation environment' do
+        let(:xml) { BrDanfe::XML.new(File.read("#{base_dir}nfce-unauthorized-hom.xml")) }
+
+        it 'render watermark at pdf' do
+          expect(File.exist?(output_pdf)).to be_falsey
+          subject.save_pdf output_pdf
+
+          expect("#{base_dir}nfce-unauthorized-hom.fixture.pdf").to have_same_content_of file: output_pdf
+        end
+      end
+
+      context 'when nfc-e is in production environment' do
+        let(:xml) { BrDanfe::XML.new(File.read("#{base_dir}nfce-unauthorized-prod.xml")) }
+
+        it 'render watermark at pdf' do
+          expect(File.exist?(output_pdf)).to be_falsey
+          subject.save_pdf output_pdf
+
+          expect("#{base_dir}nfce-unauthorized-prod.fixture.pdf").to have_same_content_of file: output_pdf
+        end
+      end
+    end
   end
 end
