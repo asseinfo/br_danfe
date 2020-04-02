@@ -4,7 +4,7 @@ module BrDanfe
 
     def initialize(xml)
       @xml = BrDanfe::XML.new(xml)
-      @pdf = DanfeLib::Document.new
+      @pdf = DanfeNfeLib::Document.new
       @options = BrDanfe::Logo::Config.new
 
       create_watermark
@@ -44,24 +44,24 @@ module BrDanfe
     end
 
     def render_on_first_page
-      DanfeLib::Ticket.new(@pdf, @xml).render
-      DanfeLib::Dest.new(@pdf, @xml).render
-      DanfeLib::Dup.new(@pdf, @xml).render
-      DanfeLib::Icmstot.new(@pdf, @xml).render
-      DanfeLib::Transp.new(@pdf, @xml).render
-      n_vol = DanfeLib::Vol.new(@pdf, @xml).render
-      has_issqn = DanfeLib::Issqn.new(@pdf, @xml).render
-      DanfeLib::Infadic.new(@pdf, @xml).render(n_vol)
+      DanfeNfeLib::Ticket.new(@pdf, @xml).render
+      DanfeNfeLib::Dest.new(@pdf, @xml).render
+      DanfeNfeLib::Dup.new(@pdf, @xml).render
+      DanfeNfeLib::Icmstot.new(@pdf, @xml).render
+      DanfeNfeLib::Transp.new(@pdf, @xml).render
+      n_vol = DanfeNfeLib::Vol.new(@pdf, @xml).render
+      has_issqn = DanfeNfeLib::Issqn.new(@pdf, @xml).render
+      DanfeNfeLib::Infadic.new(@pdf, @xml).render(n_vol)
 
       render_products has_issqn
     end
 
     def render_products(has_issqn)
-      DanfeLib::DetBody.new(@pdf, @xml).render(has_issqn)
+      DanfeNfeLib::DetBody.new(@pdf, @xml).render(has_issqn)
     end
 
     def render_on_each_page(footer_info)
-      emitter = DanfeLib::EmitHeader.new(@pdf, @xml, @options.logo, @options.logo_dimensions)
+      emitter = DanfeNfeLib::EmitHeader.new(@pdf, @xml, @options.logo, @options.logo_dimensions)
 
       @pdf.page_count.times do |i|
         page = i + 1
@@ -91,7 +91,7 @@ module BrDanfe
     end
 
     def render_no_fiscal_value
-      @pdf.stamp('has_no_fiscal_value') if DanfeLib::Helper.no_fiscal_value?(@xml)
+      @pdf.stamp('has_no_fiscal_value') if DanfeNfeLib::Helper.no_fiscal_value?(@xml)
     end
   end
 end
