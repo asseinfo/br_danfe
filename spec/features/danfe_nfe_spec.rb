@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe BrDanfe::Danfe do
+describe BrDanfe::DanfeNfe do
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
   describe '#render_pdf' do
     let(:base_dir) { './spec/fixtures/nfe/v3.10/' }
 
     it 'renders a Simples Nacional NF-e using CSOSN' do
-      danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
+      danfe = BrDanfe::DanfeNfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
 
       expected = IO.binread("#{base_dir}nfe_simples_nacional.xml.fixture.pdf")
 
@@ -24,7 +24,7 @@ describe BrDanfe::Danfe do
       it 'render a NF-e with customized options' do
         expect(File.exist?(output_pdf)).to be_falsey
 
-        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}custom_options.fixture.xml"))
+        danfe = BrDanfe::DanfeNfe.new(File.read("#{base_dir}custom_options.fixture.xml"))
         danfe.options.logo = 'spec/fixtures/logo.png'
         danfe.options.logo_dimensions = { width: 100, height: 100 }
 
@@ -42,7 +42,7 @@ describe BrDanfe::Danfe do
       it 'renders a basic NF-e with namespace' do
         expect(File.exist?(output_pdf)).to be_falsey
 
-        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_ns.xml"))
+        danfe = BrDanfe::DanfeNfe.new(File.read("#{base_dir}nfe_with_ns.xml"))
         danfe.save_pdf output_pdf
 
         expect("#{base_dir}nfe_with_ns.xml.fixture.pdf").to have_same_content_of file: output_pdf
@@ -51,7 +51,7 @@ describe BrDanfe::Danfe do
       it 'renders another basic NF-e without namespace' do
         expect(File.exist?(output_pdf)).to be_falsey
 
-        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_without_ns.xml"))
+        danfe = BrDanfe::DanfeNfe.new(File.read("#{base_dir}nfe_without_ns.xml"))
         danfe.save_pdf output_pdf
 
         expect("#{base_dir}nfe_without_ns.xml.fixture.pdf").to have_same_content_of file: output_pdf
@@ -60,7 +60,7 @@ describe BrDanfe::Danfe do
       it 'renders a NF-e having FCI in its items' do
         expect(File.exist?(output_pdf)).to be_falsey
 
-        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_fci.xml"))
+        danfe = BrDanfe::DanfeNfe.new(File.read("#{base_dir}nfe_with_fci.xml"))
         danfe.save_pdf output_pdf
 
         expect("#{base_dir}nfe_with_fci.xml.fixture.pdf").to have_same_content_of file: output_pdf
@@ -69,7 +69,7 @@ describe BrDanfe::Danfe do
       it 'renders a Simples Nacional NF-e using CSOSN' do
         expect(File.exist?(output_pdf)).to be_falsey
 
-        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
+        danfe = BrDanfe::DanfeNfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
         danfe.save_pdf output_pdf
 
         expect("#{base_dir}nfe_simples_nacional.xml.fixture.pdf").to have_same_content_of file: output_pdf
@@ -78,7 +78,7 @@ describe BrDanfe::Danfe do
       it 'renders a NF-e with extra volumes' do
         expect(File.exist?(output_pdf)).to be_falsey
 
-        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_with_extra_volumes.xml"))
+        danfe = BrDanfe::DanfeNfe.new(File.read("#{base_dir}nfe_with_extra_volumes.xml"))
         danfe.save_pdf output_pdf
 
         expect("#{base_dir}nfe_with_extra_volumes.xml.fixture.pdf").to have_same_content_of file: output_pdf
@@ -93,7 +93,7 @@ describe BrDanfe::Danfe do
       it 'renders a Simples Nacional NF-e using CSOSN' do
         expect(File.exist?(output_pdf)).to be_falsey
 
-        danfe = BrDanfe::Danfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
+        danfe = BrDanfe::DanfeNfe.new(File.read("#{base_dir}nfe_simples_nacional.xml"))
         danfe.save_pdf output_pdf
 
         expect("#{base_dir}nfe_simples_nacional.xml.fixture.pdf").to have_same_content_of file: output_pdf
@@ -103,7 +103,7 @@ describe BrDanfe::Danfe do
         it 'renders xml to the pdf' do
           expect(File.exist?(output_pdf)).to be_falsey
 
-          danfe = BrDanfe::Danfe.new(File.read("#{base_dir}with_three_pages.xml"))
+          danfe = BrDanfe::DanfeNfe.new(File.read("#{base_dir}with_three_pages.xml"))
           danfe.save_pdf output_pdf
 
           expect("#{base_dir}with_three_pages.fixture.pdf").to have_same_content_of file: output_pdf
@@ -114,7 +114,7 @@ describe BrDanfe::Danfe do
         it 'renders xml to the pdf' do
           expect(File.exist?(output_pdf)).to be_falsey
 
-          danfe = BrDanfe::Danfe.new(File.read("#{base_dir}with_issqn.xml"))
+          danfe = BrDanfe::DanfeNfe.new(File.read("#{base_dir}with_issqn.xml"))
           danfe.save_pdf output_pdf
 
           expect("#{base_dir}with_issqn.fixture.pdf").to have_same_content_of file: output_pdf
@@ -125,7 +125,7 @@ describe BrDanfe::Danfe do
         it 'renders xml to the pdf' do
           expect(File.exist?(output_pdf)).to be_falsey
 
-          danfe = BrDanfe::Danfe.new(File.read("#{base_dir}without_issqn.xml"))
+          danfe = BrDanfe::DanfeNfe.new(File.read("#{base_dir}without_issqn.xml"))
           danfe.save_pdf output_pdf
 
           expect("#{base_dir}without_issqn.fixture.pdf").to have_same_content_of file: output_pdf
@@ -137,7 +137,7 @@ describe BrDanfe::Danfe do
           expect(File.exist?(output_pdf)).to be_falsey
 
           footer = 'Gerado através do Teste'
-          danfe = BrDanfe::Danfe.new(File.read("#{base_dir}with_footer.xml"))
+          danfe = BrDanfe::DanfeNfe.new(File.read("#{base_dir}with_footer.xml"))
           danfe.save_pdf output_pdf, footer
 
           expect("#{base_dir}with_footer.fixture.pdf").to have_same_content_of file: output_pdf

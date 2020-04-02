@@ -1,5 +1,5 @@
 module BrDanfe
-  class Danfe
+  class DanfeNfe
     attr_reader :options
 
     def initialize(xml)

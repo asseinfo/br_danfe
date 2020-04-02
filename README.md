@@ -1,6 +1,6 @@
 # BrDanfe
 
-[![Code Climate](https://codeclimate.com/github/asseinfo/br_danfe.png)](https://codeclimate.com/github/asseinfo/br_danfe) 
+[![Code Climate](https://codeclimate.com/github/asseinfo/br_danfe.png)](https://codeclimate.com/github/asseinfo/br_danfe)
 
 This gem generates PDF files for Brazilian DANFE (_Documento Auxiliar da Nota Fiscal Eletrônica_) from a valid NF-e XML. It also can generates PDF file for CC-e (_Carta de Correção Eletrônica_).
 
@@ -28,7 +28,7 @@ XML version | Supported?
 
         xml = File.read("nfe.xml")
 
-        danfe = BrDanfe::Danfe.new(xml)
+        danfe = BrDanfe::DanfeNfe.new(xml)
         danfe.options.logo_path = "logo.png"
         danfe.save_pdf("nfe.pdf")
 
@@ -39,7 +39,7 @@ XML version | Supported?
             invoice = Invoice.find(params[:id])
             xml_as_string = invoice.generate_xml # your method that generates the NF-e's xml
 
-            danfe = BrDanfe::Danfe.new(xml_as_string)
+            danfe = BrDanfe::DanfeNfe.new(xml_as_string)
 
             send_data danfe.render_pdf, filename: "danfe.pdf", type: "application/pdf"
           end
@@ -114,10 +114,10 @@ The following variables are necessary to be set:
 
 Environment var       | Development? | Test? | CI?   | Production? | Data
 ----------------------|--------------|-------|-------|-------------|-----
-TZ                    | no           | no    | yes   | no          | America/Sao_Paulo 
-BUNDLE_PATH           | no           | no    | yes   | no          | vendor/bundle 
-CC_TEST_REPORTER_ID   | no           | no    | yes   | no          | get at codeclimate 
-RAILS_ENV             | no           | no    | yes   | no          | test  
+TZ                    | no           | no    | yes   | no          | America/Sao_Paulo
+BUNDLE_PATH           | no           | no    | yes   | no          | vendor/bundle
+CC_TEST_REPORTER_ID   | no           | no    | yes   | no          | get at codeclimate
+RAILS_ENV             | no           | no    | yes   | no          | test
 
 ### Code coverage
 
