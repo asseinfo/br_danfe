@@ -353,15 +353,6 @@ FPbE+iPqSrIJitGByRpQUIE4Oz+765RpKEd7whcggA==</SignatureValue>
       </Signature>
    </NFe>
    <protNFe versao="4.00">
-      <infProt>
-         <tpAmb>2</tpAmb>
-         <verAplic>SVRS201908091113</verAplic>
-         <chNFe>42200310845180000166550010000016291182910232</chNFe>
-         <dhRecbto>2020-03-24T15:36:14-03:00</dhRecbto>
-         <nProt>342200000151784</nProt>
-         <digVal>3usUeRVacbmm1YX7mhrFM06rWcM=</digVal>
-         <cStat>100</cStat>
-         <xMotivo>Autorizado o uso da NF-e</xMotivo>
-      </infProt>
+      <infProt></infProt>
    </protNFe>
 </nfeProc>
