@@ -8,6 +8,11 @@ describe BrDanfe::Danfe do
           <infNFe>
             <ide>
               <mod>#{mod}</mod>
+              <NFref>
+                <refNFP>
+                  <mod>04</mod>
+                </refNFP>
+              </NFref>
             </ide>
           </infNFe>
         </NFe>

@@ -6,7 +6,7 @@ module BrDanfe
 
     def self.create_danfe(xml)
       nfe_code = '55'
-      xml['mod'] == nfe_code ? DanfeLib::Nfe.new(xml) : DanfeLib::Nfce.new(xml)
+      xml['ide > mod'] == nfe_code ? DanfeLib::Nfe.new(xml) : DanfeLib::Nfce.new(xml)
     end
     private_class_method :create_danfe
   end
