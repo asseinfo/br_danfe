@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'prawn-table', '0.2.2'
   spec.add_dependency 'rqrcode', '~> 1.1.1'
 
-  spec.add_development_dependency 'byebug', '11.1.1'
+  spec.add_development_dependency 'byebug', '11.1.3'
   spec.add_development_dependency 'rake', '13.0.1'
   spec.add_development_dependency 'rspec', '3.9.0'
   spec.add_development_dependency 'rubocop', '0.67.0'
