@@ -31,4 +31,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-performance', '~> 1.1.0'
   spec.add_development_dependency 'simplecov', '0.17.1'
   spec.add_development_dependency 'simplecov-html', '0.10.2'
+  spec.add_development_dependency 'guard', '~> 2.16.2'
+  spec.add_development_dependency 'guard-rspec'
 end
