@@ -44,6 +44,7 @@ module BrDanfe
           additional_data.push(address_content) if address?
           additional_data.push(difal_content) if difal?
           additional_data.push(fisco_content) if fisco?
+          additional_data.push(address_shipment) if shipment?
           additional_data.join(' * ')
         end
 
@@ -76,6 +77,21 @@ module BrDanfe
           BrDanfe::Helper.numerify(value) if value != ''
         end
 
+        def shipment?
+          @xml['entrega'].present?
+        end
+
+        def address_shipment
+          street = @xml['entrega/xLgr'].to_s
+          number = @xml['entrega/nro'].to_s
+          complement = @xml['entrega/xCpl'].to_s
+          neighborhood = @xml['entrega/xBairro'].to_s
+          city = @xml['entrega/xMun'].to_s
+          uf = @xml['entrega/UF'].to_s
+
+          "Endereço de entrega: #{street}, nº #{number} - #{neighborhood} - #{city} - #{uf} - #{complement}"
+        end
+
         def difal?
           @xml['ICMSTot/vICMSUFDest'].to_f != 0
         end
@@ -97,7 +113,7 @@ module BrDanfe
         end
 
         def additional_data?
-          complementary? || address? || difal? || fisco?
+          complementary? || address? || difal? || fisco? || shipment?
         end
 
         def render_reserved_fisco

@@ -231,8 +231,7 @@ describe BrDanfe::DanfeLib::NfeLib::Infadic do
         EOS
       end
 
-      it 'renders title with box, subtitle, fisco box and complementary ' \
-        'information on the pdf' do
+      fit 'renders title with box, subtitle, fisco box and complementary information on the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
@@ -340,6 +339,36 @@ describe BrDanfe::DanfeLib::NfeLib::Infadic do
       end
     end
 
+    context 'when has address shipment' do
+      let(:xml_as_string) do
+        <<-EOS
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <entrega>
+                <CNPJ>32301321907894</CNPJ>
+                <CPF></CPF>
+                <xLgr>Rua dos bobos</xLgr>
+                <nro>0</nro>
+                <xCpl>Na casa não tem parede</xCpl>
+                <xBairro>Centro</xBairro>
+                <cMun>4218004</cMun>
+                <xMun>TIJUCAS</xMun>
+                <UF>SC</UF>
+              </entrega>
+            </infNFe>
+          </NFe>
+        EOS
+      end
+
+      it 'renders title with box, subtitle, fisco box and address shipment information on the pdf' do
+      expect(File.exist?(output_pdf)).to be_falsey
+
+      pdf.render_file output_pdf
+
+      expect("#{base_dir}infadic#address-shipment.pdf").to have_same_content_of file: output_pdf
+      end
+    end
+
     context 'when has all the informations' do
       let(:xml_as_string) do
         <<-EOS
@@ -389,6 +418,17 @@ describe BrDanfe::DanfeLib::NfeLib::Infadic do
                 <pesoB>3300.000</pesoB>
               </vol>
             </transp>
+            <entrega>
+              <CNPJ>32301321907894</CNPJ>
+              <CPF></CPF>
+              <xLgr>Rua dos bobos</xLgr>
+              <nro>0</nro>
+              <xCpl>Na casa não tem parede</xCpl>
+              <xBairro>Centro</xBairro>
+              <cMun>4218004</cMun>
+              <xMun>TIJUCAS</xMun>
+              <UF>SC</UF>
+            </entrega>
             <infAdic>
               <infCpl>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue in dolor sed sagittis.</infCpl>
               <infAdFisco>Total de FCP-ST: 348,96</infAdFisco>
@@ -409,6 +449,7 @@ describe BrDanfe::DanfeLib::NfeLib::Infadic do
       'complementary information, address and difal on the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
+        pdf.render_file "#{base_dir}infadic#render-all_the_informations.pdf"
         pdf.render_file output_pdf
 
         expect("#{base_dir}infadic#render-all_the_informations.pdf").to have_same_content_of file: output_pdf
