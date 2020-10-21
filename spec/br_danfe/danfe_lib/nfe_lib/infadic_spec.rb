@@ -231,7 +231,7 @@ describe BrDanfe::DanfeLib::NfeLib::Infadic do
         EOS
       end
 
-      fit 'renders title with box, subtitle, fisco box and complementary information on the pdf' do
+      it 'renders title with box, subtitle, fisco box and complementary information on the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf
