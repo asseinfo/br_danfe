@@ -13,3 +13,9 @@ require 'br_documents'
 Dir[File.dirname(__FILE__) + '/**/*.rb'].sort.each { |f| require f }
 I18n.load_path << File.expand_path('../config/locales/pt-BR.yml', __dir__)
 Prawn::Font::AFM.hide_m17n_warning = true
+
+module BrDanfe
+  def self.root_path
+    File.expand_path('../..',__FILE__)
+  end
+end

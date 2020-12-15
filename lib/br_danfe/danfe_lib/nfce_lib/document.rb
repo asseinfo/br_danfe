@@ -3,7 +3,7 @@ module BrDanfe
     module NfceLib
       class Document
         def initialize(page_width, page_height)
-          @document = Prawn::Document.new(
+          @document = BrDanfe::PrawnBuilder.build(
             page_size: [page_width, page_height],
             page_layout: :portrait,
             left_margin: 0.3.cm,
