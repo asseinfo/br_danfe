@@ -449,7 +449,6 @@ describe BrDanfe::DanfeLib::NfeLib::Infadic do
       'complementary information, address and difal on the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
-        pdf.render_file "#{base_dir}infadic#render-all_the_informations.pdf"
         pdf.render_file output_pdf
 
         expect("#{base_dir}infadic#render-all_the_informations.pdf").to have_same_content_of file: output_pdf
