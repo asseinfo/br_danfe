@@ -7,7 +7,7 @@ module BrDanfe
         end
 
         def render
-          xprod = @det.css('prod/xProd').text.to_s.force_encoding('utf-8')
+          xprod = @det.css('prod/xProd').text.to_s
 
           xprod += infAdProd if infAdProd?
           xprod += fci if fci?
