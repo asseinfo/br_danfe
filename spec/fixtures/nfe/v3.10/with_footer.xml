@@ -564,6 +564,24 @@
         <indTot>1</indTot>
       </prod>
     </det>
+    <det nItem="15">
+      <prod>
+        <cProd>14</cProd>
+        <cEAN />
+        <xProd>Produto Com Csosn 101</xProd>
+        <NCM />
+        <CFOP>5101</CFOP>
+        <uCom>UN</uCom>
+        <qCom>2.00</qCom>
+        <vUnCom>1.01</vUnCom>
+        <vProd>2.02</vProd>
+        <cEANTrib />
+        <uTrib>UN</uTrib>
+        <qTrib>2.00</qTrib>
+        <vUnTrib>1.01</vUnTrib>
+        <indTot>1</indTot>
+      </prod>
+    </det>
     <total>
       <ICMSTot>
         <vBC>17.28</vBC>
