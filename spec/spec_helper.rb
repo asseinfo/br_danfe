@@ -13,5 +13,7 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
+  config.filter_run_when_matching :focus
+
   config.order = "random"
 end

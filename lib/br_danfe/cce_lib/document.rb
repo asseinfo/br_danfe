@@ -2,7 +2,7 @@ module BrDanfe
   module CceLib
     class Document
       def initialize
-        @document = Prawn::Document.new(
+        @document = BrDanfe::DocumentBuilder.build(
           page_size: 'A4',
           page_layout: :portrait,
           left_margin: 30,
@@ -11,7 +11,7 @@ module BrDanfe
           botton_margin: 30
         )
 
-        @document.font 'Times-Roman'
+        @document.font 'tinos'
         @document.line_width = 0.3
       end
 

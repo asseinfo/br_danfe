@@ -3,7 +3,7 @@ module BrDanfe
     module NfeLib
       class Document
         def initialize
-          @document = Prawn::Document.new(
+          @document = BrDanfe::DocumentBuilder.build(
             page_size: 'A4',
             page_layout: :portrait,
             left_margin: 0,
@@ -12,7 +12,8 @@ module BrDanfe
             botton_margin: 0
           )
 
-          @document.font 'Times-Roman'
+          @document.font 'tinos'
+
           @document.line_width = 0.3
         end
 
