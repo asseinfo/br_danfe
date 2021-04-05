@@ -300,7 +300,7 @@ describe BrDanfe::DanfeLib::NfeLib::Xprod do
             <ICMS>
               <ICMS30>
                 <vBCFCPST>235.50</vBCFCPST>
-                <vFCPST>4.71</vFCPST>
+                <vFCPST>0.71</vFCPST>
                 <pFCPST>2.00</pFCPST>
               </ICMS30>
             </ICMS>
@@ -316,7 +316,7 @@ describe BrDanfe::DanfeLib::NfeLib::Xprod do
       it 'returns product + FCP' do
         expected = 'MONITOR DE ARCO ELETRICO'
         expected += "\n"
-        expected += 'FCP ST: Base: 235,50 * Alíq: 2,00% * Vlr: 4,71'
+        expected += 'FCP ST: Base: 235,50 * Alíq: 2,00% * Vlr: 0,71'
 
         expect(subject.render).to eq expected
       end

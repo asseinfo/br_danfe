@@ -47,11 +47,11 @@ module BrDanfe
         end
 
         def icms_st?
-          @det.css('ICMS/*/vBCST').text.to_i.positive?
+          @det.css('ICMS/*/vBCST').text.to_f.positive?
         end
 
         def fcp?
-          @det.css('ICMS/*/vFCP').text.to_i.positive?
+          @det.css('ICMS/*/vFCP').text.to_f.positive?
         end
 
         def fcp
@@ -76,7 +76,7 @@ module BrDanfe
         end
 
         def fcp_st?
-          @det.css('ICMS/*/vFCPST').text.to_i.positive?
+          @det.css('ICMS/*/vFCPST').text.to_f.positive?
         end
 
         def fcp_st
@@ -91,8 +91,8 @@ module BrDanfe
         end
 
         def icms_st_ret?
-          @det.css('ICMS/*/vBCSTRet').text.to_i.positive? || @det.css('ICMS/*/vICMSSTRet').text.to_i.positive? ||
-            @det.css('ICMS/*/pST').text.to_i.positive?
+          @det.css('ICMS/*/vBCSTRet').text.to_f.positive? || @det.css('ICMS/*/vICMSSTRet').text.to_f.positive? ||
+            @det.css('ICMS/*/pST').text.to_f.positive?
         end
 
         def icms_st_ret
