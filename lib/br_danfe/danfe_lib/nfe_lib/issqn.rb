@@ -29,7 +29,7 @@ module BrDanfe
         private
 
         def can_render?
-          @xml[@serv].to_i.positive? || @xml[@bc].to_i.positive? || @xml[@iss].to_i.positive?
+          @xml[@serv].to_f.positive? || @xml[@bc].to_f.positive? || @xml[@iss].to_f.positive?
         end
       end
     end
