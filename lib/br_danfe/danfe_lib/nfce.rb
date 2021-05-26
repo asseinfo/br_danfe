@@ -10,19 +10,6 @@ module BrDanfe
         NfceLib::Document.new(PAGE_WIDTH, PAGE_HEIGHT)
       end
 
-      def create_watermark
-        @document.create_stamp('has_no_fiscal_value') do
-          @document.fill_color '7d7d7d'
-          @document.text_box I18n.t('danfe.others.has_no_fiscal_value'),
-                    size: 0.8.cm,
-                    width: 10.cm,
-                    height: 1.2.cm,
-                    at: [0, PAGE_HEIGHT - 3.8.cm],
-                    rotate: 45,
-                    rotate_around: :center
-        end
-      end
-
       def generate(footer_info)
         NfceLib::Header.new(@document, @xml, @options.logo, @options.logo_dimensions).render
         NfceLib::ProductList.new(@document, @xml).render

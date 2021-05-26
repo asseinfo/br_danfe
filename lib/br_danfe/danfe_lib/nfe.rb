@@ -7,21 +7,6 @@ module BrDanfe
         NfeLib::Document.new
       end
 
-      def create_watermark
-        @document.create_stamp('has_no_fiscal_value') do
-          @document.fill_color '7d7d7d'
-          @document.text_box I18n.t('danfe.others.has_no_fiscal_value'),
-                        size: 2.2.cm,
-                        width: @document.bounds.width,
-                        height: @document.bounds.height,
-                        align: :center,
-                        valign: :center,
-                        at: [0, @document.bounds.height],
-                        rotate: 45,
-                        rotate_around: :center
-        end
-      end
-
       def generate(footer_info)
         render_on_first_page
         render_on_each_page footer_info

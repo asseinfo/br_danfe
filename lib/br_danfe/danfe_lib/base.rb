@@ -7,8 +7,6 @@ module BrDanfe
         @xml = xml
         @document = document
         @options = BrDanfe::Logo::Config.new
-
-        create_watermark
       end
 
       def save_pdf(filename, footer_info = '')
