@@ -8,7 +8,6 @@ describe BrDanfe::DanfeLib::NfeLib::Document do
 
   describe '#lie' do
     before do
-      subject.render
       File.delete(output_pdf) if File.exist?(output_pdf)
     end
 
@@ -116,7 +115,6 @@ describe BrDanfe::DanfeLib::NfeLib::Document do
 
   describe '#lcnpj' do
     before do
-      subject.render
       File.delete(output_pdf) if File.exist?(output_pdf)
     end
 
