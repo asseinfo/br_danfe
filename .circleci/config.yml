@@ -21,6 +21,7 @@ jobs:
   rspec:
     docker:
       - image: circleci/ruby:2.5.1
+
     steps:
       - restore_cache:
           key: brdanfe-cache-v1-{{ .Environment.CIRCLE_SHA1 }}
