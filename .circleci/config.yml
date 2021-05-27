@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.5.1
+
     steps:
       - checkout
       - restore_cache:
@@ -16,6 +17,7 @@ jobs:
           key: brdanfe-cache-v1-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
+
   rspec:
     docker:
       - image: circleci/ruby:2.5.1
@@ -32,6 +34,7 @@ jobs:
       - run: ./cc-test-reporter before-build
       - run: bundle exec rspec
       - run: ./cc-test-reporter after-build --exit-code $?
+
 workflows:
   version: 2
   main:
