@@ -72,11 +72,11 @@ module BrDanfe
         end
       end
 
-      def repeated_information(page, y_position, emitter, footer_info, xml, total_pages, initial_page_of_xml)
+      def repeated_information(page, y_position, emitter, footer_info, xml, total_pages, initial_page_of_pdf)
         @document.go_to_page(page)
 
-        emitter.render(initial_page_of_xml, y_position, total_pages)
-        render_product_table_title initial_page_of_xml
+        emitter.render(initial_page_of_pdf, y_position, total_pages)
+        render_product_table_title initial_page_of_pdf
         render_footer_information footer_info
         render_no_fiscal_value(xml)
       end
