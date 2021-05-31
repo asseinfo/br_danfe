@@ -5,7 +5,7 @@ describe BrDanfe::DanfeLib::Nfe do
   let(:xml_file) {}
   let(:xml) { BrDanfe::XML.new(xml_file) }
 
-  subject { described_class.new xml }
+  subject { described_class.new [xml] }
 
   describe '#render_pdf' do
     let(:base_dir) { './spec/fixtures/nfe/v3.10/' }
@@ -150,6 +150,22 @@ describe BrDanfe::DanfeLib::Nfe do
 
           expect("#{base_dir}with_footer.fixture.pdf").to have_same_content_of file: output_pdf
         end
+      end
+    end
+
+    context 'when there is more than one xml' do
+      let(:base_dir) { './spec/fixtures/nfe/v3.10/' }
+      let(:xml_file) { File.read("#{base_dir}nfe_simples_nacional.xml") }
+
+      before { File.delete(output_pdf) if File.exist?(output_pdf) }
+
+      it 'renders multiple danfes on the same pdf' do
+        expect(File.exist?(output_pdf)).to be_falsey
+        subject = described_class.new([xml, xml])
+
+        subject.save_pdf(output_pdf)
+
+        expect("#{base_dir}multiples.xmls.on.the.same.pdf.pdf").to have_same_content_of file: output_pdf
       end
     end
   end

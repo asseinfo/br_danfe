@@ -23,45 +23,62 @@ module BrDanfe
       end
 
       def generate(footer_info)
-        render_on_first_page
-        render_on_each_page footer_info
+        nfe_code = '55'
+
+        last_index = @xmls.size - 1
+
+        @xmls.each_with_index do |xml, index|
+          break unless xml['ide > mod'] == nfe_code
+
+          initial_number_of_pages = @document.page_count
+
+          render_on_first_page(xml)
+
+          render_on_each_page(footer_info, xml, initial_number_of_pages)
+
+          @document.start_new_page unless index == last_index
+        end
+
         @document
       end
 
-      def render_on_first_page
-        NfeLib::Ticket.new(@document, @xml).render
-        NfeLib::Dest.new(@document, @xml).render
-        NfeLib::Dup.new(@document, @xml).render
-        NfeLib::Icmstot.new(@document, @xml).render
-        NfeLib::Transp.new(@document, @xml).render
-        n_vol = NfeLib::Vol.new(@document, @xml).render
-        has_issqn = NfeLib::Issqn.new(@document, @xml).render
-        NfeLib::Infadic.new(@document, @xml).render(n_vol)
+      def render_on_first_page(xml)
+        NfeLib::Ticket.new(@document, xml).render
+        NfeLib::Dest.new(@document, xml).render
+        NfeLib::Dup.new(@document, xml).render
+        NfeLib::Icmstot.new(@document, xml).render
+        NfeLib::Transp.new(@document, xml).render
+        n_vol = NfeLib::Vol.new(@document, xml).render
+        has_issqn = NfeLib::Issqn.new(@document, xml).render
+        NfeLib::Infadic.new(@document, xml).render(n_vol)
 
-        render_products has_issqn
+        render_products(has_issqn, xml)
       end
 
-      def render_products(has_issqn)
-        NfeLib::DetBody.new(@document, @xml).render(has_issqn)
+      def render_products(has_issqn, xml)
+        NfeLib::DetBody.new(@document, xml).render(has_issqn)
       end
 
-      def render_on_each_page(footer_info)
-        emitter = NfeLib::EmitHeader.new(@document, @xml, @options.logo, @options.logo_dimensions)
+      def render_on_each_page(footer_info, xml, initial_number_of_pages)
+        total_pages = @document.page_count + 1 - initial_number_of_pages
 
-        @document.page_count.times do |i|
-          page = i + 1
-          position = page == 1 ? 3.96 : 1.85
-          repeated_information page, position, emitter, footer_info
+        emitter = NfeLib::EmitHeader.new(@document, xml, @options.logo, @options.logo_dimensions)
+
+        total_pages.times do |page_index|
+          page = page_index + initial_number_of_pages
+
+          position = page_index + 1 == 1 ? 3.96 : 1.85
+          repeated_information(page, position, emitter, footer_info, xml, total_pages, page_index + 1)
         end
       end
 
-      def repeated_information(page, y_position, emitter, footer_info)
+      def repeated_information(page, y_position, emitter, footer_info, xml, total_pages, initial_page_of_xml)
         @document.go_to_page(page)
 
-        emitter.render page, y_position
-        render_product_table_title page
+        emitter.render(initial_page_of_xml, y_position, total_pages)
+        render_product_table_title initial_page_of_xml
         render_footer_information footer_info
-        render_no_fiscal_value
+        render_no_fiscal_value(xml)
       end
 
       def render_product_table_title(page)
@@ -75,8 +92,8 @@ module BrDanfe
         end
       end
 
-      def render_no_fiscal_value
-        @document.stamp('has_no_fiscal_value') if BrDanfe::Helper.no_fiscal_value?(@xml)
+      def render_no_fiscal_value(xml)
+        @document.stamp('has_no_fiscal_value') if BrDanfe::Helper.no_fiscal_value?(xml)
       end
     end
   end

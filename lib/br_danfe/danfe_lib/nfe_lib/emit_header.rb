@@ -9,10 +9,10 @@ module BrDanfe
           @logo_dimensions = logo_dimensions
         end
 
-        def render(page, y_position)
+        def render(page, y_position, total)
           @y_position = y_position
           company_box
-          danfe_box page
+          danfe_box(page, total)
           access_key_box
           sefaz_box
           render_emit y_position
@@ -64,7 +64,7 @@ module BrDanfe
           end
         end
 
-        def danfe_box(page)
+        def danfe_box(page, total)
           @pdf.ibox 3.92, 2.08, 8.21, @y_position
 
           @pdf.ibox 0.60, 2.08, 8.21, @y_position, '', 'DANFE',
@@ -83,7 +83,7 @@ module BrDanfe
                     size: 8, align: :center, valign: :center, border: 0, style: :bold
 
           @pdf.ibox 1.00, 2.08, 8.21, @y_position + 3.00, '',
-                    I18n.t('danfe.others.page', current: page, total: @pdf.page_count),
+                    I18n.t('danfe.others.page', current: page, total: total),
                     size: 8, align: :center, valign: :center, border: 0, style: :bold
         end
 

@@ -53,7 +53,7 @@ describe BrDanfe::DanfeLib::NfeLib::EmitHeader do
 
     context 'render emitter on first page' do
       before do
-        subject.render 1, 3.96
+        subject.render 1, 3.96, 1
         File.delete(output_pdf) if File.exist?(output_pdf)
       end
 
@@ -82,7 +82,7 @@ describe BrDanfe::DanfeLib::NfeLib::EmitHeader do
 
     context 'render emitter on second page' do
       before do
-        subject.render 2, 1.85
+        subject.render 2, 1.85, 1
         File.delete(output_pdf) if File.exist?(output_pdf)
       end
 
