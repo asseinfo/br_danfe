@@ -33,5 +33,11 @@ module BrDanfe
 
       formated
     end
+
+    def self.nfe?(xml)
+      nfe_code = '55'
+
+      xml['ide > mod'] == nfe_code
+    end
   end
 end

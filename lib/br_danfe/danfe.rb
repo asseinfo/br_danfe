@@ -9,15 +9,8 @@ module BrDanfe
     end
 
     def self.create_danfe(xmls)
-      nfe?(xmls) ? DanfeLib::Nfe.new(xmls) : DanfeLib::Nfce.new(xmls)
+      BrDanfe::Helper.nfe?(xmls.first) ? DanfeLib::Nfe.new(xmls) : DanfeLib::Nfce.new(xmls)
     end
     private_class_method :create_danfe
-
-    def self.nfe?(xmls)
-      nfe_code = '55'
-
-      xmls.first['ide > mod'] == nfe_code
-    end
-    private_class_method :nfe?
   end
 end

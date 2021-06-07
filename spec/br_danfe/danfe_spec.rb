@@ -31,7 +31,7 @@ describe BrDanfe::Danfe do
       expect(subject.class).to eq BrDanfe::DanfeLib::Nfe
     end
 
-    it 'accepts a array of xmls' do
+    it 'accepts an array of xmls' do
       subject = described_class.new([xml, xml])
 
       expect(subject.class).to eq BrDanfe::DanfeLib::Nfe

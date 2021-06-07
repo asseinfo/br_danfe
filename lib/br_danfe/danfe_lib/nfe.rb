@@ -23,19 +23,14 @@ module BrDanfe
       end
 
       def generate(footer_info)
-        nfe_code = '55'
-
         last_index = @xmls.size - 1
 
         @xmls.each_with_index do |xml, index|
-          break unless xml['ide > mod'] == nfe_code
+          break unless BrDanfe::Helper.nfe?(xml)
 
           initial_number_of_pages = @document.page_count
-
           render_on_first_page(xml)
-
           render_on_each_page(footer_info, xml, initial_number_of_pages)
-
           @document.start_new_page unless index == last_index
         end
 
