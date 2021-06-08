@@ -22,6 +22,22 @@ describe BrDanfe::Danfe do
 
   subject { described_class.new(xml) }
 
+  context 'xmls parameter' do
+    let(:mod) { 55 }
+
+    it 'accepts one xml' do
+      subject = described_class.new(xml)
+
+      expect(subject.class).to eq BrDanfe::DanfeLib::Nfe
+    end
+
+    it 'accepts an array of xmls' do
+      subject = described_class.new([xml, xml])
+
+      expect(subject.class).to eq BrDanfe::DanfeLib::Nfe
+    end
+  end
+
   context 'when the xml document type is NF-e' do
     let(:mod) { 55 }
 

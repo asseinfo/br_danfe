@@ -1,12 +1,15 @@
 module BrDanfe
   class Danfe
-    def self.new(xml)
-      create_danfe BrDanfe::XML.new(xml)
+    def self.new(xmls)
+      xmls = [xmls] unless xmls.is_a?(Array)
+
+      parsed_xmls = xmls.map { |xml| BrDanfe::XML.new(xml) }
+
+      create_danfe(parsed_xmls)
     end
 
-    def self.create_danfe(xml)
-      nfe_code = '55'
-      xml['ide > mod'] == nfe_code ? DanfeLib::Nfe.new(xml) : DanfeLib::Nfce.new(xml)
+    def self.create_danfe(xmls)
+      BrDanfe::Helper.nfe?(xmls.first) ? DanfeLib::Nfe.new(xmls) : DanfeLib::Nfce.new(xmls)
     end
     private_class_method :create_danfe
   end

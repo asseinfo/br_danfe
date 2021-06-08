@@ -5,7 +5,7 @@ describe BrDanfe::DanfeLib::Nfce do
   let(:base_dir) { './spec/fixtures/nfce/v4.00/' }
   let(:xml) { BrDanfe::XML.new(File.read("#{base_dir}nfce.xml")) }
 
-  subject { described_class.new xml }
+  subject { described_class.new [xml] }
 
   before do
     subject.options.logo = 'spec/fixtures/logo.png'
@@ -51,6 +51,17 @@ describe BrDanfe::DanfeLib::Nfce do
 
           expect("#{base_dir}nfce-unauthorized-prod.fixture.pdf").to have_same_content_of file: output_pdf
         end
+      end
+    end
+
+    context 'when there is more than one xml' do
+      it 'renders multiple danfes on the same pdf' do
+        subject = described_class.new [xml, xml]
+
+        expect(File.exist?(output_pdf)).to be_falsey
+        subject.save_pdf output_pdf
+
+        expect("#{base_dir}multiples_xmls_on_the_same_pdf.pdf").to have_same_content_of file: output_pdf
       end
     end
   end

@@ -24,21 +24,23 @@ module BrDanfe
       end
 
       def generate(footer_info)
-        NfceLib::Header.new(@document, @xml, @options.logo, @options.logo_dimensions).render
-        NfceLib::ProductList.new(@document, @xml).render
-        NfceLib::TotalList.new(@document, @xml).render
-        NfceLib::Key.new(@document, @xml).render
-        NfceLib::Recipient.new(@document, @xml).render
-        NfceLib::NfceIdentification.new(@document, @xml).render
-        NfceLib::QrCode.new(@document, @xml).render
-        NfceLib::Footer.new(@document, @xml).render(footer_info)
+        @xmls.each do |xml|
+          NfceLib::Header.new(@document, xml, @options.logo, @options.logo_dimensions).render
+          NfceLib::ProductList.new(@document, xml).render
+          NfceLib::TotalList.new(@document, xml).render
+          NfceLib::Key.new(@document, xml).render
+          NfceLib::Recipient.new(@document, xml).render
+          NfceLib::NfceIdentification.new(@document, xml).render
+          NfceLib::QrCode.new(@document, xml).render
+          NfceLib::Footer.new(@document, xml).render(footer_info)
 
-        render_no_fiscal_value
-        resize_page_height
+          render_no_fiscal_value(xml)
+          resize_page_height
+        end
       end
 
-      def render_no_fiscal_value
-        @document.stamp('has_no_fiscal_value') if BrDanfe::Helper.unauthorized?(@xml)
+      def render_no_fiscal_value(xml)
+        @document.stamp('has_no_fiscal_value') if BrDanfe::Helper.unauthorized?(xml)
       end
 
       def resize_page_height

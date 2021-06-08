@@ -3,8 +3,8 @@ module BrDanfe
     class Base
       attr_reader :options
 
-      def initialize(xml)
-        @xml = xml
+      def initialize(xmls)
+        @xmls = xmls
         @document = document
         @options = BrDanfe::Logo::Config.new
 
