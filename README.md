@@ -45,6 +45,22 @@ XML version | Supported?
           end
         end
 
+#### Usage in Rails Controller with more than one xml
+        class DanfeController < ApplicationController
+          def new
+            invoices = Invoice.where(ids: params[:ids])
+            xmls_as_string = []
+            
+            invoices.each do |invoice|
+                xmls_as_string << invoice.generate_xml # your method that generates the NF-e's xml
+            end
+
+            danfe = BrDanfe::Danfe.new(xmls_as_string)
+
+            send_data danfe.render_pdf, filename: "danfe.pdf", type: "application/pdf"
+          end
+        end
+
 ### Options
 
 * `logo_path`: Path of sender's logo image.
