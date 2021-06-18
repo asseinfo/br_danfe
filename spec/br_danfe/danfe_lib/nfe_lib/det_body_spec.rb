@@ -432,7 +432,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
       end
 
       context 'when the product table occupies three pages' do
-        let(:products) { ("#{product_1}\n#{product_2}" * 23) }
+        let(:products) { ("#{product_1}\n#{product_2}" * 24) }
 
         it 'renders xml to the pdf' do
           expect(File.exist?(output_pdf)).to be_falsey
