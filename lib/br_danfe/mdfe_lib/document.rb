@@ -22,16 +22,6 @@ module BrDanfe
         @document.respond_to?(method_name, include_private) || super
       end
 
-      # def text(text, options = {})
-      #   pad = options.delete(:pad) || 0
-      #   options = { align: :left, size: 12, style: nil }.merge(options)
-
-      #   pad(pad) do
-      #     @document.text text, size: options[:size], style: options[:style],
-      #       align: options[:align]
-      #   end
-      # end
-
       private
 
       def page_width

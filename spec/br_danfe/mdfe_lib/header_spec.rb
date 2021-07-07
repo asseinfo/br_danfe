@@ -103,7 +103,7 @@ describe BrDanfe::MdfeLib::Header do
           subject.render
           pdf.render_file output_pdf
 
-          expect("#{base_dir}emit_header#render-with_logo.pdf").to have_same_content_of file: output_pdf
+          expect("#{base_dir}header#render-with_logo.pdf").to have_same_content_of file: output_pdf
         end
       end
 
@@ -113,7 +113,7 @@ describe BrDanfe::MdfeLib::Header do
 
           pdf.render_file output_pdf
 
-          expect("#{base_dir}emit_header#render-without_logo.pdf").to have_same_content_of file: output_pdf
+          expect("#{base_dir}header#render-without_logo.pdf").to have_same_content_of file: output_pdf
         end
       end
     end
