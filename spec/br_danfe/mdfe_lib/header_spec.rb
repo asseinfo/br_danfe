@@ -58,18 +58,15 @@ describe BrDanfe::MdfeLib::Header do
 
   let(:base_dir) { './spec/fixtures/mdfe/lib/' }
   let(:output_pdf) { "#{base_dir}output.pdf" }
-  let(:logo) { 'spec/fixtures/logo.png' }
 
-  subject { described_class.new(pdf, xml, logo) }
+  subject { described_class.new(pdf, xml) }
 
   let(:pdf_text) do
-    pdf.render_file output_pdf
-    pdf.render
     PDF::Inspector::Text.analyze(pdf.render).strings.join("\n")
   end
 
   describe '#render' do
-    fit 'renders the emitter informations' do
+    it 'renders the emitter informations' do
       emitter_name = 'VENTURIM AGROCRIATIVA LTDA EPP'
       emitter_address = "RODOVIA ES 473 KM 13, nº 0\nVENDA NOVA DO IMIGRANTE - ES   CEP 29.375-000"
 
@@ -85,25 +82,39 @@ describe BrDanfe::MdfeLib::Header do
       expect(pdf_text).to include emitter_ie
     end
 
-    context 'with logo' do
-      it 'renders the logo' do
-        expect(File.exist?(output_pdf)).to be_falsey
+    it'renders the DAMDFE title' do
+      title = "DAMDFE: \n - Documento Auxiliar de Manifesto Eletrônico de Documentos Fiscais"
 
-        subject.render
+      subject.render
 
-        expect("#{base_dir}emit_header#render-with_logo.pdf").to have_same_content_of file: output_pdf
-      end
+      expect(pdf_text).to include title
     end
 
-    context 'without logo' do
-      let(:logo) { '' }
+    describe'logo' do
+      after { File.delete(output_pdf) if File.exist?(output_pdf) }
 
-      it 'renders xml to the pdf' do
-        expect(File.exist?(output_pdf)).to be_falsey
+      context 'with logo' do
+        it 'renders the logo' do
+          expect(File.exist?(output_pdf)).to be_falsey
 
-        pdf.render_file output_pdf
+          subject.options.logo_dimensions = { width: 100, height: 100 }
+          subject.options.logo = 'spec/fixtures/logo.png'
 
-        expect("#{base_dir}emit_header#render-without_logo.pdf").to have_same_content_of file: output_pdf
+          subject.render
+          pdf.render_file output_pdf
+
+          expect("#{base_dir}emit_header#render-with_logo.pdf").to have_same_content_of file: output_pdf
+        end
+      end
+
+      context 'without logo' do
+        it 'does not render the logo' do
+          expect(File.exist?(output_pdf)).to be_falsey
+
+          pdf.render_file output_pdf
+
+          expect("#{base_dir}emit_header#render-without_logo.pdf").to have_same_content_of file: output_pdf
+        end
       end
     end
   end
