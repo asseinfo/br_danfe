@@ -1,23 +1,26 @@
 module BrDanfe
   module MdfeLib
     class Header
-      def initialize(pdf, xml, logo)
+      attr_reader :options
+
+      def initialize(pdf, xml)
         @pdf = pdf
         @xml = xml
-        @logo = logo
+        @options = BrDanfe::Logo::Config.new
       end
 
       def render
-        company
+        render_emit
+        render_title
       end
 
       private
 
       def render_emit
-        if @logo.blank?
+        if @options.logo.blank?
           company
         else
-          company(3.60.cm)
+          company(90)
           logo
         end
       end
@@ -44,13 +47,19 @@ module BrDanfe
 
       def logo
         bounding_box_size = 80
-        logo_options = BrDanfe::Logo::Options.new(bounding_box_size, @logo_dimensions).options
+        logo_options = BrDanfe::Logo::Options.new(bounding_box_size, @options.logo_dimensions).options
 
         @pdf.bounding_box(
-          [0.83.cm, Helper.invert(@y_position.cm + 1.02.cm)], width: bounding_box_size, height: bounding_box_size
+          [1, 770], width: bounding_box_size, height: bounding_box_size
         ) do
-          @pdf.image @logo, logo_options
+          @pdf.image @options.logo, logo_options
         end
+      end
+
+      def render_title
+        title = '<b>DAMDFE: </b> - Documento Auxiliar de Manifesto Eletrônico de Documentos Fiscais'
+
+        @pdf.text_box(title, size: 12, align: :left, inline_format: true, at: [0, 675])
       end
     end
   end
