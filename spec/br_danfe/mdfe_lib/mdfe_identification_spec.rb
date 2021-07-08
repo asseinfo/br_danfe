@@ -22,7 +22,7 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
       				<procEmi>0</procEmi>
       				<verProc>hivelog-mdfe-0.1.0</verProc>
       				<UFIni>ES</UFIni>
-      				<UFFim>ES</UFFim>
+      				<UFFim>SC</UFFim>
       				<infMunCarrega>
       					<cMunCarrega>3205069</cMunCarrega>
       					<xMunCarrega>VENDA NOVA DO IMIGRANTE</xMunCarrega>
@@ -38,41 +38,67 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
   let(:pdf) { BrDanfe::MdfeLib::Document.new }
   let(:xml) { BrDanfe::XML.new(xml_as_string) }
 
-  let(:base_dir) { './spec/fixtures/mdfe/lib/' }
-  let(:output_pdf) { "#{base_dir}output.pdf" }
-
   subject { described_class.new(pdf, xml) }
 
   let(:pdf_text) do
     PDF::Inspector::Text.analyze(pdf.render).strings.join("\n")
   end
 
-  describe'#render' do
-    it'renders the model identification' do
+  describe '#render' do
+    it 'renders the model' do
       model = '58'
 
       subject.render
 
       expect(pdf_text).to include model
-      pdf.render_file output_pdf # TODO: remover
     end
 
-    it'renders the serie identification' do
+    it 'renders the serie' do
       serie = '1'
 
       subject.render
 
       expect(pdf_text).to include serie
-      pdf.render_file output_pdf # TODO: remover
     end
 
-    it'renders the number identification' do
+    it 'renders the number' do
       number = '121'
 
       subject.render
 
       expect(pdf_text).to include number
-      pdf.render_file output_pdf # TODO: remover
+    end
+
+    it 'renders the pages number' do
+      pages = '1/1'
+
+      subject.render
+
+      expect(pdf_text).to include pages
+    end
+
+    it 'renders the emitted date and hour' do
+      datetime = '01/07/2021 17:30:00'
+
+      subject.render
+
+      expect(pdf_text).to include datetime
+    end
+
+    it 'renders the origin uf' do
+      origin_uf = 'ES'
+
+      subject.render
+
+      expect(pdf_text).to include origin_uf
+    end
+
+    it 'renders the destination uf' do
+      destination_uf = 'SC'
+
+      subject.render
+
+      expect(pdf_text).to include destination_uf
     end
   end
 end

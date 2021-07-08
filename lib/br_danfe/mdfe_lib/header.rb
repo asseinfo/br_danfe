@@ -1,23 +1,23 @@
 module BrDanfe
   module MdfeLib
     class Header
-      attr_reader :options
-
-      def initialize(pdf, xml)
+      def initialize(pdf, xml, logo, logo_dimensions)
         @pdf = pdf
         @xml = xml
-        @options = BrDanfe::Logo::Config.new
+        @logo = logo
+        @logo_dimensions = logo_dimensions
       end
 
       def render
         render_emit
         render_title
+        space_for_qr_code
       end
 
       private
 
       def render_emit
-        if @options.logo.blank?
+        if @logo.blank?
           company
         else
           company(90)
@@ -47,12 +47,12 @@ module BrDanfe
 
       def logo
         bounding_box_size = 80
-        logo_options = BrDanfe::Logo::Options.new(bounding_box_size, @options.logo_dimensions).options
+        logo_options = BrDanfe::Logo::Options.new(bounding_box_size, @logo_dimensions).options
 
         @pdf.bounding_box(
-          [1, 770], width: bounding_box_size, height: bounding_box_size
+          [0, 770], width: bounding_box_size, height: bounding_box_size
         ) do
-          @pdf.image @options.logo, logo_options
+          @pdf.image @logo, logo_options
         end
       end
 
@@ -60,6 +60,14 @@ module BrDanfe
         title = '<b>DAMDFE: </b> - Documento Auxiliar de Manifesto Eletrônico de Documentos Fiscais'
 
         @pdf.text_box(title, size: 12, align: :left, inline_format: true, at: [0, 675])
+      end
+
+      def space_for_qr_code
+        @pdf.bounding_box([420, 770], width: 95, height: 95) do
+          @pdf.stroke_color '000000'
+          @pdf.stroke_bounds
+          @pdf.text_box('Espaço para QRCode', size: 12, align: :center, valign: :center)
+        end
       end
     end
   end

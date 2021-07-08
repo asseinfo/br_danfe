@@ -5,9 +5,9 @@ describe BrDanfe::MdfeLib::Document do
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
   describe '#text' do
+    after { File.delete(output_pdf) if File.exist?(output_pdf) }
     context 'when is a simple text' do
       before do
-        File.delete(output_pdf) if File.exist?(output_pdf)
         subject.text 'simple text'
       end
 
@@ -22,7 +22,6 @@ describe BrDanfe::MdfeLib::Document do
 
     context 'when is a text with style' do
       before do
-        File.delete(output_pdf) if File.exist?(output_pdf)
         subject.text 'bold text', style: :bold
       end
 
@@ -37,7 +36,6 @@ describe BrDanfe::MdfeLib::Document do
 
     context 'when is a text with size' do
       before do
-        File.delete(output_pdf) if File.exist?(output_pdf)
         subject.text 'big text', size: 25
       end
 
@@ -52,7 +50,6 @@ describe BrDanfe::MdfeLib::Document do
 
     context 'when is a text with pad' do
       before do
-        File.delete(output_pdf) if File.exist?(output_pdf)
         subject.text 'text with pad', pad: 50
       end
 
@@ -67,7 +64,6 @@ describe BrDanfe::MdfeLib::Document do
 
     context 'when is a text with align' do
       before do
-        File.delete(output_pdf) if File.exist?(output_pdf)
         subject.text 'text in center', align: :center
       end
 

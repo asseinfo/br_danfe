@@ -59,7 +59,10 @@ describe BrDanfe::MdfeLib::Header do
   let(:base_dir) { './spec/fixtures/mdfe/lib/' }
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
-  subject { described_class.new(pdf, xml) }
+  let(:logo_dimensions) { { width: 100, height: 100 } }
+  let(:logo) { 'spec/fixtures/logo.png' }
+
+  subject { described_class.new(pdf, xml, logo, logo_dimensions) }
 
   let(:pdf_text) do
     PDF::Inspector::Text.analyze(pdf.render).strings.join("\n")
@@ -90,15 +93,12 @@ describe BrDanfe::MdfeLib::Header do
       expect(pdf_text).to include title
     end
 
-    describe'logo' do
+    describe 'logo' do
       after { File.delete(output_pdf) if File.exist?(output_pdf) }
 
       context 'with logo' do
         it 'renders the logo' do
           expect(File.exist?(output_pdf)).to be_falsey
-
-          subject.options.logo_dimensions = { width: 100, height: 100 }
-          subject.options.logo = 'spec/fixtures/logo.png'
 
           subject.render
           pdf.render_file output_pdf
@@ -108,9 +108,12 @@ describe BrDanfe::MdfeLib::Header do
       end
 
       context 'without logo' do
+        let(:logo) { '' }
+
         it 'does not render the logo' do
           expect(File.exist?(output_pdf)).to be_falsey
 
+          subject.render
           pdf.render_file output_pdf
 
           expect("#{base_dir}header#render-without_logo.pdf").to have_same_content_of file: output_pdf
