@@ -46,7 +46,7 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
 
   describe '#render' do
     it 'renders the model' do
-      model = '58'
+      model = "Modelo\n58"
 
       subject.render
 
@@ -54,7 +54,7 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
     end
 
     it 'renders the serie' do
-      serie = '1'
+      serie = "Série\n1"
 
       subject.render
 
@@ -62,7 +62,7 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
     end
 
     it 'renders the number' do
-      number = '121'
+      number = "Número\n121"
 
       subject.render
 
@@ -70,7 +70,7 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
     end
 
     it 'renders the pages number' do
-      pages = '1/1'
+      pages = "FL\n1/1"
 
       subject.render
 
@@ -78,7 +78,7 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
     end
 
     it 'renders the emitted date and hour' do
-      datetime = '01/07/2021 17:30:00'
+      datetime = "Data e hora de Emissão\n01/07/2021 17:30:00"
 
       subject.render
 
@@ -86,7 +86,7 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
     end
 
     it 'renders the origin uf' do
-      origin_uf = 'ES'
+      origin_uf = "UF Carreg.\nES"
 
       subject.render
 
@@ -94,7 +94,7 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
     end
 
     it 'renders the destination uf' do
-      destination_uf = 'SC'
+      destination_uf = "UF Descarreg.\nSC"
 
       subject.render
 
