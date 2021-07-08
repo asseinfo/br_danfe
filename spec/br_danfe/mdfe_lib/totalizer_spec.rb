@@ -9,7 +9,6 @@ describe BrDanfe::MdfeLib::Totalizer do
       		<infMDFe Id="MDFe32210717781119000141580010000001211000000003" versao="3.00">
               <tot>
       				<qNFe>10</qNFe>
-              <qCTe>18</qCTe>
       				<vCarga>8222.10</vCarga>
       				<cUnid>01</cUnid>
       				<qCarga>615.1400</qCarga>
@@ -33,25 +32,31 @@ describe BrDanfe::MdfeLib::Totalizer do
   end
 
   describe '#render' do
-    it 'renders the  informations' do
-
-      cte_quantity = "QTD. CTe\n18"
+    it 'renders the nfe quantity' do
       nfe_quantity = "QTD. NFe\n10"
+
+      subject.render
+      expect(pdf_text).to include nfe_quantity
+    end
+
+    it 'renders only the box of cte quantity' do
+      cte_quantity = "QTD. CTe\n"
+
+      subject.render
+      expect(pdf_text).to include cte_quantity
+    end
+
+    it 'renders the total weight' do
       total_weight = "Peso Total (Kg)\n615,14"
 
       subject.render
-
-      expect(pdf_text).to include cte_quantity
-      expect(pdf_text).to include nfe_quantity
       expect(pdf_text).to include total_weight
-
     end
 
     it'renders the totalizer title' do
-      title = "Modelo Rodoviário de Carga"
+      title = 'Modelo Rodoviário de Carga'
 
       subject.render
-
       expect(pdf_text).to include title
     end
   end

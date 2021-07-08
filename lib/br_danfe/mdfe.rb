@@ -1,11 +1,11 @@
 module BrDanfe
   class Mdfe
-    attr_reader :options
+    attr_reader :logo_options
 
     def initialize(xml)
       @xml = xml
       @pdf = MdfeLib::Document.new
-      @options = BrDanfe::Logo::Config.new
+      @logo_options = BrDanfe::Logo::Config.new
     end
 
     def save_pdf(filename)
@@ -21,8 +21,11 @@ module BrDanfe
     private
 
     def generate
-      MdfeLib::Header.new(@pdf, @xml, @options.logo, @options.logo_dimensions).render
+      MdfeLib::Header.new(@pdf, @xml, @logo_options.logo, @logo_options.logo_dimensions).render
       MdfeLib::MdfeIdentification.new(@pdf, @xml).render
+      MdfeLib::Totalizer.new(@pdf, @xml).render
+      MdfeLib::AuthorizationProtocol.new(@pdf, @xml).render
+      MdfeLib::FiscoControl.new(@pdf, @xml).render
     end
   end
 end
