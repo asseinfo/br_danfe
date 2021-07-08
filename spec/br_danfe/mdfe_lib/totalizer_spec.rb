@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe BrDanfe::MdfeLib::Totalizer do
   let(:xml_as_string) do
-    <<-eos
+    <<~XML
       <?xml version="1.0" encoding="UTF-8"?>
       <mdfeProc xmlns="http://www.portalfiscal.inf.br/mdfe" versao="3.00">
       	<MDFe xmlns="http://www.portalfiscal.inf.br/mdfe">
       		<infMDFe Id="MDFe32210717781119000141580010000001211000000003" versao="3.00">
-              <tot>
+            <tot>
       				<qNFe>10</qNFe>
       				<vCarga>8222.10</vCarga>
       				<cUnid>01</cUnid>
@@ -16,7 +16,7 @@ describe BrDanfe::MdfeLib::Totalizer do
       		</infMDFe>
       	</MDFe>
       </mdfeProc>
-    eos
+    XML
   end
 
   let(:pdf) { BrDanfe::MdfeLib::Document.new }

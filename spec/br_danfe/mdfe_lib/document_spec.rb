@@ -6,13 +6,12 @@ describe BrDanfe::MdfeLib::Document do
 
   describe '#text' do
     after { File.delete(output_pdf) if File.exist?(output_pdf) }
-    context 'when is a simple text' do
-      before do
-        subject.text 'simple text'
-      end
 
+    context 'when is a simple text' do
       it 'renders the text' do
-        expect(File.exist?(output_pdf)).to be_falsey
+        subject.text('simple text')
+
+        expect(File.exist?(output_pdf)).to be false
 
         subject.render_file output_pdf
 
@@ -21,12 +20,10 @@ describe BrDanfe::MdfeLib::Document do
     end
 
     context 'when is a text with style' do
-      before do
-        subject.text 'bold text', style: :bold
-      end
-
       it 'renders the text' do
-        expect(File.exist?(output_pdf)).to be_falsey
+        subject.text('bold text', style: :bold)
+
+        expect(File.exist?(output_pdf)).to be false
 
         subject.render_file output_pdf
 
@@ -35,12 +32,10 @@ describe BrDanfe::MdfeLib::Document do
     end
 
     context 'when is a text with size' do
-      before do
-        subject.text 'big text', size: 25
-      end
-
       it 'renders the text' do
-        expect(File.exist?(output_pdf)).to be_falsey
+        subject.text('big text', size: 25)
+
+        expect(File.exist?(output_pdf)).to be false
 
         subject.render_file output_pdf
 
@@ -49,12 +44,10 @@ describe BrDanfe::MdfeLib::Document do
     end
 
     context 'when is a text with pad' do
-      before do
-        subject.text 'text with pad', pad: 50
-      end
-
       it 'renders the text' do
-        expect(File.exist?(output_pdf)).to be_falsey
+        subject.text('text with pad', pad: 50)
+
+        expect(File.exist?(output_pdf)).to be false
 
         subject.render_file output_pdf
 
@@ -63,12 +56,10 @@ describe BrDanfe::MdfeLib::Document do
     end
 
     context 'when is a text with align' do
-      before do
-        subject.text 'text in center', align: :center
-      end
-
       it 'renders the text' do
-        expect(File.exist?(output_pdf)).to be_falsey
+        subject.text('text in center', align: :center)
+
+        expect(File.exist?(output_pdf)).to be false
 
         subject.render_file output_pdf
 

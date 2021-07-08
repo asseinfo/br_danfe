@@ -17,15 +17,15 @@ module BrDanfe
       private
 
       def render_emit
-        if @logo.blank?
-          company
-        else
-          company(90)
+        if @logo.present?
+          company(x: 90)
           logo
+        else
+          company(x: 0)
         end
       end
 
-      def company(x = 0)
+      def company(x:)
         @pdf.text_box(@xml['emit/xNome'], size: 12, style: :bold, align: :left, at: [x, 770])
         @pdf.text_box(address, align: :left, size: 9, at: [x, 755])
         @pdf.text_box(company_informations, size: 9, align: :left, inline_format: true, at: [x, 735])
@@ -38,7 +38,7 @@ module BrDanfe
       end
 
       def cep
-        Cep.format(@xml['enderEmit/CEP'])
+        Helper.format_cep(@xml['enderEmit/CEP'])
       end
 
       def company_informations
@@ -64,7 +64,7 @@ module BrDanfe
 
       def space_for_qr_code
         @pdf.bounding_box([420, 770], width: 95, height: 95) do
-          @pdf.stroke_color '000000'
+          @pdf.stroke_color BLACK_COLOR
           @pdf.stroke_bounds
           @pdf.text_box('Espaço para QRCode', size: 12, align: :center, valign: :center)
         end

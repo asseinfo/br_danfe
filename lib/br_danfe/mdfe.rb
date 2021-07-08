@@ -1,4 +1,5 @@
 module BrDanfe
+  BLACK_COLOR = '000000'
   class Mdfe
     attr_reader :logo_options
 

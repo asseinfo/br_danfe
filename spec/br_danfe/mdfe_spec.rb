@@ -230,7 +230,7 @@ describe BrDanfe::Mdfe do
   describe '#save_pdf' do
     # after { File.delete(output_pdf) if File.exist?(output_pdf) }
 
-    fit 'saves the pdf' do
+    it 'saves the pdf' do
       # expect(File.exist?(output_pdf)).to be_falsey
       subject.logo_options.logo_dimensions = { width: 100, height: 100 }
       subject.logo_options.logo = 'spec/fixtures/logo.png'

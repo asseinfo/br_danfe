@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe BrDanfe::MdfeLib::MdfeIdentification do
   let(:xml_as_string) do
-    <<-eos
+    <<~XML
       <?xml version="1.0" encoding="UTF-8"?>
       <mdfeProc xmlns="http://www.portalfiscal.inf.br/mdfe" versao="3.00">
       	<MDFe xmlns="http://www.portalfiscal.inf.br/mdfe">
@@ -32,7 +32,7 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
           </infMDFe>
       	</MDFe>
       </mdfeProc>
-    eos
+    XML
   end
 
   let(:pdf) { BrDanfe::MdfeLib::Document.new }

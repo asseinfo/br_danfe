@@ -28,7 +28,7 @@ module BrDanfe
       def render_box(title, text, x_position, width = 50)
         @pdf.text_box(title, size: 10, at: [x_position, 585])
         @pdf.bounding_box([x_position, 576], width: width, height: 20) do
-          @pdf.stroke_color '000000'
+          @pdf.stroke_color BLACK_COLOR
           @pdf.stroke_bounds
           @pdf.text_box(text, size: 12, align: :center, valign: :center)
         end
