@@ -16,8 +16,8 @@ module BrDanfe
         title = 'Protocolo de autorização'
         protocol = @xml['infProt/nProt'] + ' - ' + Helper.format_datetime(@xml['infProt/dhRecbto'])
 
-        @pdf.text_box(title, size: 9, align: :left, style: :bold, at: [0, 500])
-        @pdf.text_box(protocol, size: 11, align: :left, at: [0, 490])
+        @pdf.text_box(title, size: 9, align: :left, style: :bold, at: [0, 510])
+        @pdf.text_box(protocol, size: 11, align: :left, at: [0, 500])
       end
     end
   end

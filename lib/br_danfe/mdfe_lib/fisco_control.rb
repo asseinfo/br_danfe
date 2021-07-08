@@ -22,7 +22,7 @@ module BrDanfe
 
       def barcode
         barcode = Barby::Code128C.new(nfe_key)
-        barcode.annotate_pdf(@pdf, x: 250, y: 526, height: 50)
+        barcode.annotate_pdf(@pdf, x: 250, y: 530, height: 50)
       end
 
       def nfe_key
@@ -32,8 +32,8 @@ module BrDanfe
       def render_nfe_key
         title = 'Chave de Acesso'
 
-        @pdf.text_box(title, size: 9, align: :left, style: :bold, at: [250, 500])
-        @pdf.text_box(nfe_key, size: 11, align: :left, at: [250, 490])
+        @pdf.text_box(title, size: 9, align: :left, style: :bold, at: [250, 510])
+        @pdf.text_box(nfe_key, size: 11, align: :left, at: [250, 500])
       end
     end
   end
