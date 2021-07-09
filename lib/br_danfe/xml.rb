@@ -18,7 +18,6 @@ module BrDanfe
       # With namespace
       begin
         @xml.xpath("//#{ns}:#{tag}").each do |det|
-          byebug
           result << yield(det)
         end
       rescue StandardError

@@ -57,19 +57,12 @@ describe BrDanfe::MdfeLib::Vehicles do
 
     it 'renders the list of vehicles' do
       vehicle1_plate = 'RQM8B64'
-      vehicle1_rntrc = '01259587867'
       vehicle2_plate = 'RVA1B90'
-      vehicle2_rntrc = '123456789'
+      vehicle3_plate = 'MCU9123'
+      vehicle4_plate = 'QIU1239'
 
       subject.render
-      expect(pdf_text).to include vehicle1_plate, vehicle1_rntrc, vehicle2_plate, vehicle2_rntrc
-    end
-
-    xit 'renders the vehicle plate' do
-      plate = "Placa\nRQM8B64"
-
-      subject.render
-      expect(pdf_text).to include plate
+      expect(pdf_text).to include vehicle1_plate, vehicle2_plate, vehicle3_plate, vehicle4_plate
     end
   end
 end

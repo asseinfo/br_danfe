@@ -6,7 +6,7 @@ describe BrDanfe::Mdfe do
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
   let(:xml_as_string) do
-    <<-eos
+    <<~XML
       <?xml version="1.0" encoding="UTF-8"?>
       <mdfeProc xmlns="http://www.portalfiscal.inf.br/mdfe" versao="3.00">
         <MDFe xmlns="http://www.portalfiscal.inf.br/mdfe">
@@ -71,6 +71,20 @@ describe BrDanfe::Mdfe do
                 <veicReboque>
                   <placa>RVA1B90</placa>
                   <RENAVAM>123456789</RENAVAM>
+                  <tara>0</tara>
+                  <capKG>1500</capKG>
+                  <capM3>0</capM3>
+                  <condutor>
+                    <xNome>JOAO DA SILVA</xNome>
+                    <CPF>9876654312</CPF>
+                  </condutor>
+                  <tpRod>04</tpRod>
+                  <tpCar>02</tpCar>
+                  <UF>SC</UF>
+                </veicReboque>
+                <veicReboque>
+                  <placa>DFE4U78</placa>
+                  <RENAVAM>045784572</RENAVAM>
                   <tara>0</tara>
                   <capKG>1500</capKG>
                   <capM3>0</capM3>
@@ -226,7 +240,7 @@ describe BrDanfe::Mdfe do
           </infProt>
         </protMDFe>
       </mdfeProc>
-    eos
+    XML
   end
 
   let(:xml) { BrDanfe::XML.new(xml_as_string) }

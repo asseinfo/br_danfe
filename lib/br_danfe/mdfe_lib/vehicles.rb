@@ -25,17 +25,19 @@ module BrDanfe
         plate = 'Placa'
         rntrc = 'RNTRC'
 
+        @pdf.stroke_color GRAY_COLOR
         @pdf.stroke_horizontal_line(0, 190, at: 430)
         @pdf.text_box(plate, size: 9, align: :left, at: [0, 440])
         @pdf.text_box(rntrc, size: 9, align: :left, at: [100, 440])
       end
 
       def render_vehicles
-        vehicles.each_with_index do |vehicle, vehicles_index|
-          vehicle.each_with_index do |cell, vehicle_index|
-            @pdf.bounding_box [teste(vehicle_index), 425 - vehicles_index * 15], width: 1000, height: 1000 do
-              @pdf.text cell[:content], cell[:options]
-            end
+        vehicles.each_with_index do |cell, index|
+          @pdf.bounding_box [0, 425 - index * 20], width: 190, height: 20 do
+            @pdf.stroke_color GRAY_COLOR
+            @pdf.dash([2], :phase => 6)
+            @pdf.stroke_horizontal_line(0, 190, at: 26) unless index.zero?
+            @pdf.text cell[:content], cell[:options]
           end
         end
       end
@@ -48,18 +50,15 @@ module BrDanfe
         vehicle
       end
 
-      def teste(index)
-        index.even? ? 0 : 100
-      end
-
       def collect_vehicles(tag)
-        @xml.collect('xmlns', tag) { |rodo| vehicle(rodo) }
+        vehicles = []
+        @xml.collect('xmlns', tag) {|rodo| vehicles += vehicle(rodo) }
+        vehicles
       end
 
       def vehicle(rodo)
         [
-          cell_text(rodo.css('placa').text),
-          cell_text('')
+          cell_text(rodo.css('placa').text)
         ]
       end
 
