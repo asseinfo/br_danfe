@@ -1,5 +1,5 @@
 module BrDanfe
-  BLACK_COLOR = '000000'
+  BLACK_COLOR = '000000'.freeze
   class Mdfe
     attr_reader :logo_options
 
@@ -27,6 +27,7 @@ module BrDanfe
       MdfeLib::Totalizer.new(@pdf, @xml).render
       MdfeLib::AuthorizationProtocol.new(@pdf, @xml).render
       MdfeLib::FiscoControl.new(@pdf, @xml).render
+      MdfeLib::Vehicles.new(@pdf, @xml).render
     end
   end
 end
