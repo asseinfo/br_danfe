@@ -10,7 +10,6 @@ module BrDanfe
         title
         table_titles
         render_vehicles
-        # vehicles
       end
 
       private
@@ -38,6 +37,7 @@ module BrDanfe
             @pdf.dash([2], :phase => 6)
             @pdf.stroke_horizontal_line(0, 190, at: 26) unless index.zero?
             @pdf.text cell[:content], cell[:options]
+            @pdf.undash
           end
         end
       end
@@ -63,7 +63,7 @@ module BrDanfe
       end
 
       def cell_text(text, options = {})
-        cell = { content: text, options: { size: 12, width: 100 } }
+        cell = { content: text, options: { size: 12 } }
         cell[:options].merge!(options)
         cell
       end
