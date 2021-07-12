@@ -30,6 +30,7 @@ module BrDanfe
       MdfeLib::FiscoControl.new(@pdf, @xml).render
       MdfeLib::Vehicles.new(@pdf, @xml).render
       MdfeLib::Driver.new(@pdf, @xml).render
+      MdfeLib::Notes.new(@pdf, @xml).render
     end
   end
 end
