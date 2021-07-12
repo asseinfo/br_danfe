@@ -89,7 +89,21 @@ describe BrDanfe::Mdfe do
                   <capKG>1500</capKG>
                   <capM3>0</capM3>
                   <condutor>
-                    <xNome>JOAO DA SILVA</xNome>
+                    <xNome>PEDRO DE SOUZA</xNome>
+                    <CPF>9876654312</CPF>
+                  </condutor>
+                  <tpRod>04</tpRod>
+                  <tpCar>02</tpCar>
+                  <UF>SC</UF>
+                </veicReboque>
+                <veicReboque>
+                  <placa>OPS4F78</placa>
+                  <RENAVAM>045784572</RENAVAM>
+                  <tara>0</tara>
+                  <capKG>1500</capKG>
+                  <capM3>0</capM3>
+                  <condutor>
+                    <xNome>GABRIEL DE JESUS</xNome>
                     <CPF>9876654312</CPF>
                   </condutor>
                   <tpRod>04</tpRod>

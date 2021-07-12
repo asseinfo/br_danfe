@@ -7,6 +7,8 @@ module BrDanfe
       end
 
       def render
+        @pdf.move_cursor_to 460
+
         title
         table_titles
         render_vehicles
@@ -17,7 +19,7 @@ module BrDanfe
       def title
         title = 'Veículo'
 
-        @pdf.text_box(title, size: 12, align: :left, style: :bold, at: [0, 460])
+        @pdf.text_box(title, size: 12, align: :left, style: :bold, at: [0, @pdf.cursor])
       end
 
       def table_titles
@@ -25,19 +27,24 @@ module BrDanfe
         rntrc = 'RNTRC'
 
         @pdf.stroke_color GRAY_COLOR
-        @pdf.stroke_horizontal_line(0, 190, at: 430)
-        @pdf.text_box(plate, size: 9, align: :left, at: [0, 440])
-        @pdf.text_box(rntrc, size: 9, align: :left, at: [100, 440])
+        @pdf.move_down 20
+        @pdf.text_box(plate, size: 9, align: :left, at: [0, @pdf.cursor])
+        @pdf.text_box(rntrc, size: 9, align: :left, at: [100, @pdf.cursor])
+        @pdf.move_down 10
+        @pdf.stroke_horizontal_line(0, 190, at: @pdf.cursor)
       end
 
       def render_vehicles
+        @pdf.move_cursor_to 425
+
         vehicles.each_with_index do |cell, index|
-          @pdf.bounding_box [0, 425 - index * 20], width: 190, height: 20 do
+          @pdf.bounding_box [0, @pdf.cursor], width: 190, height: 20 do
             @pdf.stroke_color GRAY_COLOR
-            @pdf.dash([2], :phase => 6)
+            @pdf.dash([2], phase: 6)
             @pdf.stroke_horizontal_line(0, 190, at: 26) unless index.zero?
             @pdf.text cell[:content], cell[:options]
             @pdf.undash
+            @pdf.move_down 20
           end
         end
       end
@@ -52,7 +59,7 @@ module BrDanfe
 
       def collect_vehicles(tag)
         vehicles = []
-        @xml.collect('xmlns', tag) {|rodo| vehicles += vehicle(rodo) }
+        @xml.collect('xmlns', tag) { |rodo| vehicles += vehicle(rodo) }
         vehicles
       end
 

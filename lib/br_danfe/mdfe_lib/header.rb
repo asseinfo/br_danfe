@@ -26,9 +26,11 @@ module BrDanfe
       end
 
       def company(x:)
-        @pdf.text_box(@xml['emit/xNome'], size: 12, style: :bold, align: :left, at: [x, 770])
-        @pdf.text_box(address, align: :left, size: 9, at: [x, 755])
-        @pdf.text_box(company_informations, size: 9, align: :left, inline_format: true, at: [x, 735])
+        @pdf.bounding_box([x, @pdf.cursor], width: 280, height: 80) do
+          @pdf.text(@xml['emit/xNome'], size: 12, style: :bold, align: :left)
+          @pdf.text(address, align: :left, size: 9)
+          @pdf.text(company_informations, size: 9, align: :left, inline_format: true)
+        end
       end
 
       def address
@@ -49,9 +51,7 @@ module BrDanfe
         bounding_box_size = 80
         logo_options = BrDanfe::Logo::Options.new(bounding_box_size, @logo_dimensions).options
 
-        @pdf.bounding_box(
-          [0, 770], width: bounding_box_size, height: bounding_box_size
-        ) do
+        @pdf.bounding_box([0, 770], width: bounding_box_size, height: bounding_box_size) do
           @pdf.image @logo, logo_options
         end
       end
@@ -59,7 +59,10 @@ module BrDanfe
       def render_title
         title = '<b>DAMDFE: </b> - Documento Auxiliar de Manifesto Eletrônico de Documentos Fiscais'
 
-        @pdf.text_box(title, size: 12, align: :left, inline_format: true, at: [0, 675])
+        @pdf.move_down 15
+        @pdf.bounding_box([0, @pdf.cursor], width: 500, height: 20) do
+          @pdf.text(title, size: 12, align: :left, inline_format: true)
+        end
       end
 
       def space_for_qr_code
