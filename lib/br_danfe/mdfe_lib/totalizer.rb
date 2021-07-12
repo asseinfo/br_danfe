@@ -22,18 +22,25 @@ module BrDanfe
       end
 
       def nfe_quantity
-        render_box('QTD. NFe', @xml['qNFe'], 55)
+        render_box('QTD. NFe', @xml['qNFe'], 65)
       end
 
-      def render_box(title, text, x_position, width = 50)
-        @pdf.text_box(title, size: 10, at: [x_position, 580])
-        @pdf.bounding_box([x_position, 570], width: width, height: 20) do
-          @pdf.text_box(text, size: 12, align: :center, valign: :center)
-        end
+      def render_box(title, text, x_position, width = 60)
+        @pdf.move_cursor_to 580
 
         @pdf.stroke do
-          @pdf.rounded_rectangle([x_position, 570], width, 20, 1)
+          @pdf.fill_color LIGHT_GRAY_COLOR
+          @pdf.fill_rectangle([x_position, @pdf.cursor], width, 35)
+          @pdf.fill_color BLACK_COLOR
         end
+
+        @pdf.bounding_box([x_position, @pdf.cursor], width: width, height: 35) do
+          @pdf.move_down 5
+          @pdf.text_box(title, size: 10, at: [3, @pdf.cursor])
+          @pdf.move_down 15
+          @pdf.text_box(text, size: 12, at: [3, @pdf.cursor])
+        end
+
       end
 
       def cte_quantity
@@ -44,7 +51,7 @@ module BrDanfe
         weight = ActiveSupport::NumberHelper.number_to_rounded(@xml['qCarga'], precision: 2)
         weight = Helper.numerify(weight)
 
-        render_box('Peso Total (Kg)', weight, 110, 80)
+        render_box('Peso Total (Kg)', weight, 130, 90)
       end
     end
   end

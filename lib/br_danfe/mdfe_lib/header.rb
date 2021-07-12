@@ -57,7 +57,7 @@ module BrDanfe
       end
 
       def render_title
-        title = '<b>DAMDFE: </b> - Documento Auxiliar de Manifesto Eletrônico de Documentos Fiscais'
+        title = '<b>DAMDFE</b> - Documento Auxiliar de Manifesto Eletrônico de Documentos Fiscais'
 
         @pdf.move_down 15
         @pdf.bounding_box([0, @pdf.cursor], width: 500, height: 20) do
