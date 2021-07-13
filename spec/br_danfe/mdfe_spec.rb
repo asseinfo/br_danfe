@@ -173,7 +173,10 @@ describe BrDanfe::Mdfe do
             <autXML>
               <CNPJ>04898488000177</CNPJ>
             </autXML>
-            <infAdic/>
+            <infAdic>
+              <infAdFisco>INFORMAÇÕES ADICIONAIS FISCO</infAdFisco>
+              <infCpl>INFORMAÇÕES ADICIONAIS CONTRIBUINTE</infCpl>
+            </infAdic>
             <infRespTec>
               <CNPJ>07960929000101</CNPJ>
               <xContato>Hivelog Soluções em Tecnologia da Informação.</xContato>
