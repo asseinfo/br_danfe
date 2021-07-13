@@ -24,14 +24,33 @@ module BrDanfe
     private
 
     def generate
-      MdfeLib::Header.new(@pdf, @xml, @logo_options.logo, @logo_options.logo_dimensions).render
-      MdfeLib::MdfeIdentification.new(@pdf, @xml).render
+      render_on_first_page
+      render_on_each_page
+    end
+
+    def render_on_first_page
       MdfeLib::Totalizer.new(@pdf, @xml).render
       MdfeLib::AuthorizationProtocol.new(@pdf, @xml).render
       MdfeLib::FiscoControl.new(@pdf, @xml).render
       MdfeLib::Vehicles.new(@pdf, @xml).render
       MdfeLib::Driver.new(@pdf, @xml).render
       MdfeLib::Notes.new(@pdf, @xml).render
+    end
+
+    def render_on_each_page
+      header = MdfeLib::Header.new(@pdf, @xml, @logo_options.logo, @logo_options.logo_dimensions)
+      mdfe_identification = MdfeLib::MdfeIdentification.new(@pdf, @xml)
+
+      @pdf.page_count.times do |i|
+        # puts @pdf.page_count
+        page = i + 1
+
+        @pdf.go_to_page page
+
+        header.render
+        mdfe_identification.render
+        # puts page
+      end
     end
   end
 end

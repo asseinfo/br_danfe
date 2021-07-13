@@ -174,8 +174,8 @@ describe BrDanfe::Mdfe do
               <CNPJ>04898488000177</CNPJ>
             </autXML>
             <infAdic>
-              <infAdFisco>INFORMAÇÕES ADICIONAIS FISCO</infAdFisco>
-              <infCpl>INFORMAÇÕES ADICIONAIS CONTRIBUINTE</infCpl>
+              <infAdFisco>#{ 'a'*2000 }</infAdFisco>
+              <infCpl>#{ 'b'*5000 }</infCpl>
             </infAdic>
             <infRespTec>
               <CNPJ>07960929000101</CNPJ>

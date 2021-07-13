@@ -28,28 +28,25 @@ module BrDanfe
         fisco_information = @xml['infAdic/infAdFisco']
         taxpayer_information = @xml['infAdic/infCpl']
 
-        fisco_information_title = 'Informações adicionais de interesse do Fisco' if fisco_information.present?
-        taxpayer_information_title = 'Informações adicionais de interesse do Contribuinte' if taxpayer_information.present?
+        fisco_information_title = 'INFORMAÇÕES ADICIONAIS DE INTERESSE DO FISCO'
+        taxpayer_information_title = 'INFORMAÇÕES ADICIONAIS DE INTERESSE DO CONTRIBUINTE'
 
-        @pdf.move_down 10
+        # @pdf.move_cursor_to 600
+        @pdf.lazy_bounding_box 526, position: :left do
+          if fisco_information.present?
+            @pdf.text(fisco_information_title, size: 10, align: :left)
+            @pdf.move_down 5
+            @pdf.text(fisco_information, size: 10, align: :left)
+            @pdf.move_down 10
+          end
 
-        @pdf.bounding_box [10, @pdf.cursor], width: 526, height: 300 do
-          @pdf.stroke_color GRAY_COLOR
-          @pdf.dash([2], phase: 6)
-          @pdf.text(taxpayer_information_title, size: 11, align: :left, style: :bold)
-          @pdf.stroke_horizontal_line(0, 516, at: @pdf.cursor)
-          @pdf.move_down 10
-          @pdf.text(taxpayer_information, size: 10, align: :left)
-          @pdf.move_down 15
-          @pdf.text(taxpayer_information_title, size: 11, align: :left, style: :bold)
-          @pdf.stroke_horizontal_line(0, 245, at: @pdf.cursor)
-          @pdf.move_down 10
-          @pdf.text(taxpayer_information, size: 10, align: :left)
-          @pdf.move_down 15
-          @pdf.text(' • ' + taxpayer_information_title, size: 11, align: :left, style: :bold)
-          @pdf.move_down 10
-          @pdf.text(taxpayer_information, size: 10, align: :left)
-          @pdf.undash
+          if taxpayer_information.present?
+            @pdf.text(taxpayer_information_title, size: 10, align: :left)
+            @pdf.move_down 5
+            @pdf.text(taxpayer_information, size: 10, align: :left)
+          end
+
+          @pdf.move_cursor_to 600 if @pdf.page_number != 1
         end
       end
     end
