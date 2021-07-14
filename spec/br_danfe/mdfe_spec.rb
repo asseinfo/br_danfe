@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-# TODO: Arrumar os testes depois de fazer os componentes
 describe BrDanfe::Mdfe do
   let(:base_dir) { './spec/fixtures/mdfe/lib/' }
   let(:output_pdf) { "#{base_dir}output.pdf" }
