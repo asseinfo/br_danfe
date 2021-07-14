@@ -48,6 +48,9 @@ describe BrDanfe::MdfeLib::Header do
               </enderEmit>
             </emit>
           </infMDFe>
+          <infMDFeSupl>
+            <qrCodMDFe>https://dfe-portal.svrs.rs.gov.br/mdfe/QRCode?chMDFe=32210717781119000141580010000001211000000003&amp;tpAmb=1</qrCodMDFe>
+          </infMDFeSupl>
         </MDFe>
       </mdfeProc>
     XML
@@ -68,6 +71,8 @@ describe BrDanfe::MdfeLib::Header do
     PDF::Inspector::Text.analyze(pdf.render).strings.join("\n")
   end
 
+  after { File.delete(output_pdf) if File.exist?(output_pdf) }
+
   describe '#render' do
     it 'renders the emitter informations' do
       emitter_name = 'VENTURIM AGROCRIATIVA LTDA EPP'
@@ -86,16 +91,23 @@ describe BrDanfe::MdfeLib::Header do
     end
 
     it'renders the DAMDFE title' do
-      title = "DAMDFE: \n - Documento Auxiliar de Manifesto Eletrônico de Documentos Fiscais"
+      title = "DAMDFE\n - Documento Auxiliar de Manifesto Eletrônico de Documentos Fiscais"
 
       subject.render
 
       expect(pdf_text).to include title
     end
 
-    describe 'logo' do
-      after { File.delete(output_pdf) if File.exist?(output_pdf) }
+    it 'renders the qr code' do
+      expect(File.exist?(output_pdf)).to be_falsey
 
+      subject.render
+      pdf.render_file output_pdf
+
+      expect("#{base_dir}header#render-qr-code.pdf").to have_same_content_of file: output_pdf
+    end
+
+    describe 'logo' do
       context 'with logo' do
         it 'renders the logo' do
           expect(File.exist?(output_pdf)).to be_falsey

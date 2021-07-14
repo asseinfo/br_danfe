@@ -11,7 +11,7 @@ module BrDanfe
       def render
         render_emit
         render_title
-        space_for_qr_code
+        qr_code
       end
 
       private
@@ -65,11 +65,16 @@ module BrDanfe
         end
       end
 
-      def space_for_qr_code
-        @pdf.bounding_box([420, 770], width: 95, height: 95) do
-          @pdf.stroke_color BLACK_COLOR
-          @pdf.stroke_bounds
-          @pdf.text_box('Espaço para QRCode', size: 12, align: :center, valign: :center)
+      def qr_code
+        qrcode = RQRCode::QRCode.new(@xml['qrCodMDFe'])
+        image = Tempfile.new(%w[qrcode png], binmode: true)
+        image.write(qrcode.as_png(module_px_size: 12).to_s)
+
+        box_size = 40.mm
+        security_margin = box_size + box_size / 10.0
+
+        @pdf.bounding_box([420, 780], width: security_margin, height: security_margin) do
+          @pdf.image(image, width: box_size, height: box_size, align: :center, valign: :center)
         end
       end
     end

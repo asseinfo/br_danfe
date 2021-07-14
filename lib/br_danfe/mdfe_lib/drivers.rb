@@ -1,6 +1,6 @@
 module BrDanfe
   module MdfeLib
-    class Driver
+    class Drivers
       def initialize(pdf, xml)
         @pdf = pdf
         @xml = xml

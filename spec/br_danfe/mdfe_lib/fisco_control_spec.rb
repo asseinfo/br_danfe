@@ -42,7 +42,7 @@ describe BrDanfe::MdfeLib::FiscoControl do
       subject.render
       pdf.render_file output_pdf
 
-      expect("#{base_dir}barcode#render.pdf").to have_same_content_of file: output_pdf
+      expect("#{base_dir}fisco_control#barcode.pdf").to have_same_content_of file: output_pdf
     end
 
     it 'renders the nfe key' do

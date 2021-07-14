@@ -42,14 +42,12 @@ module BrDanfe
       mdfe_identification = MdfeLib::MdfeIdentification.new(@pdf, @xml)
 
       @pdf.page_count.times do |i|
-        # puts @pdf.page_count
         page = i + 1
 
         @pdf.go_to_page page
 
         header.render
-        mdfe_identification.render
-        # puts page
+        mdfe_identification.render(page)
       end
     end
   end

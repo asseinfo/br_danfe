@@ -6,11 +6,11 @@ module BrDanfe
         @xml = xml
       end
 
-      def render
+      def render(page)
         model
         serie
         number
-        number_of_pages
+        number_of_pages(page)
         emitted_at
         origin_uf
         destination_uf
@@ -47,8 +47,9 @@ module BrDanfe
         render_box('Número', @xml['ide/nMDF'], 80)
       end
 
-      def number_of_pages
-        render_box('FL', '1/1', 125)
+      def number_of_pages(page)
+        text = page.to_s + '/' + @pdf.page_count.to_s
+        render_box('FL', text, 125)
       end
 
       def emitted_at

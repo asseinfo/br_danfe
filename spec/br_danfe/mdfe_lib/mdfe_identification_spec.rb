@@ -48,7 +48,7 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
     it 'renders the model' do
       model = "Modelo\n58"
 
-      subject.render
+      subject.render(1)
 
       expect(pdf_text).to include model
     end
@@ -56,7 +56,7 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
     it 'renders the serie' do
       serie = "Série\n1"
 
-      subject.render
+      subject.render(1)
 
       expect(pdf_text).to include serie
     end
@@ -64,15 +64,15 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
     it 'renders the number' do
       number = "Número\n121"
 
-      subject.render
+      subject.render(1)
 
       expect(pdf_text).to include number
     end
 
-    it 'renders the pages number' do
+    it 'renders the page number' do
       pages = "FL\n1/1"
 
-      subject.render
+      subject.render(1)
 
       expect(pdf_text).to include pages
     end
@@ -80,7 +80,7 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
     it 'renders the emitted date and hour' do
       datetime = "Data e hora de Emissão\n01/07/2021 17:30:00"
 
-      subject.render
+      subject.render(1)
 
       expect(pdf_text).to include datetime
     end
@@ -88,7 +88,7 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
     it 'renders the origin uf' do
       origin_uf = "UF Carreg.\nES"
 
-      subject.render
+      subject.render(1)
 
       expect(pdf_text).to include origin_uf
     end
@@ -96,7 +96,7 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
     it 'renders the destination uf' do
       destination_uf = "UF Descarreg.\nSC"
 
-      subject.render
+      subject.render(1)
 
       expect(pdf_text).to include destination_uf
     end
