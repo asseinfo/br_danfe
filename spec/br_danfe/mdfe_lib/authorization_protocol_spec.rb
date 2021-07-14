@@ -26,7 +26,7 @@ describe BrDanfe::MdfeLib::AuthorizationProtocol do
 
   describe '#render' do
     it 'renders the authorization protocol' do
-      # 17:39:16-03:00 - no layout original ele mostra o timezone, precisamos?
+      # TODO: 17:39:16-03:00 - no layout original ele mostra o timezone, verificar com o Marquinhos
       authorization_protocol = "Protocolo de autorização\n932210002534081 - 01/07/2021 17:39:16"
 
       subject.render

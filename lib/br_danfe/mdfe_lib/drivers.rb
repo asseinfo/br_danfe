@@ -8,7 +8,6 @@ module BrDanfe
 
       def render
         @pdf.move_cursor_to 460
-
         title
         table_titles
         render_drivers
@@ -52,10 +51,6 @@ module BrDanfe
         end
       end
 
-      def x_position(index)
-        index.even? ? 0 : 100
-      end
-
       def drivers
         @xml.collect('xmlns', 'condutor') { |rodo| driver(rodo) }
       end
@@ -65,6 +60,10 @@ module BrDanfe
           rodo.css('CPF').text,
           rodo.css('xNome').text
         ]
+      end
+
+      def x_position(index)
+        index.even? ? 0 : 100
       end
     end
   end

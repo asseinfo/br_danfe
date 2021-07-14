@@ -8,26 +8,13 @@ describe BrDanfe::MdfeLib::Header do
         <MDFe xmlns="http://www.portalfiscal.inf.br/mdfe">
           <infMDFe Id="MDFe32210717781119000141580010000001211000000003" versao="3.00">
             <ide>
-              <cUF>32</cUF>
-              <tpAmb>1</tpAmb>
-              <tpEmit>2</tpEmit>
               <mod>58</mod>
               <serie>1</serie>
               <nMDF>121</nMDF>
               <cMDF>00000000</cMDF>
-              <cDV>3</cDV>
-              <modal>1</modal>
               <dhEmi>2021-07-01T17:30:00-03:00</dhEmi>
-              <tpEmis>1</tpEmis>
-              <procEmi>0</procEmi>
-              <verProc>hivelog-mdfe-0.1.0</verProc>
               <UFIni>ES</UFIni>
               <UFFim>ES</UFFim>
-              <infMunCarrega>
-                <cMunCarrega>3205069</cMunCarrega>
-                <xMunCarrega>VENDA NOVA DO IMIGRANTE</xMunCarrega>
-              </infMunCarrega>
-              <dhIniViagem>2021-07-01T17:30:00-03:00</dhIniViagem>
             </ide>
             <emit>
               <CNPJ>17781119000141</CNPJ>
@@ -37,14 +24,10 @@ describe BrDanfe::MdfeLib::Header do
               <enderEmit>
                 <xLgr>RODOVIA ES 473 KM 13</xLgr>
                 <nro>0</nro>
-                <xCpl>ZONA RURAL</xCpl>
-                <xBairro>SAO JOAO DE VICOSA</xBairro>
                 <cMun>3205069</cMun>
                 <xMun>VENDA NOVA DO IMIGRANTE</xMun>
                 <CEP>29375000</CEP>
                 <UF>ES</UF>
-                <fone>2835466272</fone>
-                <email>VENTURIMCONSERVAS@GMAIL.COM</email>
               </enderEmit>
             </emit>
           </infMDFe>
@@ -78,7 +61,6 @@ describe BrDanfe::MdfeLib::Header do
       emitter_name = 'VENTURIM AGROCRIATIVA LTDA EPP'
       emitter_address = "RODOVIA ES 473 KM 13, nº 0\nVENDA NOVA DO IMIGRANTE - ES   CEP 29.375-000"
 
-      # TODO: verificar o \n, isso acontece quando colocamos a tag <b>, o inspector do pdf acha que é uma quebra de linha
       emitter_cnpj = "CNPJ: \n17781119000141"
       emitter_ie = "IE: \n082942625"
 

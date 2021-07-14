@@ -21,16 +21,6 @@ module BrDanfe
       def respond_to_missing?(method_name, include_private = false)
         @document.respond_to?(method_name, include_private) || super
       end
-
-      def render_blank_line(font_size = 12)
-        @document.text ' ', size: font_size
-      end
-
-      private
-
-      def page_width
-        page.dimensions[2] - (page.margins[:left] + page.margins[:right])
-      end
     end
   end
 end

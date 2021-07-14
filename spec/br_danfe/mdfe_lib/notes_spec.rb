@@ -74,8 +74,9 @@ describe BrDanfe::MdfeLib::Notes do
       expect(pdf_text).not_to include taxpayer_information
     end
 
-    # TODO: verificar esse teste com o Marquinhos
+    # TODO: verificar esse teste com o Marquinhos, y das obrservações no topo da página de teste
     after { File.delete(output_pdf) if File.exist?(output_pdf) }
+
     it 'creates a new page if aditional information do not fit on first page' do
       expect(File.exist?(output_pdf)).to be_falsey
 

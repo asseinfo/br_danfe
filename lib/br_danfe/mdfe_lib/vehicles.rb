@@ -8,7 +8,6 @@ module BrDanfe
 
       def render
         @pdf.move_cursor_to 460
-
         title
         table_titles
         render_vehicles
@@ -60,6 +59,7 @@ module BrDanfe
       def collect_vehicles(tag)
         vehicles = []
         @xml.collect('xmlns', tag) { |rodo| vehicles += vehicle(rodo) }
+
         vehicles
       end
 
@@ -72,6 +72,7 @@ module BrDanfe
       def cell_text(text, options = {})
         cell = { content: text, options: { size: 12 } }
         cell[:options].merge!(options)
+
         cell
       end
     end

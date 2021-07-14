@@ -33,7 +33,7 @@ module BrDanfe
       MdfeLib::AuthorizationProtocol.new(@pdf, @xml).render
       MdfeLib::FiscoControl.new(@pdf, @xml).render
       MdfeLib::Vehicles.new(@pdf, @xml).render
-      MdfeLib::Driver.new(@pdf, @xml).render
+      MdfeLib::Drivers.new(@pdf, @xml).render
       MdfeLib::Notes.new(@pdf, @xml).render
     end
 
