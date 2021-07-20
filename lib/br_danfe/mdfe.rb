@@ -2,6 +2,7 @@ module BrDanfe
   BLACK_COLOR = '000000'.freeze
   GRAY_COLOR = 'A0A0A0'.freeze
   LIGHT_GRAY_COLOR = 'ECECEC'.freeze
+
   class Mdfe
     attr_reader :logo_options
 

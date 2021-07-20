@@ -40,7 +40,6 @@ module BrDanfe
           @pdf.move_down 15
           @pdf.text_box(text, size: 12, at: [3, @pdf.cursor])
         end
-
       end
 
       def cte_quantity
@@ -51,7 +50,7 @@ module BrDanfe
         weight = ActiveSupport::NumberHelper.number_to_rounded(@xml['qCarga'], precision: 2)
         weight = Helper.numerify(weight)
 
-        render_box('Peso Total (Kg)', weight, 130, 90)
+        render_box('Peso total (Kg)', weight, 130, 90)
       end
     end
   end

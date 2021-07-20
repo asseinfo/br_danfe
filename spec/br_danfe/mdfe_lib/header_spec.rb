@@ -89,6 +89,64 @@ describe BrDanfe::MdfeLib::Header do
       expect("#{base_dir}header#render-qr-code.pdf").to have_same_content_of file: output_pdf
     end
 
+    context 'when emitter is company' do
+      it 'renders the company CNPJ' do
+        cnpj = "CNPJ: \n17781119000141"
+
+        subject.render
+
+        expect(pdf_text).to include cnpj
+      end
+    end
+
+    context 'when emitter is individual' do
+      let(:xml_as_string) do
+        <<~XML
+          <?xml version="1.0" encoding="UTF-8"?>
+          <mdfeProc xmlns="http://www.portalfiscal.inf.br/mdfe" versao="3.00">
+            <MDFe xmlns="http://www.portalfiscal.inf.br/mdfe">
+              <infMDFe Id="MDFe32210717781119000141580010000001211000000003" versao="3.00">
+                <ide>
+                  <mod>58</mod>
+                  <serie>1</serie>
+                  <nMDF>121</nMDF>
+                  <cMDF>00000000</cMDF>
+                  <dhEmi>2021-07-01T17:30:00-03:00</dhEmi>
+                  <UFIni>ES</UFIni>
+                  <UFFim>ES</UFFim>
+                </ide>
+                <emit>
+                  <CPF>67518007037</CPF>
+                  <IE>082942625</IE>
+                  <xNome>VENTURIM AGROCRIATIVA LTDA EPP</xNome>
+                  <xFant>VENTURIM CONSERVAS</xFant>
+                  <enderEmit>
+                    <xLgr>RODOVIA ES 473 KM 13</xLgr>
+                    <nro>0</nro>
+                    <cMun>3205069</cMun>
+                    <xMun>VENDA NOVA DO IMIGRANTE</xMun>
+                    <CEP>29375000</CEP>
+                    <UF>ES</UF>
+                  </enderEmit>
+                </emit>
+              </infMDFe>
+              <infMDFeSupl>
+                <qrCodMDFe>https://dfe-portal.svrs.rs.gov.br/mdfe/QRCode?chMDFe=32210717781119000141580010000001211000000003&amp;tpAmb=1</qrCodMDFe>
+              </infMDFeSupl>
+            </MDFe>
+          </mdfeProc>
+        XML
+      end
+
+      it 'renders the individual CPF' do
+        cpf = "CPF: \n67518007037"
+
+        subject.render
+
+        expect(pdf_text).to include cpf
+      end
+    end
+
     describe 'logo' do
       context 'with logo' do
         it 'renders the logo' do

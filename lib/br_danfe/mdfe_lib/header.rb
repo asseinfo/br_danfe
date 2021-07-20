@@ -44,7 +44,11 @@ module BrDanfe
       end
 
       def company_informations
-        '<b>CNPJ: </b>' + @xml['emit/CNPJ'] + '   ' + '<b>IE: </b>' + @xml['emit/IE']
+        # TODO: ver CPF com o Cezinha
+        company = '<b>CNPJ: </b>' + @xml['emit/CNPJ'] + '   ' + '<b>IE: </b>' + @xml['emit/IE']
+        individual = '<b>CPF: </b>' + @xml['emit/CPF'] + '   ' + '<b>IE: </b>' + @xml['emit/IE']
+
+        @xml['emit/CNPJ'].present? ? company : individual
       end
 
       def logo

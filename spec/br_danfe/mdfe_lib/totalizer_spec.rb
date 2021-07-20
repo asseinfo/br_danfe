@@ -47,7 +47,7 @@ describe BrDanfe::MdfeLib::Totalizer do
     end
 
     it 'renders the total weight' do
-      total_weight = "Peso Total (Kg)\n615,14"
+      total_weight = "Peso total (Kg)\n615,14"
 
       subject.render
       expect(pdf_text).to include total_weight
