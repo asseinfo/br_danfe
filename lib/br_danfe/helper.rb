@@ -39,5 +39,9 @@ module BrDanfe
 
       xml['ide > mod'] == nfe_code
     end
+
+    def self.format_cep(cep)
+      cep.sub(/(\d{2})(\d{3})(\d{3})/, '\\1.\\2-\\3')
+    end
   end
 end

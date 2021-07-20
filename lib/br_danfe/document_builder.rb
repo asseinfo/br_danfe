@@ -7,7 +7,7 @@ module BrDanfe
         bold: "#{BrDanfe.root_path}/fonts/tinos_bold.ttf",
         italic: "#{BrDanfe.root_path}/fonts/tinos_italic.ttf",
         bold_italic: "#{BrDanfe.root_path}/fonts/tinos_bold_italic.ttf",
-        normal: "#{BrDanfe.root_path}/fonts/tinos.ttf",
+        normal: "#{BrDanfe.root_path}/fonts/tinos.ttf"
       }
 
       document

@@ -50,7 +50,7 @@ module BrDanfe
         end
 
         def cep
-          Cep.format(@xml['enderEmit/CEP'])
+          BrDanfe::Helper.format_cep(@xml['enderEmit/CEP'])
         end
 
         def logo
