@@ -25,20 +25,20 @@ module BrDanfe
     private
 
     def generate
-      render_on_first_page
-      render_on_each_page
+      generate_on_first_page
+      generate_on_each_page
     end
 
-    def render_on_first_page
-      MdfeLib::Totalizer.new(@pdf, @xml).render
-      MdfeLib::AuthorizationProtocol.new(@pdf, @xml).render
-      MdfeLib::FiscoControl.new(@pdf, @xml).render
-      MdfeLib::Vehicles.new(@pdf, @xml).render
-      MdfeLib::Drivers.new(@pdf, @xml).render
-      MdfeLib::Notes.new(@pdf, @xml).render
+    def generate_on_first_page
+      MdfeLib::Totalizer.new(@pdf, @xml).generate
+      MdfeLib::AuthorizationProtocol.new(@pdf, @xml).generate
+      MdfeLib::FiscoControl.new(@pdf, @xml).generate
+      MdfeLib::Vehicles.new(@pdf, @xml).generate
+      MdfeLib::Drivers.new(@pdf, @xml).generate
+      MdfeLib::Notes.new(@pdf, @xml).generate
     end
 
-    def render_on_each_page
+    def generate_on_each_page
       header = MdfeLib::Header.new(@pdf, @xml, @logo_options.logo, @logo_options.logo_dimensions)
       mdfe_identification = MdfeLib::MdfeIdentification.new(@pdf, @xml)
 
@@ -47,8 +47,8 @@ module BrDanfe
 
         @pdf.go_to_page page
 
-        header.render
-        mdfe_identification.render(page)
+        header.generate
+        mdfe_identification.generate(page)
       end
     end
   end

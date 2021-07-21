@@ -26,29 +26,29 @@ describe BrDanfe::MdfeLib::FiscoControl do
     PDF::Inspector::Text.analyze(pdf.render).strings.join("\n")
   end
 
-  describe '#render' do
+  describe '#generate' do
     after { File.delete(output_pdf) if File.exist?(output_pdf) }
 
-    it 'renders the title' do
+    it 'generates the title' do
       title = 'CONTROLE DO FISCO'
 
-      subject.render
+      subject.generate
       expect(pdf_text).to include title
     end
 
-    it 'renders the bar code' do
+    it 'generates the bar code' do
       expect(File.exist?(output_pdf)).to be false
 
-      subject.render
+      subject.generate
       pdf.render_file output_pdf
 
       expect("#{base_dir}fisco_control#barcode.pdf").to have_same_content_of file: output_pdf
     end
 
-    it 'renders the nfe key' do
+    it 'generates the nfe key' do
       nfe_key = "Chave de Acesso\n32210717781119000141580010000001211000000003"
 
-      subject.render
+      subject.generate
       expect(pdf_text).to include nfe_key
     end
   end

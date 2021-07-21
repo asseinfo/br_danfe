@@ -8,15 +8,15 @@ module BrDanfe
         @logo_dimensions = logo_dimensions
       end
 
-      def render
-        render_emit
-        render_title
+      def generate
+        generate_emit
+        generate_title
         qr_code
       end
 
       private
 
-      def render_emit
+      def generate_emit
         if @logo.present?
           company(x: 90)
           logo
@@ -56,7 +56,7 @@ module BrDanfe
         end
       end
 
-      def render_title
+      def generate_title
         title = '<b>DAMDFE</b> - Documento Auxiliar de Manifesto Eletrônico de Documentos Fiscais'
 
         @pdf.move_down 15

@@ -6,8 +6,8 @@ module BrDanfe
         @xml = xml
       end
 
-      def render
-        render_title
+      def generate
+        generate_title
         nfe_quantity
         cte_quantity
         total_weight
@@ -15,17 +15,17 @@ module BrDanfe
 
       private
 
-      def render_title
+      def generate_title
         title = 'Modelo Rodoviário de Carga'
 
         @pdf.text_box(title, size: 12, align: :left, style: :bold, at: [0, 600])
       end
 
       def nfe_quantity
-        render_box('QTD. NFe', @xml['qNFe'], 65)
+        generate_box('QTD. NFe', @xml['qNFe'], 65)
       end
 
-      def render_box(title, text, x_position, width = 60)
+      def generate_box(title, text, x_position, width = 60)
         @pdf.move_cursor_to 580
 
         @pdf.stroke do
@@ -43,14 +43,14 @@ module BrDanfe
       end
 
       def cte_quantity
-        render_box('QTD. CTe', '', 0)
+        generate_box('QTD. CTe', '', 0)
       end
 
       def total_weight
         weight = ActiveSupport::NumberHelper.number_to_rounded(@xml['qCarga'], precision: 2)
         weight = Helper.numerify(weight)
 
-        render_box('Peso total (Kg)', weight, 130, 90)
+        generate_box('Peso total (Kg)', weight, 130, 90)
       end
     end
   end

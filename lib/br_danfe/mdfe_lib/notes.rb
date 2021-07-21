@@ -8,7 +8,7 @@ module BrDanfe
         @xml = xml
       end
 
-      def render
+      def generate
         title
         aditional_information_first_page
         aditional_information_taxpayer
@@ -55,11 +55,11 @@ module BrDanfe
       def aditional_information_taxpayer
         first_page, next_page = fill_aditional_information_taxpayer(@pdf.cursor).values_at(:first_page, :next_page)
 
-        render_aditional_information_taxpayer(first_page, @pdf.cursor)
+        generate_aditional_information_taxpayer(first_page, @pdf.cursor)
 
         if next_page.present?
           @pdf.start_new_page
-          render_aditional_information_taxpayer(next_page, y_position_next_pages)
+          generate_aditional_information_taxpayer(next_page, y_position_next_pages)
         end
       end
 
@@ -80,7 +80,7 @@ module BrDanfe
         { first_page: first_page, next_page: next_page }
       end
 
-      def render_aditional_information_taxpayer(data, position)
+      def generate_aditional_information_taxpayer(data, position)
         @pdf.bounding_box([0, position], width: 526) do
           @pdf.text(data, size: 10)
         end

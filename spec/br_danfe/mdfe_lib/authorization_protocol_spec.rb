@@ -24,11 +24,11 @@ describe BrDanfe::MdfeLib::AuthorizationProtocol do
     PDF::Inspector::Text.analyze(pdf.render).strings.join("\n")
   end
 
-  describe '#render' do
-    it 'renders the authorization protocol' do
+  describe '#generate' do
+    it 'generates the authorization protocol' do
       authorization_protocol = "Protocolo de autorização\n932210002534081 - 01/07/2021 17:39:16-03:00"
 
-      subject.render
+      subject.generate
       expect(pdf_text).to include authorization_protocol
     end
   end

@@ -31,32 +31,32 @@ describe BrDanfe::MdfeLib::Totalizer do
     PDF::Inspector::Text.analyze(pdf.render).strings.join("\n")
   end
 
-  describe '#render' do
-    it 'renders the nfe quantity' do
+  describe '#generate' do
+    it 'generates the nfe quantity' do
       nfe_quantity = "QTD. NFe\n10"
 
-      subject.render
+      subject.generate
       expect(pdf_text).to include nfe_quantity
     end
 
-    it 'renders only the box of cte quantity' do
+    it 'generates only the box of cte quantity' do
       cte_quantity = "QTD. CTe\n"
 
-      subject.render
+      subject.generate
       expect(pdf_text).to include cte_quantity
     end
 
-    it 'renders the total weight' do
+    it 'generates the total weight' do
       total_weight = "Peso total (Kg)\n615,14"
 
-      subject.render
+      subject.generate
       expect(pdf_text).to include total_weight
     end
 
-    it'renders the totalizer title' do
+    it'generates the totalizer title' do
       title = 'Modelo Rodoviário de Carga'
 
-      subject.render
+      subject.generate
       expect(pdf_text).to include title
     end
   end

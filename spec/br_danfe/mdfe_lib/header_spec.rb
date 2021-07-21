@@ -56,15 +56,15 @@ describe BrDanfe::MdfeLib::Header do
 
   after { File.delete(output_pdf) if File.exist?(output_pdf) }
 
-  describe '#render' do
-    it 'renders the emitter informations' do
+  describe '#generate' do
+    it 'generates the emitter informations' do
       emitter_name = 'VENTURIM AGROCRIATIVA LTDA EPP'
       emitter_address = "RODOVIA ES 473 KM 13, nº 0\nVENDA NOVA DO IMIGRANTE - ES   CEP 29.375-000"
 
       emitter_cnpj = "CNPJ: \n17781119000141"
       emitter_ie = "IE: \n082942625"
 
-      subject.render
+      subject.generate
 
       expect(pdf_text).to include emitter_name
       expect(pdf_text).to include emitter_address
@@ -72,37 +72,37 @@ describe BrDanfe::MdfeLib::Header do
       expect(pdf_text).to include emitter_ie
     end
 
-    it'renders the DAMDFE title' do
+    it'generates the DAMDFE title' do
       title = "DAMDFE\n - Documento Auxiliar de Manifesto Eletrônico de Documentos Fiscais"
 
-      subject.render
+      subject.generate
 
       expect(pdf_text).to include title
     end
 
-    it 'renders the qr code' do
+    it 'generates the qr code' do
       expect(File.exist?(output_pdf)).to be false
 
-      subject.render
+      subject.generate
       pdf.render_file output_pdf
 
       expect("#{base_dir}header#render-qr-code.pdf").to have_same_content_of file: output_pdf
     end
 
-    it 'renders the company CNPJ' do
+    it 'generates the company CNPJ' do
       cnpj = "CNPJ: \n17781119000141"
 
-      subject.render
+      subject.generate
 
       expect(pdf_text).to include cnpj
     end
 
     describe 'logo' do
       context 'with logo' do
-        it 'renders the logo' do
+        it 'generates the logo' do
           expect(File.exist?(output_pdf)).to be false
 
-          subject.render
+          subject.generate
           pdf.render_file output_pdf
 
           expect("#{base_dir}header#render-with_logo.pdf").to have_same_content_of file: output_pdf
@@ -112,10 +112,10 @@ describe BrDanfe::MdfeLib::Header do
       context 'without logo' do
         let(:logo) { '' }
 
-        it 'does not render the logo' do
+        it 'does not generate the logo' do
           expect(File.exist?(output_pdf)).to be false
 
-          subject.render
+          subject.generate
           pdf.render_file output_pdf
 
           expect("#{base_dir}header#render-without_logo.pdf").to have_same_content_of file: output_pdf

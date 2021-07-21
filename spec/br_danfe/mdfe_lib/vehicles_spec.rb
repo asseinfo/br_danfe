@@ -37,29 +37,29 @@ describe BrDanfe::MdfeLib::Vehicles do
 
   let(:pdf_text) { PDF::Inspector::Text.analyze(pdf.render).strings.join("\n") }
 
-  describe '#render' do
-    it 'renders the title' do
+  describe '#generate' do
+    it 'generates the title' do
       title = 'Veículo'
 
-      subject.render
+      subject.generate
       expect(pdf_text).to include title
     end
 
-    it 'renders the title of table' do
+    it 'generates the title of table' do
       plate = 'Placa'
       rntrc = 'RNTR'
 
-      subject.render
+      subject.generate
       expect(pdf_text).to include plate, rntrc
     end
 
-    it 'renders the list of vehicles' do
+    it 'generates the list of vehicles' do
       vehicle1_plate = 'RQM8B64'
       vehicle2_plate = 'RVA1B90'
       vehicle3_plate = 'MCU9123'
       vehicle4_plate = 'QIU1239'
 
-      subject.render
+      subject.generate
       expect(pdf_text).to include vehicle1_plate, vehicle2_plate, vehicle3_plate, vehicle4_plate
     end
   end

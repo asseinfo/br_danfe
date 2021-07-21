@@ -44,59 +44,59 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
     PDF::Inspector::Text.analyze(pdf.render).strings.join("\n")
   end
 
-  describe '#render' do
-    it 'renders the model' do
+  describe '#generate' do
+    it 'generates the model' do
       model = "Modelo\n58"
 
-      subject.render(1)
+      subject.generate(1)
 
       expect(pdf_text).to include model
     end
 
-    it 'renders the series' do
+    it 'generates the series' do
       series = "Série\n1"
 
-      subject.render(1)
+      subject.generate(1)
 
       expect(pdf_text).to include series
     end
 
-    it 'renders the number' do
+    it 'generates the number' do
       number = "Número\n121"
 
-      subject.render(1)
+      subject.generate(1)
 
       expect(pdf_text).to include number
     end
 
-    it 'renders the page number' do
+    it 'generates the page number' do
       pages = "FL\n1/1"
 
-      subject.render(1)
+      subject.generate(1)
 
       expect(pdf_text).to include pages
     end
 
-    it 'renders the emitted date and hour' do
+    it 'generates the emitted date and hour' do
       datetime = "Data e hora de Emissão\n01/07/2021 17:30:00"
 
-      subject.render(1)
+      subject.generate(1)
 
       expect(pdf_text).to include datetime
     end
 
-    it 'renders the origin uf' do
+    it 'generates the origin uf' do
       origin_uf = "UF Carreg.\nES"
 
-      subject.render(1)
+      subject.generate(1)
 
       expect(pdf_text).to include origin_uf
     end
 
-    it 'renders the destination uf' do
+    it 'generates the destination uf' do
       destination_uf = "UF Descarreg.\nSC"
 
-      subject.render(1)
+      subject.generate(1)
 
       expect(pdf_text).to include destination_uf
     end

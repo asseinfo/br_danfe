@@ -6,11 +6,11 @@ module BrDanfe
         @xml = xml
       end
 
-      def render
+      def generate
         @pdf.move_cursor_to 460
         title
         table_titles
-        render_drivers
+        generate_drivers
       end
 
       private
@@ -33,7 +33,7 @@ module BrDanfe
         @pdf.stroke_horizontal_line(250, 528, at: @pdf.cursor)
       end
 
-      def render_drivers
+      def generate_drivers
         @pdf.move_cursor_to 425
 
         drivers.each_with_index do |driver, index|

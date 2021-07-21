@@ -6,10 +6,10 @@ module BrDanfe
         @xml = xml
       end
 
-      def render
+      def generate
         title
         barcode
-        render_nfe_key
+        generate_nfe_key
       end
 
       private
@@ -29,7 +29,7 @@ module BrDanfe
         @xml['mdfeProc > protMDFe > infProt > chMDFe']
       end
 
-      def render_nfe_key
+      def generate_nfe_key
         title = 'Chave de Acesso'
 
         @pdf.text_box(title, size: 9, align: :left, style: :bold, at: [250, 510])

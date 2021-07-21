@@ -6,7 +6,7 @@ module BrDanfe
         @xml = xml
       end
 
-      def render
+      def generate
         authorization
       end
 

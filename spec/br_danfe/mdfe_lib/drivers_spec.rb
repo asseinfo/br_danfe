@@ -69,19 +69,19 @@ describe BrDanfe::MdfeLib::Drivers do
     PDF::Inspector::Text.analyze(pdf.render).strings.join("\n")
   end
 
-  describe '#render' do
-    it 'renders the title' do
+  describe '#generate' do
+    it 'generates the title' do
       title = 'Condutor'
 
-      subject.render
+      subject.generate
       expect(pdf_text).to include title
     end
 
-    it 'renders the title of table' do
+    it 'generates the title of table' do
       cpf = 'CPF'
       name = 'Nome'
 
-      subject.render
+      subject.generate
       expect(pdf_text).to include cpf, name
     end
   end

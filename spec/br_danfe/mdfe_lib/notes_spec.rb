@@ -36,43 +36,43 @@ describe BrDanfe::MdfeLib::Notes do
 
   before { pdf.move_cursor_to 345 }
 
-  describe '#render' do
-    it 'renders the title' do
+  describe '#generate' do
+    it 'generates the title' do
       title = 'Observações'
 
-      subject.render
+      subject.generate
       expect(pdf_text).to include title
     end
 
-    it 'renders additional information for fisco when xml has content in infAdFisco tag' do
+    it 'generates additional information for fisco when xml has content in infAdFisco tag' do
       fisco_information = "INFORMAÇÕES ADICIONAIS DE INTERESSE DO FISCO\nEXEMPLO INFORMAÇÕES ADICIONAIS FISCO"
 
-      subject.render
+      subject.generate
       expect(pdf_text).to include fisco_information
     end
 
-    it 'does not render the additional information for fisco when xml does not have content in infAdFisco tag' do
+    it 'does not generate the additional information for fisco when xml does not have content in infAdFisco tag' do
       fisco_information = "INFORMAÇÕES ADICIONAIS DE INTERESSE DO FISCO\n"
 
       xml = BrDanfe::XML.new(xml_as_string(infAdFisco: '', infCpl: ''))
       subject = described_class.new(pdf, xml)
-      subject.render
+      subject.generate
       expect(pdf_text).not_to include fisco_information
     end
 
-    it 'renders the additional information for taxpayer when xml has content in infCpl tag' do
+    it 'generates the additional information for taxpayer when xml has content in infCpl tag' do
       taxpayer_information = "INFORMAÇÕES ADICIONAIS DE INTERESSE DO CONTRIBUINTE\nEXEMPLO INFORMAÇÕES ADICIONAIS CONTRIBUINTE"
 
-      subject.render
+      subject.generate
       expect(pdf_text).to include taxpayer_information
     end
 
-    it 'does not render the additional information for taxpayer when xml does not have content in infCpl tag' do
+    it 'does not generate the additional information for taxpayer when xml does not have content in infCpl tag' do
       taxpayer_information = "INFORMAÇÕES ADICIONAIS DE INTERESSE DO CONTRIBUINTE\n"
 
       xml = BrDanfe::XML.new(xml_as_string(infAdFisco: '', infCpl: ''))
       subject = described_class.new(pdf, xml)
-      subject.render
+      subject.generate
       expect(pdf_text).not_to include taxpayer_information
     end
 
@@ -88,7 +88,7 @@ describe BrDanfe::MdfeLib::Notes do
         )
       )
       subject = described_class.new(pdf, xml)
-      subject.render
+      subject.generate
       pdf.render_file output_pdf
 
       expect("#{base_dir}notes#render-big-aditional-information.pdf").to have_same_content_of file: output_pdf

@@ -6,7 +6,7 @@ module BrDanfe
         @xml = xml
       end
 
-      def render(page)
+      def generate(page)
         model
         series
         number
@@ -19,10 +19,10 @@ module BrDanfe
       private
 
       def model
-        render_box('Modelo', @xml['ide/mod'], 0)
+        generate_box('Modelo', @xml['ide/mod'], 0)
       end
 
-      def render_box(title, text, x_position, width = 40)
+      def generate_box(title, text, x_position, width = 40)
         @pdf.move_cursor_to 655
 
         @pdf.stroke do
@@ -40,29 +40,29 @@ module BrDanfe
       end
 
       def series
-        render_box('Série', @xml['ide/serie'], 40)
+        generate_box('Série', @xml['ide/serie'], 40)
       end
 
       def number
-        render_box('Número', @xml['ide/nMDF'], 80)
+        generate_box('Número', @xml['ide/nMDF'], 80)
       end
 
       def number_of_pages(page)
         text = page.to_s + '/' + @pdf.page_count.to_s
-        render_box('FL', text, 125)
+        generate_box('FL', text, 125)
       end
 
       def emitted_at
         date = Helper.format_datetime(@xml['dhEmi'])
-        render_box('Data e hora de Emissão', date, 170, 110)
+        generate_box('Data e hora de Emissão', date, 170, 110)
       end
 
       def origin_uf
-        render_box('UF Carreg.', @xml['ide/UFIni'], 285, 70)
+        generate_box('UF Carreg.', @xml['ide/UFIni'], 285, 70)
       end
 
       def destination_uf
-        render_box('UF Descarreg.', @xml['ide/UFFim'], 345, 70)
+        generate_box('UF Descarreg.', @xml['ide/UFFim'], 345, 70)
       end
     end
   end
