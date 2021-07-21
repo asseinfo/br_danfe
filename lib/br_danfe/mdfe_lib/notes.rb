@@ -1,23 +1,17 @@
 module BrDanfe
   module MdfeLib
     class Notes
+      MAX_CHARS_ON_LINE = 120
+
       def initialize(pdf, xml)
         @pdf = pdf
         @xml = xml
       end
 
       def render
-        # retornar first e next_page
-        first_page = ''
-        next_page = ''
-
         title
         aditional_information_first_page
-        fill_aditional_information_taxpayer(first_page, next_page, @pdf.cursor)
-        render_aditional_information_taxpayer(first_page, @pdf.cursor)
-
-        @pdf.start_new_page if next_page.present?
-        render_aditional_information_taxpayer(next_page, y_position_next_pages)
+        aditional_information_taxpayer
       end
 
       private
@@ -58,18 +52,32 @@ module BrDanfe
         @taxpayer_information_xml ||= @xml['infAdic/infCpl']
       end
 
-      def fill_aditional_information_taxpayer(first_page, next_page, height_on_first_page)
+      def aditional_information_taxpayer
+        first_page, next_page = fill_aditional_information_taxpayer(@pdf.cursor).values_at(:first_page, :next_page)
+
+        render_aditional_information_taxpayer(first_page, @pdf.cursor)
+
+        if next_page.present?
+          @pdf.start_new_page
+          render_aditional_information_taxpayer(next_page, y_position_next_pages)
+        end
+      end
+
+      def fill_aditional_information_taxpayer(height_on_first_page)
+        first_page = ''
+        next_page = ''
         total_chars = 0
         total_height = 0
 
         taxpayer_information_xml.split.each do |word|
           total_chars += word.split.count + 1
 
-          total_height += 10 if total_chars >= 120 # TODO: const
+          total_height += 10 if total_chars >= MAX_CHARS_ON_LINE
 
-          total_height <= height_on_first_page ? first_page << word + ' ' : next_page << word + ' '
-          # total_height <= height_on_first_page ? first_page += word + ' ' : next_page += word + ' ' TODO
+          total_height <= height_on_first_page ? first_page += word + ' ' : next_page += word + ' '
         end
+
+        { first_page: first_page, next_page: next_page }
       end
 
       def render_aditional_information_taxpayer(data, position)

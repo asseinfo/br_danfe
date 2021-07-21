@@ -219,4 +219,16 @@ describe BrDanfe::Helper do
       expect(described_class.format_cep('12345678')).to eq '12.345-678'
     end
   end
+
+  describe '.format_datetime_with_timezone' do
+    it 'returns a formated string' do
+      expect(described_class.format_datetime_with_timezone('2021-07-01T17:39:16-03:00')).to eql '01/07/2021 17:39:16-03:00'
+    end
+
+    describe 'when the source is blank' do
+      it 'is empty' do
+        expect(described_class.format_datetime_with_timezone('')).to eql ''
+      end
+    end
+  end
 end

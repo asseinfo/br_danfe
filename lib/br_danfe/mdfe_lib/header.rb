@@ -44,11 +44,7 @@ module BrDanfe
       end
 
       def company_informations
-        # TODO: ver CPF com o Cezinha
-        company = '<b>CNPJ: </b>' + @xml['emit/CNPJ'] + '   ' + '<b>IE: </b>' + @xml['emit/IE']
-        individual = '<b>CPF: </b>' + @xml['emit/CPF'] + '   ' + '<b>IE: </b>' + @xml['emit/IE']
-
-        @xml['emit/CNPJ'].present? ? company : individual
+        '<b>CNPJ: </b>' + @xml['emit/CNPJ'] + '   ' + '<b>IE: </b>' + @xml['emit/IE']
       end
 
       def logo
@@ -72,7 +68,7 @@ module BrDanfe
       def qr_code
         box_size = 40.mm
         security_margin = box_size + box_size / 10.0
-        puts @xml['qrCodMDFe']
+
         @pdf.bounding_box([414, 780], width: security_margin, height: security_margin) do
           BrDanfe::QrCode.new(pdf: @pdf, xml: @xml, qr_code_tag: @xml['qrCodMDFe'], box_size: box_size).render
         end

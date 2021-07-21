@@ -4,7 +4,7 @@ describe BrDanfe::MdfeLib::Notes do
   def xml_as_string(options = {})
     params = {
       infAdFisco: '<infAdFisco>EXEMPLO INFORMAÇÕES ADICIONAIS FISCO</infAdFisco>',
-      infCpl: '<infCpl>EXEMPLO INFORMAÇÕES ADICIONAIS CONTRIBUINTE</infCpl>',
+      infCpl: '<infCpl>EXEMPLO INFORMAÇÕES ADICIONAIS CONTRIBUINTE</infCpl>'
     }.merge(options)
 
     <<~XML
@@ -33,6 +33,8 @@ describe BrDanfe::MdfeLib::Notes do
   let(:pdf_text) do
     PDF::Inspector::Text.analyze(pdf.render).strings.join("\n")
   end
+
+  before { pdf.move_cursor_to 345 }
 
   describe '#render' do
     it 'renders the title' do
@@ -74,7 +76,6 @@ describe BrDanfe::MdfeLib::Notes do
       expect(pdf_text).not_to include taxpayer_information
     end
 
-    # TODO: verificar esse teste com o Marquinhos, y das obrservações no topo da página de teste
     after { File.delete(output_pdf) if File.exist?(output_pdf) }
 
     it 'creates a new page if aditional information do not fit on first page' do
@@ -82,8 +83,8 @@ describe BrDanfe::MdfeLib::Notes do
 
       xml = BrDanfe::XML.new(
         xml_as_string(
-          infAdFisco: "<infAdFisco>#{'fisco' * 434}</infAdFisco>",
-          infCpl: "<infCpl>#{'contribuinte' * 584}<infCpl>"
+          infAdFisco: "<infAdFisco>#{'alguma coisa ' * 153}</infAdFisco>",
+          infCpl: "<infCpl>#{'alguma coisa ' * 2000}<infCpl>"
         )
       )
       subject = described_class.new(pdf, xml)
