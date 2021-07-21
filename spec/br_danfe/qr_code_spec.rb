@@ -26,11 +26,11 @@ describe BrDanfe::QrCode do
 
   describe '#render' do
     before do
-      # File.delete(output_pdf) if File.exist?(output_pdf)
+      File.delete(output_pdf) if File.exist?(output_pdf)
     end
 
     it 'renders qr-code to the pdf' do
-      # expect(File.exist?(output_pdf)).to be_falsey
+      expect(File.exist?(output_pdf)).to be_falsey
       subject.render
       pdf.render_file output_pdf
 

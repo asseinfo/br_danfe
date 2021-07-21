@@ -11,14 +11,14 @@ module BrDanfe
       end
 
       def method_missing(method_name, *args, &block)
-        if @document.respond_to? method_name
+        if @document.respond_to? method_name # TODO: remover if
           @document.send method_name, *args, &block
         else
           super
         end
       end
 
-      def respond_to_missing?(method_name, include_private = false)
+      def respond_to_missing?(method_name, include_private = false) # TODO: remover
         @document.respond_to?(method_name, include_private) || super
       end
     end

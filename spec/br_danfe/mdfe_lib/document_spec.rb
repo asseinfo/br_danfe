@@ -6,11 +6,8 @@ describe BrDanfe::MdfeLib::Document do
 
   describe '#method_missing' do
     context 'when prawn has the method' do
-      it 'calls the method' do
-        subject.text('test', align: :left)
-        subject.render_file output_pdf
-
-        expect("#{base_dir}document#render.pdf").to have_same_content_of file: output_pdf
+      it 'does not throws an error' do
+        expect{ subject.text }.not_to raise_error NameError
       end
     end
 

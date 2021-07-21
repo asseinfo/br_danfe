@@ -53,12 +53,12 @@ describe BrDanfe::MdfeLib::MdfeIdentification do
       expect(pdf_text).to include model
     end
 
-    it 'renders the serie' do
-      serie = "Série\n1"
+    it 'renders the series' do
+      series = "Série\n1"
 
       subject.render(1)
 
-      expect(pdf_text).to include serie
+      expect(pdf_text).to include series
     end
 
     it 'renders the number' do

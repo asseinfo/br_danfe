@@ -70,15 +70,11 @@ module BrDanfe
       end
 
       def qr_code
-        qrcode = RQRCode::QRCode.new(@xml['qrCodMDFe'])
-        image = Tempfile.new(%w[qrcode png], binmode: true)
-        image.write(qrcode.as_png(module_px_size: 12).to_s)
-
         box_size = 40.mm
         security_margin = box_size + box_size / 10.0
-
-        @pdf.bounding_box([420, 780], width: security_margin, height: security_margin) do
-          @pdf.image(image, width: box_size, height: box_size, align: :center, valign: :center)
+        puts @xml['qrCodMDFe']
+        @pdf.bounding_box([414, 780], width: security_margin, height: security_margin) do
+          BrDanfe::QrCode.new(pdf: @pdf, xml: @xml, qr_code_tag: @xml['qrCodMDFe'], box_size: box_size).render
         end
       end
     end

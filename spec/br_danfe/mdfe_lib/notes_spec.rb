@@ -42,14 +42,14 @@ describe BrDanfe::MdfeLib::Notes do
       expect(pdf_text).to include title
     end
 
-    it 'renders the aditional information for fisco when xml has infAdFisco tag' do
+    it 'renders additional information for fisco when xml has content in infAdFisco tag' do
       fisco_information = "INFORMAÇÕES ADICIONAIS DE INTERESSE DO FISCO\nEXEMPLO INFORMAÇÕES ADICIONAIS FISCO"
 
       subject.render
       expect(pdf_text).to include fisco_information
     end
 
-    it 'does not render the aditional information for fisco when xml does not have infAdFisco tag' do
+    it 'does not render the additional information for fisco when xml does not have content in infAdFisco tag' do
       fisco_information = "INFORMAÇÕES ADICIONAIS DE INTERESSE DO FISCO\n"
 
       xml = BrDanfe::XML.new(xml_as_string(infAdFisco: '', infCpl: ''))
@@ -58,14 +58,14 @@ describe BrDanfe::MdfeLib::Notes do
       expect(pdf_text).not_to include fisco_information
     end
 
-    it 'renders the aditional information for taxpayer when xml has infCpl tag' do
+    it 'renders the additional information for taxpayer when xml has content in infCpl tag' do
       taxpayer_information = "INFORMAÇÕES ADICIONAIS DE INTERESSE DO CONTRIBUINTE\nEXEMPLO INFORMAÇÕES ADICIONAIS CONTRIBUINTE"
 
       subject.render
       expect(pdf_text).to include taxpayer_information
     end
 
-    it 'does not render the aditional information for taxpayer when xml does not have infCpl tag' do
+    it 'does not render the additional information for taxpayer when xml does not have content in infCpl tag' do
       taxpayer_information = "INFORMAÇÕES ADICIONAIS DE INTERESSE DO CONTRIBUINTE\n"
 
       xml = BrDanfe::XML.new(xml_as_string(infAdFisco: '', infCpl: ''))
@@ -78,7 +78,7 @@ describe BrDanfe::MdfeLib::Notes do
     after { File.delete(output_pdf) if File.exist?(output_pdf) }
 
     it 'creates a new page if aditional information do not fit on first page' do
-      expect(File.exist?(output_pdf)).to be_falsey
+      expect(File.exist?(output_pdf)).to be false
 
       xml = BrDanfe::XML.new(
         xml_as_string(

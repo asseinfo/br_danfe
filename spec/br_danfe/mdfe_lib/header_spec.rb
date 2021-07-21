@@ -81,7 +81,7 @@ describe BrDanfe::MdfeLib::Header do
     end
 
     it 'renders the qr code' do
-      expect(File.exist?(output_pdf)).to be_falsey
+      expect(File.exist?(output_pdf)).to be false
 
       subject.render
       pdf.render_file output_pdf
@@ -150,7 +150,7 @@ describe BrDanfe::MdfeLib::Header do
     describe 'logo' do
       context 'with logo' do
         it 'renders the logo' do
-          expect(File.exist?(output_pdf)).to be_falsey
+          expect(File.exist?(output_pdf)).to be false
 
           subject.render
           pdf.render_file output_pdf
@@ -163,7 +163,7 @@ describe BrDanfe::MdfeLib::Header do
         let(:logo) { '' }
 
         it 'does not render the logo' do
-          expect(File.exist?(output_pdf)).to be_falsey
+          expect(File.exist?(output_pdf)).to be false
 
           subject.render
           pdf.render_file output_pdf

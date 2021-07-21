@@ -35,9 +35,7 @@ describe BrDanfe::MdfeLib::Vehicles do
 
   subject { described_class.new(pdf, xml) }
 
-  let(:pdf_text) do
-    PDF::Inspector::Text.analyze(pdf.render).strings.join("\n")
-  end
+  let(:pdf_text) { PDF::Inspector::Text.analyze(pdf.render).strings.join("\n") }
 
   describe '#render' do
     it 'renders the title' do

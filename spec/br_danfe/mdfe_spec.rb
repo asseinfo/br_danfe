@@ -278,8 +278,8 @@ describe BrDanfe::Mdfe do
   end
 
   describe '#save_pdf' do
-    it 'saves the pdf' do
-      expect(File.exist?(output_pdf)).to be_falsey
+    it 'saves the mdfe' do
+      expect(File.exist?(output_pdf)).to be false
 
       subject.save_pdf output_pdf
       expect("#{base_dir}mdfe.fixture.pdf").to have_same_content_of file: output_pdf
@@ -388,7 +388,7 @@ describe BrDanfe::Mdfe do
     end
 
     it 'renders the header and the identification on each page' do
-      expect(File.exist?(output_pdf)).to be_falsey
+      expect(File.exist?(output_pdf)).to be false
 
       subject.save_pdf output_pdf
       expect("#{base_dir}mdfe-with-multiple-pages.pdf").to have_same_content_of file: output_pdf

@@ -37,7 +37,7 @@ describe BrDanfe::MdfeLib::FiscoControl do
     end
 
     it 'renders the bar code' do
-      expect(File.exist?(output_pdf)).to be_falsey
+      expect(File.exist?(output_pdf)).to be false
 
       subject.render
       pdf.render_file output_pdf

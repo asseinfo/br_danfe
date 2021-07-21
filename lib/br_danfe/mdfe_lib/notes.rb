@@ -7,6 +7,7 @@ module BrDanfe
       end
 
       def render
+        # retornar first e next_page
         first_page = ''
         next_page = ''
 
@@ -64,9 +65,10 @@ module BrDanfe
         taxpayer_information_xml.split.each do |word|
           total_chars += word.split.count + 1
 
-          total_height += 10 if total_chars >= 120
+          total_height += 10 if total_chars >= 120 # TODO: const
 
           total_height <= height_on_first_page ? first_page << word + ' ' : next_page << word + ' '
+          # total_height <= height_on_first_page ? first_page += word + ' ' : next_page += word + ' ' TODO
         end
       end
 

@@ -215,7 +215,7 @@ describe BrDanfe::Helper do
   end
 
   describe '.format_cep' do
-    it 'returns a formated CEP' do
+    it 'returns a formatted CEP' do
       expect(described_class.format_cep('12345678')).to eq '12.345-678'
     end
   end

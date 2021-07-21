@@ -8,7 +8,7 @@ module BrDanfe
 
       def render(page)
         model
-        serie
+        series
         number
         number_of_pages(page)
         emitted_at
@@ -39,7 +39,7 @@ module BrDanfe
         end
       end
 
-      def serie
+      def series
         render_box('Série', @xml['ide/serie'], 40)
       end
 
