@@ -16,6 +16,6 @@ Prawn::Font::AFM.hide_m17n_warning = true
 
 module BrDanfe
   def self.root_path
-    File.expand_path('../..',__FILE__)
+    File.expand_path('../..', __dir__)
   end
 end
