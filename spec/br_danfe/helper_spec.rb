@@ -214,9 +214,9 @@ describe BrDanfe::Helper do
     end
 
     describe 'when has timezone' do
-        it'returns the formated string with the timezone' do
-          expect(described_class.format_datetime('2013-10-18T13:54:04-03:00', true)).to eql '18/10/2013 13:54:04-03:00'
-        end
+      it'returns the formated string with the timezone' do
+        expect(described_class.format_datetime('2013-10-18T13:54:04-03:00', with_time_zone: true)).to eql '18/10/2013 13:54:04-03:00'
+      end
     end
   end
 

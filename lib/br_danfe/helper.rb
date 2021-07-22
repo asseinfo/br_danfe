@@ -23,7 +23,7 @@ module BrDanfe
       integer_part + ',' + decimal_part
     end
 
-    def self.format_datetime(xml_datetime, with_time_zone = false)
+    def self.format_datetime(xml_datetime, with_time_zone: false)
       formated = with_time_zone ? '%d/%m/%Y %H:%M:%S%:z' : '%d/%m/%Y %H:%M:%S'
       xml_datetime.present? ? Time.parse(xml_datetime).strftime(formated) : ''
     end
