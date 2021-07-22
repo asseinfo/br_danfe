@@ -23,15 +23,9 @@ module BrDanfe
       integer_part + ',' + decimal_part
     end
 
-    def self.format_datetime(xml_datetime)
-      formated = ''
-
-      unless xml_datetime.empty?
-        date = DateTime.strptime(xml_datetime, '%Y-%m-%dT%H:%M:%S')
-        formated = date.strftime('%d/%m/%Y %H:%M:%S')
-      end
-
-      formated
+    def self.format_datetime(xml_datetime, with_time_zone = false)
+      formated = with_time_zone ? '%d/%m/%Y %H:%M:%S%:z' : '%d/%m/%Y %H:%M:%S'
+      xml_datetime.present? ? Time.parse(xml_datetime).strftime(formated) : ''
     end
 
     def self.nfe?(xml)
@@ -42,17 +36,6 @@ module BrDanfe
 
     def self.format_cep(cep)
       cep.sub(/(\d{2})(\d{3})(\d{3})/, '\\1.\\2-\\3')
-    end
-
-    def self.format_datetime_with_timezone(xml_datetime)
-      formated = ''
-
-      unless xml_datetime.empty?
-        date = DateTime.strptime(xml_datetime, '%Y-%m-%dT%H:%M:%S%z')
-        formated = date.strftime('%d/%m/%Y %H:%M:%S%:z')
-      end
-
-      formated
     end
   end
 end

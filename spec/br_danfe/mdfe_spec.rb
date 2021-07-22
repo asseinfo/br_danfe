@@ -20,7 +20,7 @@ describe BrDanfe::Mdfe do
     it 'renders the mdfe' do
       expected = IO.binread("#{base_dir}mdfe.fixture.pdf")
 
-      expect(subject.render_pdf).to eq expected
+      expect(subject.render_pdf).to eql expected
     end
   end
 

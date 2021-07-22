@@ -16,7 +16,7 @@ module BrDanfe
       image = Tempfile.new(%w[qrcode png], binmode: true)
       image.write(qrcode.as_png(module_px_size: 12).to_s)
 
-      @pdf.image image, width: @box_size, height: @box_size, position: :center
+      @pdf.image(image, width: @box_size, height: @box_size, position: :center)
     end
   end
 end
