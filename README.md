@@ -88,6 +88,29 @@ XML version | Supported?
           end
         end
 
+### DAMDFE - _Documento Auxiliar do Manifesto Eletrônico de Documentos Fiscais_
+
+#### Usage in Ruby
+
+        xml = File.read("mdfe.xml")
+
+        mdfe = BrDanfe::Mdfe.new(xml)
+        mdfe.save_pdf("mdfe.pdf")
+
+#### Usage in Rails Controller
+
+        class MdfeController < ApplicationController
+          def new
+            mdfe = Mdfe.find(params[:id])
+            xml_as_string = mdfe.generate_xml # your method that generates the MDF-e's xml
+
+            mdfe = BrDanfe::Mdfe.new(xml_as_string)
+
+            send_data mdfe.render_pdf, filename: "mdfe.pdf", type: "application/pdf"
+          end
+        end
+
+
 ## I18n
 
 By default, your rails application must be configured to `pt-Br`.
