@@ -31,7 +31,7 @@ module BrDanfe
           NfceLib::Key.new(@document, xml).render
           NfceLib::Recipient.new(@document, xml).render
           NfceLib::NfceIdentification.new(@document, xml).render
-          NfceLib::QrCode.new(@document, xml).render
+          BrDanfe::QrCode.new(pdf: @document, xml: xml, qr_code_tag: xml['qrCode'], box_size: 3.cm).render
           NfceLib::Footer.new(@document, xml).render(footer_info)
 
           render_no_fiscal_value(xml)

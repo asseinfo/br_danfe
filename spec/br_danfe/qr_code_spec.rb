@@ -1,10 +1,15 @@
 require 'spec_helper'
 
-describe BrDanfe::DanfeLib::NfceLib::QrCode do
-  let(:base_dir) { './spec/fixtures/nfce/lib/' }
+describe BrDanfe::QrCode do
+  let(:base_dir) { './spec/fixtures/qr_code/' }
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
-  let(:pdf) { BrDanfe::DanfeLib::NfceLib::Document.new(8.cm, 5.cm) }
+  let(:pdf) do
+    BrDanfe::DocumentBuilder.build(
+      page_size: 'A4',
+      page_layout: :portrait
+    )
+  end
 
   let(:xml) do
     xml = <<-eos
@@ -17,16 +22,16 @@ describe BrDanfe::DanfeLib::NfceLib::QrCode do
     BrDanfe::XML.new(xml)
   end
 
-  subject { described_class.new pdf, xml }
+  subject { described_class.new(pdf: pdf, xml: xml, qr_code_tag: xml['qrCode'], box_size: 3.cm) }
 
   describe '#render' do
     before do
-      subject.render
       File.delete(output_pdf) if File.exist?(output_pdf)
     end
 
     it 'renders qr-code to the pdf' do
       expect(File.exist?(output_pdf)).to be_falsey
+      subject.render
       pdf.render_file output_pdf
 
       expect("#{base_dir}qr_code#render.pdf").to have_same_content_of file: output_pdf

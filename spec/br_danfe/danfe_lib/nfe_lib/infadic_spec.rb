@@ -361,11 +361,11 @@ describe BrDanfe::DanfeLib::NfeLib::Infadic do
       end
 
       it 'renders title with box, subtitle, fisco box and address shipment information on the pdf' do
-      expect(File.exist?(output_pdf)).to be_falsey
+        expect(File.exist?(output_pdf)).to be_falsey
 
-      pdf.render_file output_pdf
+        pdf.render_file output_pdf
 
-      expect("#{base_dir}infadic#address-shipment.pdf").to have_same_content_of file: output_pdf
+        expect("#{base_dir}infadic#address-shipment.pdf").to have_same_content_of file: output_pdf
       end
     end
 

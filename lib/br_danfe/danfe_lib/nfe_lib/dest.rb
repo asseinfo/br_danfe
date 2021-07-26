@@ -63,7 +63,7 @@ module BrDanfe
         end
 
         def cep
-          Cep.format(@xml['enderDest/CEP'])
+          BrDanfe::Helper.format_cep(@xml['enderDest/CEP'])
         end
 
         def render_line3

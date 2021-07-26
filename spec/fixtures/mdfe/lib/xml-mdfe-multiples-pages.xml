@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdfeProc xmlns="http://www.portalfiscal.inf.br/mdfe" versao="3.00">
+  <MDFe xmlns="http://www.portalfiscal.inf.br/mdfe">
+	<infMDFe Id="MDFe32210717781119000141580010000001211000000003" versao="3.00">
+	  <ide>
+		<mod>58</mod>
+		<serie>1</serie>
+		<nMDF>121</nMDF>
+		<cMDF>00000000</cMDF>
+		<modal>1</modal>
+		<dhEmi>2021-07-01T17:30:00-03:00</dhEmi>
+		<UFIni>ES</UFIni>
+		<UFFim>ES</UFFim>
+	  </ide>
+	  <emit>
+		<CNPJ>17781119000141</CNPJ>
+		<IE>082942625</IE>
+		<xNome>VENTURIM AGROCRIATIVA LTDA EPP</xNome>
+		<xFant>VENTURIM CONSERVAS</xFant>
+		<enderEmit>
+		  <xLgr>RODOVIA ES 473 KM 13</xLgr>
+		  <nro>0</nro>
+		  <xMun>VENDA NOVA DO IMIGRANTE</xMun>
+		  <CEP>29375000</CEP>
+		  <UF>ES</UF>
+		</enderEmit>
+	  </emit>
+	  <infModal versaoModal="3.00">
+		<rodo>
+		  <infANTT/>
+		  <veicTracao>
+			<placa>RQM8B64</placa>
+			<RENAVAM>01259587867</RENAVAM>
+			<condutor>
+			  <xNome>EDUARDO DANIEL</xNome>
+			  <CPF>11585756709</CPF>
+			</condutor>
+		  </veicTracao>
+		  <veicReboque>
+			<placa>RVA1B90</placa>
+			<RENAVAM>123456789</RENAVAM>
+			<condutor>
+			  <xNome>JOAO DA SILVA</xNome>
+			  <CPF>9876654312</CPF>
+			</condutor>
+		  </veicReboque>
+		  <veicReboque>
+			<placa>DFE4U78</placa>
+			<RENAVAM>045784572</RENAVAM>
+			<condutor>
+			  <xNome>PEDRO DE SOUZA</xNome>
+			  <CPF>9876654312</CPF>
+			</condutor>
+		  </veicReboque>
+		  <veicReboque>
+			<placa>OPS4F78</placa>
+			<RENAVAM>045784572</RENAVAM>
+			<condutor>
+			  <xNome>GABRIEL DE JESUS</xNome>
+			  <CPF>9876654312</CPF>
+			</condutor>
+		  </veicReboque>
+		</rodo>
+	  </infModal>
+	  <tot>
+		<qNFe>10</qNFe>
+		<vCarga>8222.10</vCarga>
+		<cUnid>01</cUnid>
+		<qCarga>615.1400</qCarga>
+	  </tot>
+	  <autXML>
+		<CNPJ>04898488000177</CNPJ>
+	  </autXML>
+	  <infAdic>
+		<infAdFisco>Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma c</infAdFisco>
+		<infCpl>Exemplo de observação para o Contribuinte alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa 
+		Exemplo de observação para o Fisco alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa alguma coisa a</infCpl>
+	  </infAdic>
+	</infMDFe>
+	<infMDFeSupl>
+	  <qrCodMDFe>https://dfe-portal.svrs.rs.gov.br/mdfe/QRCode?chMDFe=32210717781119000141580010000001211000000003&amp;tpAmb=1</qrCodMDFe>
+	</infMDFeSupl>
+  </MDFe>
+  <protMDFe versao="3.00" xmlns="http://www.portalfiscal.inf.br/mdfe">
+	<infProt Id="MDFe932210002534081">
+	  <tpAmb>1</tpAmb>
+	  <verAplic>RS20210607092041</verAplic>
+	  <chMDFe>32210717781119000141580010000001211000000003</chMDFe>
+	  <dhRecbto>2021-07-01T17:39:16-03:00</dhRecbto>
+	  <nProt>932210002534081</nProt>
+	  <digVal>gLsHvKfPe3saxayj/JruXLmwRDM=</digVal>
+	  <cStat>100</cStat>
+	  <xMotivo>Autorizado o uso do MDF-e</xMotivo>
+	</infProt>
+  </protMDFe>
+</mdfeProc>
