@@ -92,7 +92,7 @@ GEM
     psych (4.0.1)
     racc (1.5.2)
     rainbow (3.0.0)
-    rake (13.0.1)
+    rake (13.0.6)
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -147,7 +147,7 @@ DEPENDENCIES
   guard (~> 2.16.2)
   guard-rspec
   pdf-inspector (~> 1.3.0)
-  rake (= 13.0.1)
+  rake (= 13.0.6)
   rspec (= 3.10.0)
   rubocop (= 0.67.0)
   rubocop-performance (~> 1.1.0)
