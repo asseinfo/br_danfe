@@ -8,7 +8,7 @@ PATH
       nokogiri (>= 1.8)
       prawn (~> 2.4.0)
       prawn-table (= 0.2.2)
-      rqrcode (~> 1.1.1)
+      rqrcode (>= 1.1.1, < 2.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -96,10 +96,10 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rqrcode (1.1.2)
+    rqrcode (2.0.0)
       chunky_png (~> 1.0)
-      rqrcode_core (~> 0.1)
-    rqrcode_core (0.2.0)
+      rqrcode_core (~> 1.0)
+    rqrcode_core (1.1.0)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
       rspec-expectations (~> 3.10.0)
