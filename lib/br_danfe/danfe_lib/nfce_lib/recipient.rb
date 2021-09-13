@@ -23,7 +23,7 @@ module BrDanfe
         private
 
         def options
-          { size: 7, align: :center }
+          { size: 9, align: :center }
         end
 
         def identified_recipient?
