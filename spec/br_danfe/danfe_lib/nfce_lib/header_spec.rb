@@ -42,7 +42,7 @@ describe BrDanfe::DanfeLib::NfceLib::Header do
     BrDanfe::XML.new(xml)
   end
 
-  let(:pdf) { BrDanfe::DanfeLib::NfceLib::Document.new(8.cm, 5.cm) }
+  let(:pdf) { BrDanfe::DanfeLib::NfceLib::Document.new(8.cm, 6.cm) }
 
   subject { described_class.new pdf, xml, logo, logo_options }
 
