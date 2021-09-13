@@ -10,9 +10,9 @@ module BrDanfe
         def render
           @pdf.render_blank_line
 
-          @pdf.text 'Consulte pela Chave de Acesso em', size: 7, align: :center, style: :bold
-          @pdf.text @xml['urlChave'], size: 7, align: :center
-          @pdf.text @xml['chNFe'].gsub(/(\d)(?=(\d\d\d\d)+(?!\d))/, '\\1 '), size: 6, align: :center
+          @pdf.text 'Consulte pela Chave de Acesso em', size: 9, align: :center, style: :bold
+          @pdf.text @xml['urlChave'], size: 9, align: :center
+          @pdf.text @xml['chNFe'].gsub(/(\d)(?=(\d\d\d\d)+(?!\d))/, '\\1 '), size: 8, align: :center
         end
       end
     end

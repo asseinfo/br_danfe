@@ -64,7 +64,7 @@
             <prod>
                <cProd>1173</cProd>
                <cEAN>568754456745</cEAN>
-               <xProd>Abraçadeira with a larger name with line breaks</xProd>
+               <xProd>Abraçadeira de metal with a larger name truncated</xProd>
                <NCM>01022990</NCM>
                <CFOP>5101</CFOP>
                <uCom>UN</uCom>
@@ -150,7 +150,7 @@
             <prod>
                <cProd>1173</cProd>
                <cEAN>568754456745</cEAN>
-               <xProd>Abraçadeira with a larger name with line breaks</xProd>
+               <xProd>Abraçadeira de metal with a larger name truncated</xProd>
                <NCM>01022990</NCM>
                <CFOP>5101</CFOP>
                <uCom>UN</uCom>

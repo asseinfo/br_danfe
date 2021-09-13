@@ -14,6 +14,7 @@ module BrDanfe
 
           render_company_info(cursor)
           render_logo(cursor) if @logo.present?
+          render_doc
 
           render_homologation if BrDanfe::Helper.homologation?(@xml)
         end
@@ -23,21 +24,20 @@ module BrDanfe
         def render_company_info(cursor)
           one_line = 1
 
-          @pdf.bounding_box([x_position, cursor], width: width_box, height: 45) do
-            @pdf.text (@xml['emit/xNome']).to_s, size: 7, align: :left, style: :bold
-            @pdf.text cnpj(@xml['emit/CNPJ']), size: 6, align: :left
-            @pdf.text BrDanfe::DanfeLib::NfceLib::Helper.address(@xml.css('enderEmit')), size: 6, align: :left
+          @pdf.bounding_box([x_position, cursor], width: width_box, height: 65) do
+            @pdf.text (@xml['emit/xNome']).to_s, size: 10, align: :left, style: :bold
+            @pdf.text cnpj(@xml['emit/CNPJ']), size: 9, align: :left
+            @pdf.text BrDanfe::DanfeLib::NfceLib::Helper.address(@xml.css('enderEmit')), size: 9, align: :left
             @pdf.render_blank_line if count_name_lines(@xml['emit/xNome']) == one_line
-            @pdf.text 'Documento Auxiliar da Nota Fiscal de Consumidor Eletrônica', size: 6, align: :left
           end
         end
 
         def x_position
-          @logo.present? ? 1.7.cm : 0
+          @logo.present? ? 2.2.cm : 0
         end
 
         def width_box
-          @logo.present? ? 5.7.cm : 7.4.cm
+          @logo.present? ? 4.5.cm : 6.7.cm
         end
 
         def cnpj(info)
@@ -51,7 +51,7 @@ module BrDanfe
         end
 
         def render_logo(cursor)
-          box_size = 45
+          box_size = 60
           logo_options = BrDanfe::Logo::Options.new(box_size, @logo_dimensions).options
 
           @pdf.bounding_box([0, cursor], width: box_size, height: box_size) do
@@ -59,9 +59,23 @@ module BrDanfe
           end
         end
 
-        def render_homologation
+        def render_doc
           @pdf.render_blank_line
-          @pdf.text 'EMITIDA EM AMBIENTE DE HOMOLOGAÇÃO – SEM VALOR FISCAL', size: 7, align: :center, style: :bold
+          cursor = @pdf.cursor
+
+          @pdf.bounding_box([0, cursor], width: 6.7.cm, height: 20) do
+            @pdf.text 'Documento Auxiliar da Nota Fiscal de Consumidor Eletrônica', size: 9, align: :center
+          end
+        end
+
+        def render_homologation
+          2.times { @pdf.render_blank_line }
+
+          cursor = @pdf.cursor
+          @pdf.bounding_box([0, cursor], width: 6.7.cm, height: 20) do
+            @pdf.text 'EMITIDA EM AMBIENTE DE HOMOLOGAÇÃO', size: 8, align: :center, style: :bold
+            @pdf.text 'SEM VALOR FISCAL', size: 8, align: :center, style: :bold
+          end
         end
       end
     end
