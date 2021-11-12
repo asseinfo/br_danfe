@@ -22,7 +22,7 @@ describe BrDanfe::QrCode do
     BrDanfe::XML.new(xml)
   end
 
-  subject { described_class.new(pdf: pdf, xml: xml, qr_code_tag: xml['qrCode'], box_size: 3.cm) }
+  subject { described_class.new(pdf: pdf, qr_code_tag: xml['qrCode'], box_size: 3.cm) }
 
   describe '#render' do
     before do
