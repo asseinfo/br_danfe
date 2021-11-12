@@ -30,10 +30,8 @@ describe BrDanfe::MdfeLib::FiscoControl do
     after { File.delete(output_pdf) if File.exist?(output_pdf) }
 
     it 'generates the title' do
-      title = 'CONTROLE DO FISCO'
-
       subject.generate
-      expect(pdf_text).to include title
+      expect(pdf_text).to include 'CONTROLE DO FISCO'
     end
 
     it 'generates the bar code' do
@@ -46,10 +44,26 @@ describe BrDanfe::MdfeLib::FiscoControl do
     end
 
     it 'generates the nfe key' do
-      nfe_key = "Chave de Acesso\n32210717781119000141580010000001211000000003"
-
       subject.generate
-      expect(pdf_text).to include nfe_key
+      expect(pdf_text).to include "Chave de Acesso\n32210717781119000141580010000001211000000003"
+    end
+
+    context 'when the XML does not have protMDFe tag' do
+      let(:xml_as_string) do
+        <<~XML
+          <?xml version="1.0" encoding="UTF-8"?>
+          <mdfeProc xmlns="http://www.portalfiscal.inf.br/mdfe" versao="3.00"></mdfeProc>
+        XML
+      end
+
+      it 'does not generate the bar code and the nfe key' do
+        expect(File.exist?(output_pdf)).to be false
+
+        subject.generate
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}fisco_control#without-barcode.pdf").to have_same_content_of file: output_pdf
+      end
     end
   end
 end
