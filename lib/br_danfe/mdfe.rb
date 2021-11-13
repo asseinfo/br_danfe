@@ -7,7 +7,7 @@ module BrDanfe
     attr_reader :logo_options
 
     def initialize(xml)
-      @xml = xml
+      @xml = BrDanfe::XML.new(xml)
       @pdf = MdfeLib::Document.new
       @logo_options = BrDanfe::Logo::Config.new
     end
