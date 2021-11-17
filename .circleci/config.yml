@@ -2,28 +2,28 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.5.1
+      - image: circleci/ruby:2.7.4
     steps:
       - checkout
       - restore_cache:
-          key: brdanfe-cache-v1-{{ checksum "Gemfile.lock" }}
+          key: brdanfe-cache-v2-{{ checksum "Gemfile.lock" }}
       - run: bundle check || bundle install
       - save_cache:
-          key: brdanfe-cache-v1-{{ .Environment.CIRCLE_SHA1 }}
+          key: brdanfe-cache-v2-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - .
       - save_cache:
-          key: brdanfe-cache-v1-{{ checksum "Gemfile.lock" }}
+          key: brdanfe-cache-v2-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
   rspec:
     docker:
-      - image: circleci/ruby:2.5.1
+      - image: circleci/ruby:2.7.4
     steps:
       - restore_cache:
-          key: brdanfe-cache-v1-{{ .Environment.CIRCLE_SHA1 }}
+          key: brdanfe-cache-v2-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: brdanfe-cache-v1-{{ checksum "Gemfile.lock" }}
+          key: brdanfe-cache-v2-{{ checksum "Gemfile.lock" }}
       - run:
           name: Install Test Coverage for CodeClimate
           command: |
