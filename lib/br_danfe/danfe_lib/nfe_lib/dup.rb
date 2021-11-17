@@ -38,8 +38,7 @@ module BrDanfe
 
         def dtduplicata(det)
           dtduplicata = det.css('dVenc').text
-          dtduplicata = dtduplicata[8, 2] + '/' + dtduplicata[5, 2] + '/' + dtduplicata[0, 4]
-          dtduplicata
+          "#{dtduplicata[8, 2]}/#{dtduplicata[5, 2]}/#{dtduplicata[0, 4]}"
         end
 
         def normal

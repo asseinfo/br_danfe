@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe BrDanfe::DanfeLib::NfeLib::Cst do
   let(:xml_cst) do
-    xml = <<-eos
+    xml = <<~XML
       <imposto>
         <ICMS>
           <ICMS00>
@@ -15,13 +15,13 @@ describe BrDanfe::DanfeLib::NfeLib::Cst do
           </ICMS00>
         </ICMS>
       </imposto>
-    eos
+    XML
 
     Nokogiri::XML(xml)
   end
 
   let(:xml_csosn) do
-    xml = <<-eos
+    xml = <<~XML
       <imposto>
         <ICMS>
           <ICMSSN102>
@@ -30,7 +30,7 @@ describe BrDanfe::DanfeLib::NfeLib::Cst do
           </ICMSSN102>
         </ICMS>
       </imposto>
-    eos
+    XML
 
     Nokogiri::XML(xml)
   end

@@ -20,7 +20,7 @@ module BrDanfe
       decimal_part = separated_number[1] || '00'
       decimal_part += '0' if decimal_part.size < 2
 
-      integer_part + ',' + decimal_part
+      "#{integer_part},#{decimal_part}"
     end
 
     def self.format_datetime(xml_datetime, with_time_zone: false)

@@ -5,7 +5,7 @@ describe BrDanfe::DanfeLib::NfceLib::Key do
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
   let(:xml_key) do
-    xml = <<-eos
+    xml = <<~XML
       <nfeProc>
         <NFe>
           <infNFeSupl>
@@ -19,7 +19,7 @@ describe BrDanfe::DanfeLib::NfceLib::Key do
           </infProt>
         </protNFe>
       </nfeProc>
-    eos
+    XML
 
     BrDanfe::XML.new(xml)
   end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe BrDanfe::DanfeLib::NfceLib::Helper do
   let(:xml) do
-    xml = <<-eos
+    xml = <<~XML
       <enderDest>
         <xLgr>Rua Tijucas</xLgr>
         <nro>99</nro>
@@ -15,7 +15,7 @@ describe BrDanfe::DanfeLib::NfceLib::Helper do
         <cPais>1058</cPais>
         <xPais>Brasil</xPais>
       </enderDest>
-    eos
+    XML
 
     BrDanfe::XML.new(xml)
   end

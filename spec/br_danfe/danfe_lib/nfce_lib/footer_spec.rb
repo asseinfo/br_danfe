@@ -7,7 +7,7 @@ describe BrDanfe::DanfeLib::NfceLib::Footer do
   let(:pdf) { BrDanfe::DanfeLib::NfceLib::Document.new(8.cm, 5.cm) }
 
   let(:xml_footer) do
-    xml = <<-eos
+    xml = <<~XML
       <nfeProc>
         <NFe>
           <infNFe>
@@ -19,7 +19,7 @@ describe BrDanfe::DanfeLib::NfceLib::Footer do
           </infNFe>
         </NFe>
       </nfeProc>
-    eos
+    XML
 
     BrDanfe::XML.new(xml)
   end
@@ -28,6 +28,7 @@ describe BrDanfe::DanfeLib::NfceLib::Footer do
 
   describe '#render' do
     before { File.delete(output_pdf) if File.exist?(output_pdf) }
+
     it 'renders footer to the pdf' do
       subject.render
       expect(File.exist?(output_pdf)).to be_falsey

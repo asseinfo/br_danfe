@@ -11,28 +11,28 @@ describe BrDanfe::DanfeLib::NfeLib::Issqn do
 
   describe '#render' do
     let(:xml_as_string) do
-      <<-eos
-      <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-        <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-          <emit>
-            <IM>2345</IM>
-          </emit>
-          <total>
-            <ISSQNtot>
-            #{issqn}
-            </ISSQNtot>
-          </total>
-        </infNFe>
-      </NFe>
-      eos
+      <<~XML
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+            <emit>
+              <IM>2345</IM>
+            </emit>
+            <total>
+              <ISSQNtot>
+              #{issqn}
+              </ISSQNtot>
+            </total>
+          </infNFe>
+        </NFe>
+      XML
     end
 
     let(:issqn) do
-      <<-eos
+      <<~XML
         <vServ>1.43</vServ>
         <vBC>2.34</vBC>
         <vISS>3.45</vISS>
-      eos
+      XML
     end
 
     before do

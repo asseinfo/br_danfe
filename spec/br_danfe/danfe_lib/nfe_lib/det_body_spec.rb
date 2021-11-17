@@ -8,17 +8,17 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
   let(:xml) { BrDanfe::XML.new(xml_as_string) }
 
   let(:xml_as_string) do
-    <<-eos
+    <<~XML
     <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
       <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
         #{products}
       </infNFe>
     </NFe>
-    eos
+    XML
   end
 
   let(:product_1) do
-    <<-eos
+    <<~XML
         <det nItem="1">
           <prod>
             <cProd>1</cProd>
@@ -31,11 +31,11 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
             <vProd>6.65</vProd>
           </prod>
         </det>
-    eos
+    XML
   end
 
   let(:product_2) do
-    <<-eos
+    <<~XML
         <det nItem="2">
           <prod>
             <cProd>2</cProd>
@@ -49,7 +49,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
             <infAdProd>Additional information 1 - Additional information 2 - Additional information 3</infAdProd>
           </prod>
         </det>
-    eos
+    XML
   end
 
   let(:has_issqn) { false }
@@ -64,7 +64,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
 
     context 'with CSOSN' do
       let(:products) do
-        <<-eos
+        <<~XML
         <det nItem="1">
           <prod>
             <cProd>1</cProd>
@@ -152,7 +152,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
             </ICMS>
           </imposto>
         </det>
-        eos
+        XML
       end
 
       it 'renders xml to the pdf' do
@@ -166,7 +166,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
 
     context 'with CST' do
       let(:products) do
-        <<-eos
+        <<~XML
         <det nItem="1">
           <prod>
             <cProd>REF 04</cProd>
@@ -239,7 +239,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
             </IPI>
           </imposto>
         </det>
-        eos
+        XML
       end
 
       it 'renders xml to the pdf' do
@@ -253,7 +253,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
 
     context 'with FCI' do
       let(:products) do
-        <<-eos
+        <<~XML
         <det nItem="1">
           <prod>
             <cProd>REF 06</cProd>
@@ -276,7 +276,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
             </ICMS>
           </imposto>
         </det>
-        eos
+        XML
       end
 
       it 'renders xml to the pdf' do
@@ -290,7 +290,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
 
     context 'with ICMS ST' do
       let(:products) do
-        <<-eos
+        <<~XML
         <det nItem="1">
           <prod>
             <cProd>3</cProd>
@@ -315,7 +315,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
             </ICMS>
           </imposto>
         </det>
-        eos
+        XML
       end
 
       it 'renders xml to the pdf' do
@@ -329,7 +329,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
 
     context 'when the unit price of the product has a custom precision' do
       let(:products) do
-        <<-eos
+        <<~XML
         <det nItem="1">
           <prod>
             <cProd>3</cProd>
@@ -342,7 +342,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
             <vProd>6.79</vProd>
           </prod>
         </det>
-        eos
+        XML
       end
 
       it 'renders xml to the pdf' do
@@ -356,7 +356,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
 
     context 'when the quantity of the product has a custom precision' do
       let(:products) do
-        <<-eos
+        <<~XML
         <det nItem="1">
           <prod>
             <cProd>3</cProd>
@@ -369,7 +369,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
             <vProd>6.65</vProd>
           </prod>
         </det>
-        eos
+        XML
       end
 
       it 'renders xml to the pdf' do

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe BrDanfe::Danfe do
   let(:xml) do
-    <<-eos
+    <<~XML
       <nfeProc>
         <NFe>
           <infNFe>
@@ -17,7 +17,7 @@ describe BrDanfe::Danfe do
           </infNFe>
         </NFe>
       </nfeProc>
-    eos
+    XML
   end
 
   subject { described_class.new(xml) }

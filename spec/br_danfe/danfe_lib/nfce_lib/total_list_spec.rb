@@ -6,7 +6,7 @@ describe BrDanfe::DanfeLib::NfceLib::TotalList do
 
   let(:pdf) { BrDanfe::DanfeLib::NfceLib::Document.new(8.cm, 5.cm) }
   let(:payment_xml) do
-    <<-eos
+    <<~XML
       <pag>
         <detPag>
           <tPag>01</tPag>
@@ -21,10 +21,10 @@ describe BrDanfe::DanfeLib::NfceLib::TotalList do
           <vPag>66.70</vPag>
         </detPag>
       </pag>
-    eos
+    XML
   end
   let(:xml_as_string) do
-    <<-eos
+    <<~XML
       <nfeProc>
         <NFe>
           <infNFe>
@@ -43,7 +43,7 @@ describe BrDanfe::DanfeLib::NfceLib::TotalList do
           </infNFe>
         </NFe>
       </nfeProc>
-    eos
+    XML
   end
   let(:xml_total_list) { BrDanfe::XML.new(xml_as_string) }
 
@@ -64,7 +64,7 @@ describe BrDanfe::DanfeLib::NfceLib::TotalList do
 
     describe 'about totals' do
       let(:xml_as_string) do
-        <<-eos
+        <<~XML
           <nfeProc>
             <NFe>
               <infNFe>
@@ -82,7 +82,7 @@ describe BrDanfe::DanfeLib::NfceLib::TotalList do
               </infNFe>
             </NFe>
           </nfeProc>
-        eos
+        XML
       end
 
       it 'renders the totals' do
@@ -95,7 +95,7 @@ describe BrDanfe::DanfeLib::NfceLib::TotalList do
 
     describe 'about payment methods' do
       let(:payment_xml) do
-        <<-eos
+        <<~XML
           <pag>
             <detPag>
               <tPag>01</tPag>
@@ -114,7 +114,7 @@ describe BrDanfe::DanfeLib::NfceLib::TotalList do
               <vPag>1.99</vPag>
             </detPag>
           </pag>
-        eos
+        XML
       end
 
       it 'does not render the ""without payment"" payment method ' do
@@ -126,7 +126,7 @@ describe BrDanfe::DanfeLib::NfceLib::TotalList do
 
       context 'when there are repeated payment methods' do
         let(:payment_xml) do
-          <<-eos
+          <<~XML
             <pag>
               <detPag>
                 <tPag>01</tPag>
@@ -145,7 +145,7 @@ describe BrDanfe::DanfeLib::NfceLib::TotalList do
                 <vPag>26.50</vPag>
               </detPag>
             </pag>
-          eos
+          XML
         end
 
         it 'renders grouped payment methods' do
@@ -158,7 +158,7 @@ describe BrDanfe::DanfeLib::NfceLib::TotalList do
 
       context 'when there are only "without payment" payment methods' do
         let(:payment_xml) do
-          <<-eos
+          <<~XML
             <pag>
               <detPag>
                 <tPag>90</tPag>
@@ -173,7 +173,7 @@ describe BrDanfe::DanfeLib::NfceLib::TotalList do
                 <vPag>66.70</vPag>
               </detPag>
             </pag>
-          eos
+          XML
         end
 
         it 'does not render payment methods' do

@@ -34,9 +34,8 @@ module BrDanfe
       end
 
       def address
-        formatted = @xml['enderEmit/xLgr'] + ', nº ' + @xml['enderEmit/nro'] + "\n"
-        formatted += @xml['enderEmit/xMun'] + ' - ' + @xml['enderEmit/UF'] + '   ' + 'CEP ' + cep + "\n"
-        formatted
+        "#{@xml['enderEmit/xLgr']}, nº #{@xml['enderEmit/nro']}\n" \
+          "#{@xml['enderEmit/xMun']} - #{@xml['enderEmit/UF']}   CEP #{cep}\n"
       end
 
       def cep
@@ -44,7 +43,7 @@ module BrDanfe
       end
 
       def company_informations
-        '<b>CNPJ: </b>' + @xml['emit/CNPJ'] + '   ' + '<b>IE: </b>' + @xml['emit/IE']
+        "<b>CNPJ: </b>#{@xml['emit/CNPJ']}   <b>IE: </b>#{@xml['emit/IE']}"
       end
 
       def logo
@@ -67,7 +66,7 @@ module BrDanfe
 
       def generate_qr_code
         box_size = 40.mm
-        security_margin = box_size + box_size / 10.0
+        security_margin = box_size + (box_size / 10.0)
 
         @pdf.bounding_box([414, 780], width: security_margin, height: security_margin) do
           BrDanfe::QrCode.new(pdf: @pdf, qr_code_tag: @xml['qrCodMDFe'], box_size: box_size).render

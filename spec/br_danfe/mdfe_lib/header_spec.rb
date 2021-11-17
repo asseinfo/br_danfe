@@ -76,7 +76,7 @@ describe BrDanfe::MdfeLib::Header do
       expect(pdf_text).to include emitter_ie
     end
 
-    it'generates the DAMDFE title' do
+    it 'generates the DAMDFE title' do
       subject.generate
       expect(pdf_text).to include "DAMDFE\n - Documento Auxiliar de Manifesto Eletrônico de Documentos Fiscais"
     end

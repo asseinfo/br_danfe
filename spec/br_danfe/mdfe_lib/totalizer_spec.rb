@@ -53,7 +53,7 @@ describe BrDanfe::MdfeLib::Totalizer do
       expect(pdf_text).to include total_weight
     end
 
-    it'generates the totalizer title' do
+    it 'generates the totalizer title' do
       title = 'Modelo Rodoviário de Carga'
 
       subject.generate

@@ -42,8 +42,7 @@ module BrDanfe
 
         def cnpj(info)
           cnpj = BrDocuments::CnpjCpf::Cnpj.new info
-          data = "CNPJ: #{cnpj.valid? ? cnpj.formatted : ''}"
-          data
+          "CNPJ: #{cnpj.valid? ? cnpj.formatted : ''}"
         end
 
         def count_name_lines(company_name)

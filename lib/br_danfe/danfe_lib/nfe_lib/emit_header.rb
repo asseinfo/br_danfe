@@ -38,11 +38,10 @@ module BrDanfe
         end
 
         def address
-          formatted = @xml['enderEmit/xLgr'] + ', ' + @xml['enderEmit/nro'] + "\n"
-          formatted += @xml['enderEmit/xBairro'] + ' - ' + cep + "\n"
-          formatted += @xml['enderEmit/xMun'] + '/' + @xml['enderEmit/UF'] + "\n"
-          formatted += phone + ' ' + @xml['enderEmit/email']
-          formatted
+          "#{@xml['enderEmit/xLgr']}, #{@xml['enderEmit/nro']}\n" \
+            "#{@xml['enderEmit/xBairro']} - #{cep}\n" \
+            "#{@xml['enderEmit/xMun']}/#{@xml['enderEmit/UF']}\n" \
+            "#{phone} #{@xml['enderEmit/email']}"
         end
 
         def phone

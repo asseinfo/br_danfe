@@ -8,7 +8,7 @@ describe BrDanfe::DanfeLib::NfceLib::Header do
   let(:environment) { 1 }
 
   let(:xml) do
-    xml = <<-eos
+    xml = <<~XML
       <nfeProc>
         <NFe>
           <infNFe>
@@ -37,7 +37,7 @@ describe BrDanfe::DanfeLib::NfceLib::Header do
           </infNFe>
         </NFe>
       </nfeProc>
-    eos
+    XML
 
     BrDanfe::XML.new(xml)
   end

@@ -12,43 +12,43 @@ describe BrDanfe::DanfeLib::NfeLib::EmitHeader do
 
   describe '#render' do
     let(:xml_as_string) do
-      <<-eos
-      <nfeProc xmlns="http://www.portalfiscal.inf.br/nfe" versao="2.00">
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <ide>
-              <tpNF>1</tpNF>
-              <nNF>1</nNF>
-              <serie>1</serie>
-              <natOp>Vendas de producao do estabelecimento</natOp>
-            </ide>
-            <emit>
-              <xNome>Nome do Remetente Ltda</xNome>
-              <CNPJ>62013294000143</CNPJ>
-              <IE>526926313553</IE>
-              <IEST>611724092039</IEST>
-              <enderEmit>
-                <xLgr>Rua do Remetente, Casa</xLgr>
-                <nro>123</nro>
-                <xBairro>Bairro do Remetente</xBairro>
-                <xMun>SAO PAULO</xMun>
-                <UF>SP</UF>
-                <CEP>12345678</CEP>
-                <fone>1112345678</fone>
-                <email>foo@bar.com</email>
-              </enderEmit>
-            </emit>
-          </infNFe>
-        </NFe>
-        <protNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="2.00">
-          <infProt Id="ID325110012866320">
-            <chNFe>25111012345678901234550020000134151000134151</chNFe>
-            <dhRecbto>2011-10-29T14:37:09</dhRecbto>
-            <nProt>325110012866320</nProt>
-          </infProt>
-        </protNFe>
-      </nfeProc>
-      eos
+      <<~XML
+        <nfeProc xmlns="http://www.portalfiscal.inf.br/nfe" versao="2.00">
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <ide>
+                <tpNF>1</tpNF>
+                <nNF>1</nNF>
+                <serie>1</serie>
+                <natOp>Vendas de producao do estabelecimento</natOp>
+              </ide>
+              <emit>
+                <xNome>Nome do Remetente Ltda</xNome>
+                <CNPJ>62013294000143</CNPJ>
+                <IE>526926313553</IE>
+                <IEST>611724092039</IEST>
+                <enderEmit>
+                  <xLgr>Rua do Remetente, Casa</xLgr>
+                  <nro>123</nro>
+                  <xBairro>Bairro do Remetente</xBairro>
+                  <xMun>SAO PAULO</xMun>
+                  <UF>SP</UF>
+                  <CEP>12345678</CEP>
+                  <fone>1112345678</fone>
+                  <email>foo@bar.com</email>
+                </enderEmit>
+              </emit>
+            </infNFe>
+          </NFe>
+          <protNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="2.00">
+            <infProt Id="ID325110012866320">
+              <chNFe>25111012345678901234550020000134151000134151</chNFe>
+              <dhRecbto>2011-10-29T14:37:09</dhRecbto>
+              <nProt>325110012866320</nProt>
+            </infProt>
+          </protNFe>
+        </nfeProc>
+      XML
     end
 
     context 'render emitter on first page' do

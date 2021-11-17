@@ -11,25 +11,25 @@ describe BrDanfe::DanfeLib::NfeLib::Icmstot do
 
   describe '#render' do
     let(:xml_as_string) do
-      <<-eos
-      <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-        <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-          <ICMSTot>
-            <vBC>1.23</vBC>
-            <vICMS>2.34</vICMS>
-            <vBCST>3.45</vBCST>
-            <vST>4.56</vST>
-            <vProd>5.67</vProd>
-            <vFrete>6.78</vFrete>
-            <vSeg>7.89</vSeg>
-            <vDesc>9.01</vDesc>
-            <vIPI>0.12</vIPI>
-            <vOutro>1.34</vOutro>
-            <vNF>4.35</vNF>
-          </ICMSTot>
-        </infNFe>
-      </NFe>
-      eos
+      <<~XML
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+            <ICMSTot>
+              <vBC>1.23</vBC>
+              <vICMS>2.34</vICMS>
+              <vBCST>3.45</vBCST>
+              <vST>4.56</vST>
+              <vProd>5.67</vProd>
+              <vFrete>6.78</vFrete>
+              <vSeg>7.89</vSeg>
+              <vDesc>9.01</vDesc>
+              <vIPI>0.12</vIPI>
+              <vOutro>1.34</vOutro>
+              <vNF>4.35</vNF>
+            </ICMSTot>
+          </infNFe>
+        </NFe>
+      XML
     end
 
     before do
