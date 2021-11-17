@@ -14,18 +14,18 @@ describe BrDanfe::DanfeLib::NfeLib::Document do
 
     context 'when IE is valid' do
       let(:xml_as_string) do
-        <<-eos
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <transp>
-              <transporta>
-                <IE>964508990089</IE>
-                <UF>SP</UF>
-              </transporta>
-            </transp>
-          </infNFe>
-        </NFe>
-        eos
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <transp>
+                <transporta>
+                  <IE>964508990089</IE>
+                  <UF>SP</UF>
+                </transporta>
+              </transp>
+            </infNFe>
+          </NFe>
+        XML
       end
 
       it 'renders a box with a formated IE to the pdf' do
@@ -40,18 +40,18 @@ describe BrDanfe::DanfeLib::NfeLib::Document do
 
     context 'when IE is invalid' do
       let(:xml_as_string) do
-        <<-eos
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <transp>
-              <transporta>
-                <IE>123</IE>
-                <UF>SC</UF>
-              </transporta>
-            </transp>
-          </infNFe>
-        </NFe>
-        eos
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <transp>
+                <transporta>
+                  <IE>123</IE>
+                  <UF>SC</UF>
+                </transporta>
+              </transp>
+            </infNFe>
+          </NFe>
+        XML
       end
 
       it 'renders a blank box to the pdf' do
@@ -66,16 +66,16 @@ describe BrDanfe::DanfeLib::NfeLib::Document do
 
     context 'when IE is blank' do
       let(:xml_as_string) do
-        <<-eos
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <transp>
-              <transporta>
-              </transporta>
-            </transp>
-          </infNFe>
-        </NFe>
-        eos
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <transp>
+                <transporta>
+                </transporta>
+              </transp>
+            </infNFe>
+          </NFe>
+        XML
       end
 
       it 'renders a blank box to the pdf' do
@@ -89,17 +89,17 @@ describe BrDanfe::DanfeLib::NfeLib::Document do
 
       context 'when UF is invalid' do
         let(:xml_as_string) do
-          <<-eos
-          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-              <transp>
-                <transporta>
-                  <UF>SC</UF>
-                </transporta>
-              </transp>
-            </infNFe>
-          </NFe>
-          eos
+          <<~XML
+            <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+              <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+                <transp>
+                  <transporta>
+                    <UF>SC</UF>
+                  </transporta>
+                </transp>
+              </infNFe>
+            </NFe>
+          XML
         end
 
         it 'renders a blank box to the pdf' do
@@ -122,17 +122,17 @@ describe BrDanfe::DanfeLib::NfeLib::Document do
 
     context 'when CNPJ is valid' do
       let(:xml_as_string) do
-        <<-eos
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <transp>
-              <transporta>
-                <CNPJ>71434064000149</CNPJ>
-              </transporta>
-            </transp>
-          </infNFe>
-        </NFe>
-        eos
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <transp>
+                <transporta>
+                  <CNPJ>71434064000149</CNPJ>
+                </transporta>
+              </transp>
+            </infNFe>
+          </NFe>
+        XML
       end
 
       it 'renders a box with a formated CNPJ to the pdf' do
@@ -147,17 +147,17 @@ describe BrDanfe::DanfeLib::NfeLib::Document do
 
     context 'when CNPJ is invalid' do
       let(:xml_as_string) do
-        <<-eos
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <transp>
-              <transporta>
-                <CNPJ>714</CNPJ>
-              </transporta>
-            </transp>
-          </infNFe>
-        </NFe>
-        eos
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <transp>
+                <transporta>
+                  <CNPJ>714</CNPJ>
+                </transporta>
+              </transp>
+            </infNFe>
+          </NFe>
+        XML
       end
 
       it 'renders a blank box to the pdf' do
@@ -172,16 +172,16 @@ describe BrDanfe::DanfeLib::NfeLib::Document do
 
     context 'when CNPJ is blank' do
       let(:xml_as_string) do
-        <<-eos
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <transp>
-              <transporta>
-              </transporta>
-            </transp>
-          </infNFe>
-        </NFe>
-        eos
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <transp>
+                <transporta>
+                </transporta>
+              </transp>
+            </infNFe>
+          </NFe>
+        XML
       end
 
       it 'renders a blank box to the pdf' do

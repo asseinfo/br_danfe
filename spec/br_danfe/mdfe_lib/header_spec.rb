@@ -42,13 +42,8 @@ describe BrDanfe::MdfeLib::Header do
       </mdfeProc>
     XML
   end
-
   let(:pdf) { BrDanfe::MdfeLib::Document.new }
   let(:xml) { BrDanfe::XML.new(xml_as_string) }
-
-  let(:base_dir) { './spec/fixtures/mdfe/lib/' }
-  let(:output_pdf) { "#{base_dir}output.pdf" }
-
   let(:logo_dimensions) { { width: 100, height: 100 } }
   let(:logo) { 'spec/fixtures/logo.png' }
 
@@ -58,9 +53,12 @@ describe BrDanfe::MdfeLib::Header do
     PDF::Inspector::Text.analyze(pdf.render).strings.join("\n")
   end
 
-  after { File.delete(output_pdf) if File.exist?(output_pdf) }
-
   describe '#generate' do
+    let(:base_dir) { './spec/fixtures/mdfe/lib/' }
+    let(:output_pdf) { "#{base_dir}output.pdf" }
+
+    before { File.delete(output_pdf) if File.exist?(output_pdf) }
+
     it 'generates the emitter informations' do
       emitter_name = 'VENTURIM AGROCRIATIVA LTDA EPP'
       emitter_address = "RODOVIA ES 473 KM 13, nº 0\nVENDA NOVA DO IMIGRANTE - ES   CEP 29.375-000"
@@ -76,7 +74,7 @@ describe BrDanfe::MdfeLib::Header do
       expect(pdf_text).to include emitter_ie
     end
 
-    it'generates the DAMDFE title' do
+    it 'generates the DAMDFE title' do
       subject.generate
       expect(pdf_text).to include "DAMDFE\n - Documento Auxiliar de Manifesto Eletrônico de Documentos Fiscais"
     end

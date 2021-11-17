@@ -5,11 +5,12 @@ describe BrDanfe::DanfeLib::NfeLib::InfadicVol do
   let(:output_pdf) { "#{base_dir}output.pdf" }
   let(:pdf) { BrDanfe::DanfeLib::NfeLib::Document.new }
   let(:xml) { BrDanfe::XML.new(xml_as_string) }
+
   subject { described_class.new(xml, pdf) }
 
   describe '#render' do
     let(:xml_as_string) do
-      <<-EOS
+      <<~XML
         <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
           <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
             <dest>
@@ -74,7 +75,7 @@ describe BrDanfe::DanfeLib::NfeLib::InfadicVol do
             </ICMSTot>
           </infNFe>
         </NFe>
-      EOS
+      XML
     end
 
     before do

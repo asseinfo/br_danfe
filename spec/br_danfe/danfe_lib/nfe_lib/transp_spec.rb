@@ -11,28 +11,28 @@ describe BrDanfe::DanfeLib::NfeLib::Transp do
 
   describe '#render' do
     let(:xml_as_string) do
-      <<-eos
-      <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-        <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-          <transp>
-            <modFrete>0</modFrete>
-            <transporta>
-              <CNPJ>71434064000149</CNPJ>
-              <xNome>Nome do Transportador Ltda</xNome>
-              <IE>964508990089</IE>
-              <xEnder>Rua do Transportador, 456</xEnder>
-              <xMun>Votorantim</xMun>
-              <UF>SP</UF>
-            </transporta>
-            <veicTransp>
-              <placa>ABC-1234</placa>
-              <UF>SP</UF>
-              <RNTC>123456</RNTC>
-            </veicTransp>
-          </transp>
-        </infNFe>
-      </NFe>
-      eos
+      <<~XML
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+            <transp>
+              <modFrete>0</modFrete>
+              <transporta>
+                <CNPJ>71434064000149</CNPJ>
+                <xNome>Nome do Transportador Ltda</xNome>
+                <IE>964508990089</IE>
+                <xEnder>Rua do Transportador, 456</xEnder>
+                <xMun>Votorantim</xMun>
+                <UF>SP</UF>
+              </transporta>
+              <veicTransp>
+                <placa>ABC-1234</placa>
+                <UF>SP</UF>
+                <RNTC>123456</RNTC>
+              </veicTransp>
+            </transp>
+          </infNFe>
+        </NFe>
+      XML
     end
 
     before do
@@ -50,15 +50,15 @@ describe BrDanfe::DanfeLib::NfeLib::Transp do
 
     context 'when modFrete is 0' do
       let(:xml_as_string) do
-        <<-eos
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <transp>
-              <modFrete>0</modFrete>
-            </transp>
-          </infNFe>
-        </NFe>
-        eos
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <transp>
+                <modFrete>0</modFrete>
+              </transp>
+            </infNFe>
+          </NFe>
+        XML
       end
 
       it "renders '0-Emitente' to the pdf" do
@@ -72,15 +72,15 @@ describe BrDanfe::DanfeLib::NfeLib::Transp do
 
     context 'when modFrete is 1' do
       let(:xml_as_string) do
-        <<-eos
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <transp>
-              <modFrete>1</modFrete>
-            </transp>
-          </infNFe>
-        </NFe>
-        eos
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <transp>
+                <modFrete>1</modFrete>
+              </transp>
+            </infNFe>
+          </NFe>
+        XML
       end
 
       it "renders '1-Destinatário' to the pdf" do
@@ -94,15 +94,15 @@ describe BrDanfe::DanfeLib::NfeLib::Transp do
 
     context 'when modFrete is 2' do
       let(:xml_as_string) do
-        <<-eos
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <transp>
-              <modFrete>2</modFrete>
-            </transp>
-          </infNFe>
-        </NFe>
-        eos
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <transp>
+                <modFrete>2</modFrete>
+              </transp>
+            </infNFe>
+          </NFe>
+        XML
       end
 
       it "renders '2-Terceiros' to the pdf" do
@@ -116,15 +116,15 @@ describe BrDanfe::DanfeLib::NfeLib::Transp do
 
     context 'when modFrete is 3' do
       let(:xml_as_string) do
-        <<-eos
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <transp>
-              <modFrete>3</modFrete>
-            </transp>
-          </infNFe>
-        </NFe>
-        eos
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <transp>
+                <modFrete>3</modFrete>
+              </transp>
+            </infNFe>
+          </NFe>
+        XML
       end
 
       it "renders '3-Prop/Rem' to the pdf" do
@@ -138,15 +138,15 @@ describe BrDanfe::DanfeLib::NfeLib::Transp do
 
     context 'when modFrete is 4' do
       let(:xml_as_string) do
-        <<-eos
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <transp>
-              <modFrete>4</modFrete>
-            </transp>
-          </infNFe>
-        </NFe>
-        eos
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <transp>
+                <modFrete>4</modFrete>
+              </transp>
+            </infNFe>
+          </NFe>
+        XML
       end
 
       it "renders '4-Prop/Dest' to the pdf" do
@@ -160,15 +160,15 @@ describe BrDanfe::DanfeLib::NfeLib::Transp do
 
     context 'when modFrete is 9' do
       let(:xml_as_string) do
-        <<-eos
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <transp>
-              <modFrete>9</modFrete>
-            </transp>
-          </infNFe>
-        </NFe>
-        eos
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <transp>
+                <modFrete>9</modFrete>
+              </transp>
+            </infNFe>
+          </NFe>
+        XML
       end
 
       it "renders '9-Sem Frete' to the pdf" do

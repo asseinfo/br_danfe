@@ -4,19 +4,19 @@ describe BrDanfe::DanfeLib::NfeLib::Xprod do
   describe '#render' do
     context 'when has FCI' do
       let(:xml_fci) do
-        xml = <<-eos
-        <det nItem="1">
-          <prod>
-            <xProd>MONITOR DE ARCO ELETRICO</xProd>
-            <nFCI>12232531-74B2-4FDD-87A6-CF0AD3E55386</nFCI>
-          </prod>
-        </det>
-        eos
+        xml = <<~XML
+          <det nItem="1">
+            <prod>
+              <xProd>MONITOR DE ARCO ELETRICO</xProd>
+              <nFCI>12232531-74B2-4FDD-87A6-CF0AD3E55386</nFCI>
+            </prod>
+          </det>
+        XML
 
         Nokogiri::XML(xml)
       end
 
-      subject { BrDanfe::DanfeLib::NfeLib::Xprod.new(xml_fci) }
+      subject { described_class.new(xml_fci) }
 
       it 'returns product + FCI' do
         expected = 'MONITOR DE ARCO ELETRICO'
@@ -32,7 +32,7 @@ describe BrDanfe::DanfeLib::NfeLib::Xprod do
         let(:pST) { 0.00 }
         let(:vICMSSTRet) { 0.00 }
         let(:xml) do
-          xml = <<-eos
+          xml = <<~XML
             <det nItem="1">
               <prod>
                 <xProd>MONITOR DE ARCO ELETRICO</xProd>
@@ -61,12 +61,12 @@ describe BrDanfe::DanfeLib::NfeLib::Xprod do
                 </COFINS>
               </imposto>
             </det>
-          eos
+          XML
 
           Nokogiri::XML(xml)
         end
 
-        subject { BrDanfe::DanfeLib::NfeLib::Xprod.new(xml) }
+        subject { described_class.new(xml) }
 
         context 'when has vBCSTRet' do
           let(:vBCSTRet) { 50.00 }
@@ -115,29 +115,29 @@ describe BrDanfe::DanfeLib::NfeLib::Xprod do
 
       context "when isn't Retido" do
         let(:xml_st) do
-          xml = <<-eos
-        <det nItem="1">
-          <prod>
-            <xProd>MONITOR DE ARCO ELETRICO</xProd>
-          </prod>
-          <imposto>
-            <vTotTrib>96.73</vTotTrib>
-            <ICMS>
-              <ICMSSN202>
-                <pMVAST>56.00</pMVAST>
-                <vBCST>479.82</vBCST>
-                <pICMSST>17.00</pICMSST>
-                <vICMSST>29.28</vICMSST>
-              </ICMSSN202>
-            </ICMS>
-          </imposto>
-        </det>
-          eos
+          xml = <<~XML
+            <det nItem="1">
+              <prod>
+                <xProd>MONITOR DE ARCO ELETRICO</xProd>
+              </prod>
+              <imposto>
+                <vTotTrib>96.73</vTotTrib>
+                <ICMS>
+                  <ICMSSN202>
+                    <pMVAST>56.00</pMVAST>
+                    <vBCST>479.82</vBCST>
+                    <pICMSST>17.00</pICMSST>
+                    <vICMSST>29.28</vICMSST>
+                  </ICMSSN202>
+                </ICMS>
+              </imposto>
+            </det>
+          XML
 
           Nokogiri::XML(xml)
         end
 
-        subject { BrDanfe::DanfeLib::NfeLib::Xprod.new(xml_st) }
+        subject { described_class.new(xml_st) }
 
         it 'returns product + ST' do
           expected = 'MONITOR DE ARCO ELETRICO'
@@ -151,19 +151,19 @@ describe BrDanfe::DanfeLib::NfeLib::Xprod do
 
     context 'when has infAdProd' do
       let(:xml_infAdProd) do
-        xml = <<-eos
-        <det nItem="1">
-          <prod>
-            <xProd>MONITOR DE ARCO ELETRICO</xProd>
-          </prod>
-          <infAdProd>Informações adicionais do produto</infAdProd>
-        </det>
-        eos
+        xml = <<~XML
+          <det nItem="1">
+            <prod>
+              <xProd>MONITOR DE ARCO ELETRICO</xProd>
+            </prod>
+            <infAdProd>Informações adicionais do produto</infAdProd>
+          </det>
+        XML
 
         Nokogiri::XML(xml)
       end
 
-      subject { BrDanfe::DanfeLib::NfeLib::Xprod.new(xml_infAdProd) }
+      subject { described_class.new(xml_infAdProd) }
 
       it 'returns product + infAdProd' do
         expected = 'MONITOR DE ARCO ELETRICO'
@@ -176,27 +176,27 @@ describe BrDanfe::DanfeLib::NfeLib::Xprod do
 
     context 'when has FCP on ICMS00 tag' do
       let(:xml_fcp) do
-        xml = <<-eos
-        <det nItem="1">
-          <prod>
-            <xProd>MONITOR DE ARCO ELETRICO</xProd>
-          </prod>
-          <imposto>
-            <vTotTrib>23.56</vTotTrib>
-            <ICMS>
-              <ICMS00>
-                <vFCP>4.71</vFCP>
-                <pFCP>2.00</pFCP>
-              </ICMS00>
-            </ICMS>
-          </imposto>
-        </det>
-        eos
+        xml = <<~XML
+          <det nItem="1">
+            <prod>
+              <xProd>MONITOR DE ARCO ELETRICO</xProd>
+            </prod>
+            <imposto>
+              <vTotTrib>23.56</vTotTrib>
+              <ICMS>
+                <ICMS00>
+                  <vFCP>4.71</vFCP>
+                  <pFCP>2.00</pFCP>
+                </ICMS00>
+              </ICMS>
+            </imposto>
+          </det>
+        XML
 
         Nokogiri::XML(xml)
       end
 
-      subject { BrDanfe::DanfeLib::NfeLib::Xprod.new(xml_fcp) }
+      subject { described_class.new(xml_fcp) }
 
       it 'returns product + FCP' do
         expected = 'MONITOR DE ARCO ELETRICO'
@@ -209,35 +209,35 @@ describe BrDanfe::DanfeLib::NfeLib::Xprod do
 
     context 'when has FCI + ST + infAdProd + FCP' do
       let(:xml_IFC_ST_infAdProd) do
-        xml = <<-eos
-        <det nItem="1">
-          <prod>
-            <xProd>MONITOR DE ARCO ELETRICO</xProd>
-            <nFCI>12232531-74B2-4FDD-87A6-CF0AD3E55386</nFCI>
-          </prod>
-          <imposto>
-            <vTotTrib>96.73</vTotTrib>
-            <ICMS>
-              <ICMSSN202>
-                <pMVAST>56.00</pMVAST>
-                <vBCST>479.82</vBCST>
-                <pICMSST>17.00</pICMSST>
-                <vICMSST>29.28</vICMSST>
-              </ICMSSN202>
-              <ICMS00>
-                <vFCP>4.71</vFCP>
-                <pFCP>2.00</pFCP>
-              </ICMS00>
-            </ICMS>
-          </imposto>
-          <infAdProd>Informações adicionais do produto</infAdProd>
-        </det>
-        eos
+        xml = <<~XML
+          <det nItem="1">
+            <prod>
+              <xProd>MONITOR DE ARCO ELETRICO</xProd>
+              <nFCI>12232531-74B2-4FDD-87A6-CF0AD3E55386</nFCI>
+            </prod>
+            <imposto>
+              <vTotTrib>96.73</vTotTrib>
+              <ICMS>
+                <ICMSSN202>
+                  <pMVAST>56.00</pMVAST>
+                  <vBCST>479.82</vBCST>
+                  <pICMSST>17.00</pICMSST>
+                  <vICMSST>29.28</vICMSST>
+                </ICMSSN202>
+                <ICMS00>
+                  <vFCP>4.71</vFCP>
+                  <pFCP>2.00</pFCP>
+                </ICMS00>
+              </ICMS>
+            </imposto>
+            <infAdProd>Informações adicionais do produto</infAdProd>
+          </det>
+        XML
 
         Nokogiri::XML(xml)
       end
 
-      subject { BrDanfe::DanfeLib::NfeLib::Xprod.new(xml_IFC_ST_infAdProd) }
+      subject { described_class.new(xml_IFC_ST_infAdProd) }
 
       it 'returns product + FCI + ST + infAdProd' do
         expected = 'MONITOR DE ARCO ELETRICO'
@@ -256,28 +256,28 @@ describe BrDanfe::DanfeLib::NfeLib::Xprod do
 
     context 'when FCP is not in a ICMS00 tag' do
       let(:xml_fcp) do
-        xml = <<-eos
-        <det nItem="1">
-          <prod>
-            <xProd>MONITOR DE ARCO ELETRICO</xProd>
-          </prod>
-          <imposto>
-            <vTotTrib>23.56</vTotTrib>
-            <ICMS>
-              <ICMS10>
-                <vBCFCP>235.50</vBCFCP>
-                <vFCP>4.71</vFCP>
-                <pFCP>2.00</pFCP>
-              </ICMS10>
-            </ICMS>
-          </imposto>
-        </det>
-        eos
+        xml = <<~XML
+          <det nItem="1">
+            <prod>
+              <xProd>MONITOR DE ARCO ELETRICO</xProd>
+            </prod>
+            <imposto>
+              <vTotTrib>23.56</vTotTrib>
+              <ICMS>
+                <ICMS10>
+                  <vBCFCP>235.50</vBCFCP>
+                  <vFCP>4.71</vFCP>
+                  <pFCP>2.00</pFCP>
+                </ICMS10>
+              </ICMS>
+            </imposto>
+          </det>
+        XML
 
         Nokogiri::XML(xml)
       end
 
-      subject { BrDanfe::DanfeLib::NfeLib::Xprod.new(xml_fcp) }
+      subject { described_class.new(xml_fcp) }
 
       it 'returns product + FCP' do
         expected = 'MONITOR DE ARCO ELETRICO'
@@ -290,28 +290,28 @@ describe BrDanfe::DanfeLib::NfeLib::Xprod do
 
     context 'when has FCP ST' do
       let(:xml_fcp) do
-        xml = <<-eos
-        <det nItem="1">
-          <prod>
-            <xProd>MONITOR DE ARCO ELETRICO</xProd>
-          </prod>
-          <imposto>
-            <vTotTrib>23.56</vTotTrib>
-            <ICMS>
-              <ICMS30>
-                <vBCFCPST>235.50</vBCFCPST>
-                <vFCPST>0.71</vFCPST>
-                <pFCPST>2.00</pFCPST>
-              </ICMS30>
-            </ICMS>
-          </imposto>
-        </det>
-        eos
+        xml = <<~XML
+          <det nItem="1">
+            <prod>
+              <xProd>MONITOR DE ARCO ELETRICO</xProd>
+            </prod>
+            <imposto>
+              <vTotTrib>23.56</vTotTrib>
+              <ICMS>
+                <ICMS30>
+                  <vBCFCPST>235.50</vBCFCPST>
+                  <vFCPST>0.71</vFCPST>
+                  <pFCPST>2.00</pFCPST>
+                </ICMS30>
+              </ICMS>
+            </imposto>
+          </det>
+        XML
 
         Nokogiri::XML(xml)
       end
 
-      subject { BrDanfe::DanfeLib::NfeLib::Xprod.new(xml_fcp) }
+      subject { described_class.new(xml_fcp) }
 
       it 'returns product + FCP' do
         expected = 'MONITOR DE ARCO ELETRICO'

@@ -93,7 +93,8 @@ module BrDanfe
         end
 
         def difal?
-          @xml['ICMSTot/vICMSUFDest'].to_f != 0
+          value = @xml['ICMSTot/vICMSUFDest'].presence || '0.0'
+          BigDecimal(value).positive?
         end
 
         def fisco_content

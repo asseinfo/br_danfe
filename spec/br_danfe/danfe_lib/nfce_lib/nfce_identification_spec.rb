@@ -7,7 +7,7 @@ describe BrDanfe::DanfeLib::NfceLib::NfceIdentification do
   let(:pdf) { BrDanfe::DanfeLib::NfceLib::Document.new(8.cm, 5.cm) }
 
   let(:xml) do
-    xml = <<-eos
+    xml = <<~XML
       <nfeProc>
         <NFe>
           <infNFe>
@@ -25,7 +25,7 @@ describe BrDanfe::DanfeLib::NfceLib::NfceIdentification do
           </infNFe>
         </NFe>
       </nfeProc>
-    eos
+    XML
 
     BrDanfe::XML.new(xml)
   end

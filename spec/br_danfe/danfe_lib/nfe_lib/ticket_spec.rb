@@ -11,19 +11,19 @@ describe BrDanfe::DanfeLib::NfeLib::Ticket do
 
   describe '#render' do
     let(:xml_as_string) do
-      <<-eos
-      <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-        <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-          <ide>
-            <nNF>1</nNF>
-            <serie>1</serie>
-          </ide>
-          <emit>
-            <xNome>Nome do Remetente Ltda</xNome>
-          </emit>
-        </infNFe>
-      </NFe>
-      eos
+      <<~XML
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+            <ide>
+              <nNF>1</nNF>
+              <serie>1</serie>
+            </ide>
+            <emit>
+              <xNome>Nome do Remetente Ltda</xNome>
+            </emit>
+          </infNFe>
+        </NFe>
+      XML
     end
 
     before do

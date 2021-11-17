@@ -48,7 +48,7 @@ module BrDanfe
       end
 
       def number_of_pages(page)
-        text = page.to_s + '/' + @pdf.page_count.to_s
+        text = "#{page}/#{@pdf.page_count}"
         generate_box('FL', text, 125)
       end
 

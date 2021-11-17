@@ -1,7 +1,8 @@
-require: rubocop-performance
+require:
+  - rubocop-performance
 
 AllCops:
-  TargetRubyVersion: 2.5.1
+  TargetRubyVersion: 2.6
   Exclude:
     - bin/**/*
     - vendor/bundle/**/*
@@ -10,21 +11,25 @@ AllCops:
     - !ruby/regexp /old_and_unused\.rb$/
   DisplayCopNames: true
   DisplayStyleGuide: true
+  NewCops: enable
 
 Bundler/OrderedGems:
   Enabled: false
 
-Layout/AlignHash:
+Layout/HashAlignment:
   Enabled: false
 
-Layout/AlignParameters:
+Layout/ParameterAlignment:
   Enabled: false
 
-Layout/IndentArray:
+Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 
 Layout/SpaceBeforeBlockBraces:
   EnforcedStyleForEmptyBraces: space
+
+Layout/LineLength:
+  Max: 200
 
 Metrics/ClassLength:
   Max: 230
@@ -59,8 +64,14 @@ Style/IfUnlessModifier:
 Style/SymbolArray:
   EnforcedStyle: brackets
 
-Metrics/LineLength:
-  Max: 200
+Style/HashEachMethods:
+  Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashTransformValues:
+  Enabled: false
 
 Lint/AmbiguousBlockAssociation:
   Exclude:
@@ -89,7 +100,7 @@ Naming/HeredocDelimiterNaming:
 Naming/HeredocDelimiterCase:
   Enabled: false
 
-Naming/UncommunicativeMethodParamName:
+Naming/MethodParameterName:
   Enabled: false
 
 Naming/MethodName:
@@ -101,5 +112,5 @@ Naming/VariableName:
 Metrics/ParameterLists:
   Enabled: false
 
-Naming/UncommunicativeBlockParamName:
+Naming/BlockParameterName:
   Enabled: false

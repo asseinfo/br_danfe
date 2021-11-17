@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = `git ls-files -- { test,spec,features }/*`.split("\n")
   spec.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   spec.require_paths = ['lib']
-  spec.required_ruby_version = '>= 2.5.1'
+  spec.required_ruby_version = '>= 2.6'
 
   spec.add_dependency 'barby', '0.6.8'
   spec.add_dependency 'br_documents', '>= 0.1.3'
@@ -30,8 +30,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pdf-inspector', '~> 1.3.0'
   spec.add_development_dependency 'rake', '13.0.6'
   spec.add_development_dependency 'rspec', '3.10.0'
-  spec.add_development_dependency 'rubocop', '0.67.0'
-  spec.add_development_dependency 'rubocop-performance', '~> 1.1.0'
+  spec.add_development_dependency 'rubocop', '~> 0.93.1'
+  spec.add_development_dependency 'rubocop-performance', '~> 1.10.2'
+  spec.add_development_dependency 'rubocop-rspec', '~> 1.44.1'
   spec.add_development_dependency 'simplecov', '0.17.1'
   spec.add_development_dependency 'simplecov-html', '0.10.2'
 end

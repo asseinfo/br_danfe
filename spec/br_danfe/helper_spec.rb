@@ -3,7 +3,7 @@ require 'spec_helper'
 describe BrDanfe::Helper do
   describe '.no_fiscal_value?' do
     let(:xml_homologation) do
-      xml = <<-eos
+      xml = <<~XML
         <nfeProc>
           <NFe>
             <infNFe>
@@ -18,25 +18,25 @@ describe BrDanfe::Helper do
             </protNFe>
           </NFe>
         </nfeProc>
-      eos
+      XML
 
       Nokogiri::XML(xml)
     end
 
     let(:xml_unauthorized) do
-      xml = <<-eos
+      xml = <<~XML
         <nfeProc>
           <protNFe>
             <infProt></infProt>
           </protNFe>
         </nfeProc>
-      eos
+      XML
 
       Nokogiri::XML(xml)
     end
 
     let(:xml_authorized) do
-      xml = <<-eos
+      xml = <<~XML
         <nfeProc>
           <NFe>
             <infNFe>
@@ -51,7 +51,7 @@ describe BrDanfe::Helper do
             </infProt>
           </protNFe>
         </nfeProc>
-      eos
+      XML
 
       Nokogiri::XML(xml)
     end
@@ -78,13 +78,13 @@ describe BrDanfe::Helper do
   describe '.unauthorized?' do
     context 'when XML is unauthorized' do
       let(:xml_unauthorized) do
-        xml = <<-eos
+        xml = <<~XML
           <nfeProc>
             <protNFe>
               <infProt></infProt>
             </protNFe>
           </nfeProc>
-        eos
+        XML
 
         Nokogiri::XML(xml)
       end
@@ -96,7 +96,7 @@ describe BrDanfe::Helper do
 
     context 'when XML is authorized' do
       let(:xml_authorized) do
-        xml = <<-eos
+        xml = <<~XML
           <nfeProc>
             <protNFe>
               <infProt>
@@ -104,7 +104,7 @@ describe BrDanfe::Helper do
               </infProt>
             </protNFe>
           </nfeProc>
-        eos
+        XML
 
         Nokogiri::XML(xml)
       end
@@ -118,7 +118,7 @@ describe BrDanfe::Helper do
   describe '.homologation?' do
     context 'when tpAmb is equal to "2"' do
       let(:xml_homologation) do
-        xml = <<-eos
+        xml = <<~XML
           <nfeProc>
             <NFe>
               <infNFe>
@@ -128,7 +128,7 @@ describe BrDanfe::Helper do
               </infNFe>
             </NFe>
           </nfeProc>
-        eos
+        XML
 
         Nokogiri::XML(xml)
       end
@@ -140,7 +140,7 @@ describe BrDanfe::Helper do
 
     context 'when tpAmb is different to "2"' do
       let(:xml_production) do
-        xml = <<-eos
+        xml = <<~XML
           <nfeProc>
             <NFe>
               <infNFe>
@@ -150,7 +150,7 @@ describe BrDanfe::Helper do
               </infNFe>
             </NFe>
           </nfeProc>
-        eos
+        XML
 
         Nokogiri::XML(xml)
       end
@@ -214,7 +214,7 @@ describe BrDanfe::Helper do
     end
 
     describe 'when has timezone' do
-      it'returns the formated string with the timezone' do
+      it 'returns the formated string with the timezone' do
         expect(described_class.format_datetime('2013-10-18T13:54:04-03:00', with_time_zone: true)).to eql '18/10/2013 13:54:04-03:00'
       end
     end

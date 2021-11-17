@@ -22,9 +22,6 @@ describe BrDanfe::MdfeLib::Notes do
     XML
   end
 
-  let(:base_dir) { './spec/fixtures/mdfe/lib/' }
-  let(:output_pdf) { "#{base_dir}output.pdf" }
-
   let(:pdf) { BrDanfe::MdfeLib::Document.new }
   let(:xml) { BrDanfe::XML.new(xml_as_string) }
 
@@ -37,6 +34,11 @@ describe BrDanfe::MdfeLib::Notes do
   before { pdf.move_cursor_to 345 }
 
   describe '#generate' do
+    let(:base_dir) { './spec/fixtures/mdfe/lib/' }
+    let(:output_pdf) { "#{base_dir}output.pdf" }
+
+    before { File.delete(output_pdf) if File.exist?(output_pdf) }
+
     it 'generates the title' do
       title = 'Observações'
 
@@ -75,8 +77,6 @@ describe BrDanfe::MdfeLib::Notes do
       subject.generate
       expect(pdf_text).not_to include taxpayer_information
     end
-
-    after { File.delete(output_pdf) if File.exist?(output_pdf) }
 
     it 'creates a new page if aditional information do not fit on first page' do
       expect(File.exist?(output_pdf)).to be false

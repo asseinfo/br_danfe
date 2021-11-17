@@ -74,7 +74,7 @@ module BrDanfe
 
           total_height += 10 if total_chars >= MAX_CHARS_ON_LINE
 
-          total_height <= height_on_first_page ? first_page += word + ' ' : next_page += word + ' '
+          total_height <= height_on_first_page ? first_page += "#{word} " : next_page += "#{word} "
         end
 
         { first_page: first_page, next_page: next_page }

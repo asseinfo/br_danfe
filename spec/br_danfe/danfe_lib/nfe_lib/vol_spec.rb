@@ -11,38 +11,38 @@ describe BrDanfe::DanfeLib::NfeLib::Vol do
 
   describe '#render' do
     let(:xml_as_string) do
-      <<-eos
-      <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-        <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-          <transp>
-            <vol>
-              <qVol>1</qVol>
-              <esp>VOLUMES 1</esp>
-              <marca>DIVERSOS 1</marca>
-              <nVol>1</nVol>
-              <pesoL>1000.000</pesoL>
-              <pesoB>1100.000</pesoB>
-            </vol>
-            <vol>
-              <qVol>2</qVol>
-              <esp>VOLUMES 2</esp>
-              <marca>DIVERSOS 2</marca>
-              <nVol>2</nVol>
-              <pesoL>2000.000</pesoL>
-              <pesoB>2200.000</pesoB>
-            </vol>
-            <vol>
-              <qVol>3</qVol>
-              <esp>VOLUMES 3</esp>
-              <marca>DIVERSOS 3</marca>
-              <nVol>3</nVol>
-              <pesoL>3000.000</pesoL>
-              <pesoB>3300.000</pesoB>
-            </vol>
-          </transp>
-        </infNFe>
-      </NFe>
-      eos
+      <<~XML
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+            <transp>
+              <vol>
+                <qVol>1</qVol>
+                <esp>VOLUMES 1</esp>
+                <marca>DIVERSOS 1</marca>
+                <nVol>1</nVol>
+                <pesoL>1000.000</pesoL>
+                <pesoB>1100.000</pesoB>
+              </vol>
+              <vol>
+                <qVol>2</qVol>
+                <esp>VOLUMES 2</esp>
+                <marca>DIVERSOS 2</marca>
+                <nVol>2</nVol>
+                <pesoL>2000.000</pesoL>
+                <pesoB>2200.000</pesoB>
+              </vol>
+              <vol>
+                <qVol>3</qVol>
+                <esp>VOLUMES 3</esp>
+                <marca>DIVERSOS 3</marca>
+                <nVol>3</nVol>
+                <pesoL>3000.000</pesoL>
+                <pesoB>3300.000</pesoB>
+              </vol>
+            </transp>
+          </infNFe>
+        </NFe>
+      XML
     end
 
     before do
@@ -64,14 +64,14 @@ describe BrDanfe::DanfeLib::NfeLib::Vol do
 
     context 'when any <vol> tag is found' do
       let(:xml_as_string) do
-        <<-eos
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            <transp>
-            </transp>
-          </infNFe>
-        </NFe>
-        eos
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <transp>
+              </transp>
+            </infNFe>
+          </NFe>
+        XML
       end
 
       it 'renders blank boxes' do

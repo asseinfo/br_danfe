@@ -11,29 +11,29 @@ describe BrDanfe::DanfeLib::NfeLib::Dup do
 
   describe '#render' do
     let(:xml_as_string) do
-      <<-eos
-      <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-        <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-          <cobr>
-            <dup>
-              <nDup>1</nDup>
-              <dVenc>2015-02-13</dVenc>
-              <vDup>25.56</vDup>
-            </dup>
-            <dup>
-              <nDup>2</nDup>
-              <dVenc>2015-03-15</dVenc>
-              <vDup>25.56</vDup>
-            </dup>
-            <dup>
-              <nDup>3</nDup>
-              <dVenc>2015-04-14</dVenc>
-              <vDup>25.55</vDup>
-            </dup>
-          </cobr>
-        </infNFe>
-      </NFe>
-      eos
+      <<~XML
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+            <cobr>
+              <dup>
+                <nDup>1</nDup>
+                <dVenc>2015-02-13</dVenc>
+                <vDup>25.56</vDup>
+              </dup>
+              <dup>
+                <nDup>2</nDup>
+                <dVenc>2015-03-15</dVenc>
+                <vDup>25.56</vDup>
+              </dup>
+              <dup>
+                <nDup>3</nDup>
+                <dVenc>2015-04-14</dVenc>
+                <vDup>25.55</vDup>
+              </dup>
+            </cobr>
+          </infNFe>
+        </NFe>
+      XML
     end
 
     before do
