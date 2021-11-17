@@ -16,6 +16,15 @@ jobs:
           key: brdanfe-cache-v2-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
+  linter:
+    docker:
+      - image: circleci/ruby:2.7.4
+    steps:
+      - restore_cache:
+          key: brdanfe-cache-v2-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: brdanfe-cache-v2-{{ checksum "Gemfile.lock" }}
+      - run: bundle exec rubocop --display-cop-names --parallel
   rspec:
     docker:
       - image: circleci/ruby:2.7.4
@@ -37,6 +46,9 @@ workflows:
   main:
     jobs:
       - build
-      - rspec:
+      - linter:
           requires:
             - build
+      - rspec:
+          requires:
+            - linter
