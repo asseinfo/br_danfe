@@ -12,7 +12,7 @@ module BrDanfe
             botton_margin: 0
           )
 
-          @document.font 'Courier'
+          @document.font 'tinos'
           @document.line_width = 0.3
         end
 

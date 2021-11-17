@@ -4,9 +4,8 @@ module BrDanfe
     require 'chunky_png'
     require 'tempfile'
 
-    def initialize(pdf:, xml:, qr_code_tag:, box_size:)
+    def initialize(pdf:, qr_code_tag:, box_size:)
       @pdf = pdf
-      @xml = xml
       @qr_code_tag = qr_code_tag
       @box_size = box_size
     end

@@ -4,12 +4,11 @@ describe BrDanfe::Mdfe do
   let(:base_dir) { './spec/fixtures/mdfe/lib/' }
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
-  let(:xml_as_string) { File.read('./spec/fixtures/mdfe/lib/xml-mdfe.xml') }
-
-  let(:xml) { BrDanfe::XML.new(xml_as_string) }
+  let(:xml) { File.read('./spec/fixtures/mdfe/lib/xml-mdfe.xml') }
 
   subject { described_class.new(xml) }
-  after { File.delete(output_pdf) if File.exist?(output_pdf) }
+
+  before { File.delete(output_pdf) if File.exist?(output_pdf) }
 
   before do
     subject.logo_options.logo_dimensions = { width: 100, height: 100 }
@@ -34,7 +33,7 @@ describe BrDanfe::Mdfe do
   end
 
   context 'when MDF-e has multiple pages' do
-    let(:xml_as_string) { File.read('./spec/fixtures/mdfe/lib/xml-mdfe-multiples-pages.xml') }
+    let(:xml) { File.read('./spec/fixtures/mdfe/lib/xml-mdfe-multiples-pages.xml') }
 
     it 'renders the header and the identification on each page' do
       expect(File.exist?(output_pdf)).to be false

@@ -1,7 +1,7 @@
 module BrDanfe
   module DanfeLib
     class Nfce < Base
-      PAGE_WIDTH = 8.cm
+      PAGE_WIDTH = 7.cm
       PAGE_HEIGHT = 100.cm
 
       private
@@ -31,7 +31,7 @@ module BrDanfe
           NfceLib::Key.new(@document, xml).render
           NfceLib::Recipient.new(@document, xml).render
           NfceLib::NfceIdentification.new(@document, xml).render
-          BrDanfe::QrCode.new(pdf: @document, xml: xml, qr_code_tag: xml['qrCode'], box_size: 3.cm).render
+          BrDanfe::QrCode.new(pdf: @document, qr_code_tag: xml['qrCode'], box_size: 4.5.cm).render
           NfceLib::Footer.new(@document, xml).render(footer_info)
 
           render_no_fiscal_value(xml)

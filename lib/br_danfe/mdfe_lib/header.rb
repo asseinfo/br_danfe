@@ -11,7 +11,7 @@ module BrDanfe
       def generate
         generate_emit
         generate_title
-        qr_code
+        generate_qr_code if @xml['qrCodMDFe'].present?
       end
 
       private
@@ -65,12 +65,12 @@ module BrDanfe
         end
       end
 
-      def qr_code
+      def generate_qr_code
         box_size = 40.mm
         security_margin = box_size + box_size / 10.0
 
         @pdf.bounding_box([414, 780], width: security_margin, height: security_margin) do
-          BrDanfe::QrCode.new(pdf: @pdf, xml: @xml, qr_code_tag: @xml['qrCodMDFe'], box_size: box_size).render
+          BrDanfe::QrCode.new(pdf: @pdf, qr_code_tag: @xml['qrCodMDFe'], box_size: box_size).render
         end
       end
     end
