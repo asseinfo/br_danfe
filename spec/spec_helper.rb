@@ -1,5 +1,5 @@
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start unless ENV["NO_COVERAGE"]
 
 require "bundler/setup"
 require "br_danfe"
