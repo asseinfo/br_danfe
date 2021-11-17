@@ -3,7 +3,7 @@ require 'spec_helper'
 describe BrDanfe::MdfeLib::Header do
   let(:qr_code_mdfe) do
     url = 'https://dfe-portal.svrs.rs.gov.br/mdfe/QRCode?chMDFe=32210717781119000141580010000001211000000003&amp;tpAmb=1'
-     "<qrCodMDFe>#{url}</qrCodMDFe>"
+    "<qrCodMDFe>#{url}</qrCodMDFe>"
   end
   let(:xml_as_string) do
     <<~XML
