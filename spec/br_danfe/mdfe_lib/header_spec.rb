@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe BrDanfe::MdfeLib::Header do
+  let(:qr_code_mdfe) do
+    url = 'https://dfe-portal.svrs.rs.gov.br/mdfe/QRCode?chMDFe=32210717781119000141580010000001211000000003&amp;tpAmb=1'
+     "<qrCodMDFe>#{url}</qrCodMDFe>"
+  end
   let(:xml_as_string) do
     <<~XML
       <?xml version="1.0" encoding="UTF-8"?>
@@ -32,7 +36,7 @@ describe BrDanfe::MdfeLib::Header do
             </emit>
           </infMDFe>
           <infMDFeSupl>
-            <qrCodMDFe>https://dfe-portal.svrs.rs.gov.br/mdfe/QRCode?chMDFe=32210717781119000141580010000001211000000003&amp;tpAmb=1</qrCodMDFe>
+            #{qr_code_mdfe}
           </infMDFeSupl>
         </MDFe>
       </mdfeProc>
@@ -73,14 +77,11 @@ describe BrDanfe::MdfeLib::Header do
     end
 
     it'generates the DAMDFE title' do
-      title = "DAMDFE\n - Documento Auxiliar de Manifesto Eletrônico de Documentos Fiscais"
-
       subject.generate
-
-      expect(pdf_text).to include title
+      expect(pdf_text).to include "DAMDFE\n - Documento Auxiliar de Manifesto Eletrônico de Documentos Fiscais"
     end
 
-    it 'generates the qr code' do
+    it 'generates the QR-code' do
       expect(File.exist?(output_pdf)).to be false
 
       subject.generate
@@ -89,12 +90,22 @@ describe BrDanfe::MdfeLib::Header do
       expect("#{base_dir}header#render-qr-code.pdf").to have_same_content_of file: output_pdf
     end
 
+    context 'if the QR-code URL is not present' do
+      let(:qr_code_mdfe) { '<qrCodMDFe></qrCodMDFe>' }
+
+      it 'does not generates the QR-code' do
+        expect(File.exist?(output_pdf)).to be false
+
+        subject.generate
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}header#render-without-qr-code.pdf").to have_same_content_of file: output_pdf
+      end
+    end
+
     it 'generates the company CNPJ' do
-      cnpj = "CNPJ: \n17781119000141"
-
       subject.generate
-
-      expect(pdf_text).to include cnpj
+      expect(pdf_text).to include "CNPJ: \n17781119000141"
     end
 
     describe 'logo' do
