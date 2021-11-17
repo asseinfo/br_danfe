@@ -1,4 +1,6 @@
-guard :rspec, cmd: 'bundle exec rspec' do
+directories %w[lib spec]
+
+guard :rspec, cmd: 'NO_COVERAGE=true bundle exec rspec' do
   require 'guard/rspec/dsl'
   dsl = Guard::RSpec::Dsl.new(self)
 
