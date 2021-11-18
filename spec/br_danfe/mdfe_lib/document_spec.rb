@@ -7,13 +7,13 @@ describe BrDanfe::MdfeLib::Document do
   describe '#method_missing' do
     context 'when prawn has the method' do
       it 'does not throws an error' do
-        expect { subject.text }.not_to raise_error NameError
+        expect(subject).to respond_to :text
       end
     end
 
     context 'when prawn does not have the method' do
       it 'throws an error' do
-        expect { subject.any_method }.to raise_error NameError
+        expect { subject.non_existent_method }.to raise_error NameError
       end
     end
   end
