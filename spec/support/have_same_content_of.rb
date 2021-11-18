@@ -5,7 +5,9 @@ RSpec::Matchers.define(:have_same_content_of) do |file: nil|
     if File.exist?(actual_file_path)
       expect(md5_hash(actual_file_path)).to eq(md5_hash(expected_file_path))
     else
+      # :nocov:
       create_when_missing(expected_file_path, actual_file_path)
+      # :nocov:
     end
   end
 
@@ -13,6 +15,7 @@ RSpec::Matchers.define(:have_same_content_of) do |file: nil|
     Digest::MD5.hexdigest(File.read(file_path))
   end
 
+  # :nocov:
   def create_when_missing(expected_file_path, actual_file_path)
     puts '+----------------------------------------------------'
     puts '|'
@@ -26,4 +29,5 @@ RSpec::Matchers.define(:have_same_content_of) do |file: nil|
 
     false
   end
+  # :nocov:
 end

@@ -3,6 +3,8 @@ module Prawn
   # of various strings for layout purposes.
   #
   # @private
+
+  # :nocov:
   class FontMetricCache
     CacheEntryMonkeyPatch = Struct.new(:font, :font_size, :options, :string)
 
@@ -30,4 +32,5 @@ module Prawn
       length
     end
   end
+  # :nocov:
 end

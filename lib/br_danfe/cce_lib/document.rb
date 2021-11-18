@@ -19,13 +19,17 @@ module BrDanfe
         if @document.respond_to? method_name
           @document.send method_name, *args, &block
         else
+          # :nocov:
           super
+          # :nocov:
         end
       end
 
+      # :nocov:
       def respond_to_missing?(method_name, include_private = false)
         @document.respond_to?(method_name, include_private) || super
       end
+      # :nocov:
 
       def box(height:, pad: 5)
         bounding_box([0, cursor], width: page_width, height: height) do
