@@ -49,15 +49,15 @@ describe BrDanfe::DanfeLib::NfceLib::Header do
   describe '#render' do
     before do
       subject.render
-      File.delete(output_pdf) if File.exist?(output_pdf)
+      # File.delete(output_pdf) if File.exist?(output_pdf)
     end
 
     context 'when has a short name' do
       let(:company_name) { 'Test company' }
 
       context 'when has a logo' do
-        it 'renders header to the pdf' do
-          expect(File.exist?(output_pdf)).to be_falsey
+        fit 'renders header to the pdf' do
+          # expect(File.exist?(output_pdf)).to be_falsey
           pdf.render_file output_pdf
 
           expect("#{base_dir}header#render-short_name_with_logo.pdf").to have_same_content_of file: output_pdf
