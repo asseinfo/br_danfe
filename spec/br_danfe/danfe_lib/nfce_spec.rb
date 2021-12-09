@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe BrDanfe::DanfeLib::Nfce do
-  let(:output_pdf) { "#{base_dir}output.pdf" }
   let(:base_dir) { './spec/fixtures/nfce/v4.00/' }
+  let(:output_pdf) { "#{base_dir}output.pdf" }
   let(:xml) { BrDanfe::XML.new(File.read("#{base_dir}nfce.xml")) }
 
   subject { described_class.new [xml] }
@@ -15,6 +15,7 @@ describe BrDanfe::DanfeLib::Nfce do
   describe '#render_pdf' do
     it 'renders the NFC-e pdf' do
       expected = IO.binread("#{base_dir}rendered_nfce.fixture.pdf")
+
       expect(subject.render_pdf).to eq expected
     end
   end

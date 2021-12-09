@@ -52,6 +52,8 @@ describe BrDanfe::DanfeLib::NfceLib::Header do
       File.delete(output_pdf) if File.exist?(output_pdf)
     end
 
+    after { File.delete(output_pdf) if File.exist?(output_pdf) }
+
     context 'when has a short name' do
       let(:company_name) { 'Test company' }
 
@@ -81,7 +83,7 @@ describe BrDanfe::DanfeLib::NfceLib::Header do
       let(:company_name) { 'Test company with some very long name to do a line break' }
 
       context 'when has a logo' do
-        it 'renders the header with company name line breaked' do
+        it 'renders the header with company name line breaked and shrinked to fit' do
           expect(File.exist?(output_pdf)).to be_falsey
           pdf.render_file output_pdf
 

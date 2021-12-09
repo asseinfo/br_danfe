@@ -12,7 +12,7 @@ module BrDanfe
         def render
           cursor = @pdf.cursor
 
-          render_company_info(cursor)
+          render_company_info
           render_logo(cursor) if @logo.present?
           render_doc
 
@@ -21,15 +21,18 @@ module BrDanfe
 
         private
 
-        def render_company_info(cursor)
+        def render_company_info
           one_line = 1
 
-          @pdf.bounding_box([x_position, cursor], width: width_box, height: 65) do
-            @pdf.text (@xml['emit/xNome']).to_s, size: 10, align: :left, style: :bold
-            @pdf.text cnpj(@xml['emit/CNPJ']), size: 9, align: :left
-            @pdf.text BrDanfe::DanfeLib::NfceLib::Helper.address(@xml.css('enderEmit')), size: 9, align: :left
-            @pdf.render_blank_line if count_name_lines(@xml['emit/xNome']) == one_line
-          end
+          @pdf.text_box (@xml['emit/xNome']).to_s, at: [x_position, @pdf.cursor], height: 36, size: 9, align: :left, style: :bold, overflow: :shrink_to_fit
+          @pdf.move_down 36
+
+          @pdf.text_box cnpj(@xml['emit/CNPJ']), at: [x_position, @pdf.cursor], height: 9, size: 9, align: :left, overflow: :shrink_to_fit
+          @pdf.move_down 9
+
+          @pdf.text_box BrDanfe::DanfeLib::NfceLib::Helper.address(@xml.css('enderEmit')), at: [x_position, @pdf.cursor], height: 20, size: 9, align: :left, overflow: :shrink_to_fit
+          @pdf.move_down 20
+          @pdf.render_blank_line if count_name_lines(@xml['emit/xNome']) == one_line
         end
 
         def x_position
@@ -60,9 +63,8 @@ module BrDanfe
 
         def render_doc
           @pdf.render_blank_line
-          cursor = @pdf.cursor
 
-          @pdf.bounding_box([0, cursor], width: 6.7.cm, height: 20) do
+          @pdf.bounding_box([0, @pdf.cursor], width: 6.7.cm, height: 20) do
             @pdf.text 'Documento Auxiliar da Nota Fiscal de Consumidor Eletrônica', size: 9, align: :center
           end
         end
@@ -70,8 +72,7 @@ module BrDanfe
         def render_homologation
           2.times { @pdf.render_blank_line }
 
-          cursor = @pdf.cursor
-          @pdf.bounding_box([0, cursor], width: 6.7.cm, height: 20) do
+          @pdf.bounding_box([0, @pdf.cursor], width: 6.7.cm, height: 20) do
             @pdf.text 'EMITIDA EM AMBIENTE DE HOMOLOGAÇÃO', size: 8, align: :center, style: :bold
             @pdf.text 'SEM VALOR FISCAL', size: 8, align: :center, style: :bold
           end
