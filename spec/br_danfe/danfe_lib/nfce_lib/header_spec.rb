@@ -49,15 +49,17 @@ describe BrDanfe::DanfeLib::NfceLib::Header do
   describe '#render' do
     before do
       subject.render
-      # File.delete(output_pdf) if File.exist?(output_pdf)
+      File.delete(output_pdf) if File.exist?(output_pdf)
     end
+
+    after { File.delete(output_pdf) if File.exist?(output_pdf) }
 
     context 'when has a short name' do
       let(:company_name) { 'Test company' }
 
       context 'when has a logo' do
-        fit 'renders header to the pdf' do
-          # expect(File.exist?(output_pdf)).to be_falsey
+        it 'renders header to the pdf' do
+          expect(File.exist?(output_pdf)).to be_falsey
           pdf.render_file output_pdf
 
           expect("#{base_dir}header#render-short_name_with_logo.pdf").to have_same_content_of file: output_pdf
@@ -81,7 +83,7 @@ describe BrDanfe::DanfeLib::NfceLib::Header do
       let(:company_name) { 'Test company with some very long name to do a line break' }
 
       context 'when has a logo' do
-        it 'renders the header with company name line breaked' do
+        it 'renders the header with company name line breaked and shrinked to fit' do
           expect(File.exist?(output_pdf)).to be_falsey
           pdf.render_file output_pdf
 
