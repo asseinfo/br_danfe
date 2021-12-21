@@ -88,9 +88,9 @@ module BrDanfe
 
         def access_key_box
           @pdf.ibox 2.22, 10.02, 10.29, @y_position
-          @pdf.ibarcode 1.50, 8.00, 10.4010, @y_position + 1.90, @xml['chNFe']
+          @pdf.ibarcode 1.50, 8.00, 10.4010, @y_position + 1.90, @xml['infProt > chNFe']
           @pdf.ibox 0.85, 10.02, 10.29, @y_position + 2.22, I18n.t('danfe.chNFe'),
-                    @xml['chNFe'].gsub(/(\d)(?=(\d\d\d\d)+(?!\d))/, '\\1 '), style: :bold, align: :center
+                    @xml['infProt > chNFe'].gsub(/(\d)(?=(\d\d\d\d)+(?!\d))/, '\\1 '), style: :bold, align: :center
         end
 
         def sefaz_box
