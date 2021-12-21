@@ -38,6 +38,15 @@ describe BrDanfe::DanfeLib::NfeLib::EmitHeader do
                   <email>foo@bar.com</email>
                 </enderEmit>
               </emit>
+                <det nItem="1">
+                  <prod>
+                    <detExport>
+                      <exportInd>
+                        <chNFe>41211285493849000105550020000027171182910239</chNFe>
+                      </exportInd>
+                    </detExport>
+                  </prod>
+                </det>
             </infNFe>
           </NFe>
           <protNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="2.00">
@@ -49,6 +58,15 @@ describe BrDanfe::DanfeLib::NfeLib::EmitHeader do
           </protNFe>
         </nfeProc>
       XML
+    end
+
+    it 'renders only the nfe key' do
+      subject.render 2, 1.85, 2
+      File.delete(output_pdf) if File.exist?(output_pdf)
+
+      pdf.render_file output_pdf
+
+      expect("#{base_dir}emit_header#render-nfe_key.pdf").to have_same_content_of file: output_pdf
     end
 
     context 'render emitter on first page' do
