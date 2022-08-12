@@ -19,7 +19,7 @@ XML version | Supported?
 
 ## Installing
 
-        gem install ruby_danfe
+        gem install br_danfe
 
 ## Usage
 
