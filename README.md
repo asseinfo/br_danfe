@@ -29,7 +29,8 @@ XML version | Supported?
         xml = File.read("nfe.xml")
 
         danfe = BrDanfe::Danfe.new(xml)
-        danfe.options.logo_path = "logo.png"
+        danfe.options.logo = "logo.png"
+        danfe.options.logo_dimensions = { width: <largura>, height: <altura> }
         danfe.save_pdf("nfe.pdf")
 
 #### Usage in Rails Controller
