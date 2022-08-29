@@ -19,47 +19,49 @@ XML version | Supported?
 
 ## Installing
 
-        gem install ruby_danfe
+    gem install br_danfe
 
 ## Usage
 
 ### DANFE - _Documento Auxiliar da Nota Fiscal Eletrônica_
 #### Usage in Ruby
 
-        xml = File.read("nfe.xml")
+    xml = File.read("spec/fixtures/nfe/v2.00/nfe_simples_nacional.xml")
 
-        danfe = BrDanfe::Danfe.new(xml)
-        danfe.options.logo_path = "logo.png"
-        danfe.save_pdf("nfe.pdf")
+    danfe = BrDanfe::Danfe.new(xml)
+    danfe.options.logo = "spec/fixtures/logo.png"
+    danfe.options.logo_dimensions = { width: 100, height: 100 }
+    danfe.save_pdf("output.pdf")
 
 #### Usage in Rails Controller
 
-        class DanfeController < ApplicationController
-          def new
-            invoice = Invoice.find(params[:id])
-            xml_as_string = invoice.generate_xml # your method that generates the NF-e's xml
+    class DanfeController < ApplicationController
+      def new
+        invoice = Invoice.find(params[:id])
+        xml_as_string = invoice.generate_xml # your method that generates the NF-e's xml
 
-            danfe = BrDanfe::Danfe.new(xml_as_string)
+        danfe = BrDanfe::Danfe.new(xml_as_string)
 
-            send_data danfe.render_pdf, filename: "danfe.pdf", type: "application/pdf"
-          end
-        end
+        send_data danfe.render_pdf, filename: "danfe.pdf", type: "application/pdf"
+      end
+    end
 
 #### Usage in Rails Controller with more than one xml
-        class DanfeController < ApplicationController
-          def new
-            invoices = Invoice.where(ids: params[:ids])
-            xmls_as_string = []
-            
-            invoices.each do |invoice|
-                xmls_as_string << invoice.generate_xml # your method that generates the NF-e's xml
-            end
 
-            danfe = BrDanfe::Danfe.new(xmls_as_string)
+    class DanfeController < ApplicationController
+      def new
+        invoices = Invoice.where(ids: params[:ids])
+        xmls_as_string = []
 
-            send_data danfe.render_pdf, filename: "danfe.pdf", type: "application/pdf"
-          end
+        invoices.each do |invoice|
+            xmls_as_string << invoice.generate_xml # your method that generates the NF-e's xml
         end
+
+        danfe = BrDanfe::Danfe.new(xmls_as_string)
+
+        send_data danfe.render_pdf, filename: "danfe.pdf", type: "application/pdf"
+      end
+    end
 
 ### Options
 
@@ -70,45 +72,45 @@ XML version | Supported?
 
 #### Usage in Ruby
 
-        xml = File.read("cce.xml")
+    xml = File.read("cce.xml")
 
-        cce = BrDanfe::Cce.new(xml)
-        cce.save_pdf("nfe.pdf")
+    cce = BrDanfe::Cce.new(xml)
+    cce.save_pdf("nfe.pdf")
 
 #### Usage in Rails Controller
 
-        class CCeController < ApplicationController
-          def new
-            invoice = Invoice.find(params[:id])
-            xml_as_string = invoice.generate_xml # your method that generates the CC-e's xml
+    class CCeController < ApplicationController
+      def new
+        invoice = Invoice.find(params[:id])
+        xml_as_string = invoice.generate_xml # your method that generates the CC-e's xml
 
-            cce = BrDanfe::Cce.new(xml_as_string)
+        cce = BrDanfe::Cce.new(xml_as_string)
 
-            send_data cce.render_pdf, filename: "cce.pdf", type: "application/pdf"
-          end
-        end
+        send_data cce.render_pdf, filename: "cce.pdf", type: "application/pdf"
+      end
+    end
 
 ### DAMDFE - _Documento Auxiliar do Manifesto Eletrônico de Documentos Fiscais_
 
 #### Usage in Ruby
 
-        xml = File.read("mdfe.xml")
+    xml = File.read("mdfe.xml")
 
-        mdfe = BrDanfe::Mdfe.new(xml)
-        mdfe.save_pdf("mdfe.pdf")
+    mdfe = BrDanfe::Mdfe.new(xml)
+    mdfe.save_pdf("mdfe.pdf")
 
 #### Usage in Rails Controller
 
-        class MdfeController < ApplicationController
-          def new
-            mdfe = Mdfe.find(params[:id])
-            xml_as_string = mdfe.generate_xml # your method that generates the MDF-e's xml
+    class MdfeController < ApplicationController
+      def new
+        mdfe = Mdfe.find(params[:id])
+        xml_as_string = mdfe.generate_xml # your method that generates the MDF-e's xml
 
-            mdfe = BrDanfe::Mdfe.new(xml_as_string)
+        mdfe = BrDanfe::Mdfe.new(xml_as_string)
 
-            send_data mdfe.render_pdf, filename: "mdfe.pdf", type: "application/pdf"
-          end
-        end
+        send_data mdfe.render_pdf, filename: "mdfe.pdf", type: "application/pdf"
+      end
+    end
 
 
 ## I18n
@@ -121,23 +123,23 @@ If you need to customize some message or field label, you can override the conte
 
 You needs to build docker container like above:
 
-        $ docker-compose build
+    $ docker-compose build
 
 You can run all RSpec specs using:
 
-        $ docker-compose run --rm br_danfe rspec
+    $ docker-compose run --rm br_danfe rspec
 
 
 ## Development - Without Docker
 
 You needs to install all necessaries dependencies using bunder like above:
 
-        $ bundle install
+    $ bundle install
 
 
 You can run all RSpec specs using:
 
-        $ bundle exec rspec
+    $ bundle exec rspec
 
 
 ## About tests
