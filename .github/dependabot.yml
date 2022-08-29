@@ -8,10 +8,7 @@ updates:
   - package-ecosystem: "bundler" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "weekly"
-      day: "wednesday"
-      time: "09:00"
-      timezone: "America/Sao_Paulo"
+      interval: "monthly"
     open-pull-requests-limit: 10
     allow:
       - dependency-type: "direct"
