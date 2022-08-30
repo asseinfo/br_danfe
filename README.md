@@ -19,18 +19,19 @@ XML version | Supported?
 
 ## Installing
 
-        gem install ruby_danfe
+        gem install br_danfe
 
 ## Usage
 
 ### DANFE - _Documento Auxiliar da Nota Fiscal Eletrônica_
 #### Usage in Ruby
 
-        xml = File.read("nfe.xml")
+        xml = File.read("spec/fixtures/nfe/v2.00/nfe_simples_nacional.xml")
 
         danfe = BrDanfe::Danfe.new(xml)
-        danfe.options.logo_path = "logo.png"
-        danfe.save_pdf("nfe.pdf")
+        danfe.options.logo = "spec/fixtures/logo.png"
+        danfe.options.logo_dimensions = { width: 100, height: 100 }
+        danfe.save_pdf("output.pdf")
 
 #### Usage in Rails Controller
 
