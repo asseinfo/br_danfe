@@ -10,6 +10,7 @@ module BrDanfe
         @document.font 'tinos'
       end
 
+      # :nocov:
       def method_missing(method_name, *args, &block)
         if @document.respond_to? method_name
           @document.send method_name, *args, &block
@@ -21,6 +22,7 @@ module BrDanfe
       def respond_to_missing?(method_name, include_private = false)
         @document.respond_to?(method_name, include_private) || super
       end
+      # :nocov:
     end
   end
 end

@@ -7,18 +7,11 @@ module Prawn
     CacheEntryMonkeyPatch = Struct.new(:font, :font_size, :options, :string)
 
     def width_of(string, options)
-      f = if options[:style]
-            # override style with :style => :bold
-            @document.find_font(@document.font.family, style: options[:style])
-          else
-            @document.font
-          end
+      encoded_string = @document.font.normalize_encoding(string)
 
-      encoded_string = f.normalize_encoding(string)
+      key = CacheEntryMonkeyPatch.new(@document.font, @document.font_size, options, encoded_string)
 
-      key = CacheEntryMonkeyPatch.new(f, @document.font_size, options, encoded_string)
-
-      @cache[key] ||= f.compute_width_of(encoded_string, options)
+      @cache[key] ||= @document.font.compute_width_of(encoded_string, options)
 
       length = @cache[key]
 

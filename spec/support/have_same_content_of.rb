@@ -1,3 +1,4 @@
+# :nocov:
 RSpec::Matchers.define(:have_same_content_of) do |file: nil|
   expected_file_path = file
 
@@ -27,3 +28,4 @@ RSpec::Matchers.define(:have_same_content_of) do |file: nil|
     false
   end
 end
+# :nocov:
