@@ -26,7 +26,7 @@ XML version | Supported?
 ### DANFE - _Documento Auxiliar da Nota Fiscal Eletrônica_
 #### Usage in Ruby
 
-        xml = File.read("nfe.xml")
+        xml = File.read("spec/fixtures/nfe/v2.00/nfe_simples_nacional.xml")
 
         danfe = BrDanfe::Danfe.new(xml)
         danfe.options.logo = "spec/fixtures/logo.png"
