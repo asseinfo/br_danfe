@@ -229,9 +229,20 @@ You can generate new data using [4devs generators](http://www.4devs.com.br).
 
 ## Deploy to Rubygems
 
-    $ bundle exec rake release  # Create tag vX.X.X, build and push br_danfe-X.X.X.gem to Rubygems
+1. Create and send the new version to Rubygems
 
-You can build or install using one of the above tasks
+    $ bundle exec rake release
+
+2. Create a [new release on Github](https://github.com/asseinfo/br_danfe/releases/new)
+
+* Choose **the new tag** (Ex.: v0.10.1)
+* Fill the **Release title** (Ex.: 0.10.1)
+* Click at **Generate release notes**
+* Click at **Publish release**
+
+3. Done!
+
+You can build or install the gem using one of the above tasks
 
     $ bundle exec rake build    # Build br_danfe-X.X.X.gem into the pkg directory
     $ bundle exec rake install  # Build and install br_danfe-X.X.X.gem into system gems
