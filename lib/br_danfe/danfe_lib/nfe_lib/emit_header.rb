@@ -32,7 +32,7 @@ module BrDanfe
           if @logo.blank?
             @pdf.ibox 3.92, 7.46, 1.25, @y_position + 1.46, '', address, align: :left, border: 0
           else
-            @pdf.ibox 3.92, 7.46, 3.60, @y_position + 1.46, '', address, size: 8, align: :left, border: 0
+            @pdf.ibox 3.92, 4.7, 3.65, @y_position + 1.46, '', address, size: 8, align: :left, border: 0
             logo
           end
         end
