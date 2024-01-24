@@ -25,8 +25,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rqrcode', '~> 2.1.0'
 
   spec.add_development_dependency 'byebug', '11.1.3'
-  spec.add_development_dependency 'guard', '~> 2.18.0'
-  spec.add_development_dependency 'guard-rspec'
+  spec.add_development_dependency 'guard', '~> 2.18.1'
+  spec.add_development_dependency 'guard-rspec', '~> 4.7.3'
   spec.add_development_dependency 'pdf-inspector', '~> 1.3.0'
   spec.add_development_dependency 'rake', '13.0.6'
   spec.add_development_dependency 'rspec', '3.11.0'
