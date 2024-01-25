@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = `git ls-files -- { test,spec,features }/*`.split("\n")
   spec.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   spec.require_paths = ['lib']
-  spec.required_ruby_version = '>= 2.6'
+  spec.required_ruby_version = '>= 3.0'
 
   spec.add_dependency 'barby', '0.6.8'
   spec.add_dependency 'br_documents', '>= 0.1.3'
