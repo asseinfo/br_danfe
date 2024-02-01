@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.required_ruby_version = '>= 3.0'
 
-  spec.add_dependency 'barby', '0.6.8'
+  spec.add_dependency 'barby', '0.6.9'
   spec.add_dependency 'br_documents', '>= 0.1.3'
   spec.add_dependency 'i18n', '>= 0.8.6'
   spec.add_dependency 'nokogiri', '>= 1.8'
