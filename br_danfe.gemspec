@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'guard', '~> 2.18.1'
   spec.add_development_dependency 'guard-rspec', '~> 4.7.3'
   spec.add_development_dependency 'pdf-inspector', '~> 1.3.0'
-  spec.add_development_dependency 'rake', '13.0.6'
+  spec.add_development_dependency 'rake', '13.1.0'
   spec.add_development_dependency 'rspec', '3.13.0'
   spec.add_development_dependency 'rubocop', '~> 0.93.1'
   spec.add_development_dependency 'rubocop-performance', '~> 1.10.2'
