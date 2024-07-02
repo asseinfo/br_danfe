@@ -65,7 +65,9 @@ module BrDanfe
 
             payments.each do |key, value|
               cursor = @pdf.cursor
-              print_text(I18n.t("nfce.payment_methods.#{key}"), cursor, size: 9, align: :left)
+
+              payment_description = prepare_payment_description(I18n.t("nfce.payment_methods.#{key}"))
+              print_text(payment_description, cursor, size: 9, align: :left)
               print_text(BrDanfe::Helper.numerify(value.to_f), cursor, size: 9, align: :right)
             end
           end
@@ -75,6 +77,16 @@ module BrDanfe
           @pdf.bounding_box [0, cursor], width: 6.7.cm, height: 0.35.cm do
             @pdf.text text, options
           end
+        end
+
+        private
+
+        def prepare_payment_description(description)
+          maximum_size_for_description = 40
+
+          return "#{description[0..maximum_size_for_description - 3]}..." if description.length > maximum_size_for_description
+
+          description
         end
       end
     end
