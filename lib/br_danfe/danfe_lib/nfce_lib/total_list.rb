@@ -44,6 +44,7 @@ module BrDanfe
           print_text(BrDanfe::Helper.numerify(@xml['ICMSTot > vNF'].to_f), cursor, size: 10, align: :right, style: :bold)
         end
 
+        # rubocop:disable Metrics/MethodLength
         def payment_methods
           payments = {}
           without_payment = '90'
@@ -72,14 +73,13 @@ module BrDanfe
             end
           end
         end
+        # rubocop:enable Metrics/MethodLength
 
         def print_text(text, cursor, options)
           @pdf.bounding_box [0, cursor], width: 6.7.cm, height: 0.35.cm do
             @pdf.text text, options
           end
         end
-
-        private
 
         def prepare_payment_description(description)
           maximum_size_for_description = 40
