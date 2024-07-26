@@ -12,14 +12,7 @@ module BrDanfe
           @document.fill_color '7d7d7d'
           @document.text_box(
             I18n.t('danfe.others.has_no_fiscal_value'),
-            size: 2.2.cm,
-            width: @document.bounds.width,
-            height: @document.bounds.height,
-            align: :center,
-            valign: :center,
-            at: [0, @document.bounds.height],
-            rotate: 45,
-            rotate_around: :center
+            default_watermark_text_config.merge(size: 2.2.cm)
           )
         end
       end
@@ -112,17 +105,22 @@ module BrDanfe
           @document.transparent(0.5) do
             @document.text_box(
               I18n.t('danfe.others.canceled'),
-              size: 3.4.cm,
-              width: @document.bounds.width,
-              height: @document.bounds.height,
-              align: :center,
-              valign: :center,
-              at: [0, @document.bounds.height],
-              rotate: 45,
-              rotate_around: :center
+              default_watermark_text_config.merge(size: 3.4.cm)
             )
           end
         end
+      end
+
+      def default_watermark_text_config
+        {
+          width: @document.bounds.width,
+          height: @document.bounds.height,
+          align: :center,
+          valign: :center,
+          at: [0, @document.bounds.height],
+          rotate: 45,
+          rotate_around: :center
+        }
       end
     end
   end
