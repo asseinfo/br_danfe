@@ -36,6 +36,8 @@ module BrDanfe
           @document.start_new_page unless index == last_index
         end
 
+        render_canceled_watermark
+
         @document
       end
 
@@ -90,7 +92,37 @@ module BrDanfe
       end
 
       def render_no_fiscal_value(xml)
-        @document.stamp('has_no_fiscal_value') if BrDanfe::Helper.no_fiscal_value?(xml)
+        @document.stamp('has_no_fiscal_value') if BrDanfe::Helper.no_fiscal_value?(xml) && !@canceled
+      end
+
+      def render_canceled_watermark
+        return unless @canceled
+
+        create_canceled_watermark
+
+        @document.page_count.times do |i|
+          @document.go_to_page(i + 1)
+          @document.stamp('canceled')
+        end
+      end
+
+      def create_canceled_watermark
+        @document.create_stamp('canceled') do
+          @document.fill_color '7d7d7d'
+          @document.transparent(0.5) do
+            @document.text_box(
+              I18n.t('danfe.others.canceled'),
+              size: 3.4.cm,
+              width: @document.bounds.width,
+              height: @document.bounds.height,
+              align: :center,
+              valign: :center,
+              at: [0, @document.bounds.height],
+              rotate: 45,
+              rotate_around: :center
+            )
+          end
+        end
       end
     end
   end

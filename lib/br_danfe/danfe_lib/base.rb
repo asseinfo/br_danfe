@@ -2,11 +2,13 @@ module BrDanfe
   module DanfeLib
     class Base
       attr_reader :options
+      attr_writer :canceled
 
       def initialize(xmls)
         @xmls = xmls
         @document = document
         @options = BrDanfe::Logo::Config.new
+        @canceled = false
 
         create_watermark
       end

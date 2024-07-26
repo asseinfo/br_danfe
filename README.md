@@ -65,8 +65,10 @@ XML version | Supported?
 
 ### Options
 
-* `logo_path`: Path of sender's logo image.
-* `logo_dimensions`: Dimensions of the logo. Ex: logo_dimensions = { width: 100, height: 90 }
+- `canceled`: (Boolean) If the NF-e is canceled.
+- `options.logo_path`: Path of sender's logo image.
+- `options.logo_dimensions`: Dimensions of the logo.
+  - Ex: `options.logo_dimensions = { width: 100, height: 90 }`
 
 ### CC-e - Carta de Correção Eletrônica
 
