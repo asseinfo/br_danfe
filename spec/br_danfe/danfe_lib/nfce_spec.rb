@@ -31,6 +31,14 @@ describe BrDanfe::DanfeLib::Nfce do
       expect("#{base_dir}saved_nfce.fixture.pdf").to have_same_content_of file: output_pdf
     end
 
+    it 'saves canceled NFC-e as pdf with' do
+      expect(File.exist?(output_pdf)).to be_falsey
+      subject.canceled = true
+      subject.save_pdf output_pdf
+
+      expect("#{base_dir}canceled_nfce.fixture.pdf").to have_same_content_of file: output_pdf
+    end
+
     context 'when nfc-e is unauthorized' do
       context 'when nfc-e is in homologation environment' do
         let(:xml) { BrDanfe::XML.new(File.read("#{base_dir}nfce-unauthorized-hom.xml")) }
@@ -63,6 +71,16 @@ describe BrDanfe::DanfeLib::Nfce do
         subject.save_pdf output_pdf
 
         expect("#{base_dir}multiples_xmls_on_the_same_pdf.pdf").to have_same_content_of file: output_pdf
+      end
+
+      it 'renders multiple canceled danfes on the same pdf' do
+        subject = described_class.new [xml, xml]
+
+        expect(File.exist?(output_pdf)).to be_falsey
+        subject.canceled = true
+        subject.save_pdf output_pdf
+
+        expect("#{base_dir}multiples_canceled_xmls_on_the_same_pdf.pdf").to have_same_content_of file: output_pdf
       end
     end
   end

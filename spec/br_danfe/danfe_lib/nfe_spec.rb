@@ -15,6 +15,12 @@ describe BrDanfe::DanfeLib::Nfe do
       expected = IO.binread("#{base_dir}nfe_simples_nacional.xml.fixture.pdf")
       expect(subject.render_pdf).to eq expected
     end
+
+    it 'renders a canceled Simples Nacional NF-e using CSOSN' do
+      subject.canceled = true
+      expected = IO.binread("#{base_dir}nfe_simples_nacional_cancel.xml.fixture.pdf")
+      expect(subject.render_pdf).to eq expected
+    end
   end
 
   describe '#save_pdf' do
@@ -46,6 +52,14 @@ describe BrDanfe::DanfeLib::Nfe do
         subject.save_pdf output_pdf
 
         expect("#{base_dir}nfe_with_ns.xml.fixture.pdf").to have_same_content_of file: output_pdf
+      end
+
+      it 'renders a basic canceled NF-e with namespace' do
+        expect(File.exist?(output_pdf)).to be_falsey
+        subject.canceled = true
+        subject.save_pdf output_pdf
+
+        expect("#{base_dir}nfe_with_ns_canceled.fixture.pdf").to have_same_content_of file: output_pdf
       end
 
       context 'when NF-e does not have namespace' do
@@ -106,6 +120,14 @@ describe BrDanfe::DanfeLib::Nfe do
         expect("#{base_dir}nfe_simples_nacional.xml.fixture.pdf").to have_same_content_of file: output_pdf
       end
 
+      it 'renders a canceled Simples Nacional NF-e using CSOSN' do
+        expect(File.exist?(output_pdf)).to be_falsey
+        subject.canceled = true
+        subject.save_pdf output_pdf
+
+        expect("#{base_dir}nfe_simples_nacional_cancel.xml.fixture.pdf").to have_same_content_of file: output_pdf
+      end
+
       context 'when there are more than one page' do
         let(:xml_file) { File.read("#{base_dir}with_three_pages.xml") }
 
@@ -114,6 +136,14 @@ describe BrDanfe::DanfeLib::Nfe do
           subject.save_pdf output_pdf
 
           expect("#{base_dir}with_three_pages.fixture.pdf").to have_same_content_of file: output_pdf
+        end
+
+        it 'renders xml to the pdf with canceled stamp' do
+          expect(File.exist?(output_pdf)).to be_falsey
+          subject.canceled = true
+          subject.save_pdf output_pdf
+
+          expect("#{base_dir}with_three_pages_cancel.fixture.pdf").to have_same_content_of file: output_pdf
         end
       end
 
