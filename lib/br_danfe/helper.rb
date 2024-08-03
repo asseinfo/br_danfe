@@ -12,6 +12,14 @@ module BrDanfe
       xml.css('nfeProc/protNFe/infProt/dhRecbto').empty?
     end
 
+    def self.authorized?(xml)
+      !unauthorized?(xml)
+    end
+
+    def self.canceled?(xml, event_xmls)
+      authorized?(xml) && cancellation_event_any?(event_xmls)
+    end
+
     def self.numerify(number)
       return '' if !number || number == ''
 

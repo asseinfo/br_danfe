@@ -65,7 +65,7 @@ module BrDanfe
         render_product_table_title initial_page_of_pdf
         render_footer_information footer_info
         render_no_fiscal_value(xml)
-        render_canceled(event_xmls)
+        render_canceled(xml, event_xmls)
       end
 
       def render_product_table_title(page)
@@ -83,17 +83,19 @@ module BrDanfe
         @document.stamp('has_no_fiscal_value') if BrDanfe::Helper.no_fiscal_value?(xml)
       end
 
-      def render_canceled(xmls)
-        @document.stamp('canceled') if BrDanfe::Helper.cancellation_event_any?(xmls)
+      def render_canceled(xml, event_xmls)
+        @document.stamp('canceled') if BrDanfe::Helper.canceled?(xml, event_xmls)
       end
 
       def create_has_no_fiscal_value_watermark
         @document.create_stamp('has_no_fiscal_value') do
           @document.fill_color '7d7d7d'
-          @document.text_box(
-            I18n.t('danfe.others.has_no_fiscal_value'),
-            default_watermark_text_config.merge(size: 2.2.cm)
-          )
+          @document.transparent(0.5) do
+            @document.text_box(
+              I18n.t('danfe.others.has_no_fiscal_value'),
+              default_watermark_text_config.merge(size: 2.2.cm)
+            )
+          end
         end
       end
 
