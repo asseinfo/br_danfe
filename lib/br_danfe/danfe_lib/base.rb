@@ -41,6 +41,10 @@ module BrDanfe
           xml_list[xml_key][:events] << xml if is_event
         end
 
+        filter_xml_list(xml_list)
+      end
+
+      def filter_xml_list(xml_list)
         xml_list.reject { |_key, data| data[:xml].nil? }
                 .map { |_key, data| [data[:xml], data[:events]] }
       end

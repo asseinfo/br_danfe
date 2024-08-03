@@ -11,8 +11,8 @@ module BrDanfe
       end
 
       def create_watermark
-        create_canceled_watermark
-        create_has_no_fiscal_value_watermark
+        create_stamp('canceled', size: 1.1.cm, width: 12.cm, at: [-0.5.cm, PAGE_HEIGHT - 5.cm])
+        create_stamp('has_no_fiscal_value', size: 0.8.cm)
       end
 
       def generate(footer_info)
@@ -48,44 +48,22 @@ module BrDanfe
         @document.stamp('canceled') if BrDanfe::Helper.canceled?(xml, event_xmls)
       end
 
-      def create_has_no_fiscal_value_watermark
-        @document.create_stamp('has_no_fiscal_value') do
+      def create_stamp(name, extra_config = {})
+        @document.create_stamp(name) do
           @document.fill_color '7d7d7d'
           @document.transparent(0.5) do
             @document.text_box(
-              I18n.t('danfe.others.has_no_fiscal_value'),
-              default_watermark_text_config.merge(
-                size: 0.8.cm
-              )
+              I18n.t("danfe.others.#{name}"),
+              {
+                width: 10.cm,
+                height: 1.2.cm,
+                at: [0, PAGE_HEIGHT - 3.8.cm],
+                rotate: 45,
+                rotate_around: :center
+              }.merge(extra_config)
             )
           end
         end
-      end
-
-      def create_canceled_watermark
-        @document.create_stamp('canceled') do
-          @document.fill_color '7d7d7d'
-          @document.transparent(0.5) do
-            @document.text_box(
-              I18n.t('danfe.others.canceled'),
-              default_watermark_text_config.merge(
-                size: 1.1.cm,
-                width: 12.cm,
-                at: [-0.5.cm, PAGE_HEIGHT - 5.cm]
-              )
-            )
-          end
-        end
-      end
-
-      def default_watermark_text_config
-        {
-          width: 10.cm,
-          height: 1.2.cm,
-          at: [0, PAGE_HEIGHT - 3.8.cm],
-          rotate: 45,
-          rotate_around: :center
-        }
       end
     end
   end
