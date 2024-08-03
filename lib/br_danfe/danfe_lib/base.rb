@@ -33,15 +33,19 @@ module BrDanfe
         xml_list = {}
 
         xmls.each do |xml|
+          xml_key = BrDanfe::Helper.xml_key(xml)
           is_event = BrDanfe::Helper.event?(xml)
-          xml_key = is_event ? xml['evento > infEvento > chNFe'] : xml.css('infNFe').attr('Id').to_s.gsub(/[^\d]/, '')
 
-          xml_list[xml_key] ||= { xml: nil, events: [] }
-          xml_list[xml_key][:xml] = xml unless is_event
-          xml_list[xml_key][:events] << xml if is_event
+          group_xmls_by_key(xml_list, xml, xml_key, is_event)
         end
 
         filter_xml_list(xml_list)
+      end
+
+      def group_xmls_by_key(xml_list, xml, xml_key, is_event)
+        xml_list[xml_key] ||= { xml: nil, events: [] }
+        xml_list[xml_key][:xml] = xml unless is_event
+        xml_list[xml_key][:events] << xml if is_event
       end
 
       def filter_xml_list(xml_list)

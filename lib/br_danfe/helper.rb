@@ -54,6 +54,10 @@ module BrDanfe
       xmls.any? { |xml| cancellation_event?(xml) }
     end
 
+    def self.xml_key(xml)
+      event?(xml) ? xml['evento > infEvento > chNFe'] : xml.css('infNFe').attr('Id').to_s.gsub(/[^\d]/, '')
+    end
+
     def self.format_cep(cep)
       cep.sub(/(\d{2})(\d{3})(\d{3})/, '\\1.\\2-\\3')
     end
