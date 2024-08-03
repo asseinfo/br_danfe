@@ -2,13 +2,11 @@ module BrDanfe
   module DanfeLib
     class Base
       attr_reader :options
-      attr_writer :canceled
 
       def initialize(xmls)
-        @xmls = xmls
+        @xmls = group_xmls(xmls)
         @document = document
         @options = BrDanfe::Logo::Config.new
-        @canceled = false
 
         create_watermark
       end
@@ -30,6 +28,22 @@ module BrDanfe
       def create_watermark; end
 
       def generate(footer_info); end
+
+      def group_xmls(xmls)
+        xml_list = {}
+
+        xmls.each do |xml|
+          is_event = BrDanfe::Helper.event?(xml)
+          xml_key = is_event ? xml['evento > infEvento > chNFe'] : xml['infProt > chNFe']
+
+          xml_list[xml_key] ||= { xml: nil, events: [] }
+          xml_list[xml_key][:xml] = xml unless is_event
+          xml_list[xml_key][:events] << xml if is_event
+        end
+
+        xml_list.reject { |_key, data| data[:xml].nil? }
+                .map { |_key, data| [data[:xml], data[:events]] }
+      end
     end
   end
 end

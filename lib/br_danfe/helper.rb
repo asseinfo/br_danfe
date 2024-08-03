@@ -34,6 +34,18 @@ module BrDanfe
       xml['ide > mod'] == nfe_code
     end
 
+    def self.event?(xml)
+      xml['evento > infEvento'].present?
+    end
+
+    def self.cancellation_event?(xml)
+      xml['evento > infEvento > tpEvento'] == '110111'
+    end
+
+    def self.cancellation_event_any?(xmls)
+      xmls.any? { |xml| cancellation_event?(xml) }
+    end
+
     def self.format_cep(cep)
       cep.sub(/(\d{2})(\d{3})(\d{3})/, '\\1.\\2-\\3')
     end

@@ -11,22 +11,14 @@ module BrDanfe
       end
 
       def create_watermark
-        @document.create_stamp('has_no_fiscal_value') do
-          @document.fill_color '7d7d7d'
-          @document.text_box(
-            I18n.t('danfe.others.has_no_fiscal_value'),
-            size: 0.8.cm,
-            width: 10.cm,
-            height: 1.2.cm,
-            at: [0, PAGE_HEIGHT - 3.8.cm],
-            rotate: 45,
-            rotate_around: :center
-          )
-        end
+        create_canceled_watermark
+        create_has_no_fiscal_value_watermark
       end
 
       def generate(footer_info)
-        @xmls.each do |xml|
+        @xmls.each do |xmls|
+          xml, event_xmls = xmls
+
           NfceLib::Header.new(@document, xml, @options.logo, @options.logo_dimensions).render
           NfceLib::ProductList.new(@document, xml).render
           NfceLib::TotalList.new(@document, xml).render
@@ -37,53 +29,55 @@ module BrDanfe
           NfceLib::Footer.new(@document, xml).render(footer_info)
 
           render_no_fiscal_value(xml)
+          render_canceled(event_xmls)
           resize_page_height
         end
 
-        render_canceled_watermark
-
         @document
-      end
-
-      def render_no_fiscal_value(xml)
-        @document.stamp('has_no_fiscal_value') if BrDanfe::Helper.unauthorized?(xml) && !@canceled
       end
 
       def resize_page_height
         @document.page.dictionary.data[:MediaBox] = [0, @document.y - 10, PAGE_WIDTH, PAGE_HEIGHT]
       end
 
-      def render_canceled_watermark
-        return unless @canceled
+      def render_no_fiscal_value(xml)
+        @document.stamp('has_no_fiscal_value') if BrDanfe::Helper.unauthorized?(xml)
+      end
 
-        create_cancel_watermark
+      def render_canceled(xmls)
+        @document.stamp('canceled') if BrDanfe::Helper.cancellation_event_any?(xmls)
+      end
 
-        @document.page_count.times do |i|
-          @document.go_to_page(i + 1)
-          @document.canvas do
-            spacing = 10.cm
+      def create_has_no_fiscal_value_watermark
+        @document.create_stamp('has_no_fiscal_value') do
+          @document.fill_color '7d7d7d'
+          @document.text_box(
+            I18n.t('danfe.others.has_no_fiscal_value'),
+            default_watermark_text_config.merge(size: 0.8.cm)
+          )
+        end
+      end
 
-            (0..@document.bounds.width).step(spacing).each do |x|
-              (0..@document.bounds.height).step(spacing).each do |y|
-                @document.stamp_at('canceled', [x, y])
-              end
-            end
+      def create_canceled_watermark
+        @document.create_stamp('canceled') do
+          @document.fill_color '7d7d7d'
+          @document.transparent(0.5) do
+            @document.text_box(
+              I18n.t('danfe.others.canceled'),
+              default_watermark_text_config.merge(size: 1.1.cm, width: 12.cm)
+            )
           end
         end
       end
 
-      def create_cancel_watermark
-        return unless @canceled
-
-        @document.create_stamp('canceled') do
-          @document.fill_color '7d7d7d'
-          @document.font_size 1.cm
-          @document.rotate(45, origin: [0, 0]) do
-            @document.transparent(0.3) do
-              @document.draw_text I18n.t('danfe.others.canceled'), at: [1.cm, 0]
-            end
-          end
-        end
+      def default_watermark_text_config
+        {
+          width: 10.cm,
+          height: 1.2.cm,
+          at: [0, PAGE_HEIGHT - 3.8.cm],
+          rotate: 45,
+          rotate_around: :center
+        }
       end
     end
   end
