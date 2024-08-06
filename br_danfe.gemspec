@@ -30,9 +30,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pdf-inspector', '~> 1.3.0'
   spec.add_development_dependency 'rake', '13.2.1'
   spec.add_development_dependency 'rspec', '3.13.0'
-  spec.add_development_dependency 'rubocop', '~> 0.93.1'
-  spec.add_development_dependency 'rubocop-performance', '~> 1.10.2'
-  spec.add_development_dependency 'rubocop-rspec', '~> 1.44.1'
+  spec.add_development_dependency 'rubocop', '~> 1.65.1'
+  spec.add_development_dependency 'rubocop-performance', '~> 1.21.1'
+  spec.add_development_dependency 'rubocop-rspec', '~> 3.0.4'
   spec.add_development_dependency 'simplecov', '0.22.0'
   spec.add_development_dependency 'simplecov-html', '0.12.3'
 end
