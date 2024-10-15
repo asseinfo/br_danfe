@@ -2,7 +2,7 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Vol
-        Y = 18.01
+        Y = 21.01
 
         def initialize(pdf, xml)
           @pdf = pdf

@@ -40,8 +40,13 @@ module BrDanfe
       end
 
       def render_on_first_page(xml)
+        if NfeLib::Delivery.new(@document, xml).render
+
+        end
+
         NfeLib::Ticket.new(@document, xml).render
         NfeLib::Dest.new(@document, xml).render
+        render_delivery(xml)
         NfeLib::Dup.new(@document, xml).render
         NfeLib::Icmstot.new(@document, xml).render
         NfeLib::Transp.new(@document, xml).render
@@ -50,6 +55,24 @@ module BrDanfe
         NfeLib::Infadic.new(@document, xml).render(n_vol)
 
         render_products(has_issqn, xml)
+      end
+
+      # def render_on_first_page_with_delivery(xml)
+      #   NfeLib::Ticket.new(@document, xml).render
+      #   NfeLib::Dest.new(@document, xml).render
+      #   NfeLib::Delivery.new(@document, xml).render
+      #   NfeLib::Dup.new(@document, xml).render
+      #   NfeLib::Icmstot.new(@document, xml).render
+      #   NfeLib::Transp.new(@document, xml).render
+      #   n_vol = NfeLib::Vol.new(@document, xml).render
+      #   has_issqn = NfeLib::Issqn.new(@document, xml).render
+      #   NfeLib::Infadic.new(@document, xml).render(n_vol)
+
+      #   render_products(has_issqn, xml)
+      # end
+
+      def render_delivery(xml)
+        NfeLib::Delivery.new(@document, xml).render
       end
 
       def render_products(has_issqn, xml)
@@ -79,7 +102,7 @@ module BrDanfe
       end
 
       def render_product_table_title(page)
-        y_position = page == 1 ? 18.91 : 7.40
+        y_position = page == 1 ? 21.91 : 7.40
         @document.ititle 0.42, 10.00, 0.75, y_position, 'det.title'
       end
 

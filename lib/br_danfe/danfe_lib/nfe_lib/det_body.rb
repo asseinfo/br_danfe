@@ -7,7 +7,7 @@ module BrDanfe
           @xml = xml
         end
 
-        def render(has_issqn)
+        def render(has_issqn, y_position_on_first_page = false)
           table_height_on_first_page = table_height_on_first_page has_issqn
           first_table = create_table
           next_table = create_table
@@ -121,7 +121,8 @@ module BrDanfe
         end
 
         def table_position_on_first_page
-          Helper.invert(18.07.cm)
+          y_position = y_position_on_first_page ? 21.07.cm : 18.07.cm
+          Helper.invert(y_position)
         end
 
         def table_position_on_next_pages

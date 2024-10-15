@@ -2,7 +2,7 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Dup
-        Y = 12.92
+        Y = 15.92
 
         def initialize(pdf, xml)
           @pdf = pdf

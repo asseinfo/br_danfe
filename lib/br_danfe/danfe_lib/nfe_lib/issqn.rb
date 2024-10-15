@@ -2,7 +2,7 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Issqn
-        Y_POSITION = 25.72 + SPACE_BETWEEN_GROUPS
+        Y_POSITION = 28.72 + SPACE_BETWEEN_GROUPS
 
         def initialize(pdf, xml)
           @pdf = pdf

@@ -2,7 +2,7 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Icmstot
-        Y = 13.77 + SPACE_BETWEEN_GROUPS
+        Y = 16.77 + SPACE_BETWEEN_GROUPS
 
         def initialize(pdf, xml)
           @pdf = pdf

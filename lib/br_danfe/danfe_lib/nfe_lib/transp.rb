@@ -2,7 +2,7 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Transp
-        Y = 15.89 + SPACE_BETWEEN_GROUPS
+        Y = 18.89 + SPACE_BETWEEN_GROUPS
 
         def initialize(pdf, xml)
           @pdf = pdf
