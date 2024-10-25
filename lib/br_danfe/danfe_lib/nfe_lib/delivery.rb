@@ -8,9 +8,8 @@ module BrDanfe
         def initialize(pdf, xml)
           @pdf = pdf
           @xml = xml
-          @xml_version_is_310_or_newer = @xml.version_is_310_or_newer?
 
-          @address = 'enderEntrega/xLgr'
+          @address = 'entrega/xLgr'
 
           @ltitle = Y - 0.42
           @l1 = Y
@@ -20,13 +19,11 @@ module BrDanfe
 
         def render
           if can_render?
-            @pdf.ititle 0.42, 10.00, 0.75, @ltitle, 'enderEntrega.title'
+            @pdf.ititle 0.42, 10.00, 0.75, @ltitle, 'entrega.title'
 
             render_line1
             render_line2
             render_line3
-
-            @xml_version_is_310_or_newer ? render_dates_for_nfe_310_or_newer : render_dates_for_older_nfes
           end
         end
 
@@ -37,27 +34,28 @@ module BrDanfe
         end
 
         def render_line1
-          @pdf.lbox LINE_HEIGHT, 11.82, 0.75, @l1, @xml, 'dest/xNome'
+          @pdf.lbox LINE_HEIGHT, 11.82, 0.75, @l1, @xml, 'entrega/xNome'
           render_cnpj_cpf
+          @pdf.lie LINE_HEIGHT, 2.92, 17.40, @l1, @xml, 'entrega/UF', 'entrega/IE'
         end
 
         def render_cnpj_cpf
-          if @xml['enderEntrega/CNPJ'] == ''
-            @pdf.i18n_lbox LINE_HEIGHT, 4.37, 12.57, @l1, 'enderEntrega.CPF', cpf
+          if @xml['entrega/CNPJ'] == ''
+            @pdf.i18n_lbox LINE_HEIGHT, 4.37, 12.57, @l1, 'entrega.CPF', cpf
           else
-            @pdf.lcnpj LINE_HEIGHT, 4.37, 12.57, @l1, @xml, 'enderEntrega/CNPJ'
+            @pdf.lcnpj LINE_HEIGHT, 4.37, 12.57, @l1, @xml, 'entrega/CNPJ'
           end
         end
 
         def cpf
-          cpf = BrDocuments::CnpjCpf::Cpf.new(@xml['enderEntrega/CPF'])
+          cpf = BrDocuments::CnpjCpf::Cpf.new(@xml['entrega/CPF'])
           cpf.formatted
         end
 
         def render_line2
-          @pdf.i18n_lbox LINE_HEIGHT, 9.66, 0.75, @l2, 'enderEntrega.xLgr', address
-          @pdf.lbox LINE_HEIGHT, 4.33, 10.41, @l2, @xml, 'enderEntrega/xBairro'
-          @pdf.i18n_lbox LINE_HEIGHT, 2.20, 14.74, @l2, 'enderEntrega.cMun', cep
+          @pdf.i18n_lbox LINE_HEIGHT, 11.82, 0.75, @l2, 'entrega.xLgr', address
+          @pdf.lbox LINE_HEIGHT, 4.37, 12.57, @l2, @xml, 'entrega/xBairro'
+          @pdf.i18n_lbox LINE_HEIGHT, 2.92, 17.40, @l2, 'entrega.CEP', cep
         end
 
         def address
@@ -71,18 +69,17 @@ module BrDanfe
         end
 
         def cep
-          BrDanfe::Helper.format_cep(@xml['enderEntrega/cMun'])
+          BrDanfe::Helper.format_cep(@xml['entrega/CEP'])
         end
 
         def render_line3
-          @pdf.lbox LINE_HEIGHT, 6.61, 0.75, @l3, @xml, 'enderEntrega/xMun'
-          @pdf.i18n_lbox LINE_HEIGHT, 4.06, 7.36, @l3, 'enderDest.fone', phone
-          @pdf.lbox LINE_HEIGHT, 1.14, 11.42, @l3, @xml, 'enderEntrega/UF'
-          @pdf.lie LINE_HEIGHT, 4.38, 12.56, @l3, @xml, 'enderEntrega/UF', 'dest/IE'
+          @pdf.lbox LINE_HEIGHT, 15.05, 0.75, @l3, @xml, 'entrega/xMun'
+          @pdf.lbox LINE_HEIGHT, 1.14, 15.8, @l3, @xml, 'entrega/UF'
+          @pdf.i18n_lbox LINE_HEIGHT, 2.92, 17.40, @l3, 'entrega.fone', phone
         end
 
         def phone
-          Phone.format(@xml['enderDest/fone'])
+          Phone.format(@xml['entrega/fone'])
         end
       end
     end

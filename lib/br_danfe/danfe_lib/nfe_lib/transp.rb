@@ -2,7 +2,7 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Transp
-        Y = 18.89 + SPACE_BETWEEN_GROUPS
+        Y = 15.89 + SPACE_BETWEEN_GROUPS
 
         def initialize(pdf, xml)
           @pdf = pdf
@@ -13,7 +13,13 @@ module BrDanfe
           @l2 = Y + LINE_HEIGHT
         end
 
-        def render
+        def render(has_delivery)
+          if has_delivery
+            @ltitle += 3.00
+            @l1 += 3.00
+            @l2 += 3.00
+          end
+
           @pdf.ititle 0.42, 10.00, 0.75, @ltitle, 'transporta.title'
 
           @pdf.lbox LINE_HEIGHT, 8.52, 0.75, @l1, @xml, 'transporta/xNome'

@@ -2,7 +2,7 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Issqn
-        Y_POSITION = 28.72 + SPACE_BETWEEN_GROUPS
+        Y_POSITION = 25.72 + SPACE_BETWEEN_GROUPS
 
         def initialize(pdf, xml)
           @pdf = pdf
@@ -16,8 +16,13 @@ module BrDanfe
           @iss = 'total/ISSQNtot/vISS'
         end
 
-        def render
+        def render(has_delivery)
           if can_render?
+            if has_delivery
+              @title += 3.00
+              @y_position += 3.00
+            end
+
             @pdf.ititle 0.42, 10.00, 0.75, @title, 'issqn.title'
             @pdf.lbox LINE_HEIGHT, 4.64, 0.75, @y_position, @xml, 'emit/IM'
             @pdf.lnumeric LINE_HEIGHT, 5.14, 5.39, @y_position, @xml, @serv

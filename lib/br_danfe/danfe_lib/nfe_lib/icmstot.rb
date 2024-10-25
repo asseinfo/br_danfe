@@ -2,7 +2,7 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Icmstot
-        Y = 16.77 + SPACE_BETWEEN_GROUPS
+        Y = 13.77 + SPACE_BETWEEN_GROUPS
 
         def initialize(pdf, xml)
           @pdf = pdf
@@ -13,7 +13,13 @@ module BrDanfe
           @l2 = Y + LINE_HEIGHT
         end
 
-        def render
+        def render(has_delivery)
+          if has_delivery
+            @ltitle += 3.00
+            @l1 += 3.00
+            @l2 += 3.00
+          end
+
           @pdf.ititle 0.42, 5.60, 0.75, @ltitle, 'ICMSTot.title'
 
           @pdf.lnumeric LINE_HEIGHT, 3.56, 0.75, @l1, @xml, 'ICMSTot/vBC'

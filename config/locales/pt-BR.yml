@@ -144,17 +144,21 @@ pt-BR:
         received_at: "DATA DE RECEBIMENTO"
         receiver: "IDENTIFICAÇÃO E ASSINATURA DO RECEBEDOR"
         document: "NF-e\nN°. %{nNF}\nSÉRIE %{serie}"
-    enderEntrega:
+    entrega:
       title: "INFORMAÇÕES DO LOCAL DE ENTREGA"
-      cnpj: "CNPJ"
-      cpf:  "CPF"
+      CNPJ: "CNPJ"
+      CPF:  "CPF"
+      xNome: "NOME/RAZÃO SOCIAL"
       xLgr: "ENDEREÇO"
       nro: "NÚMERO"
       xCpl: "COMPLEMENTO"
       xBairro: "BAIRRO"
-      cMun: "CEP"
-      xMun: "CIDADE"
-      uf: "ESTADO"
+      cMun: "CÓDIGO DE MUNICÍPIO"
+      xMun: "MUNICÍPIO"
+      UF: "UF"
+      CEP: "CEP"
+      fone: "FONE/FAX"
+      IE: "INSCRIÇÃO ESTADUAL"
   nfce:
     payment_methods:
       '01': "Dinheiro"
