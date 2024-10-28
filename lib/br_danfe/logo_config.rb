@@ -1,22 +1,11 @@
 module BrDanfe
   module Logo
-    class Config < OpenStruct
-      DEFAULTOPTIONS = { logo: '', logo_dimensions: {} }.freeze
+    class Config
+      attr_accessor :logo, :logo_dimensions
 
       def initialize(new_options = {})
-        options = DEFAULTOPTIONS.merge(config_yaml_load)
-        super options.merge(new_options)
-      end
-
-      private
-
-      def file
-        File.exist?('config/br_danfe.yml') ? File.open('config/br_danfe.yml').read : ''
-      end
-
-      def config_yaml_load
-        @file_read = YAML.safe_load(file)
-        @file_read ? (@file_read['br_danfe'] || {})['options'] : {}
+        @logo = new_options[:logo] || ''
+        @logo_dimensions = new_options[:logo_dimensions] || {}
       end
     end
   end
