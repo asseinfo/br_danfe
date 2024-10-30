@@ -2,20 +2,16 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Vol
-        Y = 18.01
+        Y_POSITION = 18.01
 
         def initialize(pdf, xml)
           @pdf = pdf
           @xml = xml
 
-          @l1 = Y
+          @l1 = Entrega.can_render?(@xml) ? Y_POSITION + 3.00 : Y_POSITION
         end
 
-        def render(has_delivery)
-          if has_delivery
-            @l1 += 3.00
-          end
-
+        def render
           nVol = 0
 
           @xml.collect('xmlns', 'vol') do |det|

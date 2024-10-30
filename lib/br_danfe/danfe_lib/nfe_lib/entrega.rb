@@ -1,24 +1,25 @@
 module BrDanfe
   module DanfeLib
     module NfeLib
-      class Delivery
-        Y = 12.92
+      class Entrega
+        Y_POSITION = 12.92
         MAXIMUM_SIZE_FOR_STREET = 319
 
         def initialize(pdf, xml)
           @pdf = pdf
           @xml = xml
 
+          @y_position = Y_POSITION
           @address = 'entrega/xLgr'
 
-          @ltitle = Y - 0.42
-          @l1 = Y
-          @l2 = Y + LINE_HEIGHT
-          @l3 = Y + (LINE_HEIGHT * 2)
+          @ltitle = @y_position - 0.42
+          @l1 = @y_position
+          @l2 = @y_position + LINE_HEIGHT
+          @l3 = @y_position + (LINE_HEIGHT * 2)
         end
 
         def render
-          if can_render?
+          if Entrega::can_render?(@xml)
             @pdf.ititle 0.42, 10.00, 0.75, @ltitle, 'entrega.title'
 
             render_line1
@@ -27,11 +28,13 @@ module BrDanfe
           end
         end
 
-        private
+        def self.can_render?(xml)
+          xml_document = Nokogiri::XML(xml.to_s)
 
-        def can_render?
-          @xml[@address].to_s.present?
+          xml_document.xpath('//xmlns:entrega/xmlns:xLgr', 'xmlns' => 'http://www.portalfiscal.inf.br/nfe').any?
         end
+
+        private
 
         def render_line1
           @pdf.lbox LINE_HEIGHT, 11.82, 0.75, @l1, @xml, 'entrega/xNome'

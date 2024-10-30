@@ -12,6 +12,20 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
       <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
         <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
           #{products}
+          <entrega>
+            <CNPJ>82743287000880</CNPJ>
+            <xNome>Schneider Electric Brasil Ltda</xNome>
+            <xLgr>Av da Saudade</xLgr>
+            <nro>1125</nro>
+            <xBairro>Frutal</xBairro>
+            <xCpl>Sala 01 e 02</xCpl>
+            <cMun>3552403</cMun>
+            <xMun>SUMARE</xMun>
+            <UF>SP</UF>
+            <CEP>13171320</CEP>
+            <fone>1921046300</fone>
+            <IE>671008375110</IE>
+          </entrega>
         </infNFe>
       </NFe>
     XML

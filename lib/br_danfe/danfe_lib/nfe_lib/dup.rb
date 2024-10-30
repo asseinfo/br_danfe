@@ -2,22 +2,23 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Dup
-        Y = 12.92
+        Y_POSITION = 12.92
 
         def initialize(pdf, xml)
           @pdf = pdf
           @xml = xml
+
+          @y_position = Entrega.can_render?(@xml) ? Y_POSITION + 3.00 : Y_POSITION
         end
 
-        def render(has_delivery)
-          y_value = has_delivery ? Y + 3.00 : Y
-          @ltitle = y_value - 0.42
+        def render
+          @ltitle = @y_position - 0.42
 
           @pdf.ititle 0.42, 10.00, 0.75, @ltitle, 'dup.title'
-          @pdf.ibox 0.85, 19.57, 0.75, y_value
+          @pdf.ibox 0.85, 19.57, 0.75, @y_position
 
           x = 0.75
-          y = y_value
+          y = @y_position
           @xml.collect('xmlns', 'dup') do |det|
             render_dup(det, x, y)
             x += 2.30

@@ -11,18 +11,16 @@ module BrDanfe
           @title = Y_POSITION - 0.42
           @y_position = Y_POSITION
 
+          # @y_position = Entrega.can_render?(@xml) ? Y_POSITION + 3.00 : Y_POSITION
+          # @title = @y_position - 0.42
+
           @serv = 'total/ISSQNtot/vServ'
           @bc = 'total/ISSQNtot/vBC'
           @iss = 'total/ISSQNtot/vISS'
         end
 
-        def render(has_delivery)
+        def render
           if can_render?
-            if has_delivery
-              @title += 3.00
-              @y_position += 3.00
-            end
-
             @pdf.ititle 0.42, 10.00, 0.75, @title, 'issqn.title'
             @pdf.lbox LINE_HEIGHT, 4.64, 0.75, @y_position, @xml, 'emit/IM'
             @pdf.lnumeric LINE_HEIGHT, 5.14, 5.39, @y_position, @xml, @serv

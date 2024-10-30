@@ -5,11 +5,11 @@ module BrDanfe
         def initialize(pdf, xml)
           @pdf = pdf
           @xml = xml
+
+          @y_position_with_entrega = Entrega.can_render?(@xml) ? 3.00 : 0.00
         end
 
-        def render(has_issqn, has_delivery)
-          @y_with_delivery = has_delivery ? 3.00 : 0.00
-
+        def render(has_issqn)
           table_height_on_first_page = table_height_on_first_page has_issqn
           first_table = create_table
           next_table = create_table
@@ -123,7 +123,7 @@ module BrDanfe
         end
 
         def table_position_on_first_page
-          y_position = @y_with_delivery.cm + 18.07.cm
+          y_position = @y_position_with_entrega.cm + 18.07.cm
           Helper.invert(y_position)
         end
 
