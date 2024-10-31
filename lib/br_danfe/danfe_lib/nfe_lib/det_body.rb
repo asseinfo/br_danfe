@@ -2,6 +2,8 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class DetBody
+        attr_reader :y_position_with_entrega
+
         def initialize(pdf, xml)
           @pdf = pdf
           @xml = xml

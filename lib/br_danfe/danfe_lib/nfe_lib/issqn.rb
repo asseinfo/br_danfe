@@ -2,17 +2,16 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Issqn
+        attr_reader :y_position
+
         Y_POSITION = 25.72 + SPACE_BETWEEN_GROUPS
 
         def initialize(pdf, xml)
           @pdf = pdf
           @xml = xml
 
-          @title = Y_POSITION - 0.42
-          @y_position = Y_POSITION
-
-          # @y_position = Entrega.can_render?(@xml) ? Y_POSITION + 3.00 : Y_POSITION
-          # @title = @y_position - 0.42
+          @y_position = Entrega.can_render?(@xml) ? Y_POSITION + 3.00 : Y_POSITION
+          @title = @y_position - 0.42
 
           @serv = 'total/ISSQNtot/vServ'
           @bc = 'total/ISSQNtot/vBC'

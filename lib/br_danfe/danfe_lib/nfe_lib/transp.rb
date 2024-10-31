@@ -2,6 +2,8 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Transp
+        attr_reader :y_position
+
         Y_POSITION = 15.89 + SPACE_BETWEEN_GROUPS
 
         def initialize(pdf, xml)

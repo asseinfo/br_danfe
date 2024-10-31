@@ -2,6 +2,8 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Icmstot
+        attr_reader :y_position
+
         Y_POSITION = 13.77 + SPACE_BETWEEN_GROUPS
 
         def initialize(pdf, xml)

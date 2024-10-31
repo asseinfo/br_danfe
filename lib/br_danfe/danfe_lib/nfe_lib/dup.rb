@@ -2,6 +2,8 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Dup
+        attr_reader :y_position
+
         Y_POSITION = 12.92
 
         def initialize(pdf, xml)
