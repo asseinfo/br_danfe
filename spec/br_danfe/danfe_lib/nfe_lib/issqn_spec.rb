@@ -41,7 +41,7 @@ describe BrDanfe::DanfeLib::NfeLib::Issqn do
     end
 
     context 'with ISSQN' do
-      fit 'renders xml to the pdf' do
+      it 'renders xml to the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
         pdf.render_file output_pdf

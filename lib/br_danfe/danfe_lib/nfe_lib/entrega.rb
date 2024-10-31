@@ -19,9 +19,8 @@ module BrDanfe
         end
 
         def render
-          if Entrega::can_render?(@xml)
+          if self.class.can_render?(@xml)
             @pdf.ititle 0.42, 10.00, 0.75, @ltitle, 'entrega.title'
-
             render_line1
             render_line2
             render_line3
@@ -29,9 +28,13 @@ module BrDanfe
         end
 
         def self.can_render?(xml)
-          xml_document = Nokogiri::XML(xml.to_s)
+          if xml.is_a?(BrDanfe::XML)
+            xml.collect('xmlns', 'entrega') { |entrega| entrega.css('xLgr').text }.any?(&:present?)
+          else
+            xml_document = Nokogiri::XML(xml)
 
-          xml_document.xpath('//xmlns:entrega/xmlns:xLgr', 'xmlns' => 'http://www.portalfiscal.inf.br/nfe').any?
+            xml_document.xpath('//xmlns:entrega/xmlns:xLgr', 'xmlns' => 'http://www.portalfiscal.inf.br/nfe').any?
+          end
         end
 
         private
@@ -62,7 +65,7 @@ module BrDanfe
         end
 
         def address
-          address = Helper.generate_address @xml
+          address = Helper.generate_address @xml, 'entrega'
 
           if Helper.address_is_too_big(@pdf, address)
             address = address[0..address.length - 2] while Helper.mensure_text(@pdf, "#{address.strip}...") > MAXIMUM_SIZE_FOR_STREET && !address.empty?
