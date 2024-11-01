@@ -2,13 +2,17 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Vol
-        Y = 18.01
+        attr_reader :y_position
+
+        Y_POSITION = 18.01
 
         def initialize(pdf, xml)
           @pdf = pdf
           @xml = xml
 
-          @l1 = Y
+          @y_position = Entrega.delivery_local?(@xml) ? Y_POSITION + 3.00 : Y_POSITION
+
+          @l1 = @y_position
         end
 
         def render

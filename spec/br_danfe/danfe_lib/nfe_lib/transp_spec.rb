@@ -179,5 +179,54 @@ describe BrDanfe::DanfeLib::NfeLib::Transp do
         expect("#{base_dir}transp#render-modfrete_9.pdf").to have_same_content_of file: output_pdf
       end
     end
+
+    describe 'with entrega' do
+      let(:xml_as_string) do
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <transp>
+                <modFrete>0</modFrete>
+                <transporta>
+                  <CNPJ>71434064000149</CNPJ>
+                  <xNome>Nome do Transportador Ltda</xNome>
+                  <IE>964508990089</IE>
+                  <xEnder>Rua do Transportador, 456</xEnder>
+                  <xMun>Votorantim</xMun>
+                  <UF>SP</UF>
+                </transporta>
+                <veicTransp>
+                  <placa>ABC-1234</placa>
+                  <UF>SP</UF>
+                  <RNTC>123456</RNTC>
+                </veicTransp>
+              </transp>
+              <entrega>
+                <CNPJ>82743287000880</CNPJ>
+                <xNome>Schneider Electric Brasil Ltda</xNome>
+                <xLgr>Av da Saudade</xLgr>
+                <nro>1125</nro>
+                <xBairro>Frutal</xBairro>
+                <xCpl>Sala 01 e 02</xCpl>
+                <cMun>3552403</cMun>
+                <xMun>SUMARE</xMun>
+                <UF>SP</UF>
+                <CEP>13171320</CEP>
+                <fone>1921046300</fone>
+                <IE>671008375110</IE>
+              </entrega>
+            </infNFe>
+          </NFe>
+        XML
+      end
+
+      it 'renders xml to the pdf' do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}transp#render-with_entrega.pdf").to have_same_content_of file: output_pdf
+      end
+    end
   end
 end

@@ -2,9 +2,13 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class DetBody
+        attr_reader :y_position_with_entrega
+
         def initialize(pdf, xml)
           @pdf = pdf
           @xml = xml
+
+          @y_position_with_entrega = Entrega.delivery_local?(@xml) ? 3.00 : 0.00
         end
 
         def render(has_issqn)
@@ -121,7 +125,8 @@ module BrDanfe
         end
 
         def table_position_on_first_page
-          Helper.invert(18.07.cm)
+          y_position = @y_position_with_entrega.cm + 18.07.cm
+          Helper.invert(y_position)
         end
 
         def table_position_on_next_pages

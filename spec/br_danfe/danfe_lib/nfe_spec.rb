@@ -91,6 +91,17 @@ describe BrDanfe::DanfeLib::Nfe do
           expect("#{base_dir}nfe_with_extra_volumes.xml.fixture.pdf").to have_same_content_of file: output_pdf
         end
       end
+
+      context 'when NF-e has entrega' do
+        let(:xml_file) { File.read("#{base_dir}nfe_with_entrega.xml") }
+
+        it 'renders a NF-e with entrega' do
+          expect(File.exist?(output_pdf)).to be_falsey
+          subject.save_pdf output_pdf
+
+          expect("#{base_dir}nfe_with_entrega.xml.fixture.pdf").to have_same_content_of file: output_pdf
+        end
+      end
     end
 
     context "when xml's version is v3.10" do
