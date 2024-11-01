@@ -57,11 +57,11 @@ module BrDanfe
         end
 
         def address_content
-          "Endereço: #{Helper.generate_address @xml}"
+          "Endereço: #{Helper.generate_address @xml, 'enderDest'}"
         end
 
         def address?
-          Helper.address_is_too_big @pdf, Helper.generate_address(@xml)
+          Helper.address_is_too_big @pdf, Helper.generate_address(@xml, 'enderDest')
         end
 
         def difal_content

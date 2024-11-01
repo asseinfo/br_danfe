@@ -228,7 +228,7 @@ describe BrDanfe::DanfeLib::NfeLib::Entrega do
     end
   end
 
-  describe 'can_render?' do
+  describe 'has_delivery_local' do
     context 'when the address is present in the XML' do
       let(:xml_with_address) do
         <<~XML
@@ -267,7 +267,7 @@ describe BrDanfe::DanfeLib::NfeLib::Entrega do
       end
 
       it 'returns true' do
-        expect(described_class.can_render?(xml_with_address)).to be true
+        expect(described_class.delivery_local?(xml_with_address)).to be true
       end
     end
 
@@ -341,15 +341,15 @@ describe BrDanfe::DanfeLib::NfeLib::Entrega do
       end
 
       it 'returns false if has not xLgr in entrega' do
-        expect(described_class.can_render?(xml_without_xLgr)).to be false
+        expect(described_class.delivery_local?(xml_without_xLgr)).to be false
       end
 
       it 'returns false if has dest with xLgr and entrega without xLgr' do
-        expect(described_class.can_render?(xml_with_dest)).to be false
+        expect(described_class.delivery_local?(xml_with_dest)).to be false
       end
 
       it 'returns false if has not entrega' do
-        expect(described_class.can_render?(xml_without_entrega)).to be false
+        expect(described_class.delivery_local?(xml_without_entrega)).to be false
       end
     end
   end

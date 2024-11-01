@@ -80,7 +80,7 @@ module BrDanfe
       end
 
       def render_product_table_title(page, xml)
-        y_position = NfeLib::Entrega.can_render?(xml) && page == 1 ? 3.00 : 0
+        y_position = NfeLib::Entrega.delivery_local?(xml) && page == 1 ? 3.00 : 0
         y_position += page == 1 ? 18.91 : 7.40
         @document.ititle 0.42, 10.00, 0.75, y_position, 'det.title'
       end

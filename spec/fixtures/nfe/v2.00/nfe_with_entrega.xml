@@ -78,13 +78,13 @@
         <EXTIPI>00</EXTIPI>
         <CFOP>6101</CFOP>
         <uCom>MI</uCom>
-        <qCom>2.0000</qCom>
-        <vUnCom>10.0000000000</vUnCom>
+        <qCom>2.00</qCom>
+        <vUnCom>10.00</vUnCom>
         <vProd>20.00</vProd>
         <cEANTrib/>
         <uTrib>MI</uTrib>
-        <qTrib>2.0000</qTrib>
-        <vUnTrib>10.0000000000</vUnTrib>
+        <qTrib>2.00</qTrib>
+        <vUnTrib>10.00</vUnTrib>
         <indTot>1</indTot>
       </prod>
       <imposto>
@@ -122,13 +122,13 @@
         <EXTIPI>00</EXTIPI>
         <CFOP>6101</CFOP>
         <uCom>MI</uCom>
-        <qCom>3.0000</qCom>
-        <vUnCom>20.0000000000</vUnCom>
+        <qCom>3.00</qCom>
+        <vUnCom>20.00</vUnCom>
         <vProd>60.00</vProd>
         <cEANTrib/>
         <uTrib>MI</uTrib>
-        <qTrib>3.0000</qTrib>
-        <vUnTrib>20.0000000000</vUnTrib>
+        <qTrib>3.00</qTrib>
+        <vUnTrib>20.00</vUnTrib>
         <indTot>1</indTot>
       </prod>
       <imposto>
@@ -166,13 +166,13 @@
         <EXTIPI>00</EXTIPI>
         <CFOP>6101</CFOP>
         <uCom>MI</uCom>
-        <qCom>4.0000</qCom>
-        <vUnCom>30.0000000000</vUnCom>
+        <qCom>4.00</qCom>
+        <vUnCom>30.00</vUnCom>
         <vProd>120.00</vProd>
         <cEANTrib/>
         <uTrib>MI</uTrib>
-        <qTrib>4.0000</qTrib>
-        <vUnTrib>30.0000000000</vUnTrib>
+        <qTrib>4.00</qTrib>
+        <vUnTrib>30.00</vUnTrib>
         <indTot>1</indTot>
       </prod>
       <imposto>

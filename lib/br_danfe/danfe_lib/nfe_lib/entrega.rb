@@ -19,7 +19,7 @@ module BrDanfe
         end
 
         def render
-          if self.class.can_render?(@xml)
+          if self.class.delivery_local?(@xml)
             @pdf.ititle 0.42, 10.00, 0.75, @ltitle, 'entrega.title'
             render_line1
             render_line2
@@ -27,14 +27,9 @@ module BrDanfe
           end
         end
 
-        def self.can_render?(xml)
-          if xml.is_a?(BrDanfe::XML)
-            xml.collect('xmlns', 'entrega') { |entrega| entrega.css('xLgr').text }.any?(&:present?)
-          else
-            xml_document = Nokogiri::XML(xml)
-
-            xml_document.xpath('//xmlns:entrega/xmlns:xLgr', 'xmlns' => 'http://www.portalfiscal.inf.br/nfe').any?
-          end
+        def self.delivery_local?(xml)
+          doc = xml.is_a?(BrDanfe::XML) ? xml : Nokogiri::XML(xml)
+          doc.css('entrega/xLgr').text.present?
         end
 
         private

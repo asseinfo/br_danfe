@@ -8,7 +8,7 @@ module BrDanfe
           @pdf = pdf
           @xml = xml
 
-          @y_position_with_entrega = Entrega.can_render?(@xml) ? 3.00 : 0.00
+          @y_position_with_entrega = Entrega.delivery_local?(@xml) ? 3.00 : 0.00
         end
 
         def render(has_issqn)

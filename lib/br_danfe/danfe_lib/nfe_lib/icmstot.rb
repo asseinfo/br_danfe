@@ -10,14 +10,14 @@ module BrDanfe
           @pdf = pdf
           @xml = xml
 
-          @y_position = Entrega.can_render?(@xml) ? Y_POSITION + 3.00 : Y_POSITION
-        end
+          @y_position = Entrega.delivery_local?(@xml) ? Y_POSITION + 3.00 : Y_POSITION
 
-        def render
           @ltitle = @y_position - 0.42
           @l1 = @y_position
           @l2 = @y_position + LINE_HEIGHT
+        end
 
+        def render
           @pdf.ititle 0.42, 5.60, 0.75, @ltitle, 'ICMSTot.title'
 
           @pdf.lnumeric LINE_HEIGHT, 3.56, 0.75, @l1, @xml, 'ICMSTot/vBC'

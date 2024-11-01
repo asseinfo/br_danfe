@@ -76,7 +76,7 @@ describe BrDanfe::DanfeLib::NfeLib::Helper do
     end
 
     it 'returns the address with the street, number and complement' do
-      expect(described_class.generate_address(xml_street))
+      expect(described_class.generate_address(xml_street, 'enderDest'))
         .to eq 'Rua do governo do estado 1125 - Em anexo ao super mercado maior do bairro'
     end
 
@@ -92,7 +92,7 @@ describe BrDanfe::DanfeLib::NfeLib::Helper do
       end
 
       it 'returns the address with the street and number' do
-        expect(described_class.generate_address(xml_street))
+        expect(described_class.generate_address(xml_street, 'enderDest'))
           .to eq 'Rua do governo do estado 1125'
       end
     end
@@ -109,7 +109,7 @@ describe BrDanfe::DanfeLib::NfeLib::Helper do
       end
 
       it 'returns the address with the street only' do
-        expect(described_class.generate_address(xml_street))
+        expect(described_class.generate_address(xml_street, 'enderDest'))
           .to eq 'Rua do governo do estado'
       end
     end
@@ -126,12 +126,12 @@ describe BrDanfe::DanfeLib::NfeLib::Helper do
       end
 
       it 'returns the address with the street and complement' do
-        expect(described_class.generate_address(xml_street))
+        expect(described_class.generate_address(xml_street, 'enderDest'))
           .to eq 'Rua do governo do estado - Em anexo ao super mercado maior do bairro'
       end
     end
 
-    context "when receive 'entrega' type" do
+    context 'when receive the path' do
       let(:xml_entrega) do
         <<~XML
           <entrega>
@@ -146,7 +146,7 @@ describe BrDanfe::DanfeLib::NfeLib::Helper do
         Nokogiri::XML(xml_entrega)
       end
 
-      it 'returns the address with the street, number and complement' do
+      it 'returns the address scoped by the given path' do
         expect(described_class.generate_address(xml_street_entrega, 'entrega'))
           .to eq 'Rua estadual 3341 - Em anexo ao bairro'
       end

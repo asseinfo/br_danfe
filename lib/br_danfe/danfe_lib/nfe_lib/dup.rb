@@ -10,12 +10,12 @@ module BrDanfe
           @pdf = pdf
           @xml = xml
 
-          @y_position = Entrega.can_render?(@xml) ? Y_POSITION + 3.00 : Y_POSITION
+          @y_position = Entrega.delivery_local?(@xml) ? Y_POSITION + 3.00 : Y_POSITION
+
+          @ltitle = @y_position - 0.42
         end
 
         def render
-          @ltitle = @y_position - 0.42
-
           @pdf.ititle 0.42, 10.00, 0.75, @ltitle, 'dup.title'
           @pdf.ibox 0.85, 19.57, 0.75, @y_position
 

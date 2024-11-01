@@ -120,9 +120,9 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
       XML
     end
 
-    context 'when Entrega.can_render? returns true' do
+    context 'when Entrega.delivery_local? returns true' do
       before do
-        allow(BrDanfe::DanfeLib::NfeLib::Entrega).to receive(:can_render?).and_return(true)
+        allow(BrDanfe::DanfeLib::NfeLib::Entrega).to receive(:delivery_local?).and_return(true)
       end
 
       it 'sets @y_position_with_entrega to 3.00' do
@@ -130,9 +130,9 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
       end
     end
 
-    context 'when Entrega.can_render? returns false' do
+    context 'when Entrega.delivery_local? returns false' do
       before do
-        allow(BrDanfe::DanfeLib::NfeLib::Entrega).to receive(:can_render?).and_return(false)
+        allow(BrDanfe::DanfeLib::NfeLib::Entrega).to receive(:delivery_local?).and_return(false)
       end
 
       it 'sets @y_position_with_entrega to 0.00' do
