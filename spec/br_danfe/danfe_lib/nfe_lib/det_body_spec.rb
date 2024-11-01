@@ -56,91 +56,6 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
 
   subject { described_class.new(pdf, xml) }
 
-  describe '#initialize' do
-    let(:products) do
-      <<~XML
-        <det nItem="1">
-          <prod>
-            <cProd>REF 06</cProd>
-            <xProd>Produto com FCI</xProd>
-            <NCM>90303329</NCM>
-            <EXTIPI>00</EXTIPI>
-            <CFOP>5101</cfop>
-            <uCom>PC</uCom>
-            <qCom>1.00</qCom>
-            <vUnCom>49.23</vUnCom>
-            <vProd>49.23</vProd>
-          </prod>
-          <imposto>
-            <ICMS>
-              <ICMS00>
-                <orig>0</orig>
-                <CST>00</CST>
-                <modBC>3</modBC>
-                <vBC>49.23</vBC>
-                <pICMS>12.00</pICMS>
-                <vICMS>5.90</vICMS>
-              </ICMS00>
-            </ICMS>
-            <IPI>
-              <cEnq>999</cEnq>
-              <IPITrib>
-                <CST>50</CST>
-                <vBC>49.23</vBC>
-                <pIPI>5.00</pIPI>
-                <vIPI>2.46</vIPI>
-              </IPITrib>
-            </IPI>
-          </imposto>
-        </det>
-      XML
-    end
-
-    let(:xml_as_string) do
-      <<~XML
-        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-          <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
-            #{products}
-            <entrega>
-              <CNPJ>82743287000880</CNPJ>
-              <xNome>Schneider Electric Brasil Ltda</xNome>
-              <xLgr>Av da Saudade</xLgr>
-              <nro>1125</nro>
-              <xBairro>Frutal</xBairro>
-              <xCpl>Sala 01 e 02</xCpl>
-              <cMun>3552403</cMun>
-              <xMun>SUMARE</xMun>
-              <UF>SP</UF>
-              <CEP>13171320</CEP>
-              <fone>1921046300</fone>
-              <IE>671008375110</IE>
-            </entrega>
-          </infNFe>
-        </NFe>
-      XML
-    end
-
-    context 'when Entrega.delivery_local? returns true' do
-      before do
-        allow(BrDanfe::DanfeLib::NfeLib::Entrega).to receive(:delivery_local?).and_return(true)
-      end
-
-      it 'sets @y_position_with_entrega to 3.00' do
-        expect(subject.y_position_with_entrega).to eq(3.00)
-      end
-    end
-
-    context 'when Entrega.delivery_local? returns false' do
-      before do
-        allow(BrDanfe::DanfeLib::NfeLib::Entrega).to receive(:delivery_local?).and_return(false)
-      end
-
-      it 'sets @y_position_with_entrega to 0.00' do
-        expect(subject.y_position_with_entrega).to eq(0.00)
-      end
-    end
-  end
-
   describe '#render' do
     before do
       subject.render has_issqn
@@ -500,6 +415,79 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
         pdf.render_file output_pdf
 
         expect("#{base_dir}det_body#render-with_infadprod.pdf").to have_same_content_of file: output_pdf
+      end
+    end
+
+    context 'with entrega' do
+      let(:products) do
+        <<~XML
+          <det nItem="1">
+            <prod>
+              <cProd>REF 06</cProd>
+              <xProd>Produto com FCI</xProd>
+              <NCM>90303329</NCM>
+              <EXTIPI>00</EXTIPI>
+              <CFOP>5101</cfop>
+              <uCom>PC</uCom>
+              <qCom>1.00</qCom>
+              <vUnCom>49.23</vUnCom>
+              <vProd>49.23</vProd>
+            </prod>
+            <imposto>
+              <ICMS>
+                <ICMS00>
+                  <orig>0</orig>
+                  <CST>00</CST>
+                  <modBC>3</modBC>
+                  <vBC>49.23</vBC>
+                  <pICMS>12.00</pICMS>
+                  <vICMS>5.90</vICMS>
+                </ICMS00>
+              </ICMS>
+              <IPI>
+                <cEnq>999</cEnq>
+                <IPITrib>
+                  <CST>50</CST>
+                  <vBC>49.23</vBC>
+                  <pIPI>5.00</pIPI>
+                  <vIPI>2.46</vIPI>
+                </IPITrib>
+              </IPI>
+            </imposto>
+          </det>
+        XML
+      end
+
+      let(:xml_as_string) do
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              #{products}
+              <entrega>
+                <CNPJ>82743287000880</CNPJ>
+                <xNome>Schneider Electric Brasil Ltda</xNome>
+                <xLgr>Av da Saudade</xLgr>
+                <nro>1125</nro>
+                <xBairro>Frutal</xBairro>
+                <xCpl>Sala 01 e 02</xCpl>
+                <cMun>3552403</cMun>
+                <xMun>SUMARE</xMun>
+                <UF>SP</UF>
+                <CEP>13171320</CEP>
+                <fone>1921046300</fone>
+                <IE>671008375110</IE>
+              </entrega>
+            </infNFe>
+          </NFe>
+        XML
+      end
+
+      it 'renders xml to the pdf' do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}det_body#render-with_entrega.pdf").to have_same_content_of file: output_pdf
       end
     end
 

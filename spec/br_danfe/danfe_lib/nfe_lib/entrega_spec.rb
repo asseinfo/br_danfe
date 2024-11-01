@@ -228,8 +228,8 @@ describe BrDanfe::DanfeLib::NfeLib::Entrega do
     end
   end
 
-  describe 'has_delivery_local' do
-    context 'when the address is present in the XML' do
+  describe '.delivery_local' do
+    context 'when entrega/xLgr is present in the XML' do
       let(:xml_with_address) do
         <<~XML
           <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -271,7 +271,7 @@ describe BrDanfe::DanfeLib::NfeLib::Entrega do
       end
     end
 
-    context 'when the address is not present in the XML' do
+    context 'when entrega/xLgr is not present in the XML' do
       let(:xml_without_entrega) do
         <<~XML
           <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
@@ -281,74 +281,7 @@ describe BrDanfe::DanfeLib::NfeLib::Entrega do
         XML
       end
 
-      let(:xml_with_dest) do
-        <<~XML
-          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="3.10">
-              <dest>
-                <idEstrangeiro>123456789</idEstrangeiro>
-                <xNome>John Doe</xNome>
-                <enderDest>
-                  <xLgr>Av. Bayer Filho</xLgr>
-                  <nro>1999</nro>
-                  <xBairro>Centro</xBairro>
-                  <xMun>Tijucas</xMun>
-                  <UF>SC</UF>
-                </enderDest>
-              </dest>
-              <entrega>
-                <CNPJ>82743287000880</CNPJ>
-                <xNome>Schneider Electric Brasil Ltda</xNome>
-                <nro>1125</nro>
-                <xCpl>Em anexo ao super mercado maior do bairro</xCpl>
-                <xBairro>Frutal</xBairro>
-                <cMun>3552403</cMun>
-                <xMun>SUMARE</xMun>
-                <UF>SP</UF>
-                <CEP>13171320</CEP>
-                <cPais>1058</cPais>
-                <xPais>BRASIL</xPais>
-                <fone>1921046300</fone>
-                <IE>671008375110</IE>
-              </entrega>
-            </infNFe>
-          </NFe>
-        XML
-      end
-
-      let(:xml_without_xLgr) do
-        <<~XML
-          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="3.10">
-              <entrega>
-                <CNPJ>82743287000880</CNPJ>
-                <xNome>Schneider Electric Brasil Ltda</xNome>
-                <nro>1125</nro>
-                <xCpl>Em anexo ao super mercado maior do bairro</xCpl>
-                <xBairro>Frutal</xBairro>
-                <cMun>3552403</cMun>
-                <xMun>SUMARE</xMun>
-                <UF>SP</UF>
-                <CEP>13171320</CEP>
-                <cPais>1058</cPais>
-                <xPais>BRASIL</xPais>
-                <fone>1921046300</fone>
-                <IE>671008375110</IE>
-              </entrega>
-            </infNFe>
-          </NFe>
-        XML
-      end
-
-      it 'returns false if has not xLgr in entrega' do
-        expect(described_class.delivery_local?(xml_without_xLgr)).to be false
-      end
-
-      it 'returns false if has dest with xLgr and entrega without xLgr' do
-        expect(described_class.delivery_local?(xml_with_dest)).to be false
-      end
-
-      it 'returns false if has not entrega' do
+      it 'returns false' do
         expect(described_class.delivery_local?(xml_without_entrega)).to be false
       end
     end

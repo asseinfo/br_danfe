@@ -142,9 +142,7 @@ describe BrDanfe::DanfeLib::NfeLib::Helper do
         XML
       end
 
-      let(:xml_street_entrega) do
-        Nokogiri::XML(xml_entrega)
-      end
+      let(:xml_street_entrega) { Nokogiri::XML(xml_entrega) }
 
       it 'returns the address scoped by the given path' do
         expect(described_class.generate_address(xml_street_entrega, 'entrega'))
