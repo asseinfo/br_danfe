@@ -19,7 +19,7 @@ module BrDanfe
         end
 
         def render
-          if self.class.delivery_local?(@xml)
+          if Entrega.delivery_local?(@xml)
             @pdf.ititle 0.42, 10.00, 0.75, @ltitle, 'entrega.title'
             render_line1
             render_line2
