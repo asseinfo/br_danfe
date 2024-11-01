@@ -83,7 +83,7 @@ describe BrDanfe::DanfeLib::NfeLib::Vol do
       end
     end
 
-    fdescribe 'with entrega' do
+    describe 'with entrega' do
       let(:xml_as_string) do
         <<~XML
           <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
