@@ -10,7 +10,6 @@ module BrDanfe
           @xml = xml
 
           @y_position = Y_POSITION
-
           @ltitle = @y_position - 0.42
           @l1 = @y_position
           @l2 = @y_position + LINE_HEIGHT

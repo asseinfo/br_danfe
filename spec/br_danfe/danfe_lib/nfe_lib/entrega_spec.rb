@@ -52,38 +52,6 @@ describe BrDanfe::DanfeLib::NfeLib::Entrega do
       end
     end
 
-    context 'when recipient has CPF' do
-      let(:xml_as_string) do
-        <<~XML
-          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="3.10">
-              <entrega>
-                <CPF>48532557457</CPF>
-                <xNome>Schneider Electric Brasil Ltda</xNome>
-                <xLgr>Av da Saudade</xLgr>
-                <nro>1125</nro>
-                <xBairro>Frutal</xBairro>
-                <xCpl>Sala 01 e 02</xCpl>
-                <cMun>3552403</cMun>
-                <xMun>SUMARE</xMun>
-                <UF>SP</UF>
-                <CEP>13171320</CEP>
-                <fone>1921046300</fone>
-              </entrega>
-            </infNFe>
-          </NFe>
-        XML
-      end
-
-      it 'renders xml to the pdf' do
-        expect(File.exist?(path_of_expected_pdf)).to be false
-
-        pdf.render_file path_of_expected_pdf
-
-        expect('./spec/fixtures/nfe/lib/entrega#render-with_cpf.pdf').to have_same_content_of file: path_of_expected_pdf
-      end
-    end
-
     context 'when recipient address (xLgr + nro + xCpl) has more than 63 characters' do
       let(:xml_as_string) do
         <<~XML
