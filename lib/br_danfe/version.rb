@@ -1,3 +1,3 @@
 module BrDanfe
-  VERSION = '0.20.0'.freeze
+  VERSION = '1.0.0'.freeze
 end

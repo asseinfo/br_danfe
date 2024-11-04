@@ -2,15 +2,19 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Icmstot
-        Y = 13.77 + SPACE_BETWEEN_GROUPS
+        attr_reader :y_position
+
+        Y_POSITION = 13.77 + SPACE_BETWEEN_GROUPS
 
         def initialize(pdf, xml)
           @pdf = pdf
           @xml = xml
 
-          @ltitle = Y - 0.42
-          @l1 = Y
-          @l2 = Y + LINE_HEIGHT
+          @y_position = Entrega.delivery_local?(@xml) ? Y_POSITION + 3.00 : Y_POSITION
+
+          @ltitle = @y_position - 0.42
+          @l1 = @y_position
+          @l2 = @y_position + LINE_HEIGHT
         end
 
         def render
