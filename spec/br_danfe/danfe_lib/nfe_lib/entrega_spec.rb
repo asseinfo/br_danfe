@@ -75,7 +75,7 @@ describe BrDanfe::DanfeLib::NfeLib::Entrega do
         XML
       end
 
-      fit 'renders xml to the pdf' do
+      it 'renders xml to the pdf' do
         expect(File.exist?(path_of_expected_pdf)).to be false
 
         pdf.render_file path_of_expected_pdf
