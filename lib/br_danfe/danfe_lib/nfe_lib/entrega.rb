@@ -10,7 +10,6 @@ module BrDanfe
           @xml = xml
 
           @y_position = Y_POSITION
-          @address = 'entrega/xLgr'
 
           @ltitle = @y_position - 0.42
           @l1 = @y_position
