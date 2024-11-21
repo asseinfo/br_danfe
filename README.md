@@ -63,6 +63,16 @@ XML version | Supported?
       end
     end
 
+#### Usage with cancellation event
+
+    xml = File.read("spec/fixtures/nfe/v3.10/nfe_simples_nacional_authorized.xml")
+    xml_event = File.read("spec/fixtures/nfe/v3.10/nfe_simples_nacional_cancellation_event.xml")
+
+    danfe = BrDanfe::Danfe.new([xml, xml_event])
+    danfe.options.logo = "spec/fixtures/logo.png"
+    danfe.options.logo_dimensions = { width: 100, height: 100 }
+    danfe.save_pdf("output.pdf")
+
 ### Options
 
 * `logo_path`: Path of sender's logo image.

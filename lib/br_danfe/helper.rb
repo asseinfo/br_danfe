@@ -12,6 +12,14 @@ module BrDanfe
       xml.css('nfeProc/protNFe/infProt/dhRecbto').empty?
     end
 
+    def self.authorized?(xml)
+      !unauthorized?(xml)
+    end
+
+    def self.canceled?(xml, event_xmls)
+      authorized?(xml) && cancellation_event_any?(event_xmls)
+    end
+
     def self.numerify(number)
       return '' if !number || number == ''
 
@@ -32,6 +40,22 @@ module BrDanfe
       nfe_code = '55'
 
       xml['ide > mod'] == nfe_code
+    end
+
+    def self.event?(xml)
+      xml['evento > infEvento'].present?
+    end
+
+    def self.cancellation_event?(xml)
+      xml['evento > infEvento > tpEvento'] == '110111'
+    end
+
+    def self.cancellation_event_any?(xmls)
+      xmls.any? { |xml| cancellation_event?(xml) }
+    end
+
+    def self.xml_key(xml)
+      event?(xml) ? xml['evento > infEvento > chNFe'] : xml.css('infNFe').attr('Id').to_s.gsub(/[^\d]/, '')
     end
 
     def self.format_cep(cep)

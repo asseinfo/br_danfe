@@ -11,22 +11,14 @@ module BrDanfe
       end
 
       def create_watermark
-        @document.create_stamp('has_no_fiscal_value') do
-          @document.fill_color '7d7d7d'
-          @document.text_box(
-            I18n.t('danfe.others.has_no_fiscal_value'),
-            size: 0.8.cm,
-            width: 10.cm,
-            height: 1.2.cm,
-            at: [0, PAGE_HEIGHT - 3.8.cm],
-            rotate: 45,
-            rotate_around: :center
-          )
-        end
+        create_stamp('canceled', size: 1.1.cm, width: 12.cm, at: [-0.5.cm, PAGE_HEIGHT - 5.cm])
+        create_stamp('has_no_fiscal_value', size: 0.8.cm)
       end
 
       def generate(footer_info)
-        @xmls.each do |xml|
+        @xmls.each do |xmls|
+          xml, event_xmls = xmls
+
           NfceLib::Header.new(@document, xml, @options.logo, @options.logo_dimensions).render
           NfceLib::ProductList.new(@document, xml).render
           NfceLib::TotalList.new(@document, xml).render
@@ -37,16 +29,41 @@ module BrDanfe
           NfceLib::Footer.new(@document, xml).render(footer_info)
 
           render_no_fiscal_value(xml)
+          render_canceled(xml, event_xmls)
           resize_page_height
         end
+
+        @document
+      end
+
+      def resize_page_height
+        @document.page.dictionary.data[:MediaBox] = [0, @document.y - 10, PAGE_WIDTH, PAGE_HEIGHT]
       end
 
       def render_no_fiscal_value(xml)
         @document.stamp('has_no_fiscal_value') if BrDanfe::Helper.unauthorized?(xml)
       end
 
-      def resize_page_height
-        @document.page.dictionary.data[:MediaBox] = [0, @document.y - 10, PAGE_WIDTH, PAGE_HEIGHT]
+      def render_canceled(xml, event_xmls)
+        @document.stamp('canceled') if BrDanfe::Helper.canceled?(xml, event_xmls)
+      end
+
+      def create_stamp(name, extra_config = {})
+        @document.create_stamp(name) do
+          @document.fill_color '7d7d7d'
+          @document.transparent(0.5) do
+            @document.text_box(
+              I18n.t("danfe.others.#{name}"),
+              {
+                width: 10.cm,
+                height: 1.2.cm,
+                at: [0, PAGE_HEIGHT - 3.8.cm],
+                rotate: 45,
+                rotate_around: :center
+              }.merge(extra_config)
+            )
+          end
+        end
       end
     end
   end
