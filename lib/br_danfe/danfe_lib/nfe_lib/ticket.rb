@@ -43,8 +43,7 @@ module BrDanfe
         end
 
         def emmited_at_content
-          # binding.irb
-          Time.parse(@xml['ide/dhEmi']).strftime('%d/%m/%Y')
+          BrDanfe::Helper.format_datetime(@xml['ide/dhEmi'], without_time: true)
         end
       end
     end

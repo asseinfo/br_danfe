@@ -218,6 +218,12 @@ describe BrDanfe::Helper do
         expect(described_class.format_datetime('2013-10-18T13:54:04-03:00', with_time_zone: true)).to eql '18/10/2013 13:54:04-03:00'
       end
     end
+
+    describe 'when without_time is true' do
+      it 'returns the formated string with only day,month and year' do
+        expect(described_class.format_datetime('2013-10-18T13:54:04-03:00', without_time: true)).to eql '18/10/2013'
+      end
+    end
   end
 
   describe '.format_cep' do
