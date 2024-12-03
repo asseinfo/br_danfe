@@ -43,7 +43,7 @@ module BrDanfe
         end
 
         def emmited_at_content
-          BrDanfe::Helper.format_datetime(@xml['ide/dhEmi'], without_time: true)
+          @xml['ide/dhEmi'].present? ? Helper.format_date(@xml['ide/dhEmi']) : Helper.format_date(@xml['ide/dEmi'])
         end
       end
     end
