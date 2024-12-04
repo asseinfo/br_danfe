@@ -23,7 +23,8 @@ module BrDanfe
         private
 
         def table_height_on_first_page(has_issqn)
-          has_issqn ? 6.35.cm : 7.72.cm
+          base_height = has_issqn ? 6.35.cm : 7.72.cm
+          (base_height - @y_position_with_entrega.cm)
         end
 
         def create_table
