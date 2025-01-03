@@ -16,28 +16,47 @@ module BrDanfe
         end
 
         def render
-          @pdf.ititle 0.42, 10.00, 0.75, @ltitle, 'dup.title'
-          @pdf.ibox 0.85, 19.57, 0.75, @y_position
-
           x = 0.75
           y = @y_position
+
+          @pdf.ititle 0.42, 10.00, x, @ltitle, 'dup.title'
+
+          render_titles_and_box(x, y)
+          det_count = 0
+
           @xml.collect('xmlns', 'dup') do |det|
-            render_dup(det, x, y)
-            x += 2.30
+            if det_count < 6
+              y = @y_position - 0.015
+            else
+              if det_count == 6
+                x = 0.75
+              end
+              y = @y_position + 0.185
+            end
+
+            render_dup(det, x, y + 0.3)
+            x += 3.261666667
+            det_count += 1
           end
         end
 
         private
 
+        def render_titles_and_box(x, y)
+          6.times do
+            @pdf.ibox 0.30, 3.261666667, x, y
+            @pdf.ibox 0.60, 3.261666667, x, y + 0.30
+            @pdf.ibox 0.85, 1.80, x, y - 0.05, '', I18n.t('danfe.dup.nDup'), normal
+            @pdf.ibox 0.85, 1.80, x + 0.87, y - 0.05, '', I18n.t('danfe.dup.dVenc'), normal
+            @pdf.ibox 0.85, 1.80, x + 2.35, y - 0.05, '', I18n.t('danfe.dup.vDup'), normal
+            x += 3.261666667
+          end
+        end
+
         def render_dup(det, x, y)
-          @pdf.ibox 0.85, 2.12, x, y, '', I18n.t('danfe.dup.nDup'), italic
-          @pdf.ibox 0.85, 2.12, x + 0.70, y, '', det.css('nDup').text, normal
-          @pdf.ibox 0.85, 2.12, x, y + 0.20, '', I18n.t('danfe.dup.dVenc'), italic
-
-          @pdf.ibox 0.85, 2.12, x + 0.70, y + 0.20, '', dtduplicata(det), normal
-
-          @pdf.ibox 0.85, 2.12, x, y + 0.40, '', I18n.t('danfe.dup.vDup'), italic
-          @pdf.inumeric 0.85, 1.25, x + 0.70, y + 0.40, '', det.css('vDup').text, normal
+          @pdf.ibox 0.85, 2.12, x + 0.1, y, '', det.css('nDup').text, normal
+          @pdf.ibox 0.85, 2.12, x + 0.75, y, '', dtduplicata(det), normal
+          @pdf.inumeric 0.85, 2.12, x + 1.1, y, '', det.css('vDup').text, normal
         end
 
         def dtduplicata(det)
@@ -47,10 +66,6 @@ module BrDanfe
 
         def normal
           { size: 6, border: 0 }
-        end
-
-        def italic
-          normal.merge(style: :italic)
         end
       end
     end
