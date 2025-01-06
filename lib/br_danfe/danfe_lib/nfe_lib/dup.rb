@@ -27,13 +27,13 @@ module BrDanfe
           @xml.collect('xmlns', 'dup') do |det|
             next unless det_count < 12
 
-            if det_count < 6
-              y = @y_position - 0.015
-            else
-              x = 0.75 unless det_count == 6
+            x = 0.75 unless det_count != 6
 
-              y = @y_position + 0.185
-            end
+            y = if det_count < 6
+                  @y_position - 0.015
+                else
+                  @y_position + 0.185
+                end
 
             render_dup(det, x, y + 0.3)
             x += 3.261666667
