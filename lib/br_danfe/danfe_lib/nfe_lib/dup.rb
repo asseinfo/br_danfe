@@ -30,9 +30,8 @@ module BrDanfe
             if det_count < 6
               y = @y_position - 0.015
             else
-              if det_count == 6
-                x = 0.75
-              end
+              x = 0.75 unless det_count == 6
+
               y = @y_position + 0.185
             end
 
