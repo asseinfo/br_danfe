@@ -44,6 +44,7 @@ module BrDanfe
           additional_data.push(address_content) if address?
           additional_data.push(difal_content) if difal?
           additional_data.push(fisco_content) if fisco?
+          additional_data.push(dup_content) if dup?
           additional_data.join(' * ')
         end
 
@@ -89,6 +90,32 @@ module BrDanfe
           @xml['infAdic/infAdFisco'].to_s.present?
         end
 
+        def format_dup_date(_det, dup_date)
+          dtduplicata = dup_date
+          "#{dtduplicata[8, 2]}/#{dtduplicata[5, 2]}/#{dtduplicata[0, 4]}"
+        end
+
+        def dup_content
+          dup = 0
+          value_dups = []
+
+          @xml.collect('xmlns', 'dup') do |det|
+            dup += 1
+
+            if dup == 13
+              value_dups.push("Faturas: #{det.css('nDup').text} - #{format_dup_date(det, det.css('dVenc').text)} - R$ #{BrDanfe::Helper.numerify(det.css('vDup').text.to_f)}")
+            elsif dup > 13
+              value_dups.push("#{det.css('nDup').text} - #{format_dup_date(det, det.css('dVenc').text)} - R$ #{BrDanfe::Helper.numerify(det.css('vDup').text.to_f)}")
+            end
+          end
+
+          value_dups
+        end
+
+        def dup?
+          dup_content.to_s.present?
+        end
+
         def generate_y_position(volumes_number)
           if volumes_number > 1
             return Y_POSITION + 0.30 + volumes_number * 0.15 + 0.2
@@ -98,7 +125,7 @@ module BrDanfe
         end
 
         def additional_data?
-          complementary? || address? || difal? || fisco?
+          complementary? || address? || difal? || fisco? || dup?
         end
 
         def render_reserved_fisco

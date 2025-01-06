@@ -25,6 +25,8 @@ module BrDanfe
           det_count = 0
 
           @xml.collect('xmlns', 'dup') do |det|
+            next unless det_count < 12
+
             if det_count < 6
               y = @y_position - 0.015
             else
