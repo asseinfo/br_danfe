@@ -101,11 +101,12 @@ module BrDanfe
 
           @xml.collect('xmlns', 'dup') do |det|
             dup += 1
+            value = "#{det.css('nDup').text} - #{format_dup_date(det, det.css('dVenc').text)} - R$ #{BrDanfe::Helper.numerify(det.css('vDup').text.to_f)}"
 
             if dup == 13
-              value_dups.push("Faturas: #{det.css('nDup').text} - #{format_dup_date(det, det.css('dVenc').text)} - R$ #{BrDanfe::Helper.numerify(det.css('vDup').text.to_f)}")
+              value_dups.push("Faturas: #{value}")
             elsif dup > 13
-              value_dups.push("#{det.css('nDup').text} - #{format_dup_date(det, det.css('dVenc').text)} - R$ #{BrDanfe::Helper.numerify(det.css('vDup').text.to_f)}")
+              value_dups.push(value.to_s)
             end
           end
 
