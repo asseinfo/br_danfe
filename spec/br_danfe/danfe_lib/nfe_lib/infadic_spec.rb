@@ -567,7 +567,7 @@ describe BrDanfe::DanfeLib::NfeLib::Infadic do
       end
       let(:volumes_number) { 3 }
 
-      fit 'renders title with box, subtitle, fisco box, extra volumes, ' \
+      it 'renders title with box, subtitle, fisco box, extra volumes, ' \
          'complementary information, address and difal on the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
