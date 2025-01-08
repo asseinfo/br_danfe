@@ -44,7 +44,7 @@ module BrDanfe
           additional_data.push(address_content) if address?
           additional_data.push(difal_content) if difal?
           additional_data.push(fisco_content) if fisco?
-          additional_data.push(dup_content) if dup_content.to_s.present?
+          additional_data.push(dup_content) if dup_content.any?
           additional_data.join(' * ')
         end
 
