@@ -229,15 +229,15 @@ You can generate new data using [4devs generators](http://www.4devs.com.br).
 
 ## Deploy to Rubygems
 
-To deploy a new version:
+1. To deploy a new version:
 
-  1. Define the new version at `lib/nfe/version.rb`;
-  2. Execute `$ bundle`;
-  3. Commit all and push to Github;
+  * Define the new version at `lib/nfe/version.rb`;
+  * Execute `$ bundle`;
+  * Commit all and push to Github;
 
 2. Send the new version to Rubygems
 
-    $ bundle exec rake release
+  * $ bundle exec rake release
 
 3. Create a [new release on Github](https://github.com/asseinfo/br_danfe/releases/new)
 
