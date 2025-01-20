@@ -550,7 +550,7 @@ describe BrDanfe::DanfeLib::NfeLib::Infadic do
                   <pesoB>3300.000</pesoB>
                 </vol>
               </transp>
-                            <cobr>
+              <cobr>
                 <dup>
                   <nDup>001</nDup>
                   <dVenc>2015-02-13</dVenc>
