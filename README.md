@@ -231,7 +231,7 @@ You can generate new data using [4devs generators](http://www.4devs.com.br).
 
 1. To deploy a new version:
 
-  * Define the new version at `lib/nfe/version.rb`;
+  * Define the new version at `lib/br_danfe/version.rb`;
   * Execute `$ bundle`;
   * Commit all and push to Github;
 
