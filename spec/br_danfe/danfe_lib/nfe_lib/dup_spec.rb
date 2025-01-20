@@ -56,17 +56,67 @@ describe BrDanfe::DanfeLib::NfeLib::Dup do
             <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
               <cobr>
                 <dup>
-                  <nDup>1</nDup>
+                  <nDup>001</nDup>
                   <dVenc>2015-02-13</dVenc>
                   <vDup>25.56</vDup>
                 </dup>
                 <dup>
-                  <nDup>2</nDup>
+                  <nDup>002</nDup>
                   <dVenc>2015-03-15</dVenc>
                   <vDup>25.56</vDup>
                 </dup>
                 <dup>
-                  <nDup>3</nDup>
+                  <nDup>003</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>004</nDup>
+                  <dVenc>2015-02-13</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>005</nDup>
+                  <dVenc>2015-03-15</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>006</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>007</nDup>
+                  <dVenc>2015-02-13</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>008</nDup>
+                  <dVenc>2015-03-15</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>009</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>010</nDup>
+                  <dVenc>2015-02-13</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>011</nDup>
+                  <dVenc>2015-03-15</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>012</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>013</nDup>
                   <dVenc>2015-04-14</dVenc>
                   <vDup>25.55</vDup>
                 </dup>

@@ -50,9 +50,9 @@ pt-BR:
       CNPJ: "CNPJ"
     dup:
       title: "FATURA / DUPLICATAS"
-      nDup: "Núm.:"
-      vDup: "Valor: R$"
-      dVenc: "Venc.:"
+      nDup: "NRO"
+      vDup: "VALOR"
+      dVenc: "VENCTO"
     ICMSTot:
       title: "CÁLCULO DO IMPOSTO"
       vBC: "BASE DE CÁLCULO DO ICMS"

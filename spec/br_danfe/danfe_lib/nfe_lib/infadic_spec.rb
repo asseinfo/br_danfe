@@ -262,6 +262,168 @@ describe BrDanfe::DanfeLib::NfeLib::Infadic do
       end
     end
 
+    context 'when has too much dups' do
+      let(:xml_as_string) do
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <cobr>
+                <dup>
+                  <nDup>001</nDup>
+                  <dVenc>2015-02-13</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>002</nDup>
+                  <dVenc>2015-03-15</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>003</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>004</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>005</nDup>
+                  <dVenc>2015-02-13</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>006</nDup>
+                  <dVenc>2015-03-15</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>007</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>008</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>009</nDup>
+                  <dVenc>2015-02-13</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>010</nDup>
+                  <dVenc>2015-03-15</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>011</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>012</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>013</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>014</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+              </cobr>
+            </infNFe>
+          </NFe>
+        XML
+      end
+
+      it 'renders title with box, subtitle, dup box and additional information about dup on the pdf' do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}infadic#render-with_dup_additional_information.pdf").to have_same_content_of file: output_pdf
+      end
+    end
+
+    context 'when has less than NfeLib::Dup::DUP_MAX_QUANTITY dups' do
+      let(:xml_as_string) do
+        <<~XML
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe Id="NFe25111012345678901234550020000134151000134151" versao="2.00">
+              <cobr>
+                <dup>
+                  <nDup>001</nDup>
+                  <dVenc>2015-02-13</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>002</nDup>
+                  <dVenc>2015-03-15</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>003</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>004</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>005</nDup>
+                  <dVenc>2015-02-13</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>006</nDup>
+                  <dVenc>2015-03-15</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>007</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>008</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>009</nDup>
+                  <dVenc>2015-02-13</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>010</nDup>
+                  <dVenc>2015-03-15</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+              </cobr>
+            </infNFe>
+          </NFe>
+        XML
+      end
+
+      it 'renders title with box, subtitle and additional information without dup on the pdf' do
+        expect(File.exist?(output_pdf)).to be_falsey
+
+        pdf.render_file output_pdf
+
+        expect("#{base_dir}infadic#render-without_dup_additional_information.pdf").to have_same_content_of file: output_pdf
+      end
+    end
+
     context 'when has extra volume' do
       let(:xml_as_string) do
         <<~XML
@@ -388,6 +550,78 @@ describe BrDanfe::DanfeLib::NfeLib::Infadic do
                   <pesoB>3300.000</pesoB>
                 </vol>
               </transp>
+              <cobr>
+                <dup>
+                  <nDup>001</nDup>
+                  <dVenc>2015-02-13</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>002</nDup>
+                  <dVenc>2015-03-15</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>003</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>004</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>005</nDup>
+                  <dVenc>2015-02-13</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>006</nDup>
+                  <dVenc>2015-03-15</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>007</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>008</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>009</nDup>
+                  <dVenc>2015-02-13</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>010</nDup>
+                  <dVenc>2015-03-15</dVenc>
+                  <vDup>25.56</vDup>
+                </dup>
+                <dup>
+                  <nDup>011</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>012</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>013</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+                <dup>
+                  <nDup>014</nDup>
+                  <dVenc>2015-04-14</dVenc>
+                  <vDup>25.55</vDup>
+                </dup>
+              </cobr>
               <infAdic>
                 <infCpl>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue in dolor sed sagittis.</infCpl>
                 <infAdFisco>Total de FCP-ST: 348,96</infAdFisco>
