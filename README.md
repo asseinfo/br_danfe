@@ -229,18 +229,24 @@ You can generate new data using [4devs generators](http://www.4devs.com.br).
 
 ## Deploy to Rubygems
 
-1. Create and send the new version to Rubygems
+To deploy a new version:
+
+  1. Define the new version at `lib/nfe/version.rb`;
+  2. Execute `$ bundle`;
+  3. Commit all and push to Github;
+
+2. Send the new version to Rubygems
 
     $ bundle exec rake release
 
-2. Create a [new release on Github](https://github.com/asseinfo/br_danfe/releases/new)
+3. Create a [new release on Github](https://github.com/asseinfo/br_danfe/releases/new)
 
 * Choose **the new tag** (Ex.: v0.10.1)
 * Fill the **Release title** (Ex.: 0.10.1)
 * Click at **Generate release notes**
 * Click at **Publish release**
 
-3. Done!
+4. Done!
 
 You can build or install the gem using one of the above tasks
 
