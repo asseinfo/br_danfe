@@ -5,6 +5,7 @@ module BrDanfe
         attr_reader :y_position
 
         Y_POSITION = 12.92
+        DUP_MAX_QUANTITY = 12
 
         def initialize(pdf, xml)
           @pdf = pdf
@@ -22,14 +23,11 @@ module BrDanfe
           @pdf.ititle 0.42, 10.00, x, @ltitle, 'dup.title'
 
           render_titles_and_box(x, y)
-          det_count = 0
 
-          @xml.collect('xmlns', 'dup') do |det|
-            next unless det_count < 12
+          @xml.collect('xmlns', 'dup') { _1 }[..(DUP_MAX_QUANTITY - 1)].each_with_index do |det, index|
+            x = 0.75 unless index != DUP_MAX_QUANTITY / 2
 
-            x = 0.75 unless det_count != 6
-
-            y = if det_count < 6
+            y = if index < DUP_MAX_QUANTITY / 2
                   @y_position - 0.015
                 else
                   @y_position + 0.185
@@ -37,14 +35,13 @@ module BrDanfe
 
             render_dup(det, x, y + 0.3)
             x += 3.261666667
-            det_count += 1
           end
         end
 
         private
 
         def render_titles_and_box(x, y)
-          6.times do
+          (DUP_MAX_QUANTITY / 2).times do
             @pdf.ibox 0.30, 3.261666667, x, y
             @pdf.ibox 0.60, 3.261666667, x, y + 0.30
             @pdf.ibox 0.85, 1.80, x, y - 0.05, '', I18n.t('danfe.dup.nDup'), normal

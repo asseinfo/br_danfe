@@ -96,16 +96,14 @@ module BrDanfe
         end
 
         def dup_content
-          dup = 0
           value_dups = []
 
-          @xml.collect('xmlns', 'dup') do |det|
-            dup += 1
+          @xml.collect('xmlns', 'dup') { _1 }[NfeLib::Dup::DUP_MAX_QUANTITY..]&.each_with_index do |det, index|
             value = "#{det.css('nDup').text} - #{format_dup_date(det, det.css('dVenc').text)} - R$ #{BrDanfe::Helper.numerify(det.css('vDup').text.to_f)}"
 
-            if dup == 13
+            if index.zero?
               value_dups.push("Faturas: #{value}")
-            elsif dup > 13
+            elsif index.positive?
               value_dups.push(value.to_s)
             end
           end
