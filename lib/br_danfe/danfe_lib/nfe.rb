@@ -42,6 +42,7 @@ module BrDanfe
       def render_on_first_page(xml)
         NfeLib::Ticket.new(@document, xml).render
         NfeLib::Dest.new(@document, xml).render
+        NfeLib::Entrega.new(@document, xml).render
         NfeLib::Dup.new(@document, xml).render
         NfeLib::Icmstot.new(@document, xml).render
         NfeLib::Transp.new(@document, xml).render
@@ -73,13 +74,14 @@ module BrDanfe
         @document.go_to_page(page)
 
         emitter.render(initial_page_of_pdf, y_position, total_pages)
-        render_product_table_title initial_page_of_pdf
+        render_product_table_title initial_page_of_pdf, xml
         render_footer_information footer_info
         render_no_fiscal_value(xml)
       end
 
-      def render_product_table_title(page)
-        y_position = page == 1 ? 18.91 : 7.40
+      def render_product_table_title(page, xml)
+        y_position = NfeLib::Entrega.delivery_local?(xml) && page == 1 ? 3.00 : 0
+        y_position += page == 1 ? 18.91 : 7.40
         @document.ititle 0.42, 10.00, 0.75, y_position, 'det.title'
       end
 

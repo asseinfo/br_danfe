@@ -15,7 +15,7 @@ module BrDanfe
           render_title
           render_subtitle
           render_volumes if volumes_number > 1
-          render_additional_data generate_y_position(volumes_number) if additional_data?
+          render_additional_data generate_y_position(volumes_number) if complementary? || address? || difal? || fisco? || dup_content.to_s.present?
           render_reserved_fisco
         end
 
@@ -44,7 +44,7 @@ module BrDanfe
           additional_data.push(address_content) if address?
           additional_data.push(difal_content) if difal?
           additional_data.push(fisco_content) if fisco?
-          additional_data.push(address_shipment) if shipment?
+          additional_data.push(dup_content) if dup_content.any?
           additional_data.join(' * ')
         end
 
@@ -57,11 +57,11 @@ module BrDanfe
         end
 
         def address_content
-          "Endereço: #{Helper.generate_address @xml}"
+          "Endereço: #{Helper.generate_address @xml, 'enderDest'}"
         end
 
         def address?
-          Helper.address_is_too_big @pdf, Helper.generate_address(@xml)
+          Helper.address_is_too_big @pdf, Helper.generate_address(@xml, 'enderDest')
         end
 
         def difal_content
@@ -77,21 +77,6 @@ module BrDanfe
           BrDanfe::Helper.numerify(value) if value != ''
         end
 
-        def shipment?
-          @xml['entrega'].present?
-        end
-
-        def address_shipment
-          street = @xml['entrega/xLgr'].to_s
-          number = @xml['entrega/nro'].to_s
-          complement = @xml['entrega/xCpl'].to_s
-          neighborhood = @xml['entrega/xBairro'].to_s
-          city = @xml['entrega/xMun'].to_s
-          uf = @xml['entrega/UF'].to_s
-
-          "Endereço de entrega: #{street}, nº #{number} - #{neighborhood} - #{city} - #{uf} - #{complement}"
-        end
-
         def difal?
           value = @xml['ICMSTot/vICMSUFDest'].presence || '0.0'
           BigDecimal(value).positive?
@@ -105,16 +90,33 @@ module BrDanfe
           @xml['infAdic/infAdFisco'].to_s.present?
         end
 
+        def format_dup_date(_det, dup_date)
+          dtduplicata = dup_date
+          "#{dtduplicata[8, 2]}/#{dtduplicata[5, 2]}/#{dtduplicata[0, 4]}"
+        end
+
+        def dup_content
+          value_dups = []
+
+          @xml.collect('xmlns', 'dup') { _1 }[NfeLib::Dup::DUP_MAX_QUANTITY..]&.each_with_index do |det, index|
+            value = "#{det.css('nDup').text} - #{format_dup_date(det, det.css('dVenc').text)} - R$ #{BrDanfe::Helper.numerify(det.css('vDup').text.to_f)}"
+
+            if index.zero?
+              value_dups.push("Faturas: #{value}")
+            elsif index.positive?
+              value_dups.push(value.to_s)
+            end
+          end
+
+          value_dups
+        end
+
         def generate_y_position(volumes_number)
           if volumes_number > 1
             return Y_POSITION + 0.30 + volumes_number * 0.15 + 0.2
           end
 
           Y_POSITION + 0.30
-        end
-
-        def additional_data?
-          complementary? || address? || difal? || fisco? || shipment?
         end
 
         def render_reserved_fisco
