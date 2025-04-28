@@ -37,7 +37,7 @@ describe BrDanfe::DanfeLib::NfeLib::Issqn do
 
     before do
       subject.render
-      File.delete(output_pdf) if File.exist?(output_pdf)
+      FileUtils.rm_f(output_pdf)
     end
 
     context 'with ISSQN' do

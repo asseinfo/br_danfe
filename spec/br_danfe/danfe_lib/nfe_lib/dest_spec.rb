@@ -10,7 +10,7 @@ describe BrDanfe::DanfeLib::NfeLib::Dest do
 
   describe '#render' do
     before do
-      File.delete(path_of_expected_pdf) if File.exist?(path_of_expected_pdf)
+      FileUtils.rm_f(path_of_expected_pdf)
       subject.render
     end
 

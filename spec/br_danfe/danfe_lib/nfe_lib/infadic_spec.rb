@@ -14,7 +14,7 @@ describe BrDanfe::DanfeLib::NfeLib::Infadic do
 
     before do
       subject.render(volumes_number)
-      File.delete(output_pdf) if File.exist?(output_pdf)
+      FileUtils.rm_f(output_pdf)
     end
 
     context 'when there is no information' do

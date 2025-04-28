@@ -18,7 +18,7 @@ describe BrDanfe::QrCode do
   subject { described_class.new(pdf: pdf, qr_code_tag: qr_code_url, box_size: 3.cm) }
 
   describe '#render' do
-    before { File.delete(output_pdf) if File.exist?(output_pdf) }
+    before { FileUtils.rm_f(output_pdf) }
 
     it 'renders qr-code to the pdf' do
       expect(File.exist?(output_pdf)).to be_falsey

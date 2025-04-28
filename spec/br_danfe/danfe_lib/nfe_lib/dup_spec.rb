@@ -38,7 +38,7 @@ describe BrDanfe::DanfeLib::NfeLib::Dup do
 
     before do
       subject.render
-      File.delete(output_pdf) if File.exist?(output_pdf)
+      FileUtils.rm_f(output_pdf)
     end
 
     it 'renders xml to the pdf' do

@@ -24,7 +24,7 @@ module BrDanfe
         def render_company_info
           one_line = 1
 
-          @pdf.text_box (@xml['emit/xNome']).to_s, at: [x_position, @pdf.cursor], height: 36, size: 9, align: :left, style: :bold, overflow: :shrink_to_fit
+          @pdf.text_box @xml['emit/xNome'].to_s, at: [x_position, @pdf.cursor], height: 36, size: 9, align: :left, style: :bold, overflow: :shrink_to_fit
           @pdf.move_down 36
 
           @pdf.text_box cnpj(@xml['emit/CNPJ']), at: [x_position, @pdf.cursor], height: 9, size: 9, align: :left, overflow: :shrink_to_fit

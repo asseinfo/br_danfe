@@ -27,7 +27,7 @@ describe BrDanfe::DanfeLib::NfceLib::Footer do
   subject { described_class.new pdf, xml_footer }
 
   describe '#render' do
-    before { File.delete(output_pdf) if File.exist?(output_pdf) }
+    before { FileUtils.rm_f(output_pdf) }
 
     it 'renders footer to the pdf' do
       subject.render

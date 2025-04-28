@@ -17,9 +17,9 @@ module BrDanfe
           @document.line_width = 0.3
         end
 
-        def method_missing(method_name, *args, &block)
+        def method_missing(method_name, ...)
           if @document.respond_to? method_name
-            @document.send method_name, *args, &block
+            @document.send(method_name, ...)
           else
             super
           end
@@ -97,12 +97,12 @@ module BrDanfe
         end
 
         def inumeric(h, w, x, y, i18n = '', data = '', options = {})
-          label = i18n != '' ? I18n.t("danfe.#{i18n}") : ''
+          label = i18n == '' ? '' : I18n.t("danfe.#{i18n}")
           numeric [x.cm, Helper.invert(y.cm)], w.cm, h.cm, label, data, options
         end
 
         def i18n_lbox(h, w, x, y, i18n = '', info = '', options = {})
-          label = i18n != '' ? I18n.t("danfe.#{i18n}") : ''
+          label = i18n == '' ? '' : I18n.t("danfe.#{i18n}")
           ibox h, w, x, y, label, info, options
         end
 

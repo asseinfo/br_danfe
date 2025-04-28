@@ -49,10 +49,10 @@ describe BrDanfe::DanfeLib::NfceLib::Header do
   describe '#render' do
     before do
       subject.render
-      File.delete(output_pdf) if File.exist?(output_pdf)
+      FileUtils.rm_f(output_pdf)
     end
 
-    after { File.delete(output_pdf) if File.exist?(output_pdf) }
+    after { FileUtils.rm_f(output_pdf) }
 
     context 'when has a short name' do
       let(:company_name) { 'Test company' }

@@ -113,7 +113,7 @@ module BrDanfe
 
         def generate_y_position(volumes_number)
           if volumes_number > 1
-            return Y_POSITION + 0.30 + volumes_number * 0.15 + 0.2
+            return Y_POSITION + 0.30 + (volumes_number * 0.15) + 0.2
           end
 
           Y_POSITION + 0.30

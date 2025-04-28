@@ -17,7 +17,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
     XML
   end
 
-  let(:product_1) do
+  let(:product1) do
     <<~XML
       <det nItem="1">
         <prod>
@@ -34,7 +34,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
     XML
   end
 
-  let(:product_2) do
+  let(:product2) do
     <<~XML
       <det nItem="2">
         <prod>
@@ -59,7 +59,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
   describe '#render' do
     before do
       subject.render has_issqn
-      File.delete(output_pdf) if File.exist?(output_pdf)
+      FileUtils.rm_f(output_pdf)
     end
 
     context 'with CSOSN' do
@@ -383,7 +383,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
 
     context 'when there is ISSQN' do
       let(:has_issqn) { true }
-      let(:products) { "#{product_1}\n#{product_2}" * 10 }
+      let(:products) { "#{product1}\n#{product2}" * 10 }
 
       it 'renders xml to the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
@@ -395,7 +395,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
     end
 
     context "when there isn't ISSQN" do
-      let(:products) { "#{product_1}\n#{product_2}" * 10 }
+      let(:products) { "#{product1}\n#{product2}" * 10 }
 
       it 'renders xml to the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
@@ -407,7 +407,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
     end
 
     context 'with infAdProd' do
-      let(:products) { product_2.to_s }
+      let(:products) { product2.to_s }
 
       it 'renders xml to the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
@@ -493,7 +493,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
 
     context 'when the product table occupies more than one page' do
       context 'when the product table occupies two pages' do
-        let(:products) { ("#{product_1}\n#{product_2}" * 22) + "\n#{product_1}" }
+        let(:products) { ("#{product1}\n#{product2}" * 22) + "\n#{product1}" }
 
         it 'renders xml to the pdf' do
           expect(File.exist?(output_pdf)).to be_falsey
@@ -505,7 +505,7 @@ describe BrDanfe::DanfeLib::NfeLib::DetBody do
       end
 
       context 'when the product table occupies three pages' do
-        let(:products) { ("#{product_1}\n#{product_2}" * 23) }
+        let(:products) { ("#{product1}\n#{product2}" * 23) }
 
         it 'renders xml to the pdf' do
           expect(File.exist?(output_pdf)).to be_falsey

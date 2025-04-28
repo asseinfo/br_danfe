@@ -8,7 +8,7 @@ describe BrDanfe::Mdfe do
 
   subject { described_class.new(xml) }
 
-  before { File.delete(output_pdf) if File.exist?(output_pdf) }
+  before { FileUtils.rm_f(output_pdf) }
 
   before do
     subject.logo_options.logo_dimensions = { width: 100, height: 100 }
@@ -17,7 +17,7 @@ describe BrDanfe::Mdfe do
 
   describe '#render_pdf' do
     it 'renders the mdfe' do
-      expected = IO.binread("#{base_dir}mdfe.fixture.pdf")
+      expected = File.binread("#{base_dir}mdfe.fixture.pdf")
 
       expect(subject.render_pdf).to eql expected
     end

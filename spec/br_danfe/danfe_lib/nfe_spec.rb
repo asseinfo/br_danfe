@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe BrDanfe::DanfeLib::Nfe do
   let(:output_pdf) { "#{base_dir}output.pdf" }
-  let(:xml_file) {}
+  let(:xml_file) {} # rubocop:disable Lint/EmptyBlock
   let(:xml) { BrDanfe::XML.new(xml_file) }
 
   subject { described_class.new [xml] }
@@ -12,7 +12,7 @@ describe BrDanfe::DanfeLib::Nfe do
     let(:xml_file) { File.read("#{base_dir}nfe_simples_nacional.xml") }
 
     it 'renders a Simples Nacional NF-e using CSOSN' do
-      expected = IO.binread("#{base_dir}nfe_simples_nacional.xml.fixture.pdf")
+      expected = File.binread("#{base_dir}nfe_simples_nacional.xml.fixture.pdf")
       expect(subject.render_pdf).to eq expected
     end
   end
@@ -22,7 +22,7 @@ describe BrDanfe::DanfeLib::Nfe do
       let(:base_dir) { './spec/fixtures/nfe/v2.00/' }
       let(:xml_file) { File.read("#{base_dir}custom_options.fixture.xml") }
 
-      before { File.delete(output_pdf) if File.exist?(output_pdf) }
+      before { FileUtils.rm_f(output_pdf) }
 
       it 'render a NF-e with customized options' do
         expect(File.exist?(output_pdf)).to be_falsey
@@ -39,7 +39,7 @@ describe BrDanfe::DanfeLib::Nfe do
       let(:base_dir) { './spec/fixtures/nfe/v2.00/' }
       let(:xml_file) { File.read("#{base_dir}nfe_with_ns.xml") }
 
-      before { File.delete(output_pdf) if File.exist?(output_pdf) }
+      before { FileUtils.rm_f(output_pdf) }
 
       it 'renders a basic NF-e with namespace' do
         expect(File.exist?(output_pdf)).to be_falsey
@@ -108,7 +108,7 @@ describe BrDanfe::DanfeLib::Nfe do
       let(:base_dir) { './spec/fixtures/nfe/v3.10/' }
       let(:xml_file) { File.read("#{base_dir}nfe_simples_nacional.xml") }
 
-      before { File.delete(output_pdf) if File.exist?(output_pdf) }
+      before { FileUtils.rm_f(output_pdf) }
 
       it 'renders a Simples Nacional NF-e using CSOSN' do
         expect(File.exist?(output_pdf)).to be_falsey
@@ -168,7 +168,7 @@ describe BrDanfe::DanfeLib::Nfe do
       let(:base_dir) { './spec/fixtures/nfe/v3.10/' }
       let(:xml_file) { File.read("#{base_dir}nfe_simples_nacional.xml") }
 
-      before { File.delete(output_pdf) if File.exist?(output_pdf) }
+      before { FileUtils.rm_f(output_pdf) }
 
       it 'renders multiple danfes on the same pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
