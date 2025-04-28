@@ -9,7 +9,7 @@ describe BrDanfe::DanfeLib::NfeLib::Document do
   describe '#lie' do
     before do
       subject.render
-      File.delete(output_pdf) if File.exist?(output_pdf)
+      FileUtils.rm_f(output_pdf)
     end
 
     context 'when IE is valid' do
@@ -117,7 +117,7 @@ describe BrDanfe::DanfeLib::NfeLib::Document do
   describe '#lcnpj' do
     before do
       subject.render
-      File.delete(output_pdf) if File.exist?(output_pdf)
+      FileUtils.rm_f(output_pdf)
     end
 
     context 'when CNPJ is valid' do

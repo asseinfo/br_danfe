@@ -9,7 +9,7 @@ require 'yaml'
 require 'i18n'
 require 'br_documents'
 
-Dir["#{File.dirname(__FILE__)}/**/*.rb"].sort.each { |f| require f }
+Dir["#{File.dirname(__FILE__)}/**/*.rb"].each { |f| require f }
 
 I18n.load_path << File.expand_path('../config/locales/pt-BR.yml', __dir__)
 I18n.available_locales = ['pt-BR']

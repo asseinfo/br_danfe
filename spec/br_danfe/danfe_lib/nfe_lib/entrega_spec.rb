@@ -11,7 +11,7 @@ describe BrDanfe::DanfeLib::NfeLib::Entrega do
   describe '#render' do
     before do
       subject.render
-      File.delete(path_of_expected_pdf) if File.exist?(path_of_expected_pdf)
+      FileUtils.rm_f(path_of_expected_pdf)
     end
 
     context "when nf-e's version is 2.00" do

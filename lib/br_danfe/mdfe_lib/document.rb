@@ -10,9 +10,9 @@ module BrDanfe
         @document.font 'tinos'
       end
 
-      def method_missing(method_name, *args, &block)
+      def method_missing(method_name, ...)
         if @document.respond_to? method_name
-          @document.send method_name, *args, &block
+          @document.send(method_name, ...)
         else
           super
         end

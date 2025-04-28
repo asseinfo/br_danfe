@@ -6,7 +6,7 @@ describe BrDanfe::DanfeLib::NfceLib::ProductList do
 
   let(:subject) { BrDanfe::DanfeLib::NfceLib::Document.new(8.cm, 1.8.cm) }
 
-  before { File.delete(output_pdf) if File.exist?(output_pdf) }
+  before { FileUtils.rm_f(output_pdf) }
 
   it 'render the document with blank lines' do
     expect(File.exist?(output_pdf)).to be_falsey

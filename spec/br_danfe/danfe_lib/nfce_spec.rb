@@ -14,15 +14,15 @@ describe BrDanfe::DanfeLib::Nfce do
 
   describe '#render_pdf' do
     it 'renders the NFC-e pdf' do
-      expected = IO.binread("#{base_dir}rendered_nfce.fixture.pdf")
+      expected = File.binread("#{base_dir}rendered_nfce.fixture.pdf")
 
       expect(subject.render_pdf).to eq expected
     end
   end
 
   describe '#save_pdf' do
-    before { File.delete(output_pdf) if File.exist?(output_pdf) }
-    after { File.delete(output_pdf) if File.exist?(output_pdf) }
+    before { FileUtils.rm_f(output_pdf) }
+    after { FileUtils.rm_f(output_pdf) }
 
     it 'saves the NFC-e as pdf' do
       expect(File.exist?(output_pdf)).to be_falsey

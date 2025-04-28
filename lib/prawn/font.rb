@@ -1,6 +1,6 @@
 module Prawn
   class Font
-    def hash #:nodoc:
+    def hash # :nodoc:
       [self.class, name, family].hash
     end
   end

@@ -21,7 +21,7 @@ module BrDanfe
       end
 
       def calculate_size(size)
-        size < @bounding_box_size ? size : @bounding_box_size
+        [size, @bounding_box_size].min
       end
     end
   end

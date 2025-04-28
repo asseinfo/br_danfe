@@ -11,7 +11,6 @@ Gem::Specification.new do |spec|
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split("\n")
-  spec.test_files    = `git ls-files -- { test,spec,features }/*`.split("\n")
   spec.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   spec.require_paths = ['lib']
   spec.required_ruby_version = '>= 3.0'
@@ -24,15 +23,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'prawn-table', '0.2.2'
   spec.add_dependency 'rqrcode', '>= 2.1', '< 2.3'
 
-  spec.add_development_dependency 'byebug', '11.1.3'
-  spec.add_development_dependency 'guard', '~> 2.19.0'
-  spec.add_development_dependency 'guard-rspec', '~> 4.7.3'
-  spec.add_development_dependency 'pdf-inspector', '~> 1.3.0'
-  spec.add_development_dependency 'rake', '13.2.1'
-  spec.add_development_dependency 'rspec', '3.13.0'
-  spec.add_development_dependency 'rubocop', '~> 0.93.1'
-  spec.add_development_dependency 'rubocop-performance', '~> 1.10.2'
-  spec.add_development_dependency 'rubocop-rspec', '~> 1.44.1'
-  spec.add_development_dependency 'simplecov', '0.22.0'
-  spec.add_development_dependency 'simplecov-html', '0.13.1'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end
