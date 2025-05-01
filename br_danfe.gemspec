@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'nokogiri', '>= 1.8'
   spec.add_dependency 'prawn', '~> 2.5.0'
   spec.add_dependency 'prawn-table', '0.2.2'
-  spec.add_dependency 'rqrcode', '>= 2.1', '< 2.3'
+  spec.add_dependency 'rqrcode', '>= 2.1', '< 3.2'
 
   spec.metadata['rubygems_mfa_required'] = 'true'
 end
