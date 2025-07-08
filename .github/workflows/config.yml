@@ -40,10 +40,13 @@ jobs:
       - run: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
+            curl https://qlty.sh | sh
 
       - run: |
             ./cc-test-reporter before-build
             bundle exec rspec
             ./cc-test-reporter after-build -r $CC_TEST_REPORTER_ID --exit-code $?
+            ~/.qlty/bin/qlty coverage publish coverage/coverage.json
         env:
            CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+           QLTY_COVERAGE_TOKEN: ${{secrets.QLTY_COVERAGE_TOKEN}}
