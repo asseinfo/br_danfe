@@ -46,7 +46,7 @@ jobs:
             ./cc-test-reporter before-build
             bundle exec rspec
             ./cc-test-reporter after-build -r $CC_TEST_REPORTER_ID --exit-code $?
-            ~/.qlty/bin/qlty coverage publish --incomplete coverage/coverage.json
+            ~/.qlty/bin/qlty coverage publish coverage/coverage.json
         env:
            CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
            QLTY_COVERAGE_TOKEN: ${{secrets.QLTY_COVERAGE_TOKEN}}
