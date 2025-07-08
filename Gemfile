@@ -4,7 +4,7 @@ gemspec
 
 group :development, :test do
   gem 'byebug', '11.1.3'
-  gem 'guard', '~> 2.19.0'
+  gem 'guard', '~> 2.19.1'
   gem 'guard-rspec', '~> 4.7.3'
   gem 'pdf-inspector', '~> 1.3.0'
   gem 'rake', '13.2.1'
