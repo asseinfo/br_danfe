@@ -47,7 +47,8 @@ pt-BR:
       IM: "INSCRIÇÃO MUNICIPAL"
       IE: "INSCRIÇÃO ESTADUAL"
       IEST: "INSC.ESTADUAL DO SUBST. TRIBUTÁRIO"
-      CNPJ: "CNPJ"
+      CNPJ: "CNPJ/CPF"
+      CPF: "CNPJ/CPF"
     dup:
       title: "FATURA / DUPLICATAS"
       nDup: "NRO"
@@ -146,8 +147,8 @@ pt-BR:
         document: "NF-e\nN°. %{nNF}\nSÉRIE %{serie}"
     entrega:
       title: "INFORMAÇÕES DO LOCAL DE ENTREGA"
-      CNPJ: "CNPJ"
-      CPF:  "CPF"
+      CNPJ: "CNPJ/CPF"
+      CPF:  "CNPJ/CPF"
       xNome: "NOME/RAZÃO SOCIAL"
       xLgr: "ENDEREÇO"
       nro: "NÚMERO"

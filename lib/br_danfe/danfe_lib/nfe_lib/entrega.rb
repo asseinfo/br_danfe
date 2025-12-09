@@ -39,16 +39,8 @@ module BrDanfe
         end
 
         def render_cnpj_cpf
-          if @xml['entrega/CNPJ'] == ''
-            @pdf.i18n_lbox LINE_HEIGHT, 4.37, 12.57, @l1, 'entrega.CPF', cpf
-          else
-            @pdf.lcnpj LINE_HEIGHT, 4.37, 12.57, @l1, @xml, 'entrega/CNPJ'
-          end
-        end
-
-        def cpf
-          cpf = BrDocuments::CnpjCpf::Cpf.new(@xml['entrega/CPF'])
-          cpf.formatted
+          xpath = @xml['entrega/CNPJ'].present? ? 'entrega/CNPJ' : 'entrega/CPF'
+          @pdf.lcnpj_cpf LINE_HEIGHT, 4.37, 12.57, @l1, @xml, xpath
         end
 
         def render_line2

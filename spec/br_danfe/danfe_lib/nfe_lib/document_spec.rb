@@ -114,7 +114,7 @@ describe BrDanfe::DanfeLib::NfeLib::Document do
     end
   end
 
-  describe '#lcnpj' do
+  describe '#lcnpj_cpf' do
     before do
       subject.render
       FileUtils.rm_f(output_pdf)
@@ -138,10 +138,10 @@ describe BrDanfe::DanfeLib::NfeLib::Document do
       it 'renders a box with a formated CNPJ to the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
-        subject.lcnpj 0.80, 3.94, 0.75, 1.85, xml, 'transporta/CNPJ'
+        subject.lcnpj_cpf 0.80, 3.94, 0.75, 1.85, xml, 'transporta/CNPJ'
         subject.render_file output_pdf
 
-        expect("#{base_dir}document#lcnpj-valid.pdf").to have_same_content_of file: output_pdf
+        expect("#{base_dir}document#lcnpj_cpf-valid.pdf").to have_same_content_of file: output_pdf
       end
     end
 
@@ -163,10 +163,10 @@ describe BrDanfe::DanfeLib::NfeLib::Document do
       it 'renders a blank box to the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
-        subject.lcnpj 0.80, 3.94, 0.75, 1.85, xml, 'transporta/CNPJ'
+        subject.lcnpj_cpf 0.80, 3.94, 0.75, 1.85, xml, 'transporta/CNPJ'
         subject.render_file output_pdf
 
-        expect("#{base_dir}document#lcnpj-invalid.pdf").to have_same_content_of file: output_pdf
+        expect("#{base_dir}document#lcnpj_cpf-invalid.pdf").to have_same_content_of file: output_pdf
       end
     end
 
@@ -187,10 +187,10 @@ describe BrDanfe::DanfeLib::NfeLib::Document do
       it 'renders a blank box to the pdf' do
         expect(File.exist?(output_pdf)).to be_falsey
 
-        subject.lcnpj 0.80, 3.94, 0.75, 1.85, xml, 'transporta/CNPJ'
+        subject.lcnpj_cpf 0.80, 3.94, 0.75, 1.85, xml, 'transporta/CNPJ'
         subject.render_file output_pdf
 
-        expect("#{base_dir}document#lcnpj-blank.pdf").to have_same_content_of file: output_pdf
+        expect("#{base_dir}document#lcnpj_cpf-blank.pdf").to have_same_content_of file: output_pdf
       end
     end
   end

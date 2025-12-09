@@ -52,6 +52,14 @@ module BrDanfe
           BrDanfe::Helper.format_cep(@xml['enderEmit/CEP'])
         end
 
+        def cnpj_cpf
+          if @xml['emit/CNPJ'].present?
+            'emit/CNPJ'
+          else
+            'emit/CPF'
+          end
+        end
+
         def logo
           bounding_box_size = 80
           logo_options = BrDanfe::Logo::Options.new(bounding_box_size, @logo_dimensions).options
@@ -108,7 +116,7 @@ module BrDanfe
 
           @pdf.lie LINE_HEIGHT, 6.36, 0.75, y_second_line, @xml, 'enderEmit/UF', 'emit/IE'
           @pdf.lie LINE_HEIGHT, 6.86, 7.11, y_second_line, @xml, 'enderDest/UF', 'emit/IEST'
-          @pdf.lcnpj LINE_HEIGHT, 6.34, 13.97, y_second_line, @xml, 'emit/CNPJ'
+          @pdf.lcnpj_cpf LINE_HEIGHT, 6.34, 13.97, y_second_line, @xml, cnpj_cpf
         end
       end
     end
