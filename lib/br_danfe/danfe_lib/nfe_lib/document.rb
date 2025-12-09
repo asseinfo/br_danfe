@@ -64,12 +64,12 @@ module BrDanfe
           i18n_lbox(h, w, x, y, i18n, data, options)
         end
 
-        def lcnpj(h, w, x, y, xml, xpath, options = {})
+        def lcnpj_cpf(h, w, x, y, xml, xpath, options = {})
           i18n = xpath.tr('/', '.')
-
-          cnpj = BrDocuments::CnpjCpf::Cnpj.new(xml[xpath])
-          data = if cnpj.valid?
-                   cnpj.formatted
+          document_class = xpath.include?('CNPJ') ? BrDocuments::CnpjCpf::Cnpj : BrDocuments::CnpjCpf::Cpf
+          cnpj_cpf = document_class.new(xml[xpath])
+          data = if cnpj_cpf.valid?
+                   cnpj_cpf.formatted
                  else
                    ''
                  end

@@ -25,7 +25,7 @@ module BrDanfe
           @pdf.lbox LINE_HEIGHT, 1.78, 12.06, @l1, @xml, 'veicTransp/RNTC'
           @pdf.i18n_lbox LINE_HEIGHT, 2.29, 13.84, @l1, 'veicTransp.placa', plate
           @pdf.lbox LINE_HEIGHT, 0.76, 16.13, @l1, @xml, 'veicTransp/UF'
-          @pdf.lcnpj LINE_HEIGHT, 3.44, 16.89, @l1, @xml, 'transporta/CNPJ'
+          @pdf.lcnpj_cpf LINE_HEIGHT, 3.44, 16.89, @l1, @xml, 'transporta/CNPJ'
           @pdf.lbox LINE_HEIGHT, 8.52, 0.75, @l2, @xml, 'transporta/xEnder'
           @pdf.lbox LINE_HEIGHT, 6.86, 9.27, @l2, @xml, 'transporta/xMun'
           @pdf.lbox LINE_HEIGHT, 0.76, 16.13, @l2, @xml, 'transporta/UF'
