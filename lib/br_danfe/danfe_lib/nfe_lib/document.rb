@@ -66,16 +66,15 @@ module BrDanfe
 
         def lcnpj_cpf(h, w, x, y, xml, xpath, options = {})
           i18n = xpath.tr('/', '.')
-          data = format_cnpj_cpf(xml[xpath], xpath)
+          document_class = xpath.include?('CNPJ') ? BrDocuments::CnpjCpf::Cnpj : BrDocuments::CnpjCpf::Cpf
+          cnpj_cpf = document_class.new(xml[xpath])
+          data = if cnpj_cpf.valid?
+                   cnpj_cpf.formatted
+                 else
+                   ''
+                 end
 
           i18n_lbox(h, w, x, y, i18n, data, options)
-        end
-
-        def format_cnpj_cpf(value, xpath)
-          return '' if value.blank?
-
-          document_class = xpath.include?('CNPJ') ? BrDocuments::CnpjCpf::Cnpj : BrDocuments::CnpjCpf::Cpf
-          document_class.new(value).formatted
         end
 
         def lie(h, w, x, y, xml, xpath_uf, xpath_ie, options = {})
