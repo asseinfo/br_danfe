@@ -163,7 +163,7 @@ GEM
       docile (~> 1.1)
       simplecov-html (~> 0.11)
       simplecov_json_formatter (~> 0.1)
-    simplecov-html (0.13.1)
+    simplecov-html (0.13.2)
     simplecov-json (0.2.3)
       json
       simplecov
@@ -192,7 +192,7 @@ DEPENDENCIES
   rubocop-performance (~> 1.19.0)
   rubocop-rspec (~> 2.25.0)
   simplecov (= 0.22.0)
-  simplecov-html (= 0.13.1)
+  simplecov-html (= 0.13.2)
   simplecov-json (= 0.2.3)
 
 BUNDLED WITH
