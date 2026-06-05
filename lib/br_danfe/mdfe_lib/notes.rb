@@ -19,7 +19,9 @@ module BrDanfe
       def title
         title = 'Observações'
 
-        @pdf.move_down 40
+       drivers_size = @xml.collect('xmlns', 'condutor') { |rodo| driver(rodo) }.flatten.size
+
+        @pdf.move_down 40 + 20 * drivers_size
         @pdf.bounding_box [0, @pdf.cursor], width: 278, height: 20 do
           @pdf.stroke_color GRAY_COLOR
           @pdf.stroke_horizontal_line(0, 526, at: 6)
@@ -88,6 +90,13 @@ module BrDanfe
 
       def y_position_next_pages
         600
+      end
+
+      def driver(rodo)
+        [
+          rodo.css('CPF').text,
+          rodo.css('xNome').text
+        ]
       end
     end
   end
