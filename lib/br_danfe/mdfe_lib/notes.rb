@@ -19,9 +19,9 @@ module BrDanfe
       def title
         title = 'Observações'
 
-       drivers_size = @xml.collect('xmlns', 'condutor') { |rodo| driver(rodo) }.flatten.size
+        vehicles_size = @xml.css('placa').size
 
-        @pdf.move_down 40 + 20 * drivers_size
+        @pdf.move_down 40 + 10 * vehicles_size
         @pdf.bounding_box [0, @pdf.cursor], width: 278, height: 20 do
           @pdf.stroke_color GRAY_COLOR
           @pdf.stroke_horizontal_line(0, 526, at: 6)
@@ -92,10 +92,27 @@ module BrDanfe
         600
       end
 
-      def driver(rodo)
+      def vehicles
+        vehicle = []
+        vehicle += collect_vehicles('veicReboque')
+        vehicle += collect_vehicles('veicTracao')
+
+        vehicle
+      end
+
+      def collect_vehicles(tag)
+        vehicles = []
+        @xml.collect('xmlns', tag) { |rodo| vehicles += vehicle(rodo) }
+
+        vehicles
+      end
+
+      def vehicle(rodo)
         [
-          rodo.css('CPF').text,
-          rodo.css('xNome').text
+          {
+            plate: cell_text(rodo.css('placa').text),
+            rntrc: cell_text(rodo.css('RNTRC').text)
+          },
         ]
       end
     end
