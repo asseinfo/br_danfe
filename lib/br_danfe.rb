@@ -6,6 +6,7 @@ require 'barby/barcode/code_128'
 require 'barby/outputter/prawn_outputter'
 require 'nokogiri'
 require 'yaml'
+require 'bigdecimal'
 require 'i18n'
 require 'br_documents'
 
