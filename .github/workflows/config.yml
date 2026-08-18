@@ -66,7 +66,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           MARKER="<!-- couve-coverage -->"
-          { echo "$MARKER"; echo; cat coverage-report.md; } > full-comment.md
+
+          if [ "$(grep -c '^|' coverage-report.md)" -le 2 ]; then
+            REPORT="Nenhum arquivo coberto por testes foi alterado nesta PR."
+          else
+            REPORT="$(cat coverage-report.md)"
+          fi
+
+          { echo "$MARKER"; echo; echo "$REPORT"; } > full-comment.md
 
           COMMENT_ID=$(gh api "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments" \
             --paginate --jq 'map(select(.body | startswith("<!-- couve-coverage -->"))) | .[0].id // empty')
