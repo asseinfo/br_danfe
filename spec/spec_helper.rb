@@ -1,5 +1,13 @@
 require 'simplecov'
-SimpleCov.start unless ENV["NO_COVERAGE"]
+require 'simplecov_json_formatter'
+
+unless ENV["NO_COVERAGE"]
+  SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
+    SimpleCov::Formatter::JSONFormatter,
+    SimpleCov::Formatter::HTMLFormatter
+  ])
+  SimpleCov.start
+end
 
 require "bundler/setup"
 require "br_danfe"

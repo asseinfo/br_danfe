@@ -1,6 +1,13 @@
 name: Tests
 
-on: [push]
+on:
+  pull_request:
+  push:
+    branches: [master] # push is already covered by pull_request while a PR is open
+
+permissions:
+  contents: read
+  pull-requests: write # needed to post/update the coverage comment
 
 jobs:
   linter:
@@ -31,6 +38,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # full history, needed to diff against the PR's base branch
 
       - uses: ruby/setup-ruby@v1
         with:
@@ -38,3 +47,32 @@ jobs:
           bundler-cache: true
 
       - run: bundle exec rspec
+
+      - name: Generate coverage report for the PR's changed files
+        if: github.event_name == 'pull_request'
+        run: |
+          curl -L https://github.com/asseinfo/test-reporter/releases/download/0.11.1/cc-test-reporter > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter format-coverage coverage/coverage.json -t simplecov -o coverage/codeclimate.json
+
+          gem install couve
+
+          git diff --name-only origin/${{ github.event.pull_request.base.ref }}...HEAD \
+            | couve coverage/codeclimate.json coverage-report.md --changed-files -
+
+      - name: Post or update the coverage comment on the PR
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          MARKER="<!-- couve-coverage -->"
+          { echo "$MARKER"; echo; cat coverage-report.md; } > full-comment.md
+
+          COMMENT_ID=$(gh api "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments" \
+            --paginate --jq 'map(select(.body | startswith("<!-- couve-coverage -->"))) | .[0].id // empty')
+
+          if [ -n "$COMMENT_ID" ]; then
+            gh api -X PATCH "repos/${{ github.repository }}/issues/comments/$COMMENT_ID" -F body=@full-comment.md
+          else
+            gh api -X POST "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments" -F body=@full-comment.md
+          fi
