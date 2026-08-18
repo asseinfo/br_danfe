@@ -6,7 +6,11 @@ unless ENV["NO_COVERAGE"]
     SimpleCov::Formatter::JSONFormatter,
     SimpleCov::Formatter::HTMLFormatter
   ])
-  SimpleCov.start
+  SimpleCov.start do
+    # Test support code is exercised by the specs that use it, not covered
+    # on its own — the coverage gate only applies to product code.
+    add_filter '/spec/support/'
+  end
 end
 
 require "bundler/setup"
