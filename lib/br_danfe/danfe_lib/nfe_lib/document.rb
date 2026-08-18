@@ -17,8 +17,6 @@ module BrDanfe
           @document.line_width = 0.3
         end
 
-        # TEMP: touching this file to pull it into the PR diff, proving the
-        # gate flags it when its spec is disabled. Removed in the next commit.
         def method_missing(method_name, ...)
           if @document.respond_to? method_name
             @document.send(method_name, ...)
