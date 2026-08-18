@@ -10,6 +10,9 @@ unless ENV["NO_COVERAGE"]
     # Test support code is exercised by the specs that use it, not covered
     # on its own — the coverage gate only applies to product code.
     add_filter '/spec/support/'
+
+    # Prawn internals monkey-patch, not br_danfe's own logic.
+    add_filter '/lib/prawn/'
   end
 end
 

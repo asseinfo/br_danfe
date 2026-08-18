@@ -39,10 +39,6 @@ module BrDanfe
           @logo.present? ? 2.2.cm : 0
         end
 
-        def width_box
-          @logo.present? ? 4.5.cm : 6.7.cm
-        end
-
         def cnpj(info)
           cnpj = BrDocuments::CnpjCpf::Cnpj.new info
           "CNPJ: #{cnpj.valid? ? cnpj.formatted : ''}"
