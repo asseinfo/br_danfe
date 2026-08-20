@@ -1,6 +1,9 @@
 name: Tests
 
-on: [push]
+on:
+  push:
+    branches: [master]
+  pull_request:
 
 jobs:
   linter:
@@ -29,6 +32,11 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      pull-requests: write # octocov posts the coverage comment
+      actions: read # octocov reads the baseline report from the artifact datastore
+
     steps:
       - uses: actions/checkout@v3
 
@@ -38,3 +46,12 @@ jobs:
           bundler-cache: true
 
       - run: bundle exec rspec
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html
+          path: coverage/
+
+      # Forks get a read-only GITHUB_TOKEN, so octocov could not post its comment there
+      - uses: k1LoW/octocov-action@v1
+        if: ${{ !github.event.pull_request.head.repo.fork }}
