@@ -1,5 +1,13 @@
 require 'simplecov'
-SimpleCov.start unless ENV["NO_COVERAGE"]
+
+unless ENV["NO_COVERAGE"]
+  SimpleCov.start do
+    add_filter '/spec/support/'
+
+    # Prawn internals monkey-patch, not br_danfe's own logic.
+    add_filter '/lib/prawn/'
+  end
+end
 
 require "bundler/setup"
 require "br_danfe"
