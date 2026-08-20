@@ -14,5 +14,4 @@ group :development, :test do
   gem 'rubocop-rspec', '~> 2.25.0'
   gem 'simplecov', '0.22.0'
   gem 'simplecov-html', '0.13.1'
-  gem 'simplecov-json', '0.2.3'
 end

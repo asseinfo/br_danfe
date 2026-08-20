@@ -37,11 +37,4 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
-      - run: |
-            curl https://qlty.sh | sh
-
-      - run: |
-            bundle exec rspec
-            ~/.qlty/bin/qlty coverage publish coverage/coverage.json
-        env:
-           QLTY_COVERAGE_TOKEN: ${{secrets.QLTY_COVERAGE_TOKEN}}
+      - run: bundle exec rspec
