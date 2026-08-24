@@ -1,12 +1,12 @@
 require 'simplecov'
-require 'simplecov-json'
 
 unless ENV["NO_COVERAGE"]
-  SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
-    SimpleCov::Formatter::HTMLFormatter,
-    SimpleCov::Formatter::JSONFormatter
-  ])
-  SimpleCov.start
+  SimpleCov.start do
+    add_filter '/spec/support/'
+
+    # Prawn internals monkey-patch, not br_danfe's own logic.
+    add_filter '/lib/prawn/'
+  end
 end
 
 require "bundler/setup"
