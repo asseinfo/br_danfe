@@ -9,7 +9,7 @@ module BrDanfe
     end
 
     def self.create_danfe(xmls)
-      BrDanfe::Helper.nfe?(xmls.first) ? DanfeLib::Nfe.new(xmls) : DanfeLib::Nfce.new(xmls)
+      DanfeLib::Nfe.new(xmls)
     end
     private_class_method :create_danfe
   end

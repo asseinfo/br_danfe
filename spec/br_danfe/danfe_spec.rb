@@ -45,12 +45,4 @@ describe BrDanfe::Danfe do
       expect(subject.class).to eq BrDanfe::DanfeLib::Nfe
     end
   end
-
-  context 'when the xml document type is NFC-e' do
-    let(:mod) { 65 }
-
-    it 'returns a NFC-e danfe class' do
-      expect(subject.class).to eq BrDanfe::DanfeLib::Nfce
-    end
-  end
 end
