@@ -16,4 +16,16 @@ describe BrDanfe::DanfeLib::NfceLib::ProductList do
 
     expect("#{base_dir}document#render.pdf").to have_same_content_of file: output_pdf
   end
+
+  describe 'delegating unknown methods to the underlying Prawn document' do
+    context 'when the underlying document also does not know the method' do
+      it 'raises NoMethodError' do
+        expect { subject.this_method_does_not_exist }.to raise_error(NoMethodError)
+      end
+
+      it 'does not respond to it' do
+        expect(subject.respond_to?(:this_method_does_not_exist)).to be_falsey
+      end
+    end
+  end
 end
