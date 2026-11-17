@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false # I understand this is to run on all versions.
       matrix:
-        ruby: ['3.3.5']
+        ruby: ['3.4']
 
     runs-on: ubuntu-latest
 
@@ -28,7 +28,7 @@ jobs:
     strategy:
       fail-fast: false # I understand this is to run on all versions.
       matrix:
-        ruby: ['3.3.5']
+        ruby: ['3.4']
 
     runs-on: ubuntu-latest
 
