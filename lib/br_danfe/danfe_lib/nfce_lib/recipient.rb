@@ -14,7 +14,7 @@ module BrDanfe
             render_document
 
             @pdf.text @xml['dest/xNome'], options
-            @pdf.text BrDanfe::DanfeLib::NfceLib::Helper.address(@xml.css('enderDest')), options
+            @pdf.text BrDanfe::Helper.address(@xml.css('enderDest')), options
           else
             @pdf.text 'CONSUMIDOR NÃO IDENTIFICADO', options
           end

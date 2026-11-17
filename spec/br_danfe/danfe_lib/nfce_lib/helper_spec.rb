@@ -1,28 +1,14 @@
 require 'spec_helper'
 
 describe BrDanfe::DanfeLib::NfceLib::Helper do
-  let(:xml) do
-    xml = <<~XML
-      <enderDest>
-        <xLgr>Rua Tijucas</xLgr>
-        <nro>99</nro>
-        <xCpl>dwdwa</xCpl>
-        <xBairro>Centro</xBairro>
-        <cMun>4218004</cMun>
-        <xMun>TIJUCAS</xMun>
-        <UF>SC</UF>
-        <CEP>88200000</CEP>
-        <cPais>1058</cPais>
-        <xPais>Brasil</xPais>
-      </enderDest>
-    XML
+  describe '.address' do
+    let(:ender_tag) { double('ender_tag') }
 
-    BrDanfe::XML.new(xml)
-  end
+    it 'delegates to BrDanfe::Helper.address' do
+      allow(BrDanfe::Helper).to receive(:address).with(ender_tag).and_return('formatted address')
 
-  describe '#address' do
-    it 'returns a formated address string' do
-      expect(described_class.address(xml)).to eql 'Rua Tijucas, 99, Centro, TIJUCAS - SC'
+      expect(described_class.address(ender_tag)).to eq 'formatted address'
+      expect(BrDanfe::Helper).to have_received(:address).with(ender_tag)
     end
   end
 end

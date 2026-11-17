@@ -30,7 +30,7 @@ module BrDanfe
           @pdf.text_box cnpj(@xml['emit/CNPJ']), at: [x_position, @pdf.cursor], height: 9, size: 9, align: :left, overflow: :shrink_to_fit
           @pdf.move_down 9
 
-          @pdf.text_box BrDanfe::DanfeLib::NfceLib::Helper.address(@xml.css('enderEmit')), at: [x_position, @pdf.cursor], height: 20, size: 9, align: :left, overflow: :shrink_to_fit
+          @pdf.text_box BrDanfe::Helper.address(@xml.css('enderEmit')), at: [x_position, @pdf.cursor], height: 20, size: 9, align: :left, overflow: :shrink_to_fit
           @pdf.move_down 20
           @pdf.render_blank_line if count_name_lines(@xml['emit/xNome']) == one_line
         end
