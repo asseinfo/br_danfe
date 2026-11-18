@@ -225,4 +225,29 @@ describe BrDanfe::Helper do
       expect(described_class.format_cep('12345678')).to eql '12.345-678'
     end
   end
+
+  describe '.address' do
+    let(:xml) do
+      xml = <<~XML
+        <enderDest>
+          <xLgr>Rua Tijucas</xLgr>
+          <nro>99</nro>
+          <xCpl>dwdwa</xCpl>
+          <xBairro>Centro</xBairro>
+          <cMun>4218004</cMun>
+          <xMun>TIJUCAS</xMun>
+          <UF>SC</UF>
+          <CEP>88200000</CEP>
+          <cPais>1058</cPais>
+          <xPais>Brasil</xPais>
+        </enderDest>
+      XML
+
+      BrDanfe::XML.new(xml)
+    end
+
+    it 'returns a formated address string' do
+      expect(described_class.address(xml)).to eql 'Rua Tijucas, 99, Centro, TIJUCAS - SC'
+    end
+  end
 end

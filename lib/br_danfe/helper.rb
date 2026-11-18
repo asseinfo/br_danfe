@@ -37,5 +37,9 @@ module BrDanfe
     def self.format_cep(cep)
       cep.sub(/(\d{2})(\d{3})(\d{3})/, '\\1.\\2-\\3')
     end
+
+    def self.address(ender_tag)
+      "#{ender_tag.css('xLgr').text}, #{ender_tag.css('nro').text}, #{ender_tag.css('xBairro').text}, #{ender_tag.css('xMun').text} - #{ender_tag.css('UF').text}"
+    end
   end
 end
