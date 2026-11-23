@@ -12,7 +12,7 @@ module BrDanfe
             botton_margin: 0
           )
 
-          @document.font 'arimo'
+          @document.font 'tinos'
 
           @document.line_width = LINE_WIDTH
         end
@@ -122,13 +122,13 @@ module BrDanfe
         def box(at, w, h, title = '', info = '', options = {})
           options = {
             align: :left,
-            size: 6,
+            size: 10,
             style: nil,
             valign: :top,
             border: 1,
-            label_size: 5.5,
+            label_size: 6,
             label_offset: 1.9,
-            value_offset: 11.2,
+            value_offset: 10,
             leading: 0
           }.merge(options)
 
@@ -147,7 +147,7 @@ module BrDanfe
         def label(at, w, title, options)
           fill_color LABEL_COLOR
           text_box title, size: options[:label_size], at: [at[0], at[1] - options[:label_offset]],
-            width: w - (CELL_PADDING * 2), height: 7
+            width: w - (CELL_PADDING * 2), height: 8
           fill_color TEXT_COLOR
         end
       end

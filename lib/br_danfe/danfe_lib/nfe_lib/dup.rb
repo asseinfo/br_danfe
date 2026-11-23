@@ -77,7 +77,7 @@ module BrDanfe
         end
 
         def label
-          { size: 5.5, border: 0 }
+          { size: 6, border: 0 }
         end
       end
     end

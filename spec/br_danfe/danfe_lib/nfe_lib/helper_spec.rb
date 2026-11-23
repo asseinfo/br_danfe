@@ -40,6 +40,22 @@ describe BrDanfe::DanfeLib::NfeLib::Helper do
     end
   end
 
+  describe '.format_number' do
+    it 'groups the thousands with dots' do
+      expect(described_class.format_number('1234567')).to eq '1.234.567'
+    end
+
+    it 'drops the leading zeros' do
+      expect(described_class.format_number('000001')).to eq '1'
+    end
+  end
+
+  describe '.format_serie' do
+    it 'pads the serie with zeros up to three digits' do
+      expect(described_class.format_serie('1')).to eq '001'
+    end
+  end
+
   describe '.address_is_too_big' do
     let(:pdf) { BrDanfe::DanfeLib::NfeLib::Document.new }
 

@@ -7,7 +7,7 @@ module BrDanfe
         end
 
         def self.format_number(number)
-          number.to_s.rjust(9, '0').scan(/\d{3}/).join('.')
+          number.to_i.to_s.reverse.scan(/\d{1,3}/).join('.').reverse
         end
 
         def self.format_serie(serie)

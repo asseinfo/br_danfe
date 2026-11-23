@@ -2,7 +2,8 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class EmitHeader
-        OPERATION_TYPE_BOX_LINE_WIDTH = 0.75
+        IDENTIFICATION_SIZE = 10
+        DESCRIPTION_SIZE = 8
 
         def initialize(pdf, xml, logo, logo_dimensions)
           @pdf = pdf
@@ -25,18 +26,22 @@ module BrDanfe
         def company_box
           @pdf.ibox 3.92, 7.46, 0.75, @y_position
           @pdf.ibox 3.92, 7.46, 0.75, @y_position, '', @xml['emit/xNome'],
-                    size: 8, align: :center, border: 0, style: :bold
+                    size: 12, align: :center, border: 0, style: :bold
 
           address_company
         end
 
         def address_company
           if @logo.blank?
-            @pdf.ibox 3.92, 7.46, 0.75, @y_position + 1.46, '', address, align: :center, border: 0, leading: 2
+            @pdf.ibox 3.92, 7.46, 0.75, @y_position + 1.46, '', address, address_style.merge(align: :center)
           else
-            @pdf.ibox 3.92, 4.7, 3.65, @y_position + 1.46, '', address, align: :left, border: 0, leading: 2
+            @pdf.ibox 3.92, 4.7, 3.65, @y_position + 1.46, '', address, address_style.merge(align: :left)
             logo
           end
+        end
+
+        def address_style
+          { size: DESCRIPTION_SIZE, style: :bold, border: 0, leading: 2 }
         end
 
         def address
@@ -69,49 +74,45 @@ module BrDanfe
           @pdf.ibox 3.92, 2.08, 8.21, @y_position
 
           @pdf.ibox 0.60, 2.08, 8.21, @y_position, '', 'DANFE',
-                    size: 8, align: :center, border: 0, style: :bold
+                    size: 12, align: :center, border: 0, style: :bold
 
-          @pdf.fill_color LABEL_COLOR
-          @pdf.ibox 1.20, 2.08, 8.21, @y_position + 0.60, '', I18n.t('danfe.others.danfe'),
-                    size: 4.5, align: :center, border: 0
-          @pdf.fill_color TEXT_COLOR
+          @pdf.ibox 1.40, 2.08, 8.21, @y_position + 0.52, '', I18n.t('danfe.others.danfe'),
+                    size: DESCRIPTION_SIZE, align: :center, border: 0
 
           operation_type_box
 
-          @pdf.ibox 0.32, 2.08, 8.21, @y_position + 2.55, '',
-                    I18n.t('danfe.ide.nNF', nNF: Helper.format_number(@xml['ide/nNF'])),
-                    size: 5.5, align: :center, border: 0
-          @pdf.ibox 0.32, 2.08, 8.21, @y_position + 2.80, '',
-                    I18n.t('danfe.ide.serie', serie: Helper.format_serie(@xml['ide/serie'])),
-                    size: 5, align: :center, border: 0
+          identification_line 2.45, I18n.t('danfe.ide.nNF', nNF: Helper.format_number(@xml['ide/nNF']))
+          identification_line 2.88, I18n.t('danfe.ide.serie', serie: Helper.format_serie(@xml['ide/serie']))
+          identification_line 3.31, I18n.t('danfe.others.page', current: page, total: total)
+        end
 
-          @pdf.ibox 1.00, 2.08, 8.21, @y_position + 3.00, '',
-                    I18n.t('danfe.others.page', current: page, total: total),
-                    size: 5, align: :center, valign: :center, border: 0
+        def identification_line(y_offset, text)
+          @pdf.ibox 0.45, 2.08, 8.21, @y_position + y_offset, '', text,
+                    size: IDENTIFICATION_SIZE, align: :center, border: 0, style: :bold
         end
 
         def operation_type_box
-          @pdf.ibox 0.60, 1.50, 8.21, @y_position + 1.80, '',
-                    "0 - #{I18n.t('danfe.ide.tpNF.entry')}\n1 - #{I18n.t('danfe.ide.tpNF.departure')}",
-                    size: 5, valign: :center, border: 0
-          @pdf.line_width OPERATION_TYPE_BOX_LINE_WIDTH
-          @pdf.ibox 0.55, 0.55, 9.66, @y_position + 1.83, '', @xml['ide/tpNF'],
-                    size: 6.5, align: :center, valign: :center
-          @pdf.line_width LINE_WIDTH
+          operation = @xml['ide/tpNF'] == '0' ? I18n.t('danfe.ide.tpNF.entry') : I18n.t('danfe.ide.tpNF.departure')
+
+          @pdf.formatted_text_box(
+            [{ text: @xml['ide/tpNF'], size: IDENTIFICATION_SIZE, styles: [:bold] },
+             { text: " - #{operation}", size: DESCRIPTION_SIZE }],
+            at: [8.21.cm, Helper.invert((@y_position + 1.92).cm)], width: 2.08.cm, height: 0.50.cm,
+            align: :center, valign: :center
+          )
         end
 
         def access_key_box
           @pdf.ibox 2.22, 10.02, 10.29, @y_position
           @pdf.ibarcode 1.50, 8.00, 10.4010, @y_position + 1.90, @xml['infProt > chNFe']
           @pdf.ibox 0.85, 10.02, 10.29, @y_position + 2.22, I18n.t('danfe.chNFe'),
-                    @xml['infProt > chNFe'].gsub(/(\d)(?=(\d\d\d\d)+(?!\d))/, '\\1 '), size: 6.5, style: :bold,
-                    align: :center
+                    @xml['infProt > chNFe'].gsub(/(\d)(?=(\d\d\d\d)+(?!\d))/, '\\1 '), style: :bold, align: :center
         end
 
         def sefaz_box
           @pdf.fill_color LABEL_COLOR
           @pdf.ibox 0.85, 10.02, 10.29, @y_position + 3.07, '', I18n.t('danfe.others.sefaz'),
-                    valign: :center, size: 4.5
+                    valign: :center, size: DESCRIPTION_SIZE
           @pdf.fill_color TEXT_COLOR
         end
 
