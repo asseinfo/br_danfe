@@ -6,6 +6,11 @@ module BrDanfe
 
         Y_POSITION = 12.92
         DUP_MAX_QUANTITY = 12
+        DUPS_PER_ROW = DUP_MAX_QUANTITY / 2
+        LABEL_ROW_HEIGHT = 0.30
+        VALUE_ROW_HEIGHT = 0.60
+        DUP_WIDTH = CONTENT_WIDTH / DUPS_PER_ROW
+        UNTITLED_TEXT_OFFSET = 0.07
 
         def initialize(pdf, xml)
           @pdf = pdf
@@ -24,37 +29,42 @@ module BrDanfe
 
           render_titles_and_box(x, y)
 
-          @xml.collect('xmlns', 'dup') { _1 }[..(DUP_MAX_QUANTITY - 1)].each_with_index do |det, index|
-            x = 0.75 unless index != DUP_MAX_QUANTITY / 2
+          dups = @xml.collect('xmlns', 'dup') { _1 }[..(DUP_MAX_QUANTITY - 1)]
+          line_height = VALUE_ROW_HEIGHT / dups.each_slice(DUPS_PER_ROW).count
 
-            y = if index < DUP_MAX_QUANTITY / 2
-                  @y_position - 0.015
-                else
-                  @y_position + 0.185
-                end
+          dups.each_with_index do |det, index|
+            x = 0.75 if index == DUPS_PER_ROW
 
-            render_dup(det, x, y + 0.3)
-            x += 3.261666667
+            line = index / DUPS_PER_ROW
+            render_dup(det, x, y + LABEL_ROW_HEIGHT + (line * line_height), line_height)
+            x += DUP_WIDTH
           end
         end
 
         private
 
         def render_titles_and_box(x, y)
-          (DUP_MAX_QUANTITY / 2).times do
-            @pdf.ibox 0.30, 3.261666667, x, y
-            @pdf.ibox 0.60, 3.261666667, x, y + 0.30
-            @pdf.ibox 0.85, 1.80, x, y - 0.05, '', I18n.t('danfe.dup.nDup'), normal
-            @pdf.ibox 0.85, 1.80, x + 0.87, y - 0.05, '', I18n.t('danfe.dup.dVenc'), normal
-            @pdf.ibox 0.85, 1.80, x + 2.35, y - 0.05, '', I18n.t('danfe.dup.vDup'), normal
-            x += 3.261666667
+          DUPS_PER_ROW.times do
+            @pdf.ibox LABEL_ROW_HEIGHT, DUP_WIDTH, x, y
+            @pdf.ibox VALUE_ROW_HEIGHT, DUP_WIDTH, x, y + LABEL_ROW_HEIGHT
+            @pdf.fill_color LABEL_COLOR
+            centered_text LABEL_ROW_HEIGHT, 1.80, x, y, I18n.t('danfe.dup.nDup'), label
+            centered_text LABEL_ROW_HEIGHT, 1.80, x + 0.87, y, I18n.t('danfe.dup.dVenc'), label
+            centered_text LABEL_ROW_HEIGHT, 1.80, x + 2.35, y, I18n.t('danfe.dup.vDup'), label
+            @pdf.fill_color TEXT_COLOR
+            x += DUP_WIDTH
           end
         end
 
-        def render_dup(det, x, y)
-          @pdf.ibox 0.85, 2.12, x + 0.1, y, '', det.css('nDup').text, normal
-          @pdf.ibox 0.85, 2.12, x + 0.75, y, '', dtduplicata(det), normal
-          @pdf.inumeric 0.85, 2.12, x + 1.1, y, '', det.css('vDup').text, normal
+        def render_dup(det, x, y, height)
+          centered_text height, 2.12, x + 0.1, y, det.css('nDup').text, normal
+          centered_text height, 2.12, x + 0.75, y, dtduplicata(det), normal
+          centered_text height, 2.12, x + 1.1, y, BrDanfe::Helper.numerify(det.css('vDup').text), normal.merge(align: :right)
+        end
+
+        def centered_text(height, width, x, y, text, style)
+          @pdf.ibox height + UNTITLED_TEXT_OFFSET, width, x, y - UNTITLED_TEXT_OFFSET, '', text,
+                    style.merge(valign: :center)
         end
 
         def dtduplicata(det)
@@ -64,6 +74,10 @@ module BrDanfe
 
         def normal
           { size: 6, border: 0 }
+        end
+
+        def label
+          { size: 5.5, border: 0 }
         end
       end
     end

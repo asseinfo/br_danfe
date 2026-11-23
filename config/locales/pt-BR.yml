@@ -18,7 +18,7 @@ pt-BR:
     infProt: "PROTOCOLO DE AUTORIZAÇÃO DE USO"
     others:
       has_no_fiscal_value: "SEM VALOR FISCAL"
-      page: "FOLHA %{current} de %{total}"
+      page: "FOLHA %{current}/%{total}"
       danfe: "DOCUMENTO AUXILIAR DA NOTA FISCAL ELETRÔNICA"
       sefaz: "Consulta de autenticidade no portal nacional da NF-e www.nfe.fazenda.gov.br/portal ou no site da Sefaz Autorizadora"
     ide:
@@ -28,7 +28,8 @@ pt-BR:
       tpNF:
         entry: "ENTRADA"
         departure: "SAÍDA"
-      document: "N°. %{nNF}\nSÉRIE %{serie}"
+      nNF: "Nº %{nNF}"
+      serie: "SÉRIE %{serie}"
       natOp: "NATUREZA DA OPERAÇÃO"
     dest:
       title: "DESTINATÁRIO / REMETENTE"
@@ -144,7 +145,7 @@ pt-BR:
         xNome: "RECEBEMOS DE %{xNome} OS PRODUTOS/SERVIÇOS CONSTANTES DA NOTA FISCAL INDICADA AO LADO"
         received_at: "DATA DE RECEBIMENTO"
         receiver: "IDENTIFICAÇÃO E ASSINATURA DO RECEBEDOR"
-        document: "NF-e\nN°. %{nNF}\nSÉRIE %{serie}"
+        title: "NF-e"
     entrega:
       title: "INFORMAÇÕES DO LOCAL DE ENTREGA"
       CNPJ: "CNPJ/CPF"

@@ -12,9 +12,9 @@ module BrDanfe
             botton_margin: 0
           )
 
-          @document.font 'tinos'
+          @document.font 'arimo'
 
-          @document.line_width = 0.3
+          @document.line_width = LINE_WIDTH
         end
 
         def method_missing(method_name, ...)
@@ -33,7 +33,13 @@ module BrDanfe
           title = ''
           title = I18n.t("danfe.#{i18n}") if i18n != ''
 
-          text_box title, size: 8, at: [x.cm, Helper.invert(y.cm) - 4], width: w.cm, height: h.cm, style: :bold
+          at = [x.cm, Helper.invert((y + h - TITLE_HEIGHT).cm)]
+          fill_color TITLE_BACKGROUND_COLOR
+          fill_and_stroke_rectangle at, CONTENT_WIDTH.cm, TITLE_HEIGHT.cm
+          fill_color TEXT_COLOR
+
+          text_box title, size: 6.5, at: [at[0] + CELL_PADDING, at[1]], width: w.cm, height: TITLE_HEIGHT.cm,
+            style: :bold, valign: :center
         end
 
         def ibarcode(h, w, x, y, info)
@@ -116,26 +122,33 @@ module BrDanfe
         def box(at, w, h, title = '', info = '', options = {})
           options = {
             align: :left,
-            size: 10,
+            size: 6,
             style: nil,
             valign: :top,
-            border: 1
+            border: 1,
+            label_size: 5.5,
+            label_offset: 1.9,
+            value_offset: 11.2,
+            leading: 0
           }.merge(options)
 
           stroke_rectangle at, w, h if options[:border] == 1
 
-          at[0] += 2
+          at[0] += CELL_PADDING
 
-          if title != ''
-            title_coord = Array.new(at)
-            title_coord[1] -= 2
-            text_box title, size: 6, at: title_coord, width: w - 4, height: 8
-          end
+          label(at, w, title, options) if title != ''
 
-          title_adjustment = title == '' ? 4 : 13
+          title_adjustment = title == '' ? 2 : options[:value_offset]
           at[1] -= title_adjustment
-          text_box info, size: options[:size], at: at, width: w - 4, height: h - title_adjustment, align: options[:align],
-            style: options[:style], valign: options[:valign]
+          text_box info, size: options[:size], at: at, width: w - (CELL_PADDING * 2), height: h - title_adjustment,
+            align: options[:align], style: options[:style], valign: options[:valign], leading: options[:leading]
+        end
+
+        def label(at, w, title, options)
+          fill_color LABEL_COLOR
+          text_box title, size: options[:label_size], at: [at[0], at[1] - options[:label_offset]],
+            width: w - (CELL_PADDING * 2), height: 7
+          fill_color TEXT_COLOR
         end
       end
     end

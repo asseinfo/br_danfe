@@ -6,6 +6,14 @@ module BrDanfe
           29.7.cm - y
         end
 
+        def self.format_number(number)
+          number.to_s.rjust(9, '0').scan(/\d{3}/).join('.')
+        end
+
+        def self.format_serie(serie)
+          serie.to_s.rjust(3, '0')
+        end
+
         def self.format_date(xml_datetime)
           formated = ''
 

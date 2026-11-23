@@ -10,6 +10,13 @@ module BrDanfe
         normal: "#{BrDanfe.root_path}/fonts/tinos.ttf"
       }
 
+      document.font_families['arimo'] = {
+        bold: "#{BrDanfe.root_path}/fonts/arimo_bold.ttf",
+        italic: "#{BrDanfe.root_path}/fonts/arimo_italic.ttf",
+        bold_italic: "#{BrDanfe.root_path}/fonts/arimo_bold_italic.ttf",
+        normal: "#{BrDanfe.root_path}/fonts/arimo.ttf"
+      }
+
       document
     end
   end

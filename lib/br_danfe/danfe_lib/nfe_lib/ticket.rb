@@ -7,18 +7,42 @@ module BrDanfe
           @xml = xml
         end
 
+        CUT_LINE_Y_POSITION = 3.75
+        CUT_LINE_WIDTH = 0.48
+        CUT_LINE_COLOR = '888888'.freeze
+
         def render
           render_additional_data
-          @pdf.ibox 0.85, 3.85, 0.75, 2.7, I18n.t('danfe.ticket.received_at')
-          @pdf.ibox 0.85, 11.75, 4.60, 2.7, I18n.t('danfe.ticket.receiver')
-          @pdf.ibox 1.70, 4.00, 16.35, 1.85, '',
-                    I18n.t('danfe.ticket.document', nNF: @xml['ide/nNF'], serie: @xml['ide/serie']),
-                    align: :center, valign: :center
+          @pdf.ibox 0.85, 3.85, 0.75, 2.7, I18n.t('danfe.ticket.received_at'), '', label_size: 5
+          @pdf.ibox 0.85, 11.75, 4.60, 2.7, I18n.t('danfe.ticket.receiver'), '', label_size: 5
+          render_document
+          render_cut_line
         end
 
         def render_additional_data
           data = generate_additional_data
-          @pdf.ibox 0.85, 15.60, 0.75, 1.85, '', data, size: 6
+          @pdf.ibox 0.85, 15.60, 0.75, 1.85, '', data, size: 5.5, style: :bold, valign: :center
+        end
+
+        def render_document
+          @pdf.ibox 1.70, 3.96, 16.35, 1.85
+          @pdf.ibox 0.40, 3.96, 16.35, 2.30, '', I18n.t('danfe.ticket.title'),
+                    size: 8, align: :center, border: 0, style: :bold
+          @pdf.ibox 0.32, 3.96, 16.35, 2.68, '', I18n.t('danfe.ide.nNF', nNF: Helper.format_number(@xml['ide/nNF'])),
+                    size: 5.5, align: :center, border: 0
+          @pdf.ibox 0.32, 3.96, 16.35, 2.90, '', I18n.t('danfe.ide.serie', serie: Helper.format_serie(@xml['ide/serie'])),
+                    size: 5.5, align: :center, border: 0
+        end
+
+        def render_cut_line
+          y = Helper.invert(CUT_LINE_Y_POSITION.cm)
+          @pdf.line_width CUT_LINE_WIDTH
+          @pdf.stroke_color CUT_LINE_COLOR
+          @pdf.dash [1.44, 0.48]
+          @pdf.stroke_line [0.75.cm, y], [(0.75 + CONTENT_WIDTH).cm, y]
+          @pdf.undash
+          @pdf.stroke_color TEXT_COLOR
+          @pdf.line_width LINE_WIDTH
         end
 
         def generate_additional_data
