@@ -99,7 +99,7 @@ module BrDanfe
         end
 
         def cell_text(text, options = {})
-          cell = { content: text, border_lines: [:solid], size: 5 }
+          cell = { content: text, border_lines: [:solid], size: 6 }
           cell.merge!(options)
           cell
         end

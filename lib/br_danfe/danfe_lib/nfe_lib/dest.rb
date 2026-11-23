@@ -35,13 +35,13 @@ module BrDanfe
 
         def render_cnpj_cpf
           xpath = @xml['dest/CNPJ'].present? ? 'dest/CNPJ' : 'dest/CPF'
-          @pdf.lcnpj_cpf LINE_HEIGHT, 4.37, 12.57, @l1, @xml, xpath
+          @pdf.lcnpj_cpf LINE_HEIGHT, 4.83, 12.57, @l1, @xml, xpath
         end
 
         def render_line2
           @pdf.i18n_lbox LINE_HEIGHT, 9.66, 0.75, @l2, 'enderDest.xLgr', address
           @pdf.lbox LINE_HEIGHT, 4.33, 10.41, @l2, @xml, 'enderDest/xBairro'
-          @pdf.i18n_lbox LINE_HEIGHT, 2.20, 14.74, @l2, 'enderDest.CEP', cep
+          @pdf.i18n_lbox LINE_HEIGHT, 2.66, 14.74, @l2, 'enderDest.CEP', cep
         end
 
         def address
@@ -62,7 +62,7 @@ module BrDanfe
           @pdf.lbox LINE_HEIGHT, 6.61, 0.75, @l3, @xml, 'enderDest/xMun'
           @pdf.i18n_lbox LINE_HEIGHT, 4.06, 7.36, @l3, 'enderDest.fone', phone
           @pdf.lbox LINE_HEIGHT, 1.14, 11.42, @l3, @xml, 'enderDest/UF'
-          @pdf.lie LINE_HEIGHT, 4.38, 12.56, @l3, @xml, 'enderDest/UF', 'dest/IE'
+          @pdf.lie LINE_HEIGHT, 4.84, 12.56, @l3, @xml, 'enderDest/UF', 'dest/IE'
         end
 
         def phone
