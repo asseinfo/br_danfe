@@ -2,6 +2,8 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class DetBody
+        TABLE_CELL_PADDING = 2
+
         attr_reader :y_position_with_entrega
 
         def initialize(pdf, xml)
@@ -43,11 +45,17 @@ module BrDanfe
         end
 
         def header_column(title)
-          { content: I18n.t("danfe.det.#{title}"), align: :left, size: 6, valign: :top }
+          {
+            content: I18n.t("danfe.det.#{title}"), align: :center, size: 5, valign: :top, font_style: :bold,
+            background_color: TITLE_BACKGROUND_COLOR, padding: [4, TABLE_CELL_PADDING, 3.5, TABLE_CELL_PADDING]
+          }
         end
 
         def options
-          { column_widths: column_widths, cell_style: { padding: 2, border_width: 0.3 } }
+          {
+            column_widths: column_widths,
+            cell_style: { padding: [0.5, TABLE_CELL_PADDING, 1.5, TABLE_CELL_PADDING], border_width: LINE_WIDTH }
+          }
         end
 
         def column_widths
@@ -91,7 +99,7 @@ module BrDanfe
         end
 
         def cell_text(text, options = {})
-          cell = { content: text, border_lines: [:solid], size: 6.5 }
+          cell = { content: text, border_lines: [:solid], size: 5 }
           cell.merge!(options)
           cell
         end
@@ -121,7 +129,7 @@ module BrDanfe
         def render_table(data, start_position, height)
           @pdf.y = start_position
           @pdf.bounding_box [0.75.cm, @pdf.cursor], width: 19.56.cm, height: height do
-            @pdf.table data.map { |item| [item] }, header: true
+            @pdf.table data.map { |item| [item] }, header: true, cell_style: { border_width: 0 }
           end
         end
 

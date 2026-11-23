@@ -35,7 +35,7 @@ module BrDanfe
         def render_line1
           @pdf.lbox LINE_HEIGHT, 11.82, 0.75, @l1, @xml, 'entrega/xNome'
           render_cnpj_cpf
-          @pdf.lie LINE_HEIGHT, 2.92, 17.40, @l1, @xml, 'entrega/UF', 'entrega/IE'
+          @pdf.lie LINE_HEIGHT, 2.91, 17.40, @l1, @xml, 'entrega/UF', 'entrega/IE'
         end
 
         def render_cnpj_cpf
@@ -46,7 +46,7 @@ module BrDanfe
         def render_line2
           @pdf.i18n_lbox LINE_HEIGHT, 11.82, 0.75, @l2, 'entrega.xLgr', address
           @pdf.lbox LINE_HEIGHT, 4.37, 12.57, @l2, @xml, 'entrega/xBairro'
-          @pdf.i18n_lbox LINE_HEIGHT, 2.92, 17.40, @l2, 'entrega.CEP', cep
+          @pdf.i18n_lbox LINE_HEIGHT, 2.91, 17.40, @l2, 'entrega.CEP', cep
         end
 
         def address
@@ -66,7 +66,7 @@ module BrDanfe
         def render_line3
           @pdf.lbox LINE_HEIGHT, 15.05, 0.75, @l3, @xml, 'entrega/xMun'
           @pdf.lbox LINE_HEIGHT, 1.14, 15.8, @l3, @xml, 'entrega/UF'
-          @pdf.i18n_lbox LINE_HEIGHT, 2.92, 17.40, @l3, 'entrega.fone', phone
+          @pdf.i18n_lbox LINE_HEIGHT, 2.91, 17.40, @l3, 'entrega.fone', phone
         end
 
         def phone
