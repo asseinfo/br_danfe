@@ -5,11 +5,9 @@ module BrDanfe
         TOTALS = [
           'IBSCBSTot/gCBS/vCBS', 'IBSCBSTot/gIBS/gIBSUF/vIBSUF', 'IBSCBSTot/gIBS/gIBSMun/vIBSMun', 'ISTot/vIS'
         ].freeze
-        MONOPHASIC_TOTALS = [
-          'IBSCBSTot/gMono/vIBSMono', 'IBSCBSTot/gMono/vCBSMono',
-          'IBSCBSTot/gMono/vIBSMonoReten', 'IBSCBSTot/gMono/vCBSMonoReten'
-        ].freeze
-        private_constant :TOTALS, :MONOPHASIC_TOTALS
+        MONOPHASIC_TOTALS = ['IBSCBSTot/gMono/vIBSMono', 'IBSCBSTot/gMono/vCBSMono'].freeze
+        RETENTION_TOTALS = ['IBSCBSTot/gMono/vIBSMonoReten', 'IBSCBSTot/gMono/vCBSMonoReten'].freeze
+        private_constant :TOTALS, :MONOPHASIC_TOTALS, :RETENTION_TOTALS
 
         def self.offset(xml)
           return 0.0 unless RtcLayout.applies?(xml)
@@ -37,7 +35,16 @@ module BrDanfe
           @pdf.lnumeric_line LINE_HEIGHT, CONTENT_WIDTH, 0.75, @y_position, @xml, TOTALS
           return unless self.class.monophasic?(@xml)
 
-          @pdf.lnumeric_line LINE_HEIGHT, CONTENT_WIDTH, 0.75, @y_position + LINE_HEIGHT, @xml, MONOPHASIC_TOTALS
+          @pdf.inumeric_line LINE_HEIGHT, CONTENT_WIDTH, 0.75, @y_position + LINE_HEIGHT, monophasic_fields
+        end
+
+        private
+
+        def monophasic_fields
+          (MONOPHASIC_TOTALS + RETENTION_TOTALS).to_h do |xpath|
+            retention_without_value = RETENTION_TOTALS.include?(xpath) && !@xml[xpath].to_f.positive?
+            [xpath.tr('/', '.'), retention_without_value ? '' : @xml[xpath]]
+          end
         end
       end
     end

@@ -86,9 +86,25 @@ describe BrDanfe::DanfeLib::NfeLib::Ibscbstot do
       end
 
       it 'renders the monophasic totals' do
+        expect(pdf_text).to include("VALOR DO IBS MONOFÁSICO\n1,00\nVALOR DA CBS MONOFÁSICA\n9,00")
+      end
+
+      it 'renders the retention totals in blank' do
+        expect(pdf_text).to end_with(
+          "VALOR DO IBS MONOFÁSICO POR RETENÇÃO\nVALOR DA CBS MONOFÁSICA POR RETENÇÃO"
+        )
+      end
+    end
+
+    context 'when the NF-e has monophasic IBS/CBS subject to retention' do
+      let(:totals) do
+        '<IBSCBSTot><gMono><vIBSMono>1.00</vIBSMono><vCBSMono>9.00</vCBSMono>' \
+          '<vIBSMonoReten>0.50</vIBSMonoReten><vCBSMonoReten>4.50</vCBSMonoReten></gMono></IBSCBSTot>'
+      end
+
+      it 'renders the retention totals' do
         expect(pdf_text).to include(
-          "VALOR DO IBS MONOFÁSICO\n1,00\nVALOR DA CBS MONOFÁSICA\n9,00\n" \
-          "VALOR DO IBS MONOFÁSICO POR RETENÇÃO\n0,00\nVALOR DA CBS MONOFÁSICA POR RETENÇÃO\n0,00"
+          "VALOR DO IBS MONOFÁSICO POR RETENÇÃO\n0,50\nVALOR DA CBS MONOFÁSICA POR RETENÇÃO\n4,50"
         )
       end
     end

@@ -14,10 +14,7 @@ module BrDanfe
         def self.conditional_lines(xml)
           return [] unless RtcLayout.applies?(xml)
 
-          lines = []
-          lines << FCP_DIFAL_TOTALS if FCP_DIFAL_TOTALS.any? { |xpath| xml[xpath].to_f.positive? }
-          lines << MONOPHASIC_TOTALS if MONOPHASIC_TOTALS.any? { |xpath| xml[xpath].present? }
-          lines
+          [FCP_DIFAL_TOTALS, MONOPHASIC_TOTALS].select { |xpaths| xpaths.any? { |xpath| xml[xpath].to_f.positive? } }
         end
 
         def self.offset(xml)

@@ -124,10 +124,16 @@ describe BrDanfe::DanfeLib::NfeLib::Icmstot do
       it { is_expected.to eql 0.8 }
     end
 
-    context 'when the NF-e informs the monophasic ICMS totals' do
-      let(:icms_totals) { '<vFCP>0.00</vFCP><qBCMono>0.00</qBCMono><vICMSMono>0.00</vICMSMono>' }
+    context 'when the NF-e has monophasic ICMS' do
+      let(:icms_totals) { '<vFCP>0.00</vFCP><qBCMono>100.00</qBCMono><vICMSMono>112.00</vICMSMono>' }
 
       it { is_expected.to eql 0.8 }
+    end
+
+    context 'when the monophasic ICMS totals are zero' do
+      let(:icms_totals) { '<vFCP>0.00</vFCP><vICMSMono>0.00</vICMSMono><vICMSMonoReten>0.00</vICMSMonoReten>' }
+
+      it { is_expected.to eql 0.0 }
     end
 
     context 'when the NF-e has FCP and monophasic ICMS' do

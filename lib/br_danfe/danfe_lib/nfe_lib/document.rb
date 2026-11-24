@@ -103,9 +103,14 @@ module BrDanfe
         end
 
         def lnumeric_line(h, w, x, y, xml, xpaths)
-          field_width = w / xpaths.size
-          xpaths.each_with_index do |xpath, index|
-            lnumeric h, field_width, x + (index * field_width), y, xml, xpath
+          fields = xpaths.to_h { |xpath| [xpath.tr('/', '.'), xml[xpath]] }
+          inumeric_line h, w, x, y, fields
+        end
+
+        def inumeric_line(h, w, x, y, fields)
+          field_width = w / fields.size
+          fields.each_with_index do |(i18n, data), index|
+            inumeric h, field_width, x + (index * field_width), y, i18n, data
           end
         end
 
