@@ -4,7 +4,11 @@ module BrDanfe
       class DetBody
         TABLE_CELL_PADDING = 2
         TABLE_WITH_ONLY_HEADER = 1
-        private_constant :TABLE_WITH_ONLY_HEADER
+        CURRENT_HEADER = [
+          'prod.cProd', 'prod.xProd', 'prod.NCM', 'ICMS.CST', 'prod.CFOP', 'prod.uCom', 'prod.qCom',
+          'prod.vUnCom', 'prod.vProd', 'ICMS.vBC', 'ICMS.vICMS', 'IPI.vIPI', 'ICMS.pICMS', 'IPI.pIPI'
+        ].freeze
+        private_constant :TABLE_WITH_ONLY_HEADER, :CURRENT_HEADER
 
         attr_reader :y_position_with_entrega
 
@@ -38,20 +42,13 @@ module BrDanfe
         end
 
         def create_header
-          return @pdf.make_table([RtcDetRow.titles.map { |title| header_cell(title) }], options) if @rtc_layout
-
-          header = [[
-            header_column('prod.cProd'), header_column('prod.xProd'), header_column('prod.NCM'),
-            header_column('ICMS.CST'), header_column('prod.CFOP'), header_column('prod.uCom'),
-            header_column('prod.qCom'), header_column('prod.vUnCom'), header_column('prod.vProd'),
-            header_column('ICMS.vBC'), header_column('ICMS.vICMS'), header_column('IPI.vIPI'),
-            header_column('ICMS.pICMS'), header_column('IPI.pIPI')
-          ]]
-          @pdf.make_table(header, options)
+          @pdf.make_table([header_titles.map { |title| header_cell(title) }], options)
         end
 
-        def header_column(title)
-          header_cell I18n.t("danfe.det.#{title}")
+        def header_titles
+          return RtcDetRow.titles if @rtc_layout
+
+          CURRENT_HEADER.map { |key| I18n.t("danfe.det.#{key}") }
         end
 
         def header_cell(content)
