@@ -91,4 +91,56 @@ describe BrDanfe::DanfeLib::NfeLib::Icmstot do
       end
     end
   end
+
+  describe '.offset' do
+    subject { described_class.offset(xml) }
+
+    let(:issued_at) { '2026-12-02T10:00:00-03:00' }
+    let(:icms_totals) { '<vFCP>0.00</vFCP><vFCPST>0.00</vFCPST><vICMSUFDest>0.00</vICMSUFDest><vFCPUFDest>0.00</vFCPUFDest>' }
+    let(:xml_as_string) do
+      <<~XML
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe versao="4.00">
+            <ide><dhEmi>#{issued_at}</dhEmi></ide>
+            <total><ICMSTot>#{icms_totals}</ICMSTot></total>
+          </infNFe>
+        </NFe>
+      XML
+    end
+
+    context 'when the NF-e has no FCP, DIFAL or monophasic ICMS' do
+      it { is_expected.to eq 0 }
+    end
+
+    context 'when the NF-e has FCP' do
+      let(:icms_totals) { '<vFCP>24.00</vFCP><vFCPST>0.00</vFCPST><vICMSUFDest>0.00</vICMSUFDest><vFCPUFDest>0.00</vFCPUFDest>' }
+
+      it { is_expected.to eq BrDanfe::DanfeLib::NfeLib::LINE_HEIGHT }
+    end
+
+    context 'when the NF-e has DIFAL' do
+      let(:icms_totals) { '<vFCP>0.00</vFCP><vFCPST>0.00</vFCPST><vICMSUFDest>45.00</vICMSUFDest><vFCPUFDest>9.00</vFCPUFDest>' }
+
+      it { is_expected.to eq BrDanfe::DanfeLib::NfeLib::LINE_HEIGHT }
+    end
+
+    context 'when the NF-e informs the monophasic ICMS, even with zero' do
+      let(:icms_totals) { '<vFCP>0.00</vFCP><qBCMono>0.00</qBCMono><vICMSMono>0.00</vICMSMono>' }
+
+      it { is_expected.to eq BrDanfe::DanfeLib::NfeLib::LINE_HEIGHT }
+    end
+
+    context 'when the NF-e has FCP and monophasic ICMS' do
+      let(:icms_totals) { '<vFCP>24.00</vFCP><qBCMono>100.00</qBCMono><vICMSMono>112.00</vICMSMono>' }
+
+      it { is_expected.to eq BrDanfe::DanfeLib::NfeLib::LINE_HEIGHT * 2 }
+    end
+
+    context 'when the NF-e uses the current layout' do
+      let(:issued_at) { '2026-11-20T10:00:00-03:00' }
+      let(:icms_totals) { '<vFCP>24.00</vFCP><qBCMono>100.00</qBCMono><vICMSMono>112.00</vICMSMono>' }
+
+      it { is_expected.to eq 0 }
+    end
+  end
 end

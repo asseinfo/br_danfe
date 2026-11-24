@@ -11,6 +11,8 @@ module BrDanfe
           @xml = xml
 
           @y_position_with_entrega = Entrega.delivery_local?(@xml) ? 3.00 : 0.00
+          @y_position_with_entrega += RtcLayout.offset(@xml)
+          @rtc_layout = RtcLayout.applies?(@xml)
         end
 
         def render(has_issqn)
@@ -34,6 +36,8 @@ module BrDanfe
         end
 
         def create_header
+          return @pdf.make_table([RtcDetRow::COLUMNS.map { |column| rtc_header_column(column) }], options) if @rtc_layout
+
           header = [[
             header_column('prod.cProd'), header_column('prod.xProd'), header_column('prod.NCM'),
             header_column('ICMS.CST'), header_column('prod.CFOP'), header_column('prod.uCom'),
@@ -45,15 +49,23 @@ module BrDanfe
         end
 
         def header_column(title)
+          header_cell I18n.t("danfe.det.#{title}")
+        end
+
+        def rtc_header_column(column)
+          header_cell I18n.t("danfe.det.columns.#{column}")
+        end
+
+        def header_cell(content)
           {
-            content: I18n.t("danfe.det.#{title}"), align: :center, size: 5, valign: :top, font_style: :bold,
+            content: content, align: :center, size: 5, valign: :top, font_style: :bold,
             background_color: TITLE_BACKGROUND_COLOR, padding: [4, TABLE_CELL_PADDING, 3.5, TABLE_CELL_PADDING]
           }
         end
 
         def options
           {
-            column_widths: column_widths,
+            column_widths: @rtc_layout ? RtcDetRow.column_widths : column_widths,
             cell_style: { padding: [0.5, TABLE_CELL_PADDING, 1.5, TABLE_CELL_PADDING], border_width: LINE_WIDTH }
           }
         end
@@ -68,15 +80,11 @@ module BrDanfe
         def fill_tables(first_table, next_table, first_table_height)
           total_height = first_table.first.height
 
-          products.each do |product|
-            row = create_row product
+          @xml.collect('xmlns', 'det') { _1 }.each do |det|
+            row = create_row(@rtc_layout ? RtcDetRow.new(@pdf, det).render : product(det))
             total_height += row.height
             total_height <= first_table_height ? first_table << row : next_table << row
           end
-        end
-
-        def products
-          @xml.collect('xmlns', 'det') { |det| product(det) }
         end
 
         def product(det)

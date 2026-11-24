@@ -11,6 +11,7 @@ module BrDanfe
           @xml = xml
 
           @y_position = Entrega.delivery_local?(@xml) ? Y_POSITION + 3.00 : Y_POSITION
+          @y_position += RtcLayout.offset(@xml)
 
           @l1 = @y_position
         end
