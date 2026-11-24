@@ -142,7 +142,7 @@ module BrDanfe
 
         def crt
           code = @xml['emit/CRT']
-          code.present? ? I18n.t("danfe.emit.CRT.#{code}") : ''
+          code.present? ? I18n.t("danfe.emit.CRT.#{code}", default: code) : ''
         end
 
         def cnpj_cpf

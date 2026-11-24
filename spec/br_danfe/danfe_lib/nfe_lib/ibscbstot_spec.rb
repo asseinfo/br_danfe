@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BrDanfe::DanfeLib::NfeLib::IbscbsTot do
+describe BrDanfe::DanfeLib::NfeLib::Ibscbstot do
   let(:pdf) { BrDanfe::DanfeLib::NfeLib::Document.new }
   let(:xml) { BrDanfe::XML.new(xml_as_string) }
   let(:pdf_text) { PDF::Inspector::Text.analyze(pdf.render).strings.join("\n") }

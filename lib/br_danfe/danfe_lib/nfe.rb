@@ -45,13 +45,13 @@ module BrDanfe
         NfeLib::Entrega.new(@document, xml).render
         NfeLib::Dup.new(@document, xml).render
         NfeLib::Icmstot.new(@document, xml).render
-        NfeLib::IbscbsTot.new(@document, xml).render
+        NfeLib::Ibscbstot.new(@document, xml).render
         NfeLib::Transp.new(@document, xml).render
         n_vol = NfeLib::Vol.new(@document, xml).render
         has_issqn = NfeLib::Issqn.new(@document, xml).render
         NfeLib::Infadic.new(@document, xml).render(n_vol)
 
-        render_products(has_issqn, xml)
+        @products_on_first_page = render_products(has_issqn, xml)
       end
 
       def render_products(has_issqn, xml)
@@ -81,6 +81,8 @@ module BrDanfe
       end
 
       def render_product_table_title(page, xml)
+        return if page == 1 && !@products_on_first_page
+
         y_position = NfeLib::Entrega.delivery_local?(xml) && page == 1 ? 3.00 : 0
         y_position += page == 1 ? 18.91 + NfeLib::RtcLayout.offset(xml) : 7.40
         @document.ititle 0.42, 10.00, 0.75, y_position, 'det.title'

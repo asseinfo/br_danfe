@@ -79,4 +79,32 @@ describe BrDanfe::DanfeLib::NfeLib::RtcLayout do
       it { is_expected.to be false }
     end
   end
+
+  describe '.offset' do
+    subject { described_class.offset(xml) }
+
+    let(:issued_at) { '2026-12-02T10:00:00-03:00' }
+    let(:xml_as_string) do
+      <<~XML
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe versao="4.00">
+            <ide><dhEmi>#{issued_at}</dhEmi></ide>
+            <total><ICMSTot><vFCP>24.00</vFCP></ICMSTot></total>
+          </infNFe>
+        </NFe>
+      XML
+    end
+
+    context 'when the NF-e uses the new layout' do
+      it 'is the height of the conditional ICMS lines and of the IBS/CBS/IS block' do
+        expect(subject).to eql 2.12
+      end
+    end
+
+    context 'when the NF-e uses the current layout' do
+      let(:issued_at) { '2026-11-20T10:00:00-03:00' }
+
+      it { is_expected.to eql 0.0 }
+    end
+  end
 end

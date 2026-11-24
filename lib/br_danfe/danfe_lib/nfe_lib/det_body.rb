@@ -3,6 +3,8 @@ module BrDanfe
     module NfeLib
       class DetBody
         TABLE_CELL_PADDING = 2
+        TABLE_WITH_ONLY_HEADER = 1
+        private_constant :TABLE_WITH_ONLY_HEADER
 
         attr_reader :y_position_with_entrega
 
@@ -11,8 +13,8 @@ module BrDanfe
           @xml = xml
 
           @y_position_with_entrega = Entrega.delivery_local?(@xml) ? 3.00 : 0.00
-          @y_position_with_entrega += RtcLayout.offset(@xml)
           @rtc_layout = RtcLayout.applies?(@xml)
+          @rtc_offset = RtcLayout.offset(@xml)
         end
 
         def render(has_issqn)
@@ -28,7 +30,7 @@ module BrDanfe
 
         def table_height_on_first_page(has_issqn)
           base_height = has_issqn ? 6.35.cm : 7.72.cm
-          (base_height - @y_position_with_entrega.cm)
+          base_height - (@y_position_with_entrega + @rtc_offset).cm
         end
 
         def create_table
@@ -36,7 +38,7 @@ module BrDanfe
         end
 
         def create_header
-          return @pdf.make_table([RtcDetRow::COLUMNS.map { |column| rtc_header_column(column) }], options) if @rtc_layout
+          return @pdf.make_table([RtcDetRow.titles.map { |title| header_cell(title) }], options) if @rtc_layout
 
           header = [[
             header_column('prod.cProd'), header_column('prod.xProd'), header_column('prod.NCM'),
@@ -50,10 +52,6 @@ module BrDanfe
 
         def header_column(title)
           header_cell I18n.t("danfe.det.#{title}")
-        end
-
-        def rtc_header_column(column)
-          header_cell I18n.t("danfe.det.columns.#{column}")
         end
 
         def header_cell(content)
@@ -125,13 +123,15 @@ module BrDanfe
         end
 
         def render_tables(first_table, next_table, first_table_height)
-          render_table first_table, table_position_on_first_page, first_table_height
+          products_on_first_page = first_table.size > TABLE_WITH_ONLY_HEADER || next_table.size == TABLE_WITH_ONLY_HEADER
+          render_table first_table, table_position_on_first_page, first_table_height if products_on_first_page
 
-          table_with_only_header = 1
-          if next_table.size > table_with_only_header
+          if next_table.size > TABLE_WITH_ONLY_HEADER
             @pdf.start_new_page
             render_table next_table, table_position_on_next_pages, table_height_on_next_pages
           end
+
+          products_on_first_page
         end
 
         def render_table(data, start_position, height)
@@ -142,7 +142,7 @@ module BrDanfe
         end
 
         def table_position_on_first_page
-          y_position = @y_position_with_entrega.cm + 18.07.cm
+          y_position = (@y_position_with_entrega + @rtc_offset).cm + 18.07.cm
           Helper.invert(y_position)
         end
 

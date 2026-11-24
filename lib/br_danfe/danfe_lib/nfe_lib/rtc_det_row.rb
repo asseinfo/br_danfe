@@ -5,14 +5,18 @@ module BrDanfe
         COLUMNS = [
           'description', 'cst_cfop', 'quantity_unit', 'unit_value', 'total_value', 'bases', 'rates', 'taxes'
         ].freeze
-        COLUMN_WIDTHS = [4.15, 1.30, 1.30, 1.45, 1.55, 2.69, 3.30, 3.82].freeze
+        COLUMN_WIDTHS = [3.79, 1.30, 1.30, 1.45, 1.55, 2.69, 3.66, 3.82].freeze
         LABEL_RATIOS = {
-          single: [0.50, 0.50], rates: [0.28, 0.22, 0.28, 0.22], taxes: [0.24, 0.26, 0.24, 0.26]
+          single: [0.50, 0.50], rates: [0.27, 0.23, 0.27, 0.23], taxes: [0.24, 0.26, 0.24, 0.26]
         }.freeze
         FONT_SIZE = 6
         IBSCBS = 'imposto/IBSCBS'.freeze
         GROUP = "#{IBSCBS}/gIBSCBS".freeze
-        private_constant :COLUMN_WIDTHS, :LABEL_RATIOS, :FONT_SIZE, :IBSCBS, :GROUP
+        private_constant :COLUMNS, :COLUMN_WIDTHS, :LABEL_RATIOS, :FONT_SIZE, :IBSCBS, :GROUP
+
+        def self.titles
+          COLUMNS.map { |column| I18n.t("danfe.det.columns.#{column}") }
+        end
 
         def self.column_widths
           COLUMN_WIDTHS.map(&:cm)
@@ -57,7 +61,7 @@ module BrDanfe
         def codes
           [
             "[#{I18n.t('danfe.det.code')} #{text('prod/cProd')}]",
-            ("[#{I18n.t('danfe.det.ncm')} #{text('prod/NCM')}]" if text('prod/NCM').present?),
+            ("[#{I18n.t('danfe.det.prod.NCM')} #{text('prod/NCM')}]" if text('prod/NCM').present?),
             ("[cClassTrib #{text("#{IBSCBS}/cClassTrib")}]" if text("#{IBSCBS}/cClassTrib").present?)
           ].compact.join(' ')
         end
@@ -76,16 +80,16 @@ module BrDanfe
 
           @pdf.make_table(
             rows,
-            column_widths: LABEL_RATIOS.fetch(ratios).map { |ratio| (width.cm - (CELL_PADDING * 2)) * ratio },
+            column_widths: LABEL_RATIOS.fetch(ratios).map { |ratio| (width.cm - (DetBody::TABLE_CELL_PADDING * 2)) * ratio },
             cell_style: { borders: [], size: FONT_SIZE }
           )
         end
 
         def labeled_row(pairs)
-          pairs.flat_map do |label, content|
+          pairs.each_with_index.flat_map do |(label, content), index|
             [
-              { content: content.blank? ? '' : label, text_color: LABEL_COLOR, padding: [0, 1, 0, 0] },
-              { content: content.to_s, align: :right, padding: [0, 2, 0, 0] }
+              { content: content.blank? ? '' : label, text_color: LABEL_COLOR, padding: [0, 1, 0, index.zero? ? 0 : 3] },
+              { content: content.to_s, align: :right, padding: [0, 1, 0, 0] }
             ]
           end
         end

@@ -1,10 +1,7 @@
 module BrDanfe
   module DanfeLib
     module NfeLib
-      class IbscbsTot
-        Y_POSITION = 15.89 + SPACE_BETWEEN_GROUPS
-        FIELD_WIDTH = CONTENT_WIDTH / 4
-
+      class Ibscbstot
         TOTALS = [
           'IBSCBSTot/gCBS/vCBS', 'IBSCBSTot/gIBS/gIBSUF/vIBSUF', 'IBSCBSTot/gIBS/gIBSMun/vIBSMun', 'ISTot/vIS'
         ].freeze
@@ -12,7 +9,7 @@ module BrDanfe
           'IBSCBSTot/gMono/vIBSMono', 'IBSCBSTot/gMono/vCBSMono',
           'IBSCBSTot/gMono/vIBSMonoReten', 'IBSCBSTot/gMono/vCBSMonoReten'
         ].freeze
-        private_constant :Y_POSITION, :FIELD_WIDTH, :TOTALS, :MONOPHASIC_TOTALS
+        private_constant :TOTALS, :MONOPHASIC_TOTALS
 
         def self.offset(xml)
           return 0.0 unless RtcLayout.applies?(xml)
@@ -28,7 +25,7 @@ module BrDanfe
         def initialize(pdf, xml)
           @pdf = pdf
           @xml = xml
-          @y_position = Entrega.delivery_local?(@xml) ? Y_POSITION + 3.00 : Y_POSITION
+          @y_position = Entrega.delivery_local?(@xml) ? Transp::Y_POSITION + 3.00 : Transp::Y_POSITION
           @y_position += Icmstot.offset(@xml)
         end
 
@@ -37,16 +34,10 @@ module BrDanfe
 
           @pdf.ititle 0.42, 10.00, 0.75, @y_position - 0.42, 'IBSCBSTot.title'
 
-          render_line TOTALS, @y_position
-          render_line MONOPHASIC_TOTALS, @y_position + LINE_HEIGHT if self.class.monophasic?(@xml)
-        end
+          @pdf.lnumeric_line LINE_HEIGHT, CONTENT_WIDTH, 0.75, @y_position, @xml, TOTALS
+          return unless self.class.monophasic?(@xml)
 
-        private
-
-        def render_line(xpaths, y_position)
-          xpaths.each_with_index do |xpath, index|
-            @pdf.lnumeric LINE_HEIGHT, FIELD_WIDTH, 0.75 + (index * FIELD_WIDTH), y_position, @xml, xpath
-          end
+          @pdf.lnumeric_line LINE_HEIGHT, CONTENT_WIDTH, 0.75, @y_position + LINE_HEIGHT, @xml, MONOPHASIC_TOTALS
         end
       end
     end

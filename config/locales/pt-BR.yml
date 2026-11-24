@@ -152,7 +152,6 @@ pt-BR:
         vIPI: "VL IPI"
         pIPI: "% IPI"
       code: "CÓD"
-      ncm: "NCM"
       columns:
         description: "DESCRIÇÃO DO PRODUTO / SERVIÇO"
         cst_cfop: "CST / CFOP"

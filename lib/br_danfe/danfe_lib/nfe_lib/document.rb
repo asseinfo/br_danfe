@@ -102,6 +102,13 @@ module BrDanfe
           inumeric(h, w, x, y, i18n, data, options)
         end
 
+        def lnumeric_line(h, w, x, y, xml, xpaths)
+          field_width = w / xpaths.size
+          xpaths.each_with_index do |xpath, index|
+            lnumeric h, field_width, x + (index * field_width), y, xml, xpath
+          end
+        end
+
         def inumeric(h, w, x, y, i18n = '', data = '', options = {})
           label = i18n == '' ? '' : I18n.t("danfe.#{i18n}")
           numeric [x.cm, Helper.invert(y.cm)], w.cm, h.cm, label, data, options

@@ -5,12 +5,11 @@ module BrDanfe
         attr_reader :y_position
 
         Y_POSITION = 13.77 + SPACE_BETWEEN_GROUPS
-        FIELD_WIDTH = CONTENT_WIDTH / 4
         FCP_DIFAL_TOTALS = ['ICMSTot/vFCP', 'ICMSTot/vFCPST', 'ICMSTot/vICMSUFDest', 'ICMSTot/vFCPUFDest'].freeze
         MONOPHASIC_TOTALS = [
           'ICMSTot/qBCMono', 'ICMSTot/vICMSMono', 'ICMSTot/qBCMonoReten', 'ICMSTot/vICMSMonoReten'
         ].freeze
-        private_constant :FIELD_WIDTH, :FCP_DIFAL_TOTALS, :MONOPHASIC_TOTALS
+        private_constant :FCP_DIFAL_TOTALS, :MONOPHASIC_TOTALS
 
         def self.conditional_lines(xml)
           return [] unless RtcLayout.applies?(xml)
@@ -59,11 +58,7 @@ module BrDanfe
 
         def render_conditional_lines
           self.class.conditional_lines(@xml).each_with_index do |xpaths, line|
-            y_position = @l2 + (LINE_HEIGHT * (line + 1))
-
-            xpaths.each_with_index do |xpath, index|
-              @pdf.lnumeric LINE_HEIGHT, FIELD_WIDTH, 0.75 + (index * FIELD_WIDTH), y_position, @xml, xpath
-            end
+            @pdf.lnumeric_line LINE_HEIGHT, CONTENT_WIDTH, 0.75, @l2 + (LINE_HEIGHT * (line + 1)), @xml, xpaths
           end
         end
       end

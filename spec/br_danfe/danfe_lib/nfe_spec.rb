@@ -74,6 +74,28 @@ describe BrDanfe::DanfeLib::Nfe do
         expect(pdf_text).to include('Valores totais do ICMS Interestadual')
       end
     end
+
+    context 'when no item fits on the first page' do
+      let(:base_dir) { './spec/fixtures/nfe/v4.00/' }
+      let(:xml_file) { File.read("#{base_dir}rtc_regime_normal_with_entrega_and_issqn.xml") }
+      let(:pages) { PDF::Reader.new(StringIO.new(subject.render_pdf)).pages.map(&:text) }
+
+      it 'renders the products from the second page' do
+        expect(pages[0]).not_to include('DADOS DO PRODUTO / SERVIÇO', 'TIJOLO CERAMICO')
+        expect(pages[1]).to include('DADOS DO PRODUTO / SERVIÇO', 'TIJOLO CERAMICO', 'OLEO DIESEL S10')
+      end
+    end
+
+    context 'when a Regime Normal NF-e has more items than the first page holds' do
+      let(:base_dir) { './spec/fixtures/nfe/v4.00/' }
+      let(:xml_file) { File.read("#{base_dir}rtc_regime_normal_with_many_items.xml") }
+      let(:pages) { PDF::Reader.new(StringIO.new(subject.render_pdf)).pages.map(&:text) }
+
+      it 'renders the products from the first page on' do
+        expect(pages[0]).to include('DADOS DO PRODUTO / SERVIÇO', 'TIJOLO CERAMICO')
+        expect(pages[1]).to include('DADOS DO PRODUTO / SERVIÇO', 'BASES DE CÁLCULO')
+      end
+    end
   end
 
   describe '#save_pdf' do
@@ -247,7 +269,8 @@ describe BrDanfe::DanfeLib::Nfe do
 
       [
         'rtc_simples_nacional_before_start_date', 'rtc_simples_nacional', 'rtc_regime_normal',
-        'rtc_regime_normal_with_fcp_difal_and_monophasic'
+        'rtc_regime_normal_with_fcp_difal_and_monophasic', 'rtc_regime_normal_with_entrega_and_issqn',
+        'rtc_regime_normal_with_many_items'
       ].each do |fixture_name|
         context "with #{fixture_name}.xml" do
           let(:fixture) { fixture_name }
