@@ -6,8 +6,11 @@ module BrDanfe
 
         Y_POSITION = 13.77 + SPACE_BETWEEN_GROUPS
         FIELD_WIDTH = CONTENT_WIDTH / 4
-        FCP_DIFAL_TOTALS = %w[ICMSTot/vFCP ICMSTot/vFCPST ICMSTot/vICMSUFDest ICMSTot/vFCPUFDest].freeze
-        MONOPHASIC_TOTALS = %w[ICMSTot/qBCMono ICMSTot/vICMSMono ICMSTot/qBCMonoReten ICMSTot/vICMSMonoReten].freeze
+        FCP_DIFAL_TOTALS = ['ICMSTot/vFCP', 'ICMSTot/vFCPST', 'ICMSTot/vICMSUFDest', 'ICMSTot/vFCPUFDest'].freeze
+        MONOPHASIC_TOTALS = [
+          'ICMSTot/qBCMono', 'ICMSTot/vICMSMono', 'ICMSTot/qBCMonoReten', 'ICMSTot/vICMSMonoReten'
+        ].freeze
+        private_constant :FIELD_WIDTH, :FCP_DIFAL_TOTALS, :MONOPHASIC_TOTALS
 
         def self.conditional_lines(xml)
           return [] unless RtcLayout.applies?(xml)

@@ -5,9 +5,6 @@ describe BrDanfe::DanfeLib::NfeLib::IbscbsTot do
   let(:xml) { BrDanfe::XML.new(xml_as_string) }
   let(:pdf_text) { PDF::Inspector::Text.analyze(pdf.render).strings.join("\n") }
 
-  let(:line_height) { BrDanfe::DanfeLib::NfeLib::LINE_HEIGHT }
-  let(:space_between_groups) { BrDanfe::DanfeLib::NfeLib::SPACE_BETWEEN_GROUPS }
-
   let(:issued_at) { '2026-12-02T10:00:00-03:00' }
   let(:totals) { '' }
   let(:xml_as_string) do
@@ -39,21 +36,21 @@ describe BrDanfe::DanfeLib::NfeLib::IbscbsTot do
     subject { described_class.offset(xml) }
 
     context 'when the NF-e uses the new layout' do
-      it { is_expected.to eq line_height + space_between_groups }
+      it { is_expected.to eql 1.32 }
     end
 
-    context 'when the NF-e informs the monophasic IBS/CBS group, even with zero' do
+    context 'when the NF-e informs the monophasic IBS/CBS group' do
       let(:totals) do
         '<IBSCBSTot><gMono><vIBSMono>0.00</vIBSMono><vCBSMono>0.00</vCBSMono></gMono></IBSCBSTot>'
       end
 
-      it { is_expected.to eq (line_height * 2) + space_between_groups }
+      it { is_expected.to eql 2.12 }
     end
 
     context 'when the NF-e uses the current layout' do
       let(:issued_at) { '2026-11-20T10:00:00-03:00' }
 
-      it { is_expected.to eq 0 }
+      it { is_expected.to eql 0.0 }
     end
   end
 
@@ -77,9 +74,8 @@ describe BrDanfe::DanfeLib::NfeLib::IbscbsTot do
 
     context 'when the NF-e has no IBS/CBS group' do
       it 'renders the totals in blank' do
-        expect(pdf_text).to eq(
-          "TOTAL DO IBS / CBS / IS\nVALOR DA CBS\nVALOR DO IBS UF\nVALOR DO IBS MUNICÍPIO\nVALOR DO IMPOSTO SELETIVO"
-        )
+        expect(pdf_text).to eql "TOTAL DO IBS / CBS / IS\nVALOR DA CBS\nVALOR DO IBS UF\n" \
+                                "VALOR DO IBS MUNICÍPIO\nVALOR DO IMPOSTO SELETIVO"
       end
     end
 
@@ -101,7 +97,7 @@ describe BrDanfe::DanfeLib::NfeLib::IbscbsTot do
       let(:issued_at) { '2026-11-20T10:00:00-03:00' }
 
       it 'renders nothing' do
-        expect(pdf_text).to eq ''
+        expect(pdf_text).to eql ''
       end
     end
   end

@@ -5,13 +5,17 @@ module BrDanfe
         Y_POSITION = 15.89 + SPACE_BETWEEN_GROUPS
         FIELD_WIDTH = CONTENT_WIDTH / 4
 
-        TOTALS = %w[IBSCBSTot/gCBS/vCBS IBSCBSTot/gIBS/gIBSUF/vIBSUF IBSCBSTot/gIBS/gIBSMun/vIBSMun ISTot/vIS].freeze
-        MONOPHASIC_TOTALS = %w[
-          IBSCBSTot/gMono/vIBSMono IBSCBSTot/gMono/vCBSMono IBSCBSTot/gMono/vIBSMonoReten IBSCBSTot/gMono/vCBSMonoReten
+        TOTALS = [
+          'IBSCBSTot/gCBS/vCBS', 'IBSCBSTot/gIBS/gIBSUF/vIBSUF', 'IBSCBSTot/gIBS/gIBSMun/vIBSMun', 'ISTot/vIS'
         ].freeze
+        MONOPHASIC_TOTALS = [
+          'IBSCBSTot/gMono/vIBSMono', 'IBSCBSTot/gMono/vCBSMono',
+          'IBSCBSTot/gMono/vIBSMonoReten', 'IBSCBSTot/gMono/vCBSMonoReten'
+        ].freeze
+        private_constant :Y_POSITION, :FIELD_WIDTH, :TOTALS, :MONOPHASIC_TOTALS
 
         def self.offset(xml)
-          return 0 unless RtcLayout.applies?(xml)
+          return 0.0 unless RtcLayout.applies?(xml)
 
           lines = monophasic?(xml) ? 2 : 1
           (LINE_HEIGHT * lines) + SPACE_BETWEEN_GROUPS

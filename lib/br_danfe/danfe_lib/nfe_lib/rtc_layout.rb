@@ -3,6 +3,7 @@ module BrDanfe
     module NfeLib
       class RtcLayout
         START_DATE = Date.new(2026, 12, 1)
+        private_constant :START_DATE
 
         def self.applies?(xml)
           xml['IBSCBSTot'].present? || issued_from_start_date?(xml)
@@ -18,6 +19,7 @@ module BrDanfe
 
           Date.parse(issued_at[0, 10]) >= START_DATE
         end
+        private_class_method :issued_from_start_date?
       end
     end
   end
