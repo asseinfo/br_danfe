@@ -35,8 +35,11 @@ describe BrDanfe::DanfeLib::NfeLib::Ibscbstot do
   describe '.offset' do
     subject { described_class.offset(xml) }
 
+    let(:line_height) { 0.8 }
+    let(:space_between_blocks) { 0.52 }
+
     context 'when the NF-e uses the new layout' do
-      it { is_expected.to eql 1.32 }
+      it('is one line and the space before the next block') { is_expected.to eql line_height + space_between_blocks }
     end
 
     context 'when the NF-e informs the monophasic IBS/CBS group' do
@@ -44,13 +47,15 @@ describe BrDanfe::DanfeLib::NfeLib::Ibscbstot do
         '<IBSCBSTot><gMono><vIBSMono>0.00</vIBSMono><vCBSMono>0.00</vCBSMono></gMono></IBSCBSTot>'
       end
 
-      it { is_expected.to eql 2.12 }
+      it('is two lines and the space before the next block') do
+        is_expected.to eql (line_height * 2) + space_between_blocks
+      end
     end
 
     context 'when the NF-e uses the current layout' do
       let(:issued_at) { '2026-11-20T10:00:00-03:00' }
 
-      it { is_expected.to eql 0.0 }
+      it('adds nothing') { is_expected.to eql 0.0 }
     end
   end
 

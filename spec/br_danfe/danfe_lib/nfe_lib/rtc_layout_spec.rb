@@ -83,6 +83,9 @@ describe BrDanfe::DanfeLib::NfeLib::RtcLayout do
   describe '.offset' do
     subject { described_class.offset(xml) }
 
+    let(:line_height) { 0.8 }
+    let(:space_between_blocks) { 0.52 }
+
     let(:issued_at) { '2026-12-02T10:00:00-03:00' }
     let(:xml_as_string) do
       <<~XML
@@ -96,15 +99,15 @@ describe BrDanfe::DanfeLib::NfeLib::RtcLayout do
     end
 
     context 'when the NF-e uses the new layout' do
-      it 'is the height of the conditional ICMS lines and of the IBS/CBS/IS block' do
-        expect(subject).to eql 2.12
+      it 'is the FCP line plus the IBS/CBS/IS block and the space after it' do
+        expect(subject).to eql line_height + line_height + space_between_blocks
       end
     end
 
     context 'when the NF-e uses the current layout' do
       let(:issued_at) { '2026-11-20T10:00:00-03:00' }
 
-      it { is_expected.to eql 0.0 }
+      it('adds nothing') { is_expected.to eql 0.0 }
     end
   end
 end

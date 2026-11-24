@@ -95,6 +95,8 @@ describe BrDanfe::DanfeLib::NfeLib::Icmstot do
   describe '.offset' do
     subject { described_class.offset(xml) }
 
+    let(:line_height) { 0.8 }
+
     let(:issued_at) { '2026-12-02T10:00:00-03:00' }
     let(:icms_totals) { '<vFCP>0.00</vFCP><vFCPST>0.00</vFCPST><vICMSUFDest>0.00</vICMSUFDest><vFCPUFDest>0.00</vFCPUFDest>' }
     let(:xml_as_string) do
@@ -109,44 +111,44 @@ describe BrDanfe::DanfeLib::NfeLib::Icmstot do
     end
 
     context 'when the NF-e has no FCP, DIFAL or monophasic ICMS' do
-      it { is_expected.to eql 0.0 }
+      it('adds no line') { is_expected.to eql 0.0 }
     end
 
     context 'when the NF-e has FCP' do
       let(:icms_totals) { '<vFCP>24.00</vFCP><vFCPST>0.00</vFCPST><vICMSUFDest>0.00</vICMSUFDest><vFCPUFDest>0.00</vFCPUFDest>' }
 
-      it { is_expected.to eql 0.8 }
+      it('adds one line') { is_expected.to eql line_height }
     end
 
     context 'when the NF-e has DIFAL' do
       let(:icms_totals) { '<vFCP>0.00</vFCP><vFCPST>0.00</vFCPST><vICMSUFDest>45.00</vICMSUFDest><vFCPUFDest>9.00</vFCPUFDest>' }
 
-      it { is_expected.to eql 0.8 }
+      it('adds one line') { is_expected.to eql line_height }
     end
 
     context 'when the NF-e has monophasic ICMS' do
       let(:icms_totals) { '<vFCP>0.00</vFCP><qBCMono>100.00</qBCMono><vICMSMono>112.00</vICMSMono>' }
 
-      it { is_expected.to eql 0.8 }
+      it('adds one line') { is_expected.to eql line_height }
     end
 
     context 'when the monophasic ICMS totals are zero' do
       let(:icms_totals) { '<vFCP>0.00</vFCP><vICMSMono>0.00</vICMSMono><vICMSMonoReten>0.00</vICMSMonoReten>' }
 
-      it { is_expected.to eql 0.0 }
+      it('adds no line') { is_expected.to eql 0.0 }
     end
 
     context 'when the NF-e has FCP and monophasic ICMS' do
       let(:icms_totals) { '<vFCP>24.00</vFCP><qBCMono>100.00</qBCMono><vICMSMono>112.00</vICMSMono>' }
 
-      it { is_expected.to eql 1.6 }
+      it('adds two lines') { is_expected.to eql line_height * 2 }
     end
 
     context 'when the NF-e uses the current layout' do
       let(:issued_at) { '2026-11-20T10:00:00-03:00' }
       let(:icms_totals) { '<vFCP>24.00</vFCP><qBCMono>100.00</qBCMono><vICMSMono>112.00</vICMSMono>' }
 
-      it { is_expected.to eql 0.0 }
+      it('adds no line') { is_expected.to eql 0.0 }
     end
   end
 end
