@@ -102,18 +102,6 @@ module BrDanfe
           inumeric(h, w, x, y, i18n, data, options)
         end
 
-        def lnumeric_line(h, w, x, y, xml, xpaths)
-          fields = xpaths.to_h { |xpath| [xpath.tr('/', '.'), xml[xpath]] }
-          inumeric_line h, w, x, y, fields
-        end
-
-        def inumeric_line(h, w, x, y, fields)
-          field_width = w / fields.size
-          fields.each_with_index do |(i18n, data), index|
-            inumeric h, field_width, x + (index * field_width), y, i18n, data
-          end
-        end
-
         def inumeric(h, w, x, y, i18n = '', data = '', options = {})
           label = i18n == '' ? '' : I18n.t("danfe.#{i18n}")
           numeric [x.cm, Helper.invert(y.cm)], w.cm, h.cm, label, data, options

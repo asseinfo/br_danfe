@@ -2,13 +2,6 @@ module BrDanfe
   module DanfeLib
     module NfeLib
       class Ibscbstot
-        TOTALS = [
-          'IBSCBSTot/gCBS/vCBS', 'IBSCBSTot/gIBS/gIBSUF/vIBSUF', 'IBSCBSTot/gIBS/gIBSMun/vIBSMun', 'ISTot/vIS'
-        ].freeze
-        MONOPHASIC_TOTALS = ['IBSCBSTot/gMono/vIBSMono', 'IBSCBSTot/gMono/vCBSMono'].freeze
-        RETENTION_TOTALS = ['IBSCBSTot/gMono/vIBSMonoReten', 'IBSCBSTot/gMono/vCBSMonoReten'].freeze
-        private_constant :TOTALS, :MONOPHASIC_TOTALS, :RETENTION_TOTALS
-
         def self.offset(xml)
           return 0.0 unless RtcLayout.applies?(xml)
 
@@ -32,19 +25,32 @@ module BrDanfe
 
           @pdf.ititle 0.42, 10.00, 0.75, @y_position - 0.42, 'IBSCBSTot.title'
 
-          @pdf.lnumeric_line LINE_HEIGHT, CONTENT_WIDTH, 0.75, @y_position, @xml, TOTALS
-          return unless self.class.monophasic?(@xml)
-
-          @pdf.inumeric_line LINE_HEIGHT, CONTENT_WIDTH, 0.75, @y_position + LINE_HEIGHT, monophasic_fields
+          render_totals
+          render_monophasic_totals if self.class.monophasic?(@xml)
         end
 
         private
 
-        def monophasic_fields
-          (MONOPHASIC_TOTALS + RETENTION_TOTALS).to_h do |xpath|
-            retention_without_value = RETENTION_TOTALS.include?(xpath) && !@xml[xpath].to_f.positive?
-            [xpath.tr('/', '.'), retention_without_value ? '' : @xml[xpath]]
-          end
+        def render_totals
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 0.75, @y_position, @xml, 'IBSCBSTot/gCBS/vCBS'
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 5.64, @y_position, @xml, 'IBSCBSTot/gIBS/gIBSUF/vIBSUF'
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 10.53, @y_position, @xml, 'IBSCBSTot/gIBS/gIBSMun/vIBSMun'
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 15.42, @y_position, @xml, 'ISTot/vIS'
+        end
+
+        def render_monophasic_totals
+          y_position = @y_position + LINE_HEIGHT
+
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 0.75, y_position, @xml, 'IBSCBSTot/gMono/vIBSMono'
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 5.64, y_position, @xml, 'IBSCBSTot/gMono/vCBSMono'
+          @pdf.inumeric LINE_HEIGHT, 4.89, 10.53, y_position, 'IBSCBSTot.gMono.vIBSMonoReten',
+                        retention('IBSCBSTot/gMono/vIBSMonoReten')
+          @pdf.inumeric LINE_HEIGHT, 4.89, 15.42, y_position, 'IBSCBSTot.gMono.vCBSMonoReten',
+                        retention('IBSCBSTot/gMono/vCBSMonoReten')
+        end
+
+        def retention(xpath)
+          @xml[xpath].to_f.positive? ? @xml[xpath] : ''
         end
       end
     end

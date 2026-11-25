@@ -5,16 +5,16 @@ module BrDanfe
         attr_reader :y_position
 
         Y_POSITION = 13.77 + SPACE_BETWEEN_GROUPS
-        FCP_DIFAL_TOTALS = ['ICMSTot/vFCP', 'ICMSTot/vFCPST', 'ICMSTot/vICMSUFDest', 'ICMSTot/vFCPUFDest'].freeze
-        MONOPHASIC_TOTALS = [
-          'ICMSTot/qBCMono', 'ICMSTot/vICMSMono', 'ICMSTot/qBCMonoReten', 'ICMSTot/vICMSMonoReten'
-        ].freeze
-        private_constant :FCP_DIFAL_TOTALS, :MONOPHASIC_TOTALS
+        CONDITIONAL_LINES = {
+          fcp_difal: ['ICMSTot/vFCP', 'ICMSTot/vFCPST', 'ICMSTot/vICMSUFDest', 'ICMSTot/vFCPUFDest'],
+          monophasic: ['ICMSTot/qBCMono', 'ICMSTot/vICMSMono', 'ICMSTot/qBCMonoReten', 'ICMSTot/vICMSMonoReten']
+        }.freeze
+        private_constant :CONDITIONAL_LINES
 
         def self.conditional_lines(xml)
           return [] unless RtcLayout.applies?(xml)
 
-          [FCP_DIFAL_TOTALS, MONOPHASIC_TOTALS].select { |xpaths| xpaths.any? { |xpath| xml[xpath].to_f.positive? } }
+          CONDITIONAL_LINES.select { |_line, xpaths| xpaths.any? { |xpath| xml[xpath].to_f.positive? } }.keys
         end
 
         def self.offset(xml)
@@ -54,9 +54,26 @@ module BrDanfe
         private
 
         def render_conditional_lines
-          self.class.conditional_lines(@xml).each_with_index do |xpaths, line|
-            @pdf.lnumeric_line LINE_HEIGHT, CONTENT_WIDTH, 0.75, @l2 + (LINE_HEIGHT * (line + 1)), @xml, xpaths
+          y_position = @l2
+
+          self.class.conditional_lines(@xml).each do |line|
+            y_position += LINE_HEIGHT
+            line == :fcp_difal ? render_fcp_difal_line(y_position) : render_monophasic_line(y_position)
           end
+        end
+
+        def render_fcp_difal_line(y_position)
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 0.75, y_position, @xml, 'ICMSTot/vFCP'
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 5.64, y_position, @xml, 'ICMSTot/vFCPST'
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 10.53, y_position, @xml, 'ICMSTot/vICMSUFDest'
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 15.42, y_position, @xml, 'ICMSTot/vFCPUFDest'
+        end
+
+        def render_monophasic_line(y_position)
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 0.75, y_position, @xml, 'ICMSTot/qBCMono'
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 5.64, y_position, @xml, 'ICMSTot/vICMSMono'
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 10.53, y_position, @xml, 'ICMSTot/qBCMonoReten'
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 15.42, y_position, @xml, 'ICMSTot/vICMSMonoReten'
         end
       end
     end
