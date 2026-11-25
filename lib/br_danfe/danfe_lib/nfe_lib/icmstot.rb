@@ -32,6 +32,7 @@ module BrDanfe
           @ltitle = @y_position - 0.42
           @l1 = @y_position
           @l2 = @y_position + LINE_HEIGHT
+          @l3 = @l2 + LINE_HEIGHT
         end
 
         def render
@@ -50,30 +51,22 @@ module BrDanfe
           @pdf.lnumeric LINE_HEIGHT, 4.06, 12.43, @l2, @xml, 'ICMSTot/vIPI'
           @pdf.lnumeric LINE_HEIGHT, 3.82, 16.49, @l2, @xml, 'ICMSTot/vNF', style: :bold
 
-          render_conditional_lines
+          render_fcp_difal_line if self.class.fcp_difal?(@xml)
+          render_monophasic_line if self.class.monophasic?(@xml)
         end
 
         private
 
-        def render_conditional_lines
-          y_position = @l2
-
-          if self.class.fcp_difal?(@xml)
-            y_position += LINE_HEIGHT
-            render_fcp_difal_line(y_position)
-          end
-
-          render_monophasic_line(y_position + LINE_HEIGHT) if self.class.monophasic?(@xml)
+        def render_fcp_difal_line
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 0.75, @l3, @xml, 'ICMSTot/vFCP'
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 5.64, @l3, @xml, 'ICMSTot/vFCPST'
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 10.53, @l3, @xml, 'ICMSTot/vICMSUFDest'
+          @pdf.lnumeric LINE_HEIGHT, 4.89, 15.42, @l3, @xml, 'ICMSTot/vFCPUFDest'
         end
 
-        def render_fcp_difal_line(y_position)
-          @pdf.lnumeric LINE_HEIGHT, 4.89, 0.75, y_position, @xml, 'ICMSTot/vFCP'
-          @pdf.lnumeric LINE_HEIGHT, 4.89, 5.64, y_position, @xml, 'ICMSTot/vFCPST'
-          @pdf.lnumeric LINE_HEIGHT, 4.89, 10.53, y_position, @xml, 'ICMSTot/vICMSUFDest'
-          @pdf.lnumeric LINE_HEIGHT, 4.89, 15.42, y_position, @xml, 'ICMSTot/vFCPUFDest'
-        end
+        def render_monophasic_line
+          y_position = self.class.fcp_difal?(@xml) ? @l3 + LINE_HEIGHT : @l3
 
-        def render_monophasic_line(y_position)
           @pdf.lnumeric LINE_HEIGHT, 4.89, 0.75, y_position, @xml, 'ICMSTot/qBCMono'
           @pdf.lnumeric LINE_HEIGHT, 4.89, 5.64, y_position, @xml, 'ICMSTot/vICMSMono'
           @pdf.lnumeric LINE_HEIGHT, 4.89, 10.53, y_position, @xml, 'ICMSTot/qBCMonoReten'
