@@ -5,20 +5,22 @@ module BrDanfe
         attr_reader :y_position
 
         Y_POSITION = 13.77 + SPACE_BETWEEN_GROUPS
-        CONDITIONAL_LINES = {
-          fcp_difal: ['ICMSTot/vFCP', 'ICMSTot/vFCPST', 'ICMSTot/vICMSUFDest', 'ICMSTot/vFCPUFDest'],
-          monophasic: ['ICMSTot/qBCMono', 'ICMSTot/vICMSMono', 'ICMSTot/qBCMonoReten', 'ICMSTot/vICMSMonoReten']
-        }.freeze
-        private_constant :CONDITIONAL_LINES
-
-        def self.conditional_lines(xml)
-          return [] unless RtcLayout.applies?(xml)
-
-          CONDITIONAL_LINES.select { |_line, xpaths| xpaths.any? { |xpath| xml[xpath].to_f.positive? } }.keys
-        end
+        FCP_DIFAL_TOTALS = ['ICMSTot/vFCP', 'ICMSTot/vFCPST', 'ICMSTot/vICMSUFDest', 'ICMSTot/vFCPUFDest'].freeze
+        MONOPHASIC_TOTALS = [
+          'ICMSTot/qBCMono', 'ICMSTot/vICMSMono', 'ICMSTot/qBCMonoReten', 'ICMSTot/vICMSMonoReten'
+        ].freeze
+        private_constant :FCP_DIFAL_TOTALS, :MONOPHASIC_TOTALS
 
         def self.offset(xml)
-          conditional_lines(xml).size * LINE_HEIGHT
+          [fcp_difal?(xml), monophasic?(xml)].count(true) * LINE_HEIGHT
+        end
+
+        def self.fcp_difal?(xml)
+          RtcLayout.applies?(xml) && FCP_DIFAL_TOTALS.any? { |xpath| xml[xpath].to_f.positive? }
+        end
+
+        def self.monophasic?(xml)
+          RtcLayout.applies?(xml) && MONOPHASIC_TOTALS.any? { |xpath| xml[xpath].to_f.positive? }
         end
 
         def initialize(pdf, xml)
@@ -56,10 +58,12 @@ module BrDanfe
         def render_conditional_lines
           y_position = @l2
 
-          self.class.conditional_lines(@xml).each do |line|
+          if self.class.fcp_difal?(@xml)
             y_position += LINE_HEIGHT
-            line == :fcp_difal ? render_fcp_difal_line(y_position) : render_monophasic_line(y_position)
+            render_fcp_difal_line(y_position)
           end
+
+          render_monophasic_line(y_position + LINE_HEIGHT) if self.class.monophasic?(@xml)
         end
 
         def render_fcp_difal_line(y_position)
