@@ -4,11 +4,7 @@ module BrDanfe
       class DetBody
         TABLE_CELL_PADDING = 2
         TABLE_WITH_ONLY_HEADER = 1
-        CURRENT_HEADER = [
-          'prod.cProd', 'prod.xProd', 'prod.NCM', 'ICMS.CST', 'prod.CFOP', 'prod.uCom', 'prod.qCom',
-          'prod.vUnCom', 'prod.vProd', 'ICMS.vBC', 'ICMS.vICMS', 'IPI.vIPI', 'ICMS.pICMS', 'IPI.pIPI'
-        ].freeze
-        private_constant :TABLE_WITH_ONLY_HEADER, :CURRENT_HEADER
+        private_constant :TABLE_WITH_ONLY_HEADER
 
         attr_reader :y_position_with_entrega
 
@@ -17,8 +13,8 @@ module BrDanfe
           @xml = xml
 
           @y_position_with_entrega = Entrega.delivery_local?(@xml) ? 3.00 : 0.00
-          @rtc_layout = RtcLayout.applies?(@xml)
-          @rtc_offset = RtcLayout.offset(@xml)
+          @first_page_offset = @y_position_with_entrega + RtcLayout.offset(@xml)
+          @row = RtcLayout.applies?(@xml) ? RtcDetRow : DetRow
         end
 
         def render(has_issqn)
@@ -34,7 +30,7 @@ module BrDanfe
 
         def table_height_on_first_page(has_issqn)
           base_height = has_issqn ? 6.35.cm : 7.72.cm
-          base_height - (@y_position_with_entrega + @rtc_offset).cm
+          base_height - @first_page_offset.cm
         end
 
         def create_table
@@ -42,13 +38,7 @@ module BrDanfe
         end
 
         def create_header
-          @pdf.make_table([header_titles.map { |title| header_cell(title) }], options)
-        end
-
-        def header_titles
-          return RtcDetRow.titles if @rtc_layout
-
-          CURRENT_HEADER.map { |key| I18n.t("danfe.det.#{key}") }
+          @pdf.make_table([@row.titles.map { |title| header_cell(title) }], options)
         end
 
         def header_cell(content)
@@ -60,15 +50,8 @@ module BrDanfe
 
         def options
           {
-            column_widths: @rtc_layout ? RtcDetRow.column_widths : column_widths,
+            column_widths: @row.column_widths,
             cell_style: { padding: [0.5, TABLE_CELL_PADDING, 1.5, TABLE_CELL_PADDING], border_width: LINE_WIDTH }
-          }
-        end
-
-        def column_widths
-          {
-            0 => 1.60.cm, 1 => 6.10.cm, 2 => 1.05.cm, 3 => 0.60.cm, 4 => 0.70.cm, 5 => 1.05.cm, 6 => 1.20.cm,
-            7 => 1.20.cm, 8 => 1.20.cm, 9 => 1.20.cm, 10 => 1.00.cm, 11 => 1.00.cm, 12 => 0.90.cm, 13 => 0.76.cm
           }
         end
 
@@ -76,43 +59,10 @@ module BrDanfe
           total_height = first_table.first.height
 
           @xml.collect('xmlns', 'det') { _1 }.each do |det|
-            row = create_row(@rtc_layout ? RtcDetRow.new(@pdf, det).render : product(det))
+            row = create_row(@row.new(@pdf, det).render)
             total_height += row.height
             total_height <= first_table_height ? first_table << row : next_table << row
           end
-        end
-
-        def product(det)
-          [
-            cell_text(det.css('prod/cProd').text),
-            cell_text(Xprod.new(det).render),
-            cell_text(det.css('prod/NCM').text),
-            cell_text(Cst.to_danfe(det)),
-            cell_text(det.css('prod/CFOP').text),
-            cell_text(det.css('prod/uCom').text),
-            cell_number(numerify(det, 'prod/qCom')),
-            cell_number(numerify(det, 'prod/vUnCom')),
-            cell_number(numerify(det, 'prod/vProd')),
-            cell_number(numerify(det, 'ICMS/*/vBC')),
-            cell_number(numerify(det, 'ICMS/*/vICMS')),
-            cell_number(numerify(det, 'IPI/*/vIPI')),
-            cell_number(numerify(det, 'ICMS/*/pICMS')),
-            cell_number(numerify(det, 'IPI/*/pIPI'))
-          ]
-        end
-
-        def cell_text(text, options = {})
-          cell = { content: text, border_lines: [:solid], size: 6 }
-          cell.merge!(options)
-          cell
-        end
-
-        def cell_number(text)
-          cell_text(text, align: :right)
-        end
-
-        def numerify(det, xpath)
-          BrDanfe::Helper.numerify(det.css(xpath.to_s).text)
         end
 
         def create_row(data)
@@ -120,7 +70,7 @@ module BrDanfe
         end
 
         def render_tables(first_table, next_table, first_table_height)
-          products_on_first_page = first_table.size > TABLE_WITH_ONLY_HEADER || next_table.size == TABLE_WITH_ONLY_HEADER
+          products_on_first_page = products_on_first_page?(first_table, next_table)
           render_table first_table, table_position_on_first_page, first_table_height if products_on_first_page
 
           if next_table.size > TABLE_WITH_ONLY_HEADER
@@ -131,6 +81,10 @@ module BrDanfe
           products_on_first_page
         end
 
+        def products_on_first_page?(first_table, next_table)
+          first_table.size > TABLE_WITH_ONLY_HEADER || next_table.size == TABLE_WITH_ONLY_HEADER
+        end
+
         def render_table(data, start_position, height)
           @pdf.y = start_position
           @pdf.bounding_box [0.75.cm, @pdf.cursor], width: 19.56.cm, height: height do
@@ -139,7 +93,7 @@ module BrDanfe
         end
 
         def table_position_on_first_page
-          y_position = (@y_position_with_entrega + @rtc_offset).cm + 18.07.cm
+          y_position = @first_page_offset.cm + 18.07.cm
           Helper.invert(y_position)
         end
 
