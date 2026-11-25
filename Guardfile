@@ -1,4 +1,4 @@
-directories %w[lib spec]
+directories ['lib', 'spec']
 
 guard :rspec, cmd: 'NO_COVERAGE=true bundle exec rspec' do
   require 'guard/rspec/dsl'

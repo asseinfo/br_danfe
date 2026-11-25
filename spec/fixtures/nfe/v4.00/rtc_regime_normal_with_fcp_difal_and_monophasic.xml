@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nfeProc xmlns="http://www.portalfiscal.inf.br/nfe" versao="4.00">
+<NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+<infNFe Id="NFe42261112345678000195550010000012341123456780" versao="4.00">
+<ide>
+<cUF>42</cUF><cNF>12345678</cNF><natOp>VENDA DE MERCADORIA</natOp><mod>55</mod><serie>1</serie><nNF>1234</nNF>
+<dhEmi>2026-12-02T10:00:00-03:00</dhEmi><dhSaiEnt>2026-12-02T10:30:00-03:00</dhSaiEnt><tpNF>1</tpNF><idDest>1</idDest>
+<cMunFG>4205407</cMunFG><tpImp>1</tpImp><tpEmis>1</tpEmis><cDV>0</cDV><tpAmb>1</tpAmb><finNFe>1</finNFe><indFinal>0</indFinal>
+<indPres>1</indPres><procEmi>0</procEmi><verProc>Facil123</verProc>
+</ide>
+<emit>
+<CNPJ>12345678000195</CNPJ><xNome>EMPRESA EXEMPLO LTDA</xNome><xFant>EXEMPLO</xFant>
+<enderEmit><xLgr>Rua Exemplo</xLgr><nro>100</nro><xBairro>Centro</xBairro><cMun>4205407</cMun><xMun>Florianopolis</xMun><UF>SC</UF><CEP>88000000</CEP><cPais>1058</cPais><xPais>Brasil</xPais><fone>4830000000</fone></enderEmit>
+<IE>255555555</IE><CRT>3</CRT>
+</emit>
+<dest>
+<CNPJ>98765432000198</CNPJ><xNome>CLIENTE EXEMPLO S/A</xNome>
+<enderDest><xLgr>Av. Cliente</xLgr><nro>200</nro><xBairro>Centro</xBairro><cMun>4205407</cMun><xMun>Florianopolis</xMun><UF>SC</UF><CEP>88010000</CEP><cPais>1058</cPais><xPais>Brasil</xPais><fone>4831111111</fone></enderDest>
+<indIEDest>1</indIEDest><IE>251111111</IE>
+</dest>
+<det nItem="1">
+<prod><cProd>TIJ-001</cProd><cEAN>SEM GTIN</cEAN><xProd>TIJOLO CERAMICO 6 FUROS</xProd><NCM>69041000</NCM><CFOP>5101</CFOP><uCom>UN</uCom><qCom>1000.00</qCom><vUnCom>1.20</vUnCom><vProd>1200.00</vProd><cEANTrib>SEM GTIN</cEANTrib><uTrib>UN</uTrib><qTrib>1000.00</qTrib><vUnTrib>1.20</vUnTrib><indTot>1</indTot></prod>
+<imposto>
+<ICMS><ICMS00><orig>0</orig><CST>00</CST><modBC>3</modBC><vBC>1200.00</vBC><pICMS>17.00</pICMS><vICMS>204.00</vICMS></ICMS00></ICMS>
+<IPI><cEnq>999</cEnq><IPITrib><CST>50</CST><vBC>1200.00</vBC><pIPI>5.00</pIPI><vIPI>60.00</vIPI></IPITrib></IPI>
+<PIS><PISAliq><CST>01</CST><vBC>1200.00</vBC><pPIS>1.65</pPIS><vPIS>19.80</vPIS></PISAliq></PIS>
+<COFINS><COFINSAliq><CST>01</CST><vBC>1200.00</vBC><pCOFINS>7.60</pCOFINS><vCOFINS>91.20</vCOFINS></COFINSAliq></COFINS>
+<IBSCBS><CST>000</CST><cClassTrib>000001</cClassTrib>
+<gIBSCBS><vBC>1200.00</vBC>
+<gIBSUF><pIBSUF>0.1000</pIBSUF><vIBSUF>1.20</vIBSUF></gIBSUF>
+<gIBSMun><pIBSMun>0.0000</pIBSMun><vIBSMun>0.00</vIBSMun></gIBSMun>
+<vIBS>1.20</vIBS>
+<gCBS><pCBS>0.9000</pCBS><vCBS>10.80</vCBS></gCBS>
+</gIBSCBS></IBSCBS>
+</imposto>
+<infAdProd>Lote 2026-11</infAdProd>
+</det>
+<det nItem="2">
+<prod><cProd>ARG-020</cProd><cEAN>SEM GTIN</cEAN><xProd>ARGAMASSA COLANTE AC-II 20KG</xProd><NCM>32149000</NCM><CFOP>5102</CFOP><uCom>SC</uCom><qCom>50.00</qCom><vUnCom>28.50</vUnCom><vProd>1425.00</vProd><cEANTrib>SEM GTIN</cEANTrib><uTrib>SC</uTrib><qTrib>50.00</qTrib><vUnTrib>28.50</vUnTrib><indTot>1</indTot></prod>
+<imposto>
+<ICMS><ICMS00><orig>0</orig><CST>00</CST><modBC>3</modBC><vBC>1425.00</vBC><pICMS>17.00</pICMS><vICMS>242.25</vICMS></ICMS00></ICMS>
+<IPI><cEnq>999</cEnq><IPINT><CST>53</CST></IPINT></IPI>
+<PIS><PISAliq><CST>01</CST><vBC>1425.00</vBC><pPIS>1.65</pPIS><vPIS>23.51</vPIS></PISAliq></PIS>
+<COFINS><COFINSAliq><CST>01</CST><vBC>1425.00</vBC><pCOFINS>7.60</pCOFINS><vCOFINS>108.30</vCOFINS></COFINSAliq></COFINS>
+<IBSCBS><CST>200</CST><cClassTrib>200003</cClassTrib>
+<gIBSCBS><vBC>1425.00</vBC>
+<gIBSUF><pIBSUF>0.1000</pIBSUF><gRed><pRedAliq>60.0000</pRedAliq><pAliqEfet>0.0400</pAliqEfet></gRed><vIBSUF>0.57</vIBSUF></gIBSUF>
+<gIBSMun><pIBSMun>0.0000</pIBSMun><gRed><pRedAliq>60.0000</pRedAliq><pAliqEfet>0.0000</pAliqEfet></gRed><vIBSMun>0.00</vIBSMun></gIBSMun>
+<vIBS>0.57</vIBS>
+<gCBS><pCBS>0.9000</pCBS><gRed><pRedAliq>60.0000</pRedAliq><pAliqEfet>0.3600</pAliqEfet></gRed><vCBS>5.13</vCBS></gCBS>
+</gIBSCBS></IBSCBS>
+</imposto>
+</det>
+<det nItem="3">
+<prod><cProd>REF-350</cProd><cEAN>SEM GTIN</cEAN><xProd>REFRIGERANTE COLA LATA 350ML</xProd><NCM>22021000</NCM><CFOP>5102</CFOP><uCom>CX</uCom><qCom>10.00</qCom><vUnCom>45.00</vUnCom><vProd>450.00</vProd><cEANTrib>SEM GTIN</cEANTrib><uTrib>CX</uTrib><qTrib>10.00</qTrib><vUnTrib>45.00</vUnTrib><indTot>1</indTot></prod>
+<imposto>
+<ICMS><ICMS00><orig>0</orig><CST>00</CST><modBC>3</modBC><vBC>450.00</vBC><pICMS>17.00</pICMS><vICMS>76.50</vICMS></ICMS00></ICMS>
+<IPI><cEnq>999</cEnq><IPINT><CST>53</CST></IPINT></IPI>
+<PIS><PISAliq><CST>01</CST><vBC>450.00</vBC><pPIS>1.65</pPIS><vPIS>7.43</vPIS></PISAliq></PIS>
+<COFINS><COFINSAliq><CST>01</CST><vBC>450.00</vBC><pCOFINS>7.60</pCOFINS><vCOFINS>34.20</vCOFINS></COFINSAliq></COFINS>
+<IS><CSTIS>000</CSTIS><cClassTribIS>000001</cClassTribIS><vBCIS>450.00</vBCIS><pIS>4.0000</pIS><vIS>18.00</vIS></IS>
+<IBSCBS><CST>000</CST><cClassTrib>000001</cClassTrib>
+<gIBSCBS><vBC>450.00</vBC>
+<gIBSUF><pIBSUF>0.1000</pIBSUF><vIBSUF>0.45</vIBSUF></gIBSUF>
+<gIBSMun><pIBSMun>0.0000</pIBSMun><vIBSMun>0.00</vIBSMun></gIBSMun>
+<vIBS>0.45</vIBS>
+<gCBS><pCBS>0.9000</pCBS><vCBS>4.05</vCBS></gCBS>
+</gIBSCBS></IBSCBS>
+</imposto>
+</det>
+<det nItem="4">
+<prod><cProd>DSL-S10</cProd><cEAN>SEM GTIN</cEAN><xProd>OLEO DIESEL S10</xProd><NCM>27101921</NCM><CFOP>5656</CFOP><uCom>L</uCom><qCom>100.00</qCom><vUnCom>6.00</vUnCom><vProd>600.00</vProd><cEANTrib>SEM GTIN</cEANTrib><uTrib>L</uTrib><qTrib>100.00</qTrib><vUnTrib>6.00</vUnTrib><indTot>1</indTot></prod>
+<imposto>
+<ICMS><ICMS02><orig>0</orig><CST>02</CST><qBCMono>100.0000</qBCMono><adRemICMS>1.1200</adRemICMS><vICMSMono>112.00</vICMSMono></ICMS02></ICMS>
+<IPI><cEnq>999</cEnq><IPINT><CST>53</CST></IPINT></IPI>
+<IBSCBS><CST>620</CST><cClassTrib>620001</cClassTrib>
+<gIBSCBSMono><gMonoPadrao><qBCMono>100.0000</qBCMono><adRemIBS>0.0100</adRemIBS><adRemCBS>0.0900</adRemCBS><vIBSMono>1.00</vIBSMono><vCBSMono>9.00</vCBSMono></gMonoPadrao><vTotIBSMonoItem>1.00</vTotIBSMonoItem><vTotCBSMonoItem>9.00</vTotCBSMonoItem></gIBSCBSMono>
+</IBSCBS>
+</imposto>
+</det>
+<total>
+<ICMSTot><vBC>3075.00</vBC><vICMS>522.75</vICMS><vICMSDeson>0.00</vICMSDeson><vFCP>24.00</vFCP><vFCPUFDest>9.00</vFCPUFDest><vICMSUFDest>45.00</vICMSUFDest><vICMSUFRemet>0.00</vICMSUFRemet><vBCST>0.00</vBCST><vST>0.00</vST><vFCPST>0.00</vFCPST><vFCPSTRet>0.00</vFCPSTRet><qBCMono>100.00</qBCMono><vICMSMono>112.00</vICMSMono><vProd>3675.00</vProd><vFrete>0.00</vFrete><vSeg>0.00</vSeg><vDesc>0.00</vDesc><vII>0.00</vII><vIPI>60.00</vIPI><vIPIDevol>0.00</vIPIDevol><vPIS>50.74</vPIS><vCOFINS>233.70</vCOFINS><vOutro>0.00</vOutro><vNF>3735.00</vNF></ICMSTot>
+<ISTot><vIS>18.00</vIS></ISTot>
+<IBSCBSTot><vBCIBSCBS>3075.00</vBCIBSCBS>
+<gIBS><gIBSUF><vDif>0.00</vDif><vDevTrib>0.00</vDevTrib><vIBSUF>2.22</vIBSUF></gIBSUF><gIBSMun><vDif>0.00</vDif><vDevTrib>0.00</vDevTrib><vIBSMun>0.00</vIBSMun></gIBSMun><vIBS>2.22</vIBS><vCredPres>0.00</vCredPres><vCredPresCondSus>0.00</vCredPresCondSus></gIBS>
+<gCBS><vDif>0.00</vDif><vDevTrib>0.00</vDevTrib><vCBS>19.98</vCBS><vCredPres>0.00</vCredPres><vCredPresCondSus>0.00</vCredPresCondSus></gCBS>
+<gMono><vIBSMono>1.00</vIBSMono><vCBSMono>9.00</vCBSMono><vIBSMonoReten>0.00</vIBSMonoReten><vCBSMonoReten>0.00</vCBSMonoReten><vIBSMonoRet>0.00</vIBSMonoRet><vCBSMonoRet>0.00</vCBSMonoRet></gMono>
+</IBSCBSTot>
+</total>
+<transp><modFrete>0</modFrete>
+<transporta><CNPJ>11222333000144</CNPJ><xNome>TRANSPORTADORA EXEMPLO LTDA</xNome><IE>253333333</IE><xEnder>Rod. Exemplo, km 10</xEnder><xMun>Sao Jose</xMun><UF>SC</UF></transporta>
+<vol><qVol>60</qVol><esp>VOLUMES</esp><pesoL>2510.000</pesoL><pesoB>2550.000</pesoB></vol>
+</transp>
+<cobr><fat><nFat>1234</nFat><vOrig>3135.00</vOrig><vDesc>0.00</vDesc><vLiq>3135.00</vLiq></fat>
+<dup><nDup>001</nDup><dVenc>2026-12-23</dVenc><vDup>1567.50</vDup></dup>
+<dup><nDup>002</nDup><dVenc>2027-01-22</dVenc><vDup>1567.50</vDup></dup>
+</cobr>
+<pag><detPag><indPag>1</indPag><tPag>15</tPag><vPag>3135.00</vPag></detPag></pag>
+<infAdic><infCpl>Documento de teste do DANFE da Reforma Tributaria (NT 2026.010).</infCpl></infAdic>
+</infNFe>
+</NFe>
+<protNFe versao="4.00"><infProt><tpAmb>1</tpAmb><verAplic>SVRS202611</verAplic><chNFe>42261112345678000195550010000012341123456780</chNFe><dhRecbto>2026-12-02T10:01:00-03:00</dhRecbto><nProt>342260000012345</nProt><digVal>AAAAAAAAAAAAAAAAAAAAAAAAAAA=</digVal><cStat>100</cStat><xMotivo>Autorizado o uso da NF-e</xMotivo></infProt></protNFe>
+</nfeProc>

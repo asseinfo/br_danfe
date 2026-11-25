@@ -64,6 +64,9 @@ Style/IfUnlessModifier:
 Style/SymbolArray:
   EnforcedStyle: brackets
 
+Style/WordArray:
+  EnforcedStyle: brackets
+
 Style/HashEachMethods:
   Enabled: false
 

@@ -50,6 +50,12 @@ pt-BR:
       IEST: "INSC.ESTADUAL DO SUBST. TRIBUTÁRIO"
       CNPJ: "CNPJ/CPF"
       CPF: "CNPJ/CPF"
+      CRT:
+        title: "CÓDIGO DO REGIME TRIBUTÁRIO"
+        "1": "1 - SIMPLES NACIONAL"
+        "2": "2 - SIMPLES NACIONAL - EXCESSO"
+        "3": "3 - REGIME NORMAL"
+        "4": "4 - SIMPLES NACIONAL - MEI"
     dup:
       title: "FATURA / DUPLICATAS"
       nDup: "NRO"
@@ -68,6 +74,30 @@ pt-BR:
       vOutro: "OUTRAS DESPESAS ACESSORIAS"
       vIPI: "VALOR DO IPI"
       vNF: "VALOR TOTAL DA NOTA"
+      vFCP: "VALOR DO FCP"
+      vFCPST: "VALOR DO FCP RETIDO POR ST"
+      vICMSUFDest: "VALOR DO DIFAL NA UF DE DESTINO"
+      vFCPUFDest: "VALOR DO FCP NA UF DE DESTINO"
+      qBCMono: "BC DO ICMS MONOFÁSICO"
+      vICMSMono: "VALOR DO ICMS MONOFÁSICO"
+      qBCMonoReten: "BC DO ICMS MONOFÁSICO POR RETENÇÃO"
+      vICMSMonoReten: "VALOR ICMS MONOFÁSICO POR RETENÇÃO"
+    IBSCBSTot:
+      title: "TOTAL DO IBS / CBS / IS"
+      gCBS:
+        vCBS: "VALOR DA CBS"
+      gIBS:
+        gIBSUF:
+          vIBSUF: "VALOR DO IBS UF"
+        gIBSMun:
+          vIBSMun: "VALOR DO IBS MUNICÍPIO"
+      gMono:
+        vIBSMono: "VALOR DO IBS MONOFÁSICO"
+        vCBSMono: "VALOR DA CBS MONOFÁSICA"
+        vIBSMonoReten: "VALOR DO IBS MONOFÁSICO POR RETENÇÃO"
+        vCBSMonoReten: "VALOR DA CBS MONOFÁSICA POR RETENÇÃO"
+    ISTot:
+      vIS: "VALOR DO IMPOSTO SELETIVO"
     transporta:
       title: "TRANSPORTADOR / VOLUMES TRANSPORTADOS"
       xNome: "RAZÃO SOCIAL"
@@ -121,6 +151,16 @@ pt-BR:
       IPI:
         vIPI: "VL IPI"
         pIPI: "% IPI"
+      code: "CÓD"
+      columns:
+        description: "DESCRIÇÃO DO PRODUTO / SERVIÇO"
+        cst_cfop: "CST / CFOP"
+        quantity_unit: "QTD / UN"
+        unit_value: "VLR UNIT"
+        total_value: "VLR TOTAL"
+        bases: "BASES DE CÁLCULO"
+        rates: "ALÍQUOTAS"
+        taxes: "VALOR DOS TRIBUTOS"
     issqn:
       title: "CÁLCULO DO ISSQN"
     total:

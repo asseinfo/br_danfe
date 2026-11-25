@@ -178,4 +178,46 @@ describe BrDanfe::DanfeLib::NfeLib::EmitHeader do
       end
     end
   end
+
+  describe '#render with the tax regime code' do
+    let(:pdf_text) { PDF::Inspector::Text.analyze(pdf.render).strings.join("\n") }
+    let(:issued_at) { '2026-12-02T10:00:00-03:00' }
+    let(:crt) { '3' }
+    let(:xml_as_string) do
+      <<~XML
+        <nfeProc xmlns="http://www.portalfiscal.inf.br/nfe" versao="4.00">
+          <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            <infNFe versao="4.00">
+              <ide><dhEmi>#{issued_at}</dhEmi><tpNF>1</tpNF><nNF>1</nNF><serie>1</serie></ide>
+              <emit><xNome>Nome do Remetente Ltda</xNome><CNPJ>62013294000143</CNPJ><CRT>#{crt}</CRT></emit>
+            </infNFe>
+          </NFe>
+        </nfeProc>
+      XML
+    end
+
+    before { subject.render(1, 3.96, 1) }
+
+    context 'when the NF-e uses the NT 2026.010 layout' do
+      it 'renders the tax regime code' do
+        expect(pdf_text).to include("CÓDIGO DO REGIME TRIBUTÁRIO\n3 - REGIME NORMAL")
+      end
+    end
+
+    context 'when the tax regime code is unknown' do
+      let(:crt) { '9' }
+
+      it 'renders the code as informed' do
+        expect(pdf_text).to include("CÓDIGO DO REGIME TRIBUTÁRIO\n9")
+      end
+    end
+
+    context 'when the NF-e uses the current layout' do
+      let(:issued_at) { '2026-11-20T10:00:00-03:00' }
+
+      it 'does not render the tax regime code' do
+        expect(pdf_text).not_to include('CÓDIGO DO REGIME TRIBUTÁRIO')
+      end
+    end
+  end
 end
