@@ -127,4 +127,69 @@ describe BrDanfe::DanfeLib::NfeLib::Issqn do
       end
     end
   end
+
+  describe 'NT 2026.010 layout' do
+    let(:issued_at) { '2026-12-02T10:00:00-03:00' }
+    let(:entrega) { '' }
+    let(:issqn) { '<vServ>100.00</vServ><vBC>100.00</vBC><vISS>5.00</vISS>' }
+    let(:xml_as_string) do
+      <<~XML
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe versao="4.00">
+            <ide><dhEmi>#{issued_at}</dhEmi></ide>
+            #{entrega}
+            <total><ISSQNtot>#{issqn}</ISSQNtot></total>
+          </infNFe>
+        </NFe>
+      XML
+    end
+
+    let(:transporter_position) { 16.41 }
+    let(:ibscbs_block) { 1.32 }
+
+    describe '#y_position' do
+      it 'is below the IBS/CBS/IS block, at the transporter position' do
+        expect(subject.y_position).to eql transporter_position + 0.0 + ibscbs_block
+      end
+
+      context 'with entrega' do
+        let(:entrega) { '<entrega><xLgr>Rua Entrega</xLgr></entrega>' }
+
+        it 'moves down with the delivery place' do
+          expect(subject.y_position).to eql transporter_position + 3.0 + 0.0 + ibscbs_block
+        end
+      end
+
+      context 'when the NF-e uses the current layout' do
+        let(:issued_at) { '2026-11-20T10:00:00-03:00' }
+
+        it 'is above the complementary information' do
+          expect(subject.y_position).to eql 26.24
+        end
+      end
+    end
+
+    describe '.offset' do
+      subject { described_class.offset(xml) }
+
+      let(:line_height) { 0.8 }
+      let(:space_between_blocks) { 0.52 }
+
+      it 'is one line and the space before the next block' do
+        expect(subject).to eql line_height + space_between_blocks
+      end
+
+      context 'when the NF-e has no ISSQN' do
+        let(:issqn) { '<vServ>0.00</vServ><vBC>0.00</vBC><vISS>0.00</vISS>' }
+
+        it('adds nothing') { is_expected.to eql 0.0 }
+      end
+
+      context 'when the NF-e uses the current layout' do
+        let(:issued_at) { '2026-11-20T10:00:00-03:00' }
+
+        it('adds nothing') { is_expected.to eql 0.0 }
+      end
+    end
+  end
 end

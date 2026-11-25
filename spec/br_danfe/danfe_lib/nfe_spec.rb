@@ -86,6 +86,17 @@ describe BrDanfe::DanfeLib::Nfe do
       end
     end
 
+    context 'when the NF-e with ISSQN uses the NT 2026.010 layout' do
+      let(:base_dir) { './spec/fixtures/nfe/v4.00/' }
+      let(:xml_file) { File.read("#{base_dir}rtc_regime_normal_with_entrega_and_issqn.xml") }
+      let(:first_page) { PDF::Reader.new(StringIO.new(subject.render_pdf)).pages.first.text }
+
+      it 'renders the ISSQN between the IBS/CBS/IS block and the transporter' do
+        expect(first_page.index('TOTAL DO IBS / CBS / IS')).to be < first_page.index('CÁLCULO DO ISSQN')
+        expect(first_page.index('CÁLCULO DO ISSQN')).to be < first_page.index('TRANSPORTADOR / VOLUMES TRANSPORTADOS')
+      end
+    end
+
     context 'when a Regime Normal NF-e has more items than the first page holds' do
       let(:base_dir) { './spec/fixtures/nfe/v4.00/' }
       let(:xml_file) { File.read("#{base_dir}rtc_regime_normal_with_many_items.xml") }

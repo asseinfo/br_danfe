@@ -10,7 +10,7 @@ module BrDanfe
         end
 
         def self.offset(xml)
-          Icmstot.offset(xml) + Ibscbstot.offset(xml)
+          Icmstot.offset(xml) + Ibscbstot.offset(xml) + Issqn.offset(xml)
         end
 
         def self.issued_from_start_date?(xml)
