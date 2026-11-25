@@ -121,6 +121,10 @@ describe BrDanfe::DanfeLib::NfeLib::Issqn do
 
         expect("#{base_dir}issqn#render-with_entrega.pdf").to have_same_content_of file: output_pdf
       end
+
+      it 'keeps the ISSQN above the complementary information' do
+        expect(subject.y_position).to eql 26.24
+      end
     end
   end
 end

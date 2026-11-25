@@ -10,7 +10,7 @@ module BrDanfe
           @pdf = pdf
           @xml = xml
 
-          @y_position = Entrega.delivery_local?(@xml) ? Y_POSITION + 3.00 : Y_POSITION
+          @y_position = Y_POSITION
           @title = @y_position - 0.42
 
           @serv = 'total/ISSQNtot/vServ'
