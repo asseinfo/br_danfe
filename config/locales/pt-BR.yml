@@ -56,6 +56,8 @@ pt-BR:
         "2": "2 - SIMPLES NACIONAL - EXCESSO"
         "3": "3 - REGIME NORMAL"
         "4": "4 - SIMPLES NACIONAL - MEI"
+      tpRegimeIBSCBS:
+        title: "TIPO DE REGIME DE APURAÇÃO DO IBS E DA CBS"
     dup:
       title: "FATURA / DUPLICATAS"
       nDup: "NRO"

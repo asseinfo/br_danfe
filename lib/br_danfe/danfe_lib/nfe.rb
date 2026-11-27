@@ -84,7 +84,7 @@ module BrDanfe
         return if page == 1 && !@products_on_first_page
 
         y_position = NfeLib::Entrega.delivery_local?(xml) && page == 1 ? 3.00 : 0
-        y_position += page == 1 ? 18.91 + NfeLib::RtcLayout.offset(xml) : 7.40
+        y_position += page == 1 ? 18.91 + NfeLib::RtcLayout.offset(xml) : 7.40 + NfeLib::EmitHeader.offset(xml)
         @document.ititle 0.42, 10.00, 0.75, y_position, 'det.title'
       end
 

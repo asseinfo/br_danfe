@@ -5,6 +5,10 @@ module BrDanfe
         IDENTIFICATION_SIZE = 10
         DESCRIPTION_SIZE = 8
 
+        def self.offset(xml)
+          RtcLayout.applies?(xml) ? LINE_HEIGHT : 0.0
+        end
+
         def initialize(pdf, xml, logo, logo_dimensions)
           @pdf = pdf
           @xml = xml
@@ -124,7 +128,8 @@ module BrDanfe
           @pdf.ibox LINE_HEIGHT, 9.52, 10.79, y_first_line, I18n.t('danfe.infProt'),
                     "#{@xml['infProt/nProt']} #{BrDanfe::Helper.format_datetime(@xml['infProt/dhRecbto'])}", align: :right
 
-          RtcLayout.applies?(@xml) ? render_rtc_second_line(y_second_line) : render_second_line(y_second_line)
+          render_second_line(y_second_line)
+          render_tax_regime_line(y_second_line + LINE_HEIGHT) if RtcLayout.applies?(@xml)
         end
 
         def render_second_line(y_position)
@@ -133,16 +138,14 @@ module BrDanfe
           @pdf.lcnpj_cpf LINE_HEIGHT, 6.34, 13.97, y_position, @xml, cnpj_cpf, align: :right
         end
 
-        def render_rtc_second_line(y_position)
-          @pdf.lie LINE_HEIGHT, 4.40, 0.75, y_position, @xml, 'enderEmit/UF', 'emit/IE'
-          @pdf.lie LINE_HEIGHT, 4.40, 5.15, y_position, @xml, 'enderDest/UF', 'emit/IEST'
-          @pdf.i18n_lbox LINE_HEIGHT, 6.00, 9.55, y_position, 'emit.CRT.title', crt
-          @pdf.lcnpj_cpf LINE_HEIGHT, 4.76, 15.55, y_position, @xml, cnpj_cpf, align: :right
+        def render_tax_regime_line(y_position)
+          @pdf.i18n_lbox LINE_HEIGHT, 10.04, 0.75, y_position, 'emit.CRT.title', described_code('CRT')
+          @pdf.i18n_lbox LINE_HEIGHT, 9.52, 10.79, y_position, 'emit.tpRegimeIBSCBS.title', ''
         end
 
-        def crt
-          code = @xml['emit/CRT']
-          code.present? ? I18n.t("danfe.emit.CRT.#{code}", default: code) : ''
+        def described_code(tag)
+          code = @xml["emit/#{tag}"]
+          code.present? ? I18n.t("danfe.emit.#{tag}.#{code}", default: code) : ''
         end
 
         def cnpj_cpf

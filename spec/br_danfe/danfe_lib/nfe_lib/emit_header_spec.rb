@@ -183,13 +183,16 @@ describe BrDanfe::DanfeLib::NfeLib::EmitHeader do
     let(:pdf_text) { PDF::Inspector::Text.analyze(pdf.render).strings.join("\n") }
     let(:issued_at) { '2026-12-02T10:00:00-03:00' }
     let(:crt) { '3' }
+    let(:ibscbs_regime) { '' }
     let(:xml_as_string) do
       <<~XML
         <nfeProc xmlns="http://www.portalfiscal.inf.br/nfe" versao="4.00">
           <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
             <infNFe versao="4.00">
               <ide><dhEmi>#{issued_at}</dhEmi><tpNF>1</tpNF><nNF>1</nNF><serie>1</serie></ide>
-              <emit><xNome>Nome do Remetente Ltda</xNome><CNPJ>62013294000143</CNPJ><CRT>#{crt}</CRT></emit>
+              <emit>
+                <xNome>Nome do Remetente Ltda</xNome><CNPJ>62013294000143</CNPJ><CRT>#{crt}</CRT>#{ibscbs_regime}
+              </emit>
             </infNFe>
           </NFe>
         </nfeProc>
@@ -218,6 +221,42 @@ describe BrDanfe::DanfeLib::NfeLib::EmitHeader do
       it 'does not render the tax regime code' do
         expect(pdf_text).not_to include('CÓDIGO DO REGIME TRIBUTÁRIO')
       end
+
+      it 'does not render the IBS/CBS regime type' do
+        expect(pdf_text).not_to include('TIPO DE REGIME DE APURAÇÃO DO IBS E DA CBS')
+      end
+    end
+
+    context 'when the NF-e has the IBS/CBS regime type' do
+      let(:crt) { '1' }
+      let(:ibscbs_regime) { '<tpRegimeIBSCBS>1</tpRegimeIBSCBS>' }
+
+      it 'renders only the IBS/CBS regime type title' do
+        expect(pdf_text).to end_with('TIPO DE REGIME DE APURAÇÃO DO IBS E DA CBS')
+      end
+    end
+  end
+
+  describe '.offset' do
+    subject { described_class.offset(xml) }
+
+    let(:issued_at) { '2026-12-02T10:00:00-03:00' }
+    let(:xml_as_string) do
+      <<~XML
+        <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+          <infNFe versao="4.00"><ide><dhEmi>#{issued_at}</dhEmi></ide></infNFe>
+        </NFe>
+      XML
+    end
+
+    context 'when the NF-e uses the NT 2026.010 layout' do
+      it('is the tax regime line') { is_expected.to eql 0.8 }
+    end
+
+    context 'when the NF-e uses the current layout' do
+      let(:issued_at) { '2026-11-20T10:00:00-03:00' }
+
+      it('adds nothing') { is_expected.to eql 0.0 }
     end
   end
 end

@@ -40,7 +40,7 @@ module BrDanfe
 
         def position_below_the_tax_totals
           y_position = Entrega.delivery_local?(@xml) ? Transp::Y_POSITION + 3.00 : Transp::Y_POSITION
-          y_position + Icmstot.offset(@xml) + Ibscbstot.offset(@xml)
+          y_position + EmitHeader.offset(@xml) + Icmstot.offset(@xml) + Ibscbstot.offset(@xml)
         end
       end
     end

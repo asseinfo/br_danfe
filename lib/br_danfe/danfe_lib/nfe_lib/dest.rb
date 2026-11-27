@@ -10,10 +10,11 @@ module BrDanfe
           @xml = xml
           @xml_version_is_310_or_newer = @xml.version_is_310_or_newer?
 
-          @ltitle = Y - 0.42
-          @l1 = Y
-          @l2 = Y + LINE_HEIGHT
-          @l3 = Y + (LINE_HEIGHT * 2)
+          y_position = Y + EmitHeader.offset(@xml)
+          @ltitle = y_position - 0.42
+          @l1 = y_position
+          @l2 = y_position + LINE_HEIGHT
+          @l3 = y_position + (LINE_HEIGHT * 2)
         end
 
         def render

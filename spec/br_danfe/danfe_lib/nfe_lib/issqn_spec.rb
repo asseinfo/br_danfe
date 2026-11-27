@@ -145,18 +145,19 @@ describe BrDanfe::DanfeLib::NfeLib::Issqn do
     end
 
     let(:transporter_position) { 16.41 }
+    let(:tax_regime_line) { 0.8 }
     let(:ibscbs_block) { 1.32 }
 
     describe '#y_position' do
       it 'is below the IBS/CBS/IS block, at the transporter position' do
-        expect(subject.y_position).to eql transporter_position + 0.0 + ibscbs_block
+        expect(subject.y_position).to eql transporter_position + tax_regime_line + 0.0 + ibscbs_block
       end
 
       context 'with entrega' do
         let(:entrega) { '<entrega><xLgr>Rua Entrega</xLgr></entrega>' }
 
         it 'moves down with the delivery place' do
-          expect(subject.y_position).to eql transporter_position + 3.0 + 0.0 + ibscbs_block
+          expect(subject.y_position).to eql transporter_position + 3.0 + tax_regime_line + 0.0 + ibscbs_block
         end
       end
 

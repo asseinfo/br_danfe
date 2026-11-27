@@ -99,8 +99,8 @@ describe BrDanfe::DanfeLib::NfeLib::RtcLayout do
     end
 
     context 'when the NF-e uses the new layout' do
-      it 'is the FCP line plus the IBS/CBS/IS block and the space after it' do
-        expect(subject).to eql line_height + line_height + space_between_blocks
+      it 'is the tax regime line, the FCP line, the IBS/CBS/IS block and the space after it' do
+        expect(subject).to eql line_height + line_height + (line_height + space_between_blocks)
       end
     end
 

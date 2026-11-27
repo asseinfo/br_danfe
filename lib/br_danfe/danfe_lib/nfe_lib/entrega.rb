@@ -9,7 +9,7 @@ module BrDanfe
           @pdf = pdf
           @xml = xml
 
-          @y_position = Y_POSITION
+          @y_position = Y_POSITION + EmitHeader.offset(@xml)
           @ltitle = @y_position - 0.42
           @l1 = @y_position
           @l2 = @y_position + LINE_HEIGHT

@@ -98,11 +98,11 @@ module BrDanfe
         end
 
         def table_position_on_next_pages
-          Helper.invert(6.57.cm)
+          Helper.invert((6.57 + EmitHeader.offset(@xml)).cm)
         end
 
         def table_height_on_next_pages
-          22.58.cm
+          (22.58 - EmitHeader.offset(@xml)).cm
         end
       end
     end
