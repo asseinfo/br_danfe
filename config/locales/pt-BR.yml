@@ -56,6 +56,12 @@ pt-BR:
         "2": "2 - SIMPLES NACIONAL - EXCESSO"
         "3": "3 - REGIME NORMAL"
         "4": "4 - SIMPLES NACIONAL - MEI"
+      tpRegimeIBSCBS:
+        title: "TIPO DE REGIME DE APURAÇÃO DO IBS E DA CBS"
+        "1": "1 - SIMPLES NACIONAL COM REGIME REGULAR"
+        "2": "2 - NORMAL, OPÇÃO PENDENTE CRT 1"
+        "3": "3 - NORMAL, OPÇÃO PENDENTE CRT 2"
+        "4": "4 - NORMAL, OPÇÃO PENDENTE COM REGIME REGULAR"
     dup:
       title: "FATURA / DUPLICATAS"
       nDup: "NRO"

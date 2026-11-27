@@ -17,7 +17,7 @@ module BrDanfe
           @pdf = pdf
           @xml = xml
           @y_position = Entrega.delivery_local?(@xml) ? Transp::Y_POSITION + 3.00 : Transp::Y_POSITION
-          @y_position += Icmstot.offset(@xml)
+          @y_position += EmitHeader.offset(@xml) + Icmstot.offset(@xml)
         end
 
         def render

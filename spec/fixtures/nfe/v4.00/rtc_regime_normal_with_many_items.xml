@@ -11,7 +11,7 @@
 <emit>
 <CNPJ>12345678000195</CNPJ><xNome>EMPRESA EXEMPLO LTDA</xNome><xFant>EXEMPLO</xFant>
 <enderEmit><xLgr>Rua Exemplo</xLgr><nro>100</nro><xBairro>Centro</xBairro><cMun>4205407</cMun><xMun>Florianopolis</xMun><UF>SC</UF><CEP>88000000</CEP><cPais>1058</cPais><xPais>Brasil</xPais><fone>4830000000</fone></enderEmit>
-<IE>255555555</IE><CRT>3</CRT>
+<IE>255555555</IE><CRT>3</CRT><tpRegimeIBSCBS>4</tpRegimeIBSCBS>
 </emit>
 <dest>
 <CNPJ>98765432000198</CNPJ><xNome>CLIENTE EXEMPLO S/A</xNome>
