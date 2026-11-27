@@ -140,8 +140,7 @@ module BrDanfe
 
         def render_tax_regime_line(y_position)
           @pdf.i18n_lbox LINE_HEIGHT, 10.04, 0.75, y_position, 'emit.CRT.title', described_code('CRT')
-          @pdf.i18n_lbox LINE_HEIGHT, 9.52, 10.79, y_position, 'emit.tpRegimeIBSCBS.title',
-                         described_code('tpRegimeIBSCBS')
+          @pdf.i18n_lbox LINE_HEIGHT, 9.52, 10.79, y_position, 'emit.tpRegimeIBSCBS.title', ''
         end
 
         def described_code(tag)

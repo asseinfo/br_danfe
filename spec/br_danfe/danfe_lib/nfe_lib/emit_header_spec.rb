@@ -231,24 +231,8 @@ describe BrDanfe::DanfeLib::NfeLib::EmitHeader do
       let(:crt) { '1' }
       let(:ibscbs_regime) { '<tpRegimeIBSCBS>1</tpRegimeIBSCBS>' }
 
-      it 'renders the IBS/CBS regime type' do
-        expect(pdf_text).to include(
-          "TIPO DE REGIME DE APURAÇÃO DO IBS E DA CBS\n1 - SIMPLES NACIONAL COM REGIME REGULAR"
-        )
-      end
-    end
-
-    context 'when the NF-e has no IBS/CBS regime type' do
       it 'renders only the IBS/CBS regime type title' do
         expect(pdf_text).to end_with('TIPO DE REGIME DE APURAÇÃO DO IBS E DA CBS')
-      end
-    end
-
-    context 'when the IBS/CBS regime type is unknown' do
-      let(:ibscbs_regime) { '<tpRegimeIBSCBS>9</tpRegimeIBSCBS>' }
-
-      it 'renders the type as informed' do
-        expect(pdf_text).to include("TIPO DE REGIME DE APURAÇÃO DO IBS E DA CBS\n9")
       end
     end
   end
