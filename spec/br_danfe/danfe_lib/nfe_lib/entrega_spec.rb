@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe BrDanfe::DanfeLib::NfeLib::Entrega do
-  let(:path_of_expected_pdf) { './spec/fixtures/nfe/lib/output.pdf' }
+  let(:base_dir) { './spec/fixtures/nfe/lib/' }
+  let(:path_of_expected_pdf) { "#{base_dir}output.pdf" }
 
   let(:pdf) { BrDanfe::DanfeLib::NfeLib::Document.new }
   let(:xml) { BrDanfe::XML.new(xml_as_string) }
@@ -48,7 +49,7 @@ describe BrDanfe::DanfeLib::NfeLib::Entrega do
 
         pdf.render_file path_of_expected_pdf
 
-        expect('./spec/fixtures/nfe/lib/entrega#render-v2.00.pdf').to have_same_content_of file: path_of_expected_pdf
+        expect("#{base_dir}entrega#render-v2.00.pdf").to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -80,7 +81,7 @@ describe BrDanfe::DanfeLib::NfeLib::Entrega do
 
         pdf.render_file path_of_expected_pdf
 
-        expect('./spec/fixtures/nfe/lib/entrega#render-with_cpf.pdf').to have_same_content_of file: path_of_expected_pdf
+        expect("#{base_dir}entrega#render-with_cpf.pdf").to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -119,7 +120,7 @@ describe BrDanfe::DanfeLib::NfeLib::Entrega do
 
         pdf.render_file path_of_expected_pdf
 
-        expect('./spec/fixtures/nfe/lib/entrega#render-with-address-bigger.pdf')
+        expect("#{base_dir}entrega#render-with-address-bigger.pdf")
           .to have_same_content_of file: path_of_expected_pdf
       end
     end

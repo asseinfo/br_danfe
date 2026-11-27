@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe BrDanfe::DanfeLib::NfeLib::Dest do
-  let(:path_of_expected_pdf) { './spec/fixtures/nfe/lib/output.pdf' }
+  let(:base_dir) { './spec/fixtures/nfe/lib/' }
+  let(:path_of_expected_pdf) { "#{base_dir}output.pdf" }
 
   let(:pdf) { BrDanfe::DanfeLib::NfeLib::Document.new }
   let(:xml) { BrDanfe::XML.new(xml_as_string) }
@@ -52,7 +53,7 @@ describe BrDanfe::DanfeLib::NfeLib::Dest do
 
         pdf.render_file path_of_expected_pdf
 
-        expect('./spec/fixtures/nfe/lib/dest#render-v2.00.pdf').to have_same_content_of file: path_of_expected_pdf
+        expect("#{base_dir}dest#render-v2.00.pdf").to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -93,7 +94,7 @@ describe BrDanfe::DanfeLib::NfeLib::Dest do
 
         pdf.render_file path_of_expected_pdf
 
-        expect('./spec/fixtures/nfe/lib/dest#render-v3.10.pdf').to have_same_content_of file: path_of_expected_pdf
+        expect("#{base_dir}dest#render-v3.10.pdf").to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -134,7 +135,7 @@ describe BrDanfe::DanfeLib::NfeLib::Dest do
 
         pdf.render_file path_of_expected_pdf
 
-        expect('./spec/fixtures/nfe/lib/dest#render-v4.00.pdf').to have_same_content_of file: path_of_expected_pdf
+        expect("#{base_dir}dest#render-v4.00.pdf").to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -156,7 +157,7 @@ describe BrDanfe::DanfeLib::NfeLib::Dest do
 
         pdf.render_file path_of_expected_pdf
 
-        expect('./spec/fixtures/nfe/lib/dest#render-with_cnpj.pdf').to have_same_content_of file: path_of_expected_pdf
+        expect("#{base_dir}dest#render-with_cnpj.pdf").to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -178,7 +179,7 @@ describe BrDanfe::DanfeLib::NfeLib::Dest do
 
         pdf.render_file path_of_expected_pdf
 
-        expect('./spec/fixtures/nfe/lib/dest#render-with_cpf.pdf').to have_same_content_of file: path_of_expected_pdf
+        expect("#{base_dir}dest#render-with_cpf.pdf").to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -203,7 +204,7 @@ describe BrDanfe::DanfeLib::NfeLib::Dest do
 
         pdf.render_file path_of_expected_pdf
 
-        expect('./spec/fixtures/nfe/lib/dest#render-with_ie.pdf').to have_same_content_of file: path_of_expected_pdf
+        expect("#{base_dir}dest#render-with_ie.pdf").to have_same_content_of file: path_of_expected_pdf
       end
     end
 
@@ -243,7 +244,7 @@ describe BrDanfe::DanfeLib::NfeLib::Dest do
 
         pdf.render_file path_of_expected_pdf
 
-        expect('./spec/fixtures/nfe/lib/dest#render-without-address-complement.pdf')
+        expect("#{base_dir}dest#render-without-address-complement.pdf")
           .to have_same_content_of file: path_of_expected_pdf
       end
     end
@@ -285,7 +286,7 @@ describe BrDanfe::DanfeLib::NfeLib::Dest do
 
         pdf.render_file path_of_expected_pdf
 
-        expect('./spec/fixtures/nfe/lib/dest#render-with-address-bigger.pdf')
+        expect("#{base_dir}dest#render-with-address-bigger.pdf")
           .to have_same_content_of file: path_of_expected_pdf
       end
     end

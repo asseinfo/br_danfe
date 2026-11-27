@@ -38,13 +38,13 @@ describe BrDanfe::DanfeLib::NfeLib::Cst do
   describe '.to_danfe' do
     context 'when CST' do
       it 'returns origin + CST' do
-        expect(BrDanfe::DanfeLib::NfeLib::Cst.to_danfe(xml_cst)).to eq '500'
+        expect(described_class.to_danfe(xml_cst)).to eq '500'
       end
     end
 
     context 'when CSOSN' do
       it 'returns origin + CSOSN' do
-        expect(BrDanfe::DanfeLib::NfeLib::Cst.to_danfe(xml_csosn)).to eq '4102'
+        expect(described_class.to_danfe(xml_csosn)).to eq '4102'
       end
     end
   end

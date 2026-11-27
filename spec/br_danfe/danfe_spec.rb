@@ -22,7 +22,7 @@ describe BrDanfe::Danfe do
 
   subject { described_class.new(xml) }
 
-  context 'xmls parameter' do
+  context 'with the xmls parameter' do
     let(:mod) { 55 }
 
     it 'accepts one xml' do

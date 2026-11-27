@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe BrDanfe::DanfeLib::NfceLib::ProductList do
+describe BrDanfe::DanfeLib::NfceLib::Document do
   let(:base_dir) { './spec/fixtures/nfce/lib/' }
   let(:output_pdf) { "#{base_dir}output.pdf" }
 
-  let(:subject) { BrDanfe::DanfeLib::NfceLib::Document.new(8.cm, 1.8.cm) }
+  subject { described_class.new(8.cm, 1.8.cm) }
 
   before { FileUtils.rm_f(output_pdf) }
 

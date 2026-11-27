@@ -4,6 +4,7 @@ describe BrDanfe::Cce do
   let(:base_dir) { './spec/fixtures/cce/v1.00/' }
   let(:output_pdf) { "#{base_dir}output.pdf" }
   let(:xml) { File.read("#{base_dir}cce.xml") }
+
   subject { described_class.new(xml) }
 
   describe '#render_pdf' do
