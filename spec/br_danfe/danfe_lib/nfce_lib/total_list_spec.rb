@@ -117,7 +117,7 @@ describe BrDanfe::DanfeLib::NfceLib::TotalList do
         XML
       end
 
-      it 'does not render the ""without payment"" payment method ' do
+      it 'does not render the ""without payment"" payment method' do
         expect(File.exist?(output_pdf)).to be_falsey
         pdf.render_file output_pdf
 

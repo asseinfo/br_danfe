@@ -1,3 +1,6 @@
+plugins:
+  - rubocop-rspec
+
 require:
   - rubocop-performance
 
@@ -117,3 +120,117 @@ Metrics/ParameterLists:
 
 Naming/BlockParameterName:
   Enabled: false
+
+RSpec/AnyInstance:
+  Enabled: false # default: true
+
+RSpec/BeEql:
+  Enabled: false # default: true
+
+RSpec/ExampleLength:
+  Enabled: false # default: true
+
+RSpec/ExampleWording:
+  Enabled: false # default: true
+
+RSpec/ExpectChange:
+  Enabled: false # default: true
+
+RSpec/ExpectInHook:
+  Enabled: false # default: true
+
+RSpec/IndexedLet:
+  Enabled: false
+
+RSpec/HookArgument:
+  Enabled: false # default: true
+
+RSpec/HooksBeforeExamples:
+  Enabled: false # default: true
+
+RSpec/ImplicitSubject:
+  Enabled: false # default: true
+
+RSpec/InstanceVariable:
+  Enabled: false # default: true
+
+RSpec/ItBehavesLike:
+  Enabled: false # default: true
+
+RSpec/LeadingSubject:
+  Enabled: false # default: true
+
+RSpec/LeakyConstantDeclaration:
+  Enabled: false # default: true
+
+RSpec/LetBeforeExamples:
+  Enabled: false # default: true
+
+RSpec/LetSetup:
+  Enabled: false # default: true
+
+RSpec/MessageChain:
+  Enabled: false # default: true
+
+RSpec/MessageSpies:
+  Enabled: false # default: true
+
+RSpec/MultipleExpectations:
+  Enabled: false # default: true
+
+# FIXME: The max value need to be reduced
+RSpec/MultipleMemoizedHelpers:
+  Max: 20 # default: 5
+
+RSpec/NamedSubject:
+  Enabled: false # default: true
+
+RSpec/NestedGroups:
+  Enabled: false # default: true
+
+RSpec/OverwritingSetup:
+  Enabled: false # default: true
+
+RSpec/PredicateMatcher:
+  Enabled: false # default: true
+
+RSpec/ReceiveMessages:
+  Enabled: false # default: true
+
+RSpec/ScatteredLet:
+  Enabled: false # default: true
+
+RSpec/ScatteredSetup:
+  Enabled: false # default: true
+
+RSpec/ReceiveCounts:
+  Enabled: false # default: true
+
+RSpec/RepeatedDescription:
+  Enabled: false # default: true
+
+RSpec/RepeatedExample:
+  Enabled: false # default: true
+
+RSpec/RepeatedExampleGroupBody:
+  Enabled: false # default: true
+
+RSpec/RepeatedExampleGroupDescription:
+  Enabled: false # default: true
+
+RSpec/StubbedMock:
+  Enabled: false # default: true
+
+RSpec/SubjectStub:
+  Enabled: false # default: true
+
+RSpec/VariableName:
+  Enabled: false # default: true
+
+RSpec/VerifiedDoubles:
+  Enabled: false # default: true
+
+RSpec/SpecFilePathFormat:
+  Exclude:
+    - 'spec/br_danfe/logo_config_spec.rb'
+    - 'spec/br_danfe/logo_options_spec.rb'

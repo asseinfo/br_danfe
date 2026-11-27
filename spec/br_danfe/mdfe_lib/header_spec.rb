@@ -88,7 +88,7 @@ describe BrDanfe::MdfeLib::Header do
       expect("#{base_dir}header#render-qr-code.pdf").to have_same_content_of file: output_pdf
     end
 
-    context 'if the QR-code URL is not present' do
+    context 'when the QR-code URL is not present' do
       let(:qr_code_mdfe) { '<qrCodMDFe></qrCodMDFe>' }
 
       it 'does not generates the QR-code' do

@@ -69,7 +69,7 @@ describe BrDanfe::DanfeLib::NfeLib::EmitHeader do
       expect("#{base_dir}emit_header#render-nfe_key.pdf").to have_same_content_of file: output_pdf
     end
 
-    context 'render emitter on first page' do
+    context 'when the emitter is on the first page' do
       before do
         subject.render 1, 3.96, 1
         FileUtils.rm_f(output_pdf)
@@ -98,7 +98,7 @@ describe BrDanfe::DanfeLib::NfeLib::EmitHeader do
       end
     end
 
-    context 'render emitter on second page' do
+    context 'when the emitter is on the second page' do
       before do
         subject.render 2, 1.85, 2
         FileUtils.rm_f(output_pdf)

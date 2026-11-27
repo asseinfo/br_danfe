@@ -58,19 +58,19 @@ describe BrDanfe::Helper do
 
     context 'when XML is unauthorized' do
       it 'returns true' do
-        expect(described_class.no_fiscal_value?(xml_unauthorized)).to eq true
+        expect(described_class.no_fiscal_value?(xml_unauthorized)).to be true
       end
     end
 
     context 'when XML is in homologation environment' do
       it 'returns true' do
-        expect(described_class.no_fiscal_value?(xml_homologation)).to eq true
+        expect(described_class.no_fiscal_value?(xml_homologation)).to be true
       end
     end
 
     context 'when XML is authorized' do
       it 'returns false' do
-        expect(described_class.no_fiscal_value?(xml_authorized)).to eq false
+        expect(described_class.no_fiscal_value?(xml_authorized)).to be false
       end
     end
   end
@@ -90,7 +90,7 @@ describe BrDanfe::Helper do
       end
 
       it 'returns true' do
-        expect(described_class.unauthorized?(xml_unauthorized)).to eq true
+        expect(described_class.unauthorized?(xml_unauthorized)).to be true
       end
     end
 
@@ -110,7 +110,7 @@ describe BrDanfe::Helper do
       end
 
       it 'returns false' do
-        expect(described_class.unauthorized?(xml_authorized)).to eq false
+        expect(described_class.unauthorized?(xml_authorized)).to be false
       end
     end
   end
